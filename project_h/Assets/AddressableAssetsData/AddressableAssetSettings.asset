@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 8b40af7b348e0ac47883dba7e1de7626
   m_currentHash:
     serializedVersion: 2
-    Hash: b51be13cfb3b47277f7ee3c910bd5a3f
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -38,14 +38,12 @@ MonoBehaviour:
     m_Id: 
   m_RemoteCatalogLoadPath:
     m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
-  - {fileID: 11400000, guid: bff4dd4a037a47449acb839f18208a2f, type: 2}
-  - {fileID: 11400000, guid: 574a2b8ad1789ca49831440ab5048481, type: 2}
   - {fileID: 11400000, guid: 9747f2022bfb9f541a67ee70029c0120, type: 2}
   - {fileID: 11400000, guid: 091c120ecd0458c41bb2b17bab562d22, type: 2}
   - {fileID: 11400000, guid: 3de7f00da7ceadc4380a90b0de3cbe4a, type: 2}
@@ -89,7 +87,8 @@ MonoBehaviour:
     m_ProfileVersion: 1
   m_LabelTable:
     m_LabelNames:
-    - default
+    - PreTitle
+    - PreGame
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 9c565b7c035733a448e410365d036e07, type: 2}

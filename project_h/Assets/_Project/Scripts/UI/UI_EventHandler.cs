@@ -14,14 +14,14 @@ public enum EUIEvent
 
 public class UI_EventHandler : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    public event Action<PointerEventData> OnClickHandler = null;
+    public event Action OnClickHandler = null;
     public event Action<PointerEventData> OnPointerDownHandler = null;
     public event Action<PointerEventData> OnPointerUpHandler = null;
     public event Action<PointerEventData> OnDragHandler = null;
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        OnClickHandler?.Invoke(eventData);
+        OnClickHandler?.Invoke();
     }
 
     public void OnPointerDown(PointerEventData eventData)

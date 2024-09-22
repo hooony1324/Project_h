@@ -71,10 +71,6 @@ public class UI_Base : InitOnce
 
         switch (type)
         {
-            case EUIEvent.Click:
-                evt.OnClickHandler -= action;
-                evt.OnClickHandler += action;
-                break;
             case EUIEvent.PointerDown:
                 evt.OnPointerDownHandler -= action;
                 evt.OnPointerDownHandler += action;
@@ -86,6 +82,19 @@ public class UI_Base : InitOnce
             case EUIEvent.Drag:
                 evt.OnDragHandler -= action;
                 evt.OnDragHandler += action;
+                break;
+        }
+    }
+    
+    public static void BindEvent(GameObject gameObejct, Action action = null, EUIEvent type = EUIEvent.Click)
+    {
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(gameObejct);
+
+        switch (type)
+        {
+            case EUIEvent.Click:
+                evt.OnClickHandler -= action;
+                evt.OnClickHandler += action;
                 break;
         }
     }

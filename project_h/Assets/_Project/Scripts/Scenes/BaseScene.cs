@@ -5,9 +5,8 @@ using UnityEngine;
 public enum EScene
 {
     Unknown,
-    Login,
-    Lobby,
-    Game,
+    TitleScene,
+    GameScene,
 }
 
 public abstract class BaseScene : InitOnce

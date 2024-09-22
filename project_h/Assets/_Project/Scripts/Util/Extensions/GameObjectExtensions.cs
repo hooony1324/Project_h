@@ -16,6 +16,11 @@ public static class GameObjectExtensions
     {
         UI_Base.BindEvent(go, action, type);
     }
+    
+    public static void BindEvent(this GameObject go, Action action = null, EUIEvent type = EUIEvent.Click)
+    {
+        UI_Base.BindEvent(go, action, type);
+    }
 
     public static bool IsValid(this GameObject go)
     {
