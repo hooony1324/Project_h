@@ -56,6 +56,7 @@ MonoBehaviour:
     - 108fa2337d86cf245a3c94178e06addd
     - f0a2dd3539b5faf4bad881f541c35828
     - e3c5554b017cdc145a3cf0f60307e60e
+    - f4eb82776f23dfb4e9771b6aec85a4a0
     values:
     - colorIndex: 1
       iconNameOrGuid: 
@@ -140,4 +141,6 @@ MonoBehaviour:
     - colorIndex: 8
       iconNameOrGuid: 
     - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 8
       iconNameOrGuid: 

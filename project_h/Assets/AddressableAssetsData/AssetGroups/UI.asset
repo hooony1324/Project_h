@@ -17,23 +17,17 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: ba78b97d39062ae4994b3df8add9328b
   m_SerializeEntries:
-  - m_GUID: 34185650947ed714d8f8eb7874dadb48
-    m_Address: UI_TitleScene
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreTitle
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75017431f8ce1b64cac07891df482e99
     m_Address: UI_GameScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c8c3058dce4d07848b16a39be5bad2b0
-    m_Address: UI_MessagePopup
+  - m_GUID: f62601728cd2176489cfb173d9522e18
+    m_Address: UI_Joystick
     m_ReadOnly: 0
     m_SerializedLabels:
-    - PreTitle
+    - PreGame
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8f9898ef61d94f740aed59871e7ec1ba, type: 2}
