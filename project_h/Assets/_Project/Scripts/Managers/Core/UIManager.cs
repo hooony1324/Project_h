@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +17,8 @@ public class UIManager
         set { _sceneUI = value; }
         get { return _sceneUI; }
     }
+
+    private Dictionary<string, UI_Popup> _popups = new Dictionary<string, UI_Popup>();
     public GameObject Root
     {
         get
@@ -27,6 +31,34 @@ public class UIManager
             return root;
         }
     }
+
+    public void CacheAllPopups()
+    {
+        var list = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(assembly => assembly.GetTypes())
+            .Where(type => type.IsSubclassOf(typeof(UI_Popup)));
+
+        foreach (Type type in list)
+        {
+            CachePopupUI(type);
+        }
+
+        CloseAllPopupUI();
+    }
+    public void CachePopupUI(Type type)
+    {
+        string name = type.Name;
+
+        if (_popups.TryGetValue(name, out UI_Popup popup) == false)
+        {
+            GameObject go = Managers.Resource.Instantiate(name, Root.transform);
+            popup = go.GetComponent<UI_Popup>();
+            _popups[name] = popup;
+        }
+
+        _popupStack.Push(popup);
+    }
+
     public void SetCanvas(GameObject go, bool sort = true, int sortOrder = 0)
     {
         Canvas canvas = Util.GetOrAddComponent<Canvas>(go);

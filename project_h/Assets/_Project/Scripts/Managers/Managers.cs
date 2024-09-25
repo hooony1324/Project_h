@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -22,8 +24,12 @@ public class Managers : MonoBehaviour
 
     // Contents
     private GameManager _game = new GameManager();
+    private MapManager _map = new MapManager();
+    private ObjectManager _object = new ObjectManager();
 
     public static GameManager Game => Instance?._game;
+    public static MapManager Map => Instance?._map;
+    public static ObjectManager Object => Instance?._object;
 
     public static void Init()
     {

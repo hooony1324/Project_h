@@ -1,3 +1,5 @@
+using System.Diagnostics.Tracing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameScene : BaseScene
@@ -10,9 +12,16 @@ public class GameScene : BaseScene
         SceneType = EScene.GameScene;
         Managers.Scene.SetCurrentScene(this);
         
-        //test
-        HeroCamp heroCamp = Managers.Resource.Instantiate(nameof(HeroCamp)).GetComponent<HeroCamp>();
-        heroCamp.transform.position = Vector3.zero;
+        Managers.Map.LoadMap("BaseMap");
+        
+        Vector3Int startPos = new Vector3Int(8, 10, 0);
+
+        HeroCamp heroCamp = Managers.Object.Spawn<HeroCamp>(startPos);
+        heroCamp.SetCellPos(startPos, true);
+
+        Hero hero = Managers.Object.Spawn<Hero>(startPos);
+        Managers.Map.MoveTo(hero, startPos, true);
+
         Managers.Game.Cam.transform.position = heroCamp.Position;
         Managers.Game.Cam.Target = heroCamp;
         
@@ -23,17 +32,8 @@ public class GameScene : BaseScene
 
         Managers.UI.ShowSceneUI<UI_Joystick>();
         Managers.UI.ShowSceneUI<UI_GameScene>();
-
-        {
-            GameObject obj = Managers.Resource.Instantiate(nameof(Hero));
-            obj.GetComponent<Animator>().runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>("Hero_Bow");
-        }
-        {
-            GameObject obj = Managers.Resource.Instantiate(nameof(Hero));
-            obj.GetComponent<Animator>().runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>("Hero_Warrior");
-        }
+          
         
-
         return true;
     }
 
@@ -52,20 +52,6 @@ public class GameScene : BaseScene
                 break;
         }
     }
-    
-    // private void HandleOnBroadcastEvent(EBroadcastEventType eventType, ECurrencyType currencyType, int value)
-    // {
-    //     switch (eventType)
-    //     {
-    //         case EBroadcastEventType.HeroDead:
-    //             if (IsDefeated())
-    //             {
-    //                 OnDefeated();
-    //             }
-
-    //             break;
-    //     }
-    // }
 
     public override void Clear()
     {

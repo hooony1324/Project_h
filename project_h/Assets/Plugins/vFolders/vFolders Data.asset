@@ -57,6 +57,15 @@ MonoBehaviour:
     - f0a2dd3539b5faf4bad881f541c35828
     - e3c5554b017cdc145a3cf0f60307e60e
     - f4eb82776f23dfb4e9771b6aec85a4a0
+    - 43706ba700c4bb44f9244a10891ffe8f
+    - 9efd9f0bec07d274382b068a4a3c7c75
+    - 063d18d95b576bc48a53a5675b59c14c
+    - 91fb4cb0b9018134dbce0d47245aed11
+    - bb28e7f3e3cd38c41814188e32d9ba14
+    - bc4eae0d0945a8a42866b637bc7a419f
+    - 7e92506eae5b0d04888aab3155c2151d
+    - f16e95c8a4518a442a19d69e49e22187
+    - 4089622fab3d9e6489e7fed8759bf77b
     values:
     - colorIndex: 1
       iconNameOrGuid: 
@@ -140,7 +149,25 @@ MonoBehaviour:
       iconNameOrGuid: 
     - colorIndex: 8
       iconNameOrGuid: 
-    - colorIndex: 5
+    - colorIndex: 8
       iconNameOrGuid: 
     - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 1
       iconNameOrGuid: 

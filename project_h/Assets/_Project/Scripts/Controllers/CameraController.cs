@@ -11,8 +11,8 @@ public class CameraController : MonoBehaviour
 {
     public ECameraState State { get; set; }
     private bool isReady = false;
-    private Entity _target;
-    public Entity Target
+    private BaseObject _target;
+    public BaseObject Target
     {
         get { return _target; }
         set
@@ -23,7 +23,7 @@ public class CameraController : MonoBehaviour
     }
 
     [SerializeField] public float smoothSpeed = 6f;
-    private int _targetOrthographicSize = 15;
+    private int _targetOrthographicSize = 20;
 
     public void Start()
     {
@@ -46,7 +46,7 @@ public class CameraController : MonoBehaviour
         Vector3 targetPosition = new Vector3(Target.Position.x, Target.Position.y, -10f);
         transform.position = Vector3.Lerp(transform.position, targetPosition, smoothSpeed * Time.fixedDeltaTime);
     }
-    public void TargetingCamera(Entity dest)
+    public void TargetingCamera(BaseObject dest)
     {
         //이미 진행중이면 리턴
         if (State == ECameraState.Targeting)

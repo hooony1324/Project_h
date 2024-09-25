@@ -8,7 +8,7 @@ public enum ECampState
     MoveToTarget,
 }
 
-public class HeroCamp : Entity
+public class HeroCamp : BaseObject
 {
     private Vector3 _moveDir { get; set; }
     public float Speed { get; set; } = 7f;
@@ -45,15 +45,15 @@ public class HeroCamp : Entity
     {
         Vector3 dir = _moveDir * (Time.deltaTime * Speed);
         Vector3 newPos = transform.position + dir;
-        
-        // if (Managers.Map == null)
-        //     return;
-        // if (Managers.Map.CanGo(this, newPos, ignoreObjects: true, ignoreSemiWall: true) == false)
-        //     return;
-        // if (Managers.Game.Cam.State == ECameraState.Targeting)
-        //     return;
-        // if(CampState == ECampState.MoveToTarget)
-        //     return;
+
+        if (Managers.Map == null)
+            return;
+        if (Managers.Map.CanGo(this, newPos, ignoreObjects: true, ignoreSemiWall: true) == false)
+            return;
+        if (Managers.Game.Cam.State == ECameraState.Targeting)
+            return;
+        if(CampState == ECampState.MoveToTarget)
+            return;
 
         transform.position = newPos;
     }
@@ -81,8 +81,6 @@ public class HeroCamp : Entity
                 _moveDir = MoveDir.BOTTOM_RIGHT;
             else
                 _moveDir = MoveDir.TOP;
-
-            Debug.Log($"{_moveDir}, {angle}");
 
             Pivot.eulerAngles = new Vector3(0, 0, angle); //      
         }

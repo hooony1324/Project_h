@@ -16,4 +16,9 @@ public class Define
         public static Vector2 LEFT = new Vector2(-1f, 0f);
         public static Vector2 RIGHT = new Vector2(1f, 0f);
     }
+
+    public const char MAP_TOOL_WALL = '0';
+    public const char MAP_TOOL_CHARACTER_WALKABLE = '1'; 
+    public const char MAP_TOOL_CAMERA_WALKABLE = '2';	
+    public const int HERO_DEFAULT_MOVE_DEPTH = 8;
 }
