@@ -25,8 +25,6 @@ public class GameScene : BaseScene
         Managers.Game.Cam.transform.position = heroCamp.Position;
         Managers.Game.Cam.Target = heroCamp;
         
-        Managers.Game.OnJoystickStateChanged -= HandleOnJoystickStateChanged;
-        Managers.Game.OnJoystickStateChanged += HandleOnJoystickStateChanged;
         // Managers.Game.OnBroadcastEvent -= HandleOnBroadcastEvent;
         // Managers.Game.OnBroadcastEvent += HandleOnBroadcastEvent;
 
@@ -35,22 +33,6 @@ public class GameScene : BaseScene
           
         
         return true;
-    }
-
-    private void HandleOnJoystickStateChanged(EJoystickState joystickState)
-    {
-        switch (joystickState)
-        {
-            case EJoystickState.PointerDown:
-                break;
-            case EJoystickState.Drag:
-                break;
-            case EJoystickState.PointerUp:
-
-                break;
-            default:
-                break;
-        }
     }
 
     public override void Clear()

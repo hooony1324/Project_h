@@ -9,7 +9,6 @@ public class BaseLayerBehavior : StateMachineBehaviour
     private readonly static int kIsDeadHash = Animator.StringToHash("isDead");
 
     private Entity entity;
-
     private EntityMovement movement;
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
@@ -25,6 +24,9 @@ public class BaseLayerBehavior : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
+        if (entity == null)
+            return;
+
         if (movement)
             animator.SetFloat(kSpeedHash, movement.IsMoving);
 

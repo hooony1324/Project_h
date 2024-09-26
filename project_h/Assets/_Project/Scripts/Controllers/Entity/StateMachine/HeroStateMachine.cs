@@ -12,21 +12,6 @@ using UnityEngine;
 
 public class HeroStateMachine : MonoStateMachine<Entity>
 {
-    // 기본 상태
-    // DefaultState
-    // - Idle
-    // - 무언가를 Tracing
-
-    // CombatState
-
-    // DeatState
-
-
-    // 나중에 응용
-    // HeroMoveState에 있는 것들...
-    // CCState
-    // SkillState
-
     protected override void AddStates()
     {
         AddState<EntityDefaultState>();
