@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreTitle
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b84914a2883c4054ba8f350fa21ba7c1
+    m_Address: NotoSansKR-VariableFont_wght SDF
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreTitle
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c8c3058dce4d07848b16a39be5bad2b0
     m_Address: UI_MessagePopup
     m_ReadOnly: 0

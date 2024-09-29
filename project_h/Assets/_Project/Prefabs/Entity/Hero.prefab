@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlType: 0
+  Movement: {fileID: 0}
   SkillSystem: {fileID: 0}
   Target: {fileID: 0}
-  _creatureState: 0
 --- !u!114 &1191303508249754646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,18 +139,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statOverrides:
-  - stat: {fileID: 11400000, guid: 5749336c99174b84c8a868fa8d3d6126, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-  - stat: {fileID: 11400000, guid: e7d068a82fc879d48923e13bfa4c3d39, type: 2}
+  - stat: {fileID: 11400000, guid: 6a7eff128d6485744be25fc5b4976358, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: d4577d71a27ef6c4d9d6dc61ca5c701b, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
-  hpStat: {fileID: 11400000, guid: 5749336c99174b84c8a868fa8d3d6126, type: 2}
+  - stat: {fileID: 11400000, guid: 1b4fff764dcb621499255cbdfd66a652, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  hpStat: {fileID: 11400000, guid: 6a7eff128d6485744be25fc5b4976358, type: 2}
   moveSpeedStat: {fileID: 11400000, guid: d4577d71a27ef6c4d9d6dc61ca5c701b, type: 2}
-  levelStat: {fileID: 11400000, guid: e7d068a82fc879d48923e13bfa4c3d39, type: 2}
+  levelStat: {fileID: 11400000, guid: 1b4fff764dcb621499255cbdfd66a652, type: 2}
 --- !u!114 &-2360951494994577932
 MonoBehaviour:
   m_ObjectHideFlags: 0

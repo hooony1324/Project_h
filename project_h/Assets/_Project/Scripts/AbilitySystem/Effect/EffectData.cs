@@ -1,24 +1,33 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Sirenix.Serialization;
 
-[System.Serializable]
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+[System.Serializable] 
 public struct EffectData
 {
     // 현재 Data가 Effect의 몇 Level Data인지에 대한 정보
     // 예를 들어, level이 3일 경우, Effect의 3 Level Data라는 의미
+    [DelayedProperty, OnValueChanged("OnLevelChanged")]
+    [GUIColor("RGB(0, 1, 0)")]
+    [MinValue(1)]
     public int level;
 
     [Title("Stack")]
-    [Min(1)]
+    [MinValue(1)]
     // Effect가 중첩될 수 있는 최대 Stack
     public int maxStack;
     // Stack에 따른 추가 효과들
     public EffectStackAction[] stackActions;
 
     [Title("Action")]
-    [SerializeReference]
     // Effect의 실제 효과를 담당하는 Module
     // EffectAction을 통해 공격, 치유, 버프 같은 실제 Effect의 효과가 구현됨
+    [SerializeReference]
     public EffectAction action;
 
     [Title("Setting")]
@@ -43,4 +52,20 @@ public struct EffectData
     [Title("Custom Action")]
     [SerializeReference]
     public CustomAction[] customActions;
+
+    #if UNITY_EDITOR
+    private void OnLevelChanged()
+    {
+        var effect = Selection.activeObject as Effect;
+
+        if (!effect.IsValidData(this))
+        {
+            level = -1;
+            return;
+        }
+
+        effect.SortEffectsByLevel();
+    }
+
+    #endif
 }

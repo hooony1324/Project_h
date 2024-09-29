@@ -1,7 +1,15 @@
+#if UNITY_EDITOR
+
+using Sirenix.OdinInspector;
+
 [System.Serializable]
+[InlineProperty]
 public struct StatScaleFloat
 {
+    [HorizontalGroup("Row"), HideLabel]
     public float defaultValue;
+
+    [HorizontalGroup("Row"), HideLabel]
     public Stat scaleStat;
 
     public float GetValue(Stats stats)
@@ -12,3 +20,5 @@ public struct StatScaleFloat
             return defaultValue;
     }
 }
+
+#endif

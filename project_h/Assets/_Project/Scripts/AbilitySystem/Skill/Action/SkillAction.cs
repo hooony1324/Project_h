@@ -11,6 +11,8 @@ public abstract class SkillAction : ICloneable
     public virtual void Release(Skill skill) { }
 
     protected virtual IReadOnlyDictionary<string, string> GetStringsByKeyword() => null;
+    public virtual string BuildDescription(string description)
+        => TextReplacer.Replace(description, "skillAction", GetStringsByKeyword());
 
     public abstract object Clone();
 }

@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
+  m_Name: SKILL_NORMALATTACK
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 0}
+  id: 0
+  codeName: NORMALATTACK
+  displayName: 
+  description: 
+  type: 0
+  useType: 0
+  executionType: 0
+  applyType: 0
+  needSelectionResultType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  acquisitionConditions: []
+  acquisitionCosts: []
+  useConditions: []
+  isAllowLevelExceedDatas: 0
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas: []
+  references:
+    version: 2
+    RefIds: []

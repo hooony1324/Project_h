@@ -7,6 +7,15 @@ public enum SkillRunningFinishOption
     FinishWhenDurationEnded,
 }
 
+// Skill가 Charge가 끝나면(지속 시간이 끝나면) 어떤 행동을 취할 것인가?
+// Use는 Skill을 자동으로 사용함
+// Cancel을 Skill의 사용이 취소됨
+public enum SkillChargeFinishActionOption
+{
+    Use,
+    Cancel,
+}
+
 // 직접 사용해야하는 스킬인가?(Active)
 // 자동으로 사용되는 스킬인가?(Passive)
 public enum SkillType
@@ -20,14 +29,14 @@ public enum SkillType
 public enum SkillUseType
 {
     Instant,
-    //Toggle
+    Toggle
 }
 
 // 언제 사용할 CustomAction인가?
 public enum SkillCustomActionType
 {
-    //Cast,
-    //Charge,
+    Cast,
+    Charge,
     PrecedingAction,
     Action,
 }
@@ -39,7 +48,7 @@ public enum SkillCustomActionType
 public enum SkillExecutionType
 {
     Auto,
-    //Input
+    Input
 }
 
 // Skill의 적용 시점

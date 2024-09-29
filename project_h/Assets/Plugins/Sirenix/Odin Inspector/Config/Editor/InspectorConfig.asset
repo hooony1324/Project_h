@@ -16,4 +16,6 @@ MonoBehaviour:
   defaultEditorBehaviour: 11
   processMouseMoveInInspector: 1
   drawingConfig:
-    configs: []
+    configs:
+    - DrawnTypeName: Sirenix.OdinInspector.Editor.Modules.OdinModuleConfig, Sirenix.OdinInspector.Editor
+      EditorTypeName: Sirenix.OdinInspector.Editor.OdinEditor, Sirenix.OdinInspector.Editor

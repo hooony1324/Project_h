@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Stat))]
+#if UNITY_EDITOR
+//[CustomEditor(typeof(Stat))]
 public class StatEditor : IdentifiedObjectEditor
 {
     private SerializedProperty isPercentTypeProperty;
@@ -38,3 +39,4 @@ public class StatEditor : IdentifiedObjectEditor
         serializedObject.ApplyModifiedProperties();
     }
 }
+#endif

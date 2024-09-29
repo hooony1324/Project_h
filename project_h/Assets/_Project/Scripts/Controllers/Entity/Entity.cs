@@ -1,8 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
+using System.Linq;
+
+
+#if UNITY_EDITOR
+using Sirenix.OdinInspector;
+#endif
 
 public enum EEntityControlType
 {
@@ -13,8 +18,11 @@ public enum EEntityControlType
 
 public abstract class Entity : BaseObject
 {
-    [SerializeField]
+    [SerializeField, EnumToggleButtons]
     private EEntityControlType controlType;
+
+    [SerializeField]
+    private Category[] categories;
 
     public Animator Animator {get; private set; }
     public Stats Stats { get; private set; }
@@ -22,6 +30,7 @@ public abstract class Entity : BaseObject
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;
     public Transform Target;
+    public Category[] Categories => categories;
 
     public bool IsPlayer => controlType == EEntityControlType.Player;
     public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
@@ -51,6 +60,33 @@ public abstract class Entity : BaseObject
 
     }
 
+    public void TakeDamage(Entity attacker, object causer, float damage)
+    {
+        if (IsDead)
+            return;
 
+        float prevValue = Stats.HPStat.DefaultValue;
+        Stats.HPStat.DefaultValue -= damage;
 
+        //onTakeDamage?.Invoke(this, instigator, causer, damage);
+
+        if (Mathf.Approximately(Stats.HPStat.DefaultValue, 0f))
+            OnDead(); 
+    }
+    private void OnDead()
+    {
+        if (Movement)
+            Movement.enabled = false;
+
+        //SkillSystem.CancelAll(true);
+
+        //onDead?.Invoke(this);
+    }
+    public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
+
+    public bool IsInState<T>() where T : State<Entity>
+        => StateMachine.IsInState<T>();
+
+    public bool IsInState<T>(int layer) where T : State<Entity>
+        => StateMachine.IsInState<T>(layer);
 }

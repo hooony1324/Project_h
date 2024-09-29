@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
-
-[CustomEditor(typeof(IdentifiedObject), true)]
+using SkillSystemUtility;
+//[CustomEditor(typeof(IdentifiedObject), true)]
 public class IdentifiedObjectEditor : Editor
 {
+#if UNITY_EDITOR
     private SerializedProperty idProperty;
     private SerializedProperty iconProperty;
     private SerializedProperty displayNameProperty;
@@ -136,4 +137,5 @@ public class IdentifiedObjectEditor : Editor
         // 이 작업을 해주지 않으면 바뀐 값이 적용되지 않아서 이전 값으로 돌아감
         serializedObject.ApplyModifiedProperties();
     }
+#endif
 }

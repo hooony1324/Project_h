@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using VFolders.Libs;
 
 #if UNITY_EDITOR
 [CustomEditor(typeof(RectTransform))]

@@ -1,7 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Sirenix.Utilities;
 
+
+#if UNITY_EDITOR
+using Sirenix.OdinInspector;
+#endif
+
+[CreateAssetMenu(menuName = "AbilitySystem/Effect")]
 public class Effect : IdentifiedObject
 {
     // 몇몇 변수는 값이 0이면 무한을 의미함
@@ -12,28 +19,35 @@ public class Effect : IdentifiedObject
     public delegate void ReleasedHandler(Effect effect);
     public delegate void StackChangedHandler(Effect effect, int currentApplyCount, int prevApplyCount);
 
-    [SerializeField]
+    [SerializeField, FoldoutGroup("Setting")]
+    [EnumToggleButtons]
     private EffectType type;
+
     // Effect의 중복 적용 가능 여부
-    [SerializeField]
+    [SerializeField, FoldoutGroup("Setting")]
     private bool isAllowDuplicate = true;
-    [SerializeField]
+
+    [SerializeField, FoldoutGroup("Setting")]
+    [EnumToggleButtons, HideIf("isAllowDuplicate")]
     private EffectRemoveDuplicateTargetOption removeDuplicateTargetOption;
 
+
     // UI로 Effect 정보를 보여줄지에 대한 여부
-    [SerializeField]
+    [SerializeField, FoldoutGroup("Option")]
     private bool isShowInUI;
 
     // maxLevel이 effectDatas의 Length를 초과할 수 있는지 여부
     // 이 Option이 false면 maxLevel은 effectDatas의 Length로 고정됨
-    [SerializeField]
+    [SerializeField, FoldoutGroup("Level Datas")]
     private bool isAllowLevelExceedDatas;
-    [SerializeField]
+    [SerializeField, FoldoutGroup("Level Datas"), EnableIf("IsAllowLevelExceedDatas")]
     private int maxLevel;
     // Level별 Data, Level은 1부터 시작하고 Array의 Index는 0부터 시작하므로
     // Level에 맞는 Data를 가져오려면 [현재 Level - 1]번째 Data를 가져와야함
     // ex. Level이 1이라면, 1 - 1 = 0, 0번째 Data를 가져와야함(= effectDatas[0])
-    [SerializeField]
+    [InfoBox("@GetDataLevels()")]
+    [SerializeField, FoldoutGroup("Level Datas")]
+    [ListDrawerSettings(CustomAddFunction = "AddNewLevelData", DraggableItems = false, NumberOfItemsPerPage = 1)]
     private EffectData[] effectDatas;
 
     // Level에 맞는 현재 Data
@@ -375,4 +389,78 @@ public class Effect : IdentifiedObject
 
         return clone;
     }
+
+#if UNITY_EDITOR
+
+    // Add new leveldata
+    private void AddNewLevelData()
+    {
+        if (effectDatas.Length == 0)
+        {
+            effectDatas = new EffectData[1];
+            effectDatas[0].level = 1;
+            effectDatas[0].maxStack = 1;
+        }
+        else
+        {
+            EffectData[] newEffectDatas = new EffectData[effectDatas.Length + 1];
+
+            for (int i = 0; i < effectDatas.Length; i++)
+            {
+                newEffectDatas[i] = effectDatas[i];
+            }
+
+            EffectData newEffectData = effectDatas[effectDatas.Length - 1];
+            newEffectData.level += 1;
+            newEffectDatas[newEffectDatas.Length - 1] = newEffectData;
+
+            effectDatas = newEffectDatas;
+        }
+    }
+    
+    private bool IsAllowLevelExceedDatas()
+    {
+        if (effectDatas.Length == 0)
+            return false;
+        
+        if (isAllowLevelExceedDatas)
+            return true;
+
+        maxLevel = effectDatas[effectDatas.Length - 1].level;
+        return false;
+    }
+
+    public void SortEffectsByLevel()
+    {
+        effectDatas = effectDatas.OrderBy(x => x.level).ToArray();
+    }
+
+    public bool IsValidData(EffectData data)
+    {
+        // odin의 onvaluechanged는 이미 변경된 data로만 파악해야되서 겹치는 데이터는 총 2개 생김
+        int cnt = 0;
+        foreach (var effectData in effectDatas)
+        {
+            if (effectData .level == data.level)
+                cnt++;
+        }
+
+        if (cnt > 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    private string GetDataLevels()
+    {
+        if (effectDatas.IsNullOrEmpty())
+            return "Levels : ";
+
+            string levelsString = $"Levels : {string.Join(", ", System.Array.ConvertAll(effectDatas, data => data.level.ToString()))}";
+
+        return levelsString;
+    }
+#endif
 }

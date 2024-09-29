@@ -2,7 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "AbilitySystem/Category")]
 public class Category : IdentifiedObject
 {
     public override bool Equals(object other)

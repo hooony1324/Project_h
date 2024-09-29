@@ -8,10 +8,9 @@ using Newtonsoft.Json;
 using UnityEditor;
 #endif
 
+#if UNITY_EDITOR
 public class MapEditor : MonoBehaviour
 {
-    
-#if UNITY_EDITOR
     [MenuItem("Tools/GenerateMap")]
     private static void GenerateMap()
     {
@@ -51,5 +50,5 @@ public class MapEditor : MonoBehaviour
         Debug.Log("Map Collision Generation Complete");
     }
 
-#endif
 }
+#endif
