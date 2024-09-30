@@ -123,6 +123,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controlType: 0
+  categories:
+  - {fileID: 11400000, guid: c1e02e6385f1f6d4fb81b4004e4cebe5, type: 2}
   Movement: {fileID: 0}
   SkillSystem: {fileID: 0}
   Target: {fileID: 0}

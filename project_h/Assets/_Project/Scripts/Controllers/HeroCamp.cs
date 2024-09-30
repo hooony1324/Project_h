@@ -38,6 +38,9 @@ public class HeroCamp : BaseObject
 
         Managers.Game.OnMoveDirChanged -= HandleOnMoveDirChanged;
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
+
+        ExtraCells = 1;
+
         return true;
     }
     
@@ -48,7 +51,7 @@ public class HeroCamp : BaseObject
 
         if (Managers.Map == null)
             return;
-        if (Managers.Map.CanGo(this, newPos, ignoreObjects: true, ignoreSemiWall: true) == false)
+        if (Managers.Map.CanGo(this, newPos, ignoreObjects: false, ignoreSemiWall: false) == false)
             return;
         if (Managers.Game.Cam.State == ECameraState.Targeting)
             return;

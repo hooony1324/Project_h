@@ -5,20 +5,19 @@ public class EntityDefaultState : State<Entity>
 
     public override void Enter() 
     {
-        Entity.Movement.StartTrace();
+
     }
 
     public override void Exit() 
     {
-        Entity.Movement.StopTrace();
+
     }
 
     public override void Update()
     {
-        if (!Entity.Target)
+        if (!Entity.TraceTarget)
             return;
-            
-        Entity.Movement.FindPathAndMoveToCellPos(Entity.Target.position, HERO_DEFAULT_MOVE_DEPTH);
+
     }
 
     // 트리거스킬 발동 시 사용

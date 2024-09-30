@@ -119,8 +119,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc17a4e167722264da70b66df3e0ab72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExtraCells: 0
-  _cellPos: {x: 0, y: 0, z: 0}
-  <MoveSpeed>k__BackingField: 3
-  _target: {fileID: 0}
-  _creatureState: 0
+  controlType: 1
+  categories:
+  - {fileID: 11400000, guid: 76a8d37e3bbf70946a283052194d5bf1, type: 2}
+  Movement: {fileID: 0}
+  SkillSystem: {fileID: 0}
+  TraceTarget: {fileID: 0}

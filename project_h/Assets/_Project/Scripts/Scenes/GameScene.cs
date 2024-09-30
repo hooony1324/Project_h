@@ -16,14 +16,10 @@ public class GameScene : BaseScene
         
         Vector3Int startPos = new Vector3Int(8, 10, 0);
 
-        HeroCamp heroCamp = Managers.Object.Spawn<HeroCamp>(startPos);
-        heroCamp.SetCellPos(startPos, true);
-
         Hero hero = Managers.Object.Spawn<Hero>(startPos);
-        Managers.Map.MoveTo(hero, startPos, true);
-
-        Managers.Game.Cam.transform.position = heroCamp.Position;
-        Managers.Game.Cam.Target = heroCamp;
+        
+        Managers.Game.Cam.transform.position = hero.Position;
+        Managers.Game.Cam.Target = hero;
         
         // Managers.Game.OnBroadcastEvent -= HandleOnBroadcastEvent;
         // Managers.Game.OnBroadcastEvent += HandleOnBroadcastEvent;

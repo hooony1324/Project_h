@@ -16,15 +16,6 @@ public class Hero : Entity
     // Experimental Data -> TODO: Data Sheet
     string _animControllerName = "Hero_Warrior";
 
-    private Transform HeroCampDest
-    {
-        get
-        {
-            HeroCamp heroCamp = Managers.Object.HeroCamp;
-            return Movement.IsForcedMoving ? heroCamp.Destination : heroCamp.Pivot;
-        }
-    }
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -50,13 +41,11 @@ public class Hero : Entity
         {
             case EJoystickState.PointerDown:
                 Movement.IsForcedMoving = true;
-                Target = HeroCampDest;
                 break;
             case EJoystickState.Drag:
                 break;
             case EJoystickState.PointerUp:
                 Movement.IsForcedMoving = false;
-                Target = HeroCampDest;
                 break;
         }
     }

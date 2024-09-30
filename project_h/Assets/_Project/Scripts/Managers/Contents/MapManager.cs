@@ -6,9 +6,9 @@ using static Define;
 
 public enum ECellCollisionType
 {
+    Wall,
     CharacterWalkable,
     CameraWalkable,
-    Wall,
 }
 
 class Cell

@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 public enum EEntityControlType
 {
     Player,
-    NotPlayer,
+    NonPlayer,
 }
 
 
@@ -29,7 +29,7 @@ public abstract class Entity : BaseObject
     public EntityMovement Movement;
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;
-    public Transform Target;
+    public Transform TraceTarget;
     public Category[] Categories => categories;
 
     public bool IsPlayer => controlType == EEntityControlType.Player;
@@ -57,7 +57,7 @@ public abstract class Entity : BaseObject
 
     public virtual void SetInfo(int templateId)
     {
-
+        
     }
 
     public void TakeDamage(Entity attacker, object causer, float damage)

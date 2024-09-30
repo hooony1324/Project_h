@@ -29,22 +29,27 @@ public class EntityMovement : MonoBehaviour
 
     public void StartTrace()
     {
-        StartCoroutine(TraceUpdate());
+        StartCoroutine(UpdateTrace());
     }
 
     public void StopTrace()
     {
-        StopCoroutine(TraceUpdate());
+        StopCoroutine(UpdateTrace());
     }
 
-    IEnumerator TraceUpdate()
+    protected IEnumerator UpdateTrace()
     {
         while (true)
         {
-            Owner.LerpToCellPos(entityMoveSpeedStat.Value);
+            if (Owner.IsPlayer)
+                transform.position = Managers.Object.HeroCamp.Position;
+            else
+                Owner.LerpToCellPos(entityMoveSpeedStat.Value);
+            
             yield return null;
         }
     }
+
 
     #region GridWorld Moving
     public EFindPathResult FindPathAndMoveToCellPos(Vector3 destWorldPos, int maxDepth, bool forceMoveCloser = false)
