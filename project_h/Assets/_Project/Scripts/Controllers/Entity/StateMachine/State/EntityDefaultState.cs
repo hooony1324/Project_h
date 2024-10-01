@@ -15,8 +15,7 @@ public class EntityDefaultState : State<Entity>
 
     public override void Update()
     {
-        if (!Entity.TraceTarget)
-            return;
+        
 
     }
 

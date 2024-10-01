@@ -16,13 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 92898529c70623d408bffd651713a20c
-  m_SerializeEntries:
-  - m_GUID: 26b4f8b1967388d488f97a522434d4f7
-    m_Address: BaseMapCollision
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreGame
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8f9898ef61d94f740aed59871e7ec1ba, type: 2}
   m_SchemaSet:

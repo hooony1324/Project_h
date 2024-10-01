@@ -20,6 +20,14 @@ public abstract class Entity : BaseObject
 {
     [SerializeField, EnumToggleButtons]
     private EEntityControlType controlType;
+    public EEntityControlType ControlType 
+    {
+        get => controlType; 
+        set
+        {
+            controlType = value;
+        }
+    }
 
     [SerializeField]
     private Category[] categories;
@@ -29,7 +37,9 @@ public abstract class Entity : BaseObject
     public EntityMovement Movement;
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;
-    public Transform TraceTarget;
+
+    // 공격 혹은 치유와 같이 대상 지정
+    public Entity Target;
     public Category[] Categories => categories;
 
     public bool IsPlayer => controlType == EEntityControlType.Player;

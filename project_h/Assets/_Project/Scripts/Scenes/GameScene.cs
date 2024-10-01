@@ -12,7 +12,7 @@ public class GameScene : BaseScene
         SceneType = EScene.GameScene;
         Managers.Scene.SetCurrentScene(this);
         
-        Managers.Map.LoadMap("BaseMap");
+        //Managers.Map.LoadMap("BaseMap");
         
         Vector3Int startPos = new Vector3Int(8, 10, 0);
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+
 
 public enum EFindPathResult
 {
@@ -13,85 +15,174 @@ public enum EFindPathResult
 
 public class EntityMovement : MonoBehaviour
 {
+    public delegate void SetDestinationHandler(EntityMovement movement, Vector3 destination);
+    public event SetDestinationHandler onSetDestination;
+
     public Entity Owner { get; private set; }
+    public float MoveSpeed => agent.speed;
+    // 조이스틱에 의한 강제 이동
+    public bool IsForcedMoving {get; set;}
+
+    private NavMeshAgent agent;
     private Stat entityMoveSpeedStat;
+    private Transform traceTarget;
+    
+    [SerializeField]
+    private float rollTime = 0.5f;
+
+    public Transform TraceTarget
+    {
+        get => traceTarget;
+        set
+        {
+            if (traceTarget == value)
+                return;
+            
+            Stop();
+
+            traceTarget = value;
+            if (traceTarget)
+                StartCoroutine("TraceUpdate");
+        }
+    }
+    public Vector3 Destination
+    {
+        get => agent.destination;
+        set
+        {
+            // traceTarget을 추적하는 것을 멈춤
+            TraceTarget = null;
+            SetDestination(value);
+        }
+    }
+
+    public void Move(Vector3 moveDir)
+    {
+        Vector3 nextPos = transform.position + moveDir;
+        NavMesh.Raycast(transform.position, nextPos, out NavMeshHit hit, NavMesh.AllAreas);
+        
+        if (hit.distance > 0.4f)
+            Destination = nextPos;
+    }
+
+    public bool IsRolling { get; private set; }
+    
     public void Setup(Entity owner)
     {
         Owner = owner;
 
+        agent = Owner.GetComponent<NavMeshAgent>();
+
+        var animator = Owner.Animator;
+        // if (animator)
+        //     animator.SetFloat("rollSpeed", 1 / rollTime);
+
         entityMoveSpeedStat = Owner.Stats.MoveSpeedStat ?? Owner.Stats.GetStat("MOVESPEED");
+        if (entityMoveSpeedStat)
+        {
+            agent.speed = entityMoveSpeedStat.Value;
+            entityMoveSpeedStat.onValueChanged += OnMoveSpeedChanged;
+        }
     }
 
-    // 조이스틱에 의한 강제 이동
-    public bool IsForcedMoving {get; set;}
+    private void OnDisable() => Stop();
 
-    public float IsMoving => !Owner.LerpCellPosCompleted ? 1 : 0;
-
-    public void StartTrace()
+    private void OnDestroy()
     {
-        StartCoroutine(UpdateTrace());
+        if (entityMoveSpeedStat)
+            entityMoveSpeedStat.onValueChanged -= OnMoveSpeedChanged;
     }
 
-    public void StopTrace()
+    private void OnMoveSpeedChanged(Stat stat, float currentValue, float preValue)
+        => agent.speed = currentValue;
+
+    private void SetDestination(Vector3 destination)
     {
-        StopCoroutine(UpdateTrace());
+        agent.destination = destination;
+        LookAt(destination);
+
+        onSetDestination?.Invoke(this, destination);
     }
 
-    protected IEnumerator UpdateTrace()
+    public void Stop()
+    {
+        traceTarget = null;
+        StopCoroutine("TraceUpdate");
+
+        if (agent.isOnNavMesh)
+            agent.ResetPath();
+
+        agent.velocity = Vector3.zero;
+    }
+
+    public void LookAt(Vector3 position)
+    {
+        Owner.LookAt(position);
+    }
+ 
+    Vector3 rollDirection;
+    public void Roll(float distance, Vector3 direction)
+    {
+        Stop();
+
+        rollDirection = direction;
+        // +a) agent끄고(회피는 유닛 지나가게) NavMesh로 distance계산
+        Vector3 expectedRollPosition = transform.position + rollDirection * distance;
+        NavMesh.Raycast(transform.position, expectedRollPosition, out NavMeshHit hit, NavMesh.AllAreas);
+
+        expectedRollPosition = hit.position - rollDirection * agent.radius;
+
+        // 바라볼 방향 바라봄
+        if (direction != Vector3.zero)
+            LookAt(expectedRollPosition);
+        
+        IsRolling = true;
+        agent.enabled = false;
+        StopCoroutine("RollUpdate");
+        StartCoroutine("RollUpdate", distance);
+    }
+
+    private IEnumerator RollUpdate(float distance)
+    {
+        // 현재까지 구른 시간
+        float currentRollTime = 0f;
+        // 이전 Frame에 이동한 거리
+        float prevRollDistance = 0f;
+
+        while (true)
+        {
+            currentRollTime += Time.deltaTime;
+
+            float timePoint = currentRollTime / rollTime;
+            float inOutSine = -(Mathf.Cos(Mathf.PI * timePoint) - 1f) / 2f;
+            float currentRollDistance = Mathf.Lerp(0f, distance, inOutSine);
+
+            float deltaValue = currentRollDistance - prevRollDistance;
+
+            transform.position += (rollDirection * deltaValue);
+            prevRollDistance = currentRollDistance;
+
+            if (currentRollTime >= rollTime)
+                break;
+            else
+                yield return null;
+        }
+
+        IsRolling = false;
+        agent.enabled = true;
+    }
+
+    private IEnumerator TraceUpdate()
     {
         while (true)
         {
-            if (Owner.IsPlayer)
-                transform.position = Managers.Object.HeroCamp.Position;
+            if (Vector3.SqrMagnitude(TraceTarget.position - transform.position) > 1.0f)
+            {
+                SetDestination(TraceTarget.position);
+                yield return null;
+            }
             else
-                Owner.LerpToCellPos(entityMoveSpeedStat.Value);
-            
-            yield return null;
+                break;
         }
     }
-
-
-    #region GridWorld Moving
-    public EFindPathResult FindPathAndMoveToCellPos(Vector3 destWorldPos, int maxDepth, bool forceMoveCloser = false)
-    {
-        Vector3Int destCellPos = Managers.Map.World2Cell(destWorldPos);
-        return FindPathAndMoveToCellPos(destCellPos, maxDepth, forceMoveCloser);
-    }
-
-    private List<Vector3Int> _debugPath = new List<Vector3Int>();
-
-    public EFindPathResult FindPathAndMoveToCellPos(Vector3Int destCellPos, int maxDepth, bool forceMoveCloser = false)
-    {
-        if (Owner.CellPos == destCellPos)
-        {
-            return EFindPathResult.SamePosition;
-        }
-
-        if (Owner.LerpCellPosCompleted == false)
-            return EFindPathResult.Fail_LerpCell;
-
-        // A*
-        List<Vector3Int> path = Managers.Map.FindPath(Owner, Owner.CellPos, destCellPos, maxDepth, Owner.ExtraCells);
-        if (path.Count < 2)
-            return EFindPathResult.Fail_NoPath;
-
-        _debugPath = path; // 여기서 경로를 _debugPath에 저장
-
-        if (forceMoveCloser)
-        {
-            Vector3Int diff1 = Owner.CellPos - destCellPos;
-            Vector3Int diff2 = path[1] - destCellPos;
-            if (diff1.sqrMagnitude <= diff2.sqrMagnitude)
-                return EFindPathResult.Fail_NoPath;
-        }
-
-        Vector3Int dirCellPos = path[1] - Owner.CellPos;
-        Vector3Int nextPos = Owner.CellPos + dirCellPos;
-
-        if (Managers.Map.MoveTo(Owner, nextPos) == false)
-            return EFindPathResult.Fail_MoveTo;
-
-        return EFindPathResult.Success;
-    }
-    #endregion
 }

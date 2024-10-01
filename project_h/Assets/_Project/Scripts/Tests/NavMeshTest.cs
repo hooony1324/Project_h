@@ -13,8 +13,6 @@ public class NavMeshTest : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false;
-        agent.updateUpAxis = false;
     }
 
     // Update is called once per frame
@@ -25,7 +23,7 @@ public class NavMeshTest : MonoBehaviour
             return;
 
         Vector3 driftPos = Target.transform.position + new Vector3(agentDrift, 0f, 0f);
-        agent.SetDestination(Target.position);
+        agent.SetDestination(driftPos);
         
     }
 }

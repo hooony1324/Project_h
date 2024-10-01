@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BaseLayerBehavior : StateMachineBehaviour
 {
@@ -9,6 +10,7 @@ public class BaseLayerBehavior : StateMachineBehaviour
     private readonly static int kIsDeadHash = Animator.StringToHash("isDead");
 
     private Entity entity;
+    private NavMeshAgent agent;
     private EntityMovement movement;
 
     // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
@@ -18,20 +20,19 @@ public class BaseLayerBehavior : StateMachineBehaviour
             return;
         
         entity = animator.GetComponent<Entity>();
+        agent = animator.GetComponent<NavMeshAgent>();
         movement = animator.GetComponent<EntityMovement>();
     }
 
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
-        if (entity == null)
-            return;
-
-        if (movement)
-            animator.SetFloat(kSpeedHash, movement.IsMoving);
+        if (agent)
+            animator.SetFloat(kSpeedHash, agent.velocity.sqrMagnitude / (agent.speed * agent.speed));
+            
+        // roll
 
         animator.SetBool(kIsDeadHash, entity.IsDead);
-
 
     }
 

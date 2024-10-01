@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 477addb85c46a714ebd22097ffb15f13
+    m_Address: Pivot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5cedca9ead177ff46a925d5e3aa64f7c
     m_Address: BaseMap
     m_ReadOnly: 0

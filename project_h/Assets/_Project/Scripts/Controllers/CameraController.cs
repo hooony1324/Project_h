@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using DG.Tweening;
+using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public enum ECameraState
 {
@@ -22,18 +25,32 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    Camera uiCamera;
+    public Camera UICamera;
+
     [SerializeField] public float smoothSpeed = 6f;
     private int _targetOrthographicSize = 20;
 
-    public void Start()
+    public void Awake()
     {
         State = ECameraState.Following;
+        UICamera = Util.FindChild<Transform>(gameObject, "UI Camera", true).GetComponent<Camera>();
+    }
+
+    private float orthographicSize
+    {
+        get => Camera.main.orthographicSize;
+        set
+        {
+            Camera.main.orthographicSize = value;
+            UICamera.orthographicSize = value;
+        }
     }
 
     private void LateUpdate()
     {
         // Smoothly transition to the target camera size
-        Camera.main.orthographicSize = Mathf.Lerp(Camera.main.orthographicSize, _targetOrthographicSize, smoothSpeed * Time.deltaTime);
+        orthographicSize = Mathf.Lerp(orthographicSize, _targetOrthographicSize, smoothSpeed * Time.deltaTime);
         
         HandleCameraPosition();
     }

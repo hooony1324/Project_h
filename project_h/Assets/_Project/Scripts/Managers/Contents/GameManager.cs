@@ -39,7 +39,6 @@ public class GameManager
     }
     
     public event Action<Vector2> OnMoveDirChanged;
-    public EJoystickType JoystickType = EJoystickType.Flexible;
     public event Action<EJoystickState> OnJoystickStateChanged;
 
     private CameraController _cam;

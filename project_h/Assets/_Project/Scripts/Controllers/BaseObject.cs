@@ -27,12 +27,6 @@ public class BaseObject : InitOnce
     public Vector3 CenterOffset {get; set;} = new Vector3(0, 0.85f, 0);
     public SpriteRenderer Sprite => _sprite;
     private SpriteRenderer _sprite;
-
-    // gridWorld에서 차지하는 방위의 크기 
-    // 0은 1칸, 1은 3x3칸, 2는 5x5칸
-    public int ExtraCells { get; protected set; } = 0;
-    public bool LerpCellPosCompleted { get; protected set; }
-    private Vector3Int _cellPos;
     
     bool _lookLeft = true;
     public bool LookLeft
@@ -54,11 +48,20 @@ public class BaseObject : InitOnce
 
         return true;
     }
-    public void LookAtTarget(BaseObject target)
+    public void LookAt(BaseObject target)
     {
         if(target == null)
             return;
         Vector2 dir = target.transform.position - transform.position;
+        if (dir.x < 0)
+            LookLeft = true;
+        else if(dir.x > 0)
+            LookLeft = false;
+    }
+
+    public void LookAt(Vector3 position)
+    {
+        Vector2 dir = position - transform.position;
         if (dir.x < 0)
             LookLeft = true;
         else if(dir.x > 0)
@@ -78,54 +81,5 @@ public class BaseObject : InitOnce
     {
         Sprite.flipX = flag;
     }
-
-    public Vector3Int CellPos
-    {
-        get { return _cellPos; }
-        protected set
-        {
-            _cellPos = value;
-            LerpCellPosCompleted = false;
-        }
-    }
-    public void SetCellPos(Vector3Int cellPos, bool forceMove = false)
-    {
-        CellPos = cellPos;
-        LerpCellPosCompleted = false;
-
-        if (forceMove)
-        {
-            transform.position = Managers.Map.Cell2World(CellPos);
-            LerpCellPosCompleted = true;
-        }
-    }
-
-    public void LerpToCellPos(float moveSpeed , bool canFlip = true)
-    {
-        if (LerpCellPosCompleted)
-        {
-            return;
-        }
-
-        Vector3 destPos = Managers.Map.Cell2World(CellPos);
-        Vector3 dir = destPos - transform.position;
-        if (canFlip)
-        {
-            if (dir.x < 0)
-                LookLeft = true;
-            else if (dir.x > 0)
-            {
-                LookLeft = false;
-            }
-        }
-
-        if(destPos == transform.position)
-        {
-            LerpCellPosCompleted = true;
-            return;
-        }
-
-        float moveDist = Mathf.Min(dir.magnitude, moveSpeed * Time.deltaTime);
-        transform.position += dir.normalized * moveDist;
-    }
+  
 }

@@ -53,10 +53,6 @@ public class ObjectManager
         {
             spawnPos = (Vector3)position;
         }
-        else if (position is Vector3Int)
-        {
-            spawnPos = Managers.Map.CellGrid.GetCellCenterWorld((Vector3Int)position);
-        }
 
         if (type == typeof(HeroCamp))
         {
