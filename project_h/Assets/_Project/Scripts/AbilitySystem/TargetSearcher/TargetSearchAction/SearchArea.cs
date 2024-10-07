@@ -39,8 +39,8 @@ public class SearchArea: TargetSearchAction
         var targets = new List<GameObject>();
         var spherePosition = selectResult.resultMessage == SearchResultMessage.FindTarget ?
             selectResult.selectedTarget.transform.position : selectResult.selectedPosition;
-        var colliders = Physics.OverlapSphere(spherePosition, (float)ProperRange);
-
+        //var colliders = Physics.OverlapSphere(spherePosition, (float)ProperRange);
+        var colliders = Physics2D.OverlapCircleAll(spherePosition, (float)ProperRange);
         Vector3 requesterPosition = requesterObject.transform.position;
 
         foreach (var collider in colliders)
@@ -63,7 +63,7 @@ public class SearchArea: TargetSearchAction
             Vector3 entityPosition = entity.transform.position;
             entityPosition.y = requesterPosition.y;
             var direction = entityPosition - requesterPosition;
-
+            
             if (Vector3.Angle(requesterObject.transform.forward, direction) < (angle * 0.5f))
                 targets.Add(entity.gameObject);
         }

@@ -1,39 +1,32 @@
-using Sirenix.OdinInspector;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Sirenix.Serialization;
 
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
-
-[System.Serializable] 
+[System.Serializable]
 public struct EffectData
 {
     // 현재 Data가 Effect의 몇 Level Data인지에 대한 정보
     // 예를 들어, level이 3일 경우, Effect의 3 Level Data라는 의미
-    [DelayedProperty, OnValueChanged("OnLevelChanged")]
-    [GUIColor("RGB(0, 1, 0)")]
-    [MinValue(1)]
     public int level;
 
-    [Title("Stack")]
-    [MinValue(1)]
+    [UnderlineTitle("Stack")]
+    [Min(1)]
     // Effect가 중첩될 수 있는 최대 Stack
     public int maxStack;
     // Stack에 따른 추가 효과들
     public EffectStackAction[] stackActions;
 
-    [Title("Action")]
+    [UnderlineTitle("Action")]
+    [SerializeReference, SubclassSelector]
     // Effect의 실제 효과를 담당하는 Module
     // EffectAction을 통해 공격, 치유, 버프 같은 실제 Effect의 효과가 구현됨
-    [SerializeReference]
     public EffectAction action;
 
-    [Title("Setting")]
+    [UnderlineTitle("Setting")]
     // Effect를 완료할 시점
     public EffectRunningFinishOption runningFinishOption;
-
+    // Effect의 지속 시간이 만료되었을 때, 남은 적용 횟수가 있다면 모두 적용할 것인지 여부
     public bool isApplyAllWhenDurationExpires;
     // Effect의 지속시간, StatScaleFloat Type이기 때문에
     // 특정 Stat을 통해 지속 시간을 늘리거나 줄일 수 있음
@@ -49,23 +42,7 @@ public struct EffectData
 
     // Effect에 다양한 연출을 주기위한 Module
     // ex. Particle Spawn, Sound 출력, Camera Shake 등
-    [Title("Custom Action")]
-    [SerializeReference]
+    [UnderlineTitle("Custom Action")]
+    [SerializeReference, SubclassSelector]
     public CustomAction[] customActions;
-
-    #if UNITY_EDITOR
-    private void OnLevelChanged()
-    {
-        var effect = Selection.activeObject as Effect;
-
-        if (!effect.IsValidData(this))
-        {
-            level = -1;
-            return;
-        }
-
-        effect.SortEffectsByLevel();
-    }
-
-    #endif
 }

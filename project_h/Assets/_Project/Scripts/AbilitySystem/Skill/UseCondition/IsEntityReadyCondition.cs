@@ -12,13 +12,12 @@ public class IsEntityReadyCondition : SkillCondition
         // 발동 중인 Skill이 Toggle Type과 Passive Type이 아니고, 상태가 InAction State인데, Input Type이 아니라면 True
         // => Toggle Type과 Passive Type 그리고 InAction 상태인 Input Type의 Skill은 Entity의 Skill 사용을 제한하는 Skill로 보지 않음
         
-        // var isRunningSkillExist = skillSystem.RunningSkills.Any(x => {
-        //     return !x.IsToggleType && !x.IsPassive &&
-        //     !(x.IsInState<InActionState>() && x.ExecutionType == SkillExecutionType.Input);
-        // });
+        var isRunningSkillExist = skillSystem.RunningSkills.Any(x => {
+            return !x.IsToggleType && !x.IsPassive &&
+            !(x.IsInState<InActionState>() && x.ExecutionType == SkillExecutionType.Input);
+        });
 
-        //return entity.IsInState<EntityDefaultState>() && !isRunningSkillExist;
-        return false;
+        return entity.IsInState<EntityDefaultState>() && !isRunningSkillExist;
     }
 
     public override object Clone()

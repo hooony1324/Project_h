@@ -5,10 +5,6 @@ using UnityEngine;
 using System.Linq;
 
 
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
-#endif
-
 public enum EEntityControlType
 {
     Player,
@@ -18,7 +14,13 @@ public enum EEntityControlType
 
 public abstract class Entity : BaseObject
 {
-    [SerializeField, EnumToggleButtons]
+    public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer, float damage);
+    public delegate void DeadHandler(Entity entity);
+    public event TakeDamageHandler onTakeDamage;
+    public event DeadHandler onDead;
+
+
+    [SerializeField]
     private EEntityControlType controlType;
     public EEntityControlType ControlType 
     {
@@ -60,7 +62,10 @@ public abstract class Entity : BaseObject
         StateMachine = GetComponent<MonoStateMachine<Entity>>();
         StateMachine.Setup(this);
 
+        SkillSystem = GetComponent<SkillSystem>();
+        SkillSystem.Setup(this);
 
+        onTakeDamage += SpawnDamageText;
 
         return true;
     }
@@ -70,7 +75,9 @@ public abstract class Entity : BaseObject
         
     }
 
-    public void TakeDamage(Entity attacker, object causer, float damage)
+    // instigator : 이즈리얼
+    // causer : 이즈리얼 Q
+    public void TakeDamage(Entity instigator, object causer, float damage)
     {
         if (IsDead)
             return;
@@ -78,19 +85,25 @@ public abstract class Entity : BaseObject
         float prevValue = Stats.HPStat.DefaultValue;
         Stats.HPStat.DefaultValue -= damage;
 
-        //onTakeDamage?.Invoke(this, instigator, causer, damage);
+        onTakeDamage?.Invoke(this, instigator, causer, damage);
 
         if (Mathf.Approximately(Stats.HPStat.DefaultValue, 0f))
             OnDead(); 
     }
+
+    private void SpawnDamageText(Entity entity, Entity instigator, object causer, float damage)
+    {
+        Managers.Object.SpawnFloatingText(entity.CenterPosition, damage.ToString());
+    }
+
     private void OnDead()
     {
         if (Movement)
             Movement.enabled = false;
 
-        //SkillSystem.CancelAll(true);
+        SkillSystem.CancelAll(true);
 
-        //onDead?.Invoke(this);
+        onDead?.Invoke(this);
     }
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
 

@@ -5,6 +5,8 @@ using static Util;
 
 public class Define
 {
+    public static Vector2 CanvasResolution = new Vector2(2280, 1080);
+
     public static class MoveDir
     {
         public static Vector2 BOTTOM = new Vector2(0f, -1f);

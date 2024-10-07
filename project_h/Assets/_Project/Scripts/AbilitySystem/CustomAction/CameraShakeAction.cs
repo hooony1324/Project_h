@@ -5,7 +5,7 @@ public class CameraShakeAction : CustomAction
 {
     public override void Run(object data)
     {
-        // cinemachine impulse
+        Managers.Game.Cam.GenerateImpulse(.24f);
     }
 
     public override object Clone() => new CameraShakeAction();

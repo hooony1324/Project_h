@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class BaseLayerBehavior : StateMachineBehaviour
 {
     private readonly static int kSpeedHash = Animator.StringToHash("speed");
-
+    private readonly static int kIsRollingHash = Animator.StringToHash("isRolling");
     private readonly static int kIsDeadHash = Animator.StringToHash("isDead");
 
     private Entity entity;
@@ -31,9 +31,13 @@ public class BaseLayerBehavior : StateMachineBehaviour
             animator.SetFloat(kSpeedHash, agent.velocity.sqrMagnitude / (agent.speed * agent.speed));
             
         // roll
+        if (movement)
+            animator.SetBool(kIsRollingHash, movement.IsRolling);
 
         animator.SetBool(kIsDeadHash, entity.IsDead);
 
+        // animator.SetBool(kIsStunningHash, entity.IsInState<StunningState>());
+        // animator.SetBool(kIsSleepingHash, entity.IsInState<SleepingState>());
     }
 
 }

@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
-#endif
-
 public enum AnimatorParameterType
 {
     Bool,
@@ -13,12 +9,9 @@ public enum AnimatorParameterType
 }
 
 [System.Serializable]
-[InlineProperty]
 public struct AnimatorParameter
 {
-    [HorizontalGroup("Split", width: 70), HideLabel]
     public AnimatorParameterType type;
-    [HorizontalGroup("Split"), HideLabel]
     public string name;
 
     private int hash;

@@ -16,7 +16,7 @@ MonoBehaviour:
   icon: {fileID: 0}
   id: 2
   codeName: LEVEL
-  displayName: "\uB808\uBCA8"
+  displayName: 
   description: 
   isPercentType: 0
   maxValue: 30

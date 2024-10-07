@@ -11,7 +11,7 @@ public abstract class TargetSelectionAction : ICloneable
     [Header("Indicator")]
     [SerializeField]
     private bool isShowIndicatorPlayerOnly;
-    [SerializeReference]
+    [SerializeReference, SubclassSelector]
     private IndicatorViewAction indicatorViewAction;
 
     // Range에 Scale을 적용할지 여부
@@ -71,7 +71,6 @@ public abstract class TargetSelectionAction : ICloneable
         => requesterEntity.IsPlayer ? SelectImmediateByPlayer(targetSearcher, requesterEntity, requesterObject, position) :
         SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, position);
 
-    // 비동기적으로 기준점을 찾는 함수
     // 기준점을 찾았거나, 검색에 실패했을 시 onSelectCompleted callback 함수로 결과를 return해줌.
     public abstract void Select(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, SelectCompletedHandler onSelectCompleted);

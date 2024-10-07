@@ -43,6 +43,12 @@ public class ObjectManager
     //     DamageFont damageText = go.GetComponent<DamageFont>();
     //     damageText.SetInfo(pos, damage, parent, result);
     // }
+    public void SpawnFloatingText(Vector2 pos, string message)
+    {
+        GameObject go = Managers.Resource.Instantiate(nameof(UI_FloatingText), pooling: true);
+        UI_FloatingText floatingText = go.GetComponent<UI_FloatingText>();
+        floatingText.SetInfo(pos, message);
+    }
 
     public T Spawn<T>(object position, int templateID = 0, string prefabName = "") where T : BaseObject
     {

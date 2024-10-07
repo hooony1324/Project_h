@@ -1,14 +1,9 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Sirenix.Utilities;
 
-
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
-#endif
-
-[CreateAssetMenu(menuName = "AbilitySystem/Effect")]
 public class Effect : IdentifiedObject
 {
     // 몇몇 변수는 값이 0이면 무한을 의미함
@@ -19,35 +14,29 @@ public class Effect : IdentifiedObject
     public delegate void ReleasedHandler(Effect effect);
     public delegate void StackChangedHandler(Effect effect, int currentApplyCount, int prevApplyCount);
 
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons]
+
+    [SerializeField]
     private EffectType type;
-
     // Effect의 중복 적용 가능 여부
-    [SerializeField, FoldoutGroup("Setting")]
+    [SerializeField]
     private bool isAllowDuplicate = true;
-
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons, HideIf("isAllowDuplicate")]
+    [SerializeField]
     private EffectRemoveDuplicateTargetOption removeDuplicateTargetOption;
 
-
     // UI로 Effect 정보를 보여줄지에 대한 여부
-    [SerializeField, FoldoutGroup("Option")]
+    [SerializeField]
     private bool isShowInUI;
 
     // maxLevel이 effectDatas의 Length를 초과할 수 있는지 여부
     // 이 Option이 false면 maxLevel은 effectDatas의 Length로 고정됨
-    [SerializeField, FoldoutGroup("Level Datas")]
+    [SerializeField]
     private bool isAllowLevelExceedDatas;
-    [SerializeField, FoldoutGroup("Level Datas"), EnableIf("IsAllowLevelExceedDatas")]
+    [SerializeField]
     private int maxLevel;
     // Level별 Data, Level은 1부터 시작하고 Array의 Index는 0부터 시작하므로
     // Level에 맞는 Data를 가져오려면 [현재 Level - 1]번째 Data를 가져와야함
     // ex. Level이 1이라면, 1 - 1 = 0, 0번째 Data를 가져와야함(= effectDatas[0])
-    [InfoBox("@GetDataLevels()")]
-    [SerializeField, FoldoutGroup("Level Datas")]
-    [ListDrawerSettings(CustomAddFunction = "AddNewLevelData", DraggableItems = false, NumberOfItemsPerPage = 1)]
+    [SerializeField]
     private EffectData[] effectDatas;
 
     // Level에 맞는 현재 Data
@@ -55,7 +44,7 @@ public class Effect : IdentifiedObject
 
     // 현재 Effect Level
     private int level;
-    // 현재 쌓인 스택
+    // 현재 쌓인 Stack
     private int currentStack = 1;
     private float currentDuration;
     private int currentApplyCount;
@@ -63,19 +52,20 @@ public class Effect : IdentifiedObject
     // Action의 Apply 함수를 실행하려 시도한 적이 있는지 여부, 이 값에 따라 Apply 성공시에 currentApplyCycle 변수의 값을 다르게 초기화 함.
     // Action의 Apply 함수가 실행될 때 true가되고, Apply 함수가 true를 return하면 false로 초기화 됨.
     private bool isApplyTried;
+
     // 쌓인 Stack에 따라 현재 적용된 Stack Actions
     private readonly List<EffectStackAction> aplliedStackActions = new();
 
     public EffectType Type => type;
     public bool IsAllowDuplicate => isAllowDuplicate;
     public EffectRemoveDuplicateTargetOption RemoveDuplicateTargetOption => removeDuplicateTargetOption;
+
     public bool IsShowInUI => isShowInUI;
 
     public IReadOnlyList<EffectData> EffectDatas => effectDatas;
     public IReadOnlyList<EffectStackAction> StackActions => currentData.stackActions;
 
     public int MaxLevel => maxLevel;
-    public bool IsMaxLevel => level == maxLevel;
     public int Level
     {
         get => level;
@@ -96,27 +86,25 @@ public class Effect : IdentifiedObject
                 currentData = newData;
         }
     }
-
+    public bool IsMaxLevel => level == maxLevel;
     // 현재 Effect와 EffectData의 Level 차이
     // Action 쪽에서 Bonus Value를 주는데 활용할 수 있음
     // ex. totalValue = defaultValue + (effect.DataBonusLevel * bonusValuePerLevel)
     // Level이 1000까지 있는 Clicker Game의 경우 Data를 1000개 만들지 않아도
-    // 위와 같이 BonusLevel을 활용해 Level 당 수치를 조절할 수 있음
+    // 위와 같이 BonusLevel을 활용해 Level 당 수치를 조절할 수 있음.
     public int DataBonusLevel => Mathf.Max(level - currentData.level, 0);
-
 
     // Effect의 지속 시간
     public float Duration => currentData.duration.GetValue(User.Stats);
     // Duration이 0이면 무한 지속
     public bool IsTimeless => Mathf.Approximately(Duration, kInfinity);
-
     public float CurrentDuration
     {
         get => currentDuration;
         set => currentDuration = Mathf.Clamp(value, 0f, Duration);
     }
     public float RemainDuration => Mathf.Max(0f, Duration - currentDuration);
-    
+
     public int MaxStack => currentData.maxStack;
     public int CurrentStack
     {
@@ -147,20 +135,17 @@ public class Effect : IdentifiedObject
     public int ApplyCount => currentData.applyCount;
     // ApplyCount가 0이면 무한 적용(= 매 프레임마다 적용)
     public bool IsInfinitelyApplicable => ApplyCount == kInfinity;
-
     public int CurrentApplyCount
     {
         get => currentApplyCount;
         set => currentApplyCount = IsInfinitelyApplicable ? value : Mathf.Clamp(value, 0, ApplyCount);
     }
-
     // ApplyCycle이 0이고 ApplyCount가 1보다 크면 Effect의 지속시간인 Duration을 나눠서 ApplyCycle을 계산함
     // 예를들어 Duration이 10초고 ApplyCount가 11번이면, 처음 Effect가 적용될 때 Apply가 1번 이뤄져서
     // 남은 ApplyCount = 10, Duration / ApplyCount = 10 / 10 = 1, ApplyCycle = 1초
     public float ApplyCycle => Mathf.Approximately(currentData.applyCycle, 0f) && ApplyCount > 1 ?
         (Duration / (ApplyCount - 1)) : currentData.applyCycle;
-
-    //ApplyCycle을 확인하기 위한 시간 변수.
+    // ApplyCycle을 확인하기 위한 시간 변수.
     // CurrentDuration을 이용해서 확인하지 않고 CurrentApplyCycle을 따로 만든 이유는
     // CurrentDuration은 Effecf의 Stack이 쌓이면 0으로 초기화되기 때문.
     // 예를 들어, ApplyCycle이 1초이고 CurrentDuration이 0.9999초일 때,
@@ -179,14 +164,12 @@ public class Effect : IdentifiedObject
     private CustomAction[] CustomActions => currentData.customActions;
 
     public object Owner { get; private set; }
-
     public Entity User { get; private set; }
-
     public Entity Target { get; private set; }
-
     // Scale 조절을 통해 Effect의 위력을 조절할 수 있음
     // Charge처럼 Casting 시간에 따라 위력이 달라지는 Skill에 활용할 수 있음
     public float Scale { get; set; }
+    public override string Description => BuildDescription(base.Description, 0);
 
     private bool IsApplyAllWhenDurationExpires => currentData.isApplyAllWhenDurationExpires;
     private bool IsDurationEnded => !IsTimeless && Mathf.Approximately(Duration, CurrentDuration);
@@ -352,8 +335,6 @@ public class Effect : IdentifiedObject
         onReleased?.Invoke(this);
     }
 
-    public override string Description => BuildDescription(base.Description, 0);
-
     public EffectData GetData(int level) => effectDatas[level - 1];
 
     public string BuildDescription(string description, int effectIndex)
@@ -389,78 +370,4 @@ public class Effect : IdentifiedObject
 
         return clone;
     }
-
-#if UNITY_EDITOR
-
-    // Add new leveldata
-    private void AddNewLevelData()
-    {
-        if (effectDatas.Length == 0)
-        {
-            effectDatas = new EffectData[1];
-            effectDatas[0].level = 1;
-            effectDatas[0].maxStack = 1;
-        }
-        else
-        {
-            EffectData[] newEffectDatas = new EffectData[effectDatas.Length + 1];
-
-            for (int i = 0; i < effectDatas.Length; i++)
-            {
-                newEffectDatas[i] = effectDatas[i];
-            }
-
-            EffectData newEffectData = effectDatas[effectDatas.Length - 1];
-            newEffectData.level += 1;
-            newEffectDatas[newEffectDatas.Length - 1] = newEffectData;
-
-            effectDatas = newEffectDatas;
-        }
-    }
-    
-    private bool IsAllowLevelExceedDatas()
-    {
-        if (effectDatas.Length == 0)
-            return false;
-        
-        if (isAllowLevelExceedDatas)
-            return true;
-
-        maxLevel = effectDatas[effectDatas.Length - 1].level;
-        return false;
-    }
-
-    public void SortEffectsByLevel()
-    {
-        effectDatas = effectDatas.OrderBy(x => x.level).ToArray();
-    }
-
-    public bool IsValidData(EffectData data)
-    {
-        // odin의 onvaluechanged는 이미 변경된 data로만 파악해야되서 겹치는 데이터는 총 2개 생김
-        int cnt = 0;
-        foreach (var effectData in effectDatas)
-        {
-            if (effectData .level == data.level)
-                cnt++;
-        }
-
-        if (cnt > 1)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    private string GetDataLevels()
-    {
-        if (effectDatas.IsNullOrEmpty())
-            return "Levels : ";
-
-            string levelsString = $"Levels : {string.Join(", ", System.Array.ConvertAll(effectDatas, data => data.level.ToString()))}";
-
-        return levelsString;
-    }
-#endif
 }

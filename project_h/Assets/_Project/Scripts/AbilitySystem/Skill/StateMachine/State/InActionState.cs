@@ -57,6 +57,7 @@ public class InActionState : SkillState
                 // 기준점 검색이 성공하면 OnTargetSelectionCompleted Callback 함수가 호출되어 TryApply 함수를 호출함
                 if (!Entity.IsSearchingTarget)
                     Entity.SelectTarget(OnTargetSelectionCompleted);
+                    //Entity.SelectTargetImmediate(Entity.Owner.Position);
             }
             else
                 Apply();

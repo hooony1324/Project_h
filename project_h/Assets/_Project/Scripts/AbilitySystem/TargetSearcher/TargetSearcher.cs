@@ -10,12 +10,12 @@ public class TargetSearcher
 
     // Target 검색 기준점을 찾는 Module
     [Header("Select Action")]
-    [SerializeReference]
+    [SerializeReference, SubclassSelector]
     private TargetSelectionAction selectionAction;
 
     // 위 Module을 통해 찾은 기준점을 토대로 Teget을 찾는 Module 
     [Header("Search Action")]
-    [SerializeReference]
+    [SerializeReference, SubclassSelector]
     private TargetSearchAction searchAction;
 
     private SelectionCompletedHandler onSelectionCompleted;

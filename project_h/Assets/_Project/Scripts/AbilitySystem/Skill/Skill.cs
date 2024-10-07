@@ -2,100 +2,58 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Unity.VisualScripting;
-using Sirenix.Utilities.Editor;
 
-
-#if UNITY_EDITOR
-using Sirenix.OdinInspector;
-using Sirenix.OdinInspector.Editor;
-using Sirenix.Utilities;
-using UnityEditor;
-
-#endif
-
-[CreateAssetMenu(menuName = "AbilitySystem/Skill")]
 public class Skill : IdentifiedObject
 {
     private const int kInfinity = 0;
 
+    #region Events
     public delegate void LevelChangedHandler(Skill skill, int currentLevel, int prevLevel);
     public delegate void StateChangedHandler(Skill skill, State<Skill> newState, State<Skill> prevState, int layer);
     public delegate void AppliedHander(Skill skill, int currentApplyCount);
     public delegate void UsedHandler(Skill skill);
-
     // Skill이 사용(Use)된 직후 실행되는 Event
     public delegate void ActivatedHandler(Skill skill);
     // Skill이 종료된 직후 실행되는 Event
     public delegate void DeactivatedHandler(Skill skill);
-
     public delegate void CanceledHandler(Skill skill);
     public delegate void TargetSelectionCompletedHandler(Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result);
     public delegate void CurrentApplyCountChangedHandler(Skill skill, int currentApplyCount, int prevApplyCount);
+    #endregion
 
-    public event LevelChangedHandler onLevelChanged;
-    public event StateChangedHandler onStateChanged;
-    public event AppliedHander onApplied;
-    public event ActivatedHandler onActivated;
-    public event DeactivatedHandler onDeactivated;
-    public event UsedHandler onUsed;
-    public event CanceledHandler onCanceled;
-    public event TargetSelectionCompletedHandler onTargetSelectionCompleted;
-    public event CurrentApplyCountChangedHandler onCurrentApplyCountChanged;
-
-    // active
-    [Title("")]
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons]
+    [SerializeField]
     private SkillType type;
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons, HideIf("type", SkillType.Passive)]
+    [SerializeField]
     private SkillUseType useType;
 
-    [Title("")]
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons, HideIf("type", SkillType.Passive)]
+    [SerializeField]
     private SkillExecutionType executionType;
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons, HideIf("type", SkillType.Passive)]
+    [SerializeField]
     private SkillApplyType applyType;
 
-    // active & passive
-    [Title("")]
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons]
+    [SerializeField]
     private NeedSelectionResultType needSelectionResultType;
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons]
+    [SerializeField]
     private TargetSelectionTimingOption targetSelectionTimingOption;
-    [SerializeField, FoldoutGroup("Setting")]
-    [EnumToggleButtons]
+    [SerializeField]
     private TargetSearchTimingOption targetSearchTimingOption;
 
-
-    [SerializeReference, FoldoutGroup("Acquisition")]
-    [ListDrawerSettings(ShowFoldout = true)]
+    [SerializeReference, SubclassSelector]
     private EntityCondition[] acquisitionConditions;
-    [SerializeReference, FoldoutGroup("Acquisition")]
-    [ListDrawerSettings(ShowFoldout = true)]
+    [SerializeReference, SubclassSelector]
     private Cost[] acquisitionCosts;
 
     // Skill을 사용하기 위한 조건들
-    [SerializeReference, FoldoutGroup("Use Condition")]
+    [SerializeReference, SubclassSelector]
     private SkillCondition[] useConditions;
 
-    [SerializeField, FoldoutGroup("Level Datas")]
+    [SerializeField]
     private bool isAllowLevelExceedDatas;
-
-    [SerializeField, FoldoutGroup("Level Datas"), EnableIf("IsAllowLevelExceedDatas")]
+    [SerializeField]
     private int maxLevel;
-
-    [SerializeField, Min(1), FoldoutGroup("Level Datas")]
+    [SerializeField, Min(1)]
     private int defaultLevel = 1;
-
-    [InfoBox("@GetDataLevels()")]
-    [SerializeField, FoldoutGroup("Level Datas")]
-    [ListDrawerSettings(CustomAddFunction = "AddNewLevelData", DraggableItems = false, NumberOfItemsPerPage = 1)]
+    [SerializeField]
     private SkillData[] skillDatas;
 
     private SkillData currentData;
@@ -139,6 +97,7 @@ public class Skill : IdentifiedObject
             Debug.Assert(value >= 1 && value <= MaxLevel, 
                 $"Skill.Rank = {value} - value는 1과 MaxLevel({MaxLevel}) 사이 값이여야합니다.");
 
+
             if (level == value)
                 return;
 
@@ -155,12 +114,15 @@ public class Skill : IdentifiedObject
     }
     public int DataBonusLevel => Mathf.Max(level - currentData.level, 0);
     public bool IsMaxLevel => level == maxLevel;
-    public bool IsLevelUpAvailable => !IsMaxLevel && LevelUpConditions.All(x => x.IsPass(Owner)) &&
+    // Skill이 최대 Level이 아니고, Level Up 조건을 만족하고, Level Up을 위한 Costs가 충분하다면 True
+    public bool IsCanLevelUp => !IsMaxLevel && LevelUpConditions.All(x => x.IsPass(Owner)) &&
         LevelUpCosts.All(x => x.HasEnoughCost(Owner));
-    
+
     private SkillPrecedingAction PrecedingAction => currentData.precedingAction;
     private SkillAction Action => currentData.action;
     public bool HasPrecedingAction => PrecedingAction != null;
+
+    public InSkillActionFinishOption InSkillActionFinishOption => currentData.inSkillActionFinishOption;
     public AnimatorParameter CastAnimationParameter
     {
         get
@@ -198,7 +160,6 @@ public class Skill : IdentifiedObject
     public bool IsSearchingTarget => TargetSearcher.IsSearching;
     public TargetSelectionResult TargetSelectionResult => TargetSearcher.SelectionResult;
     public TargetSearchResult TargetSearchResult => TargetSearcher.SearchResult;
-
     // Skill이 필요로 하는 기준점 Type과 TargetSearcher가 검색한 기준점의 Type이 일치하는가?
     public bool HasValidTargetSelectionResult
     {
@@ -212,7 +173,6 @@ public class Skill : IdentifiedObject
             };
         }
     }
-
     // Skill이 기준점 검색중이 아니고, 검색한 기준점이 Skill이 필요로 하는 Type이라면 True 
     public bool IsTargetSelectSuccessful => !IsSearchingTarget && HasValidTargetSelectionResult;
 
@@ -254,7 +214,6 @@ public class Skill : IdentifiedObject
             onCurrentApplyCountChanged?.Invoke(this, currentApplyCount, prevApplyCount);
         }
     }
-
     // currentData의 applyCycle이 0이고 applyCount가 1보다 크면(여러번 적용 가능하면)
     // Skill의 duration을 (ApplyCount - 1)로 나눠서 ApplyCycle을 계산하여 return 함.
     // 아니라면 설정된 currentData의 applyCycle을 그대로 return 함.
@@ -292,7 +251,6 @@ public class Skill : IdentifiedObject
                 effect.Scale = currentChargePower;
         }
     }
-
     // 충전의 지속 시간
     public float ChargeDuration => currentData.chargeDuration;
     // IsUseCharge가 false면 1로 고정,
@@ -338,6 +296,7 @@ public class Skill : IdentifiedObject
                 return false;
         }
     }
+
     public IReadOnlyList<Entity> Targets { get; private set; }
     public IReadOnlyList<Vector3> TargetPositions { get; private set; }
 
@@ -378,6 +337,17 @@ public class Skill : IdentifiedObject
             return description;
         }
     }
+
+    public event LevelChangedHandler onLevelChanged;
+    public event StateChangedHandler onStateChanged;
+    public event AppliedHander onApplied;
+    public event ActivatedHandler onActivated;
+    public event DeactivatedHandler onDeactivated;
+    public event UsedHandler onUsed;
+    public event CanceledHandler onCanceled;
+    public event TargetSelectionCompletedHandler onTargetSelectionCompleted;
+    public event CurrentApplyCountChangedHandler onCurrentApplyCountChanged;
+
     public void OnDestroy()
     {
         foreach (var effect in Effects)
@@ -458,7 +428,7 @@ public class Skill : IdentifiedObject
 
     public void LevelUp()
     {
-        Debug.Assert(IsLevelUpAvailable, "Skill::LevelUP - Level Up 조건을 충족하지 못했습니다.");
+        Debug.Assert(IsCanLevelUp, "Skill::LevelUP - Level Up 조건을 충족하지 못했습니다.");
 
         foreach (var cost in LevelUpCosts)
             cost.UseCost(Owner);
@@ -703,77 +673,4 @@ public class Skill : IdentifiedObject
 
         return clone;
     }
-
-#if UNITY_EDITOR
-    // Add new leveldata
-    private void AddNewLevelData()
-    {
-        if (skillDatas.Length == 0)
-        {
-            skillDatas = new SkillData[1];
-            skillDatas[0].level = 1;
-        }
-        else
-        {
-            SkillData[] newSkillDatas = new SkillData[skillDatas.Length + 1];
-
-            for (int i = 0; i < skillDatas.Length; i++)
-            {
-                newSkillDatas[i] = skillDatas[i];
-            }
-
-            SkillData newSkillData = skillDatas[skillDatas.Length - 1];
-            newSkillData.level += 1;
-            newSkillDatas[newSkillDatas.Length - 1] = newSkillData;
-
-            skillDatas = newSkillDatas;
-        }
-    }
-
-    private bool IsAllowLevelExceedDatas()
-    {
-        if (skillDatas.Length == 0)
-            return false;
-        
-        if (isAllowLevelExceedDatas)
-            return true;
-
-        maxLevel = skillDatas[skillDatas.Length - 1].level;
-        return false;
-    }
-
-    public void SortSkillsByLevel()
-    {
-        skillDatas = skillDatas.OrderBy(x => x.level).ToArray();
-    }
-
-    public bool IsValidData(SkillData data)
-    {
-        // odin의 onvaluechanged는 이미 변경된 data로만 파악해야되서 겹치는 데이터는 총 2개 생김
-        int cnt = 0;
-        foreach (var skillData in skillDatas)
-        {
-            if (skillData.level == data.level)
-                cnt++;
-        }
-
-        if (cnt > 1)
-        {
-            return false;
-        }
-
-        return true;
-    }
-
-    private string GetDataLevels()
-    {
-        if (skillDatas.IsNullOrEmpty())
-            return "Levels : ";
-
-            string levelsString = $"Levels : {string.Join(", ", System.Array.ConvertAll(skillDatas, data => data.level.ToString()))}";
-
-        return levelsString;
-    }
-#endif
-    
 }

@@ -10,7 +10,7 @@ public abstract class TargetSearchAction : ICloneable
     [SerializeField]
     private bool isShowIndicatorPlayerOnly;
     // Indicator를 보여주는 Module
-    [SerializeReference]
+    [SerializeReference, SubclassSelector]
     private IndicatorViewAction indicatorViewAction;
 
     // Range에 Scale을 적용할지 여부

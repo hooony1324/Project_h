@@ -27,7 +27,6 @@ public class GameManager
     }
 
     private EJoystickState _joystickState;
-
     public EJoystickState JoystickState
     {
         get => _joystickState;
@@ -37,7 +36,16 @@ public class GameManager
             OnJoystickStateChanged?.Invoke(_joystickState);
         }
     }
-    
+
+    public float TriggerTab
+    {
+        set
+        {
+            OnTabTriggered?.Invoke(value);
+        }
+    }
+
+    public event Action<float> OnTabTriggered;
     public event Action<Vector2> OnMoveDirChanged;
     public event Action<EJoystickState> OnJoystickStateChanged;
 
@@ -53,6 +61,19 @@ public class GameManager
             }
 
             return _cam;
+        }
+    }
+
+    private PlayerController playerController;
+
+    public PlayerController PlayerController
+    {
+        get
+        {
+            if (playerController == null)
+                playerController = Object.FindObjectOfType<PlayerController>();
+            
+            return playerController;
         }
     }
 }

@@ -1,15 +1,13 @@
-
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Sirenix.OdinInspector;
-using UnityEditor;
-using Unity.Mathematics;
 
 [System.Serializable]
 public class EffectStackAction
 {
     // 이 Action이 Effect의 Stack이 몇 일때 적용될 것인가?
-    [SerializeField, DelayedProperty, OnValueChanged("OnStackChanged")]
-    private int stack = 1;
+    [SerializeField, Min(1)]
+    private int stack;
     // Effect가 다음 StackAction을 적용할 때 이 Action을 Release 할 것인가?
     [SerializeField]
     private bool isReleaseOnNextApply;
@@ -20,9 +18,8 @@ public class EffectStackAction
     private bool isApplyOnceInLifeTime;
 
     // 적용할 효과
-    [Title("Action")]
-    [SerializeReference]
-    [TypeSelectorSettings(FilterTypesFunction = nameof(EffectAction))]
+    [UnderlineTitle("Action")]
+    [SerializeReference, SubclassSelector]
     private EffectAction action;
 
     // 이 StackAction이 적용된 적이 있는가?
@@ -47,21 +44,4 @@ public class EffectStackAction
 
     public string BuildDescription(Effect effect, string baseDescription, int stackActionIndex, int effectIndex)
         => action.BuildDescription(effect, baseDescription, stackActionIndex, stack, effectIndex);
-
-#if UNITY_EDITOR
-    void OnStackChanged()
-    {
-        Effect effect = Selection.activeObject as Effect;
-
-        //effect.EffectDatas[0].maxStack;
-        foreach (var effectData in effect.EffectDatas)
-        {
-            foreach (var stackAction in effectData.stackActions)
-            {
-                stackAction.stack = Mathf.Clamp(stackAction.stack, 1, effectData.maxStack);
-            }
-        }
-    }
-
-#endif
 }

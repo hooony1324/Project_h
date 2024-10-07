@@ -29,7 +29,7 @@ public class CameraController : MonoBehaviour
     public Camera UICamera;
 
     [SerializeField] public float smoothSpeed = 6f;
-    private int _targetOrthographicSize = 20;
+    private int _targetOrthographicSize = 12;
 
     public void Awake()
     {
@@ -79,4 +79,12 @@ public class CameraController : MonoBehaviour
             .Append(transform.DOMove(targetPosition, 0.8f).SetEase(Ease.Linear))
             .OnComplete(() => { State = ECameraState.Following; });
     }
+
+    public void GenerateImpulse(float impulseTime)
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOShakePosition(impulseTime, .4f, 60));
+        
+    }
+
 }

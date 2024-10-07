@@ -58,6 +58,9 @@ public class EntityMovement : MonoBehaviour
 
     public void Move(Vector3 moveDir)
     {
+        if (IsRolling)
+            return;
+
         Vector3 nextPos = transform.position + moveDir;
         NavMesh.Raycast(transform.position, nextPos, out NavMeshHit hit, NavMesh.AllAreas);
         
@@ -74,8 +77,8 @@ public class EntityMovement : MonoBehaviour
         agent = Owner.GetComponent<NavMeshAgent>();
 
         var animator = Owner.Animator;
-        // if (animator)
-        //     animator.SetFloat("rollSpeed", 1 / rollTime);
+        if (animator)
+            animator.SetFloat("rollSpeed", 1 / rollTime);
 
         entityMoveSpeedStat = Owner.Stats.MoveSpeedStat ?? Owner.Stats.GetStat("MOVESPEED");
         if (entityMoveSpeedStat)
@@ -121,6 +124,8 @@ public class EntityMovement : MonoBehaviour
     }
  
     Vector3 rollDirection;
+    public void Roll(float distance)
+        => Roll(distance, agent.velocity.normalized);
     public void Roll(float distance, Vector3 direction)
     {
         Stop();
@@ -130,20 +135,22 @@ public class EntityMovement : MonoBehaviour
         Vector3 expectedRollPosition = transform.position + rollDirection * distance;
         NavMesh.Raycast(transform.position, expectedRollPosition, out NavMeshHit hit, NavMesh.AllAreas);
 
-        expectedRollPosition = hit.position - rollDirection * agent.radius;
+        
+        distance -= (expectedRollPosition - hit.position).magnitude;
 
         // 바라볼 방향 바라봄
         if (direction != Vector3.zero)
             LookAt(expectedRollPosition);
         
-        IsRolling = true;
-        agent.enabled = false;
         StopCoroutine("RollUpdate");
         StartCoroutine("RollUpdate", distance);
     }
 
     private IEnumerator RollUpdate(float distance)
     {
+        IsRolling = true;
+        agent.enabled = false;
+        
         // 현재까지 구른 시간
         float currentRollTime = 0f;
         // 이전 Frame에 이동한 거리

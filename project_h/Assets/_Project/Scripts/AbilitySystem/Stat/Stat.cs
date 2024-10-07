@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -15,19 +14,15 @@ public class Stat : IdentifiedObject
 
     // 1 => 100%, 0 => 0%
     [Tooltip("확률형 Stat이면 적용\n ex) 쿨 다운 감소율, 기술 자원 소모율, 스킬 지속시간 증가율...")]
-    [FoldoutGroup("Setting")]
     [SerializeField]    
     private bool isPercentType;
 
-    [FoldoutGroup("Setting")]
     [SerializeField]
     private float maxValue;
 
-    [FoldoutGroup("Setting")]
     [SerializeField]
     private float minValue;
 
-    [FoldoutGroup("Setting")]
     [SerializeField]
     private float defaultValue;
 

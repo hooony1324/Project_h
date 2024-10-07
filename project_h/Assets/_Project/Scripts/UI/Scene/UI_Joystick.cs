@@ -12,6 +12,7 @@ public enum EJoystickState
 
 public class UI_Joystick : UI_Scene
 {
+    private HorizontalLayoutGroup layout;
     private GameObject _joystickCursor;
     private GameObject _joystickBG;
     private Vector2 _moveDir { get; set; }
@@ -21,8 +22,11 @@ public class UI_Joystick : UI_Scene
 
     private enum GameObjects
     {
+        Layout,
         JoystickBG,
         JoystickCursor,
+        JoystickArea,
+        TouchArea,
     }
 
     public override bool Init()
@@ -35,9 +39,14 @@ public class UI_Joystick : UI_Scene
         _joystickBG = GetGameObject((int)GameObjects.JoystickBG);
         _joystickCursor = GetGameObject((int)GameObjects.JoystickCursor);
         _joystickOriginalPos = _joystickBG.transform.position;
-        gameObject.BindEvent(OnPointerDown, EUIEvent.PointerDown);
-        gameObject.BindEvent(OnPointerUp, EUIEvent.PointerUp);
-        gameObject.BindEvent(OnDrag, EUIEvent.Drag);
+
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickDown, EUIEvent.PointerDown);
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickUp, EUIEvent.PointerUp);
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickDrag, EUIEvent.Drag);
+
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDown, EUIEvent.PointerDown);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchUp, EUIEvent.PointerUp);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDrag, EUIEvent.Drag);
 
         GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         IsVisible = false;
@@ -48,7 +57,6 @@ public class UI_Joystick : UI_Scene
     void Start()
     {
         _radius = _joystickBG.GetComponent<RectTransform>().sizeDelta.y / 5;
-        //GetComponent<Canvas>().worldCamera = Managers.Game.Cam.UICamera;
     }
     
     bool IsVisible
@@ -61,7 +69,8 @@ public class UI_Joystick : UI_Scene
     }
 
     #region Event
-    private void OnPointerDown(PointerEventData eventData)
+    int touchCount = 0;
+    private void OnJoystickDown(PointerEventData eventData)
     {
         IsVisible = true;
 
@@ -76,7 +85,7 @@ public class UI_Joystick : UI_Scene
         Managers.Game.JoystickState = EJoystickState.Drag;
     }
 
-    private void OnDrag(PointerEventData eventData)
+    private void OnJoystickDrag(PointerEventData eventData)
     {        
         Vector2 dragePos = eventData.position;
 
@@ -90,7 +99,7 @@ public class UI_Joystick : UI_Scene
         Managers.Game.MoveDir = _moveDir;
     }
 
-    private void OnPointerUp(PointerEventData eventData)
+    private void OnJoystickUp(PointerEventData eventData)
     {
         _moveDir = Vector2.zero;
 
@@ -101,6 +110,26 @@ public class UI_Joystick : UI_Scene
         Managers.Game.JoystickState = EJoystickState.PointerUp;
 
         IsVisible = false;
+    }
+
+    private float tapThreshold = 0.14f;
+    private float touchStartTime;
+    private void OnTouchDown(PointerEventData eventData)
+    {
+        touchStartTime = Time.time;
+    }
+
+    private void OnTouchDrag(PointerEventData eventData)
+    {        
+
+    }
+
+    private void OnTouchUp(PointerEventData eventData)
+    {
+        float tabTime = Time.time - touchStartTime;
+        
+        if (tabTime <= tapThreshold)
+            Managers.Game.TriggerTab = tabTime;
     }
     #endregion
 }

@@ -11,13 +11,15 @@ GameObject:
   - component: {fileID: 1777685896142596829}
   - component: {fileID: 3334468523802761965}
   - component: {fileID: 7479592598183058480}
+  - component: {fileID: 1066998853570300449}
+  - component: {fileID: -6902351287890544523}
+  - component: {fileID: -5722365948147448873}
   - component: {fileID: 2945546245996844712}
   - component: {fileID: 1191303508249754646}
   - component: {fileID: -2360951494994577932}
   - component: {fileID: -4095148635912737438}
-  - component: {fileID: 1066998853570300449}
-  - component: {fileID: -5722365948147448873}
   - component: {fileID: 6377808965997499738}
+  - component: {fileID: 2690443787438582454}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -113,74 +115,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2945546245996844712
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836161735788839184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33803a16aaf2e92438a2510aa3c69c92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlType: 0
-  categories:
-  - {fileID: 11400000, guid: c1e02e6385f1f6d4fb81b4004e4cebe5, type: 2}
-  Movement: {fileID: 0}
-  SkillSystem: {fileID: 0}
-  Target: {fileID: 0}
---- !u!114 &1191303508249754646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836161735788839184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52dd50af70fc6694cb9bf6856a387ffb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statOverrides:
-  - stat: {fileID: 11400000, guid: 6a7eff128d6485744be25fc5b4976358, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-  - stat: {fileID: 11400000, guid: d4577d71a27ef6c4d9d6dc61ca5c701b, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-  - stat: {fileID: 11400000, guid: 1b4fff764dcb621499255cbdfd66a652, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-  hpStat: {fileID: 11400000, guid: 6a7eff128d6485744be25fc5b4976358, type: 2}
-  moveSpeedStat: {fileID: 11400000, guid: d4577d71a27ef6c4d9d6dc61ca5c701b, type: 2}
-  levelStat: {fileID: 11400000, guid: 1b4fff764dcb621499255cbdfd66a652, type: 2}
---- !u!114 &-2360951494994577932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836161735788839184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374edda0c81781c4f8f8a30c439b1b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4095148635912737438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836161735788839184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f3a8fa38c7524943a07d06779985d97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rollTime: 0.5
 --- !u!58 &1066998853570300449
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -216,6 +150,33 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 1.0072498}
   serializedVersion: 2
   m_Radius: 1
+--- !u!50 &-6902351287890544523
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!195 &-5722365948147448873
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -238,6 +199,85 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2945546245996844712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33803a16aaf2e92438a2510aa3c69c92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlType: 0
+  categories:
+  - {fileID: 11400000, guid: 73cb515e29c0b0342868d05f1b6db486, type: 2}
+  Movement: {fileID: 0}
+  SkillSystem: {fileID: 0}
+  Target: {fileID: 0}
+--- !u!114 &1191303508249754646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52dd50af70fc6694cb9bf6856a387ffb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statOverrides:
+  - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  hpStat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+  moveSpeedStat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
+  levelStat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
+  searchRangeStat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+  attackRangeStat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
+--- !u!114 &-2360951494994577932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374edda0c81781c4f8f8a30c439b1b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4095148635912737438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f3a8fa38c7524943a07d06779985d97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rollTime: 0.5
 --- !u!114 &6377808965997499738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,3 +290,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2690443787438582454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836161735788839184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d83d81ce8b1544da4a324ae6ce5af7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSkills:
+  - {fileID: 11400000, guid: 226b956c668983e4da21c96449068586, type: 2}
+  - {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
+  DefaultAttack: {fileID: 11400000, guid: 226b956c668983e4da21c96449068586, type: 2}
+  Roll: {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
