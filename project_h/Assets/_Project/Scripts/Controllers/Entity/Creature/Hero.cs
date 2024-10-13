@@ -29,40 +29,13 @@ public class Hero : Entity
         return true;
     }
 
-    public override void SetInfo(int templateId)
+    public override void SetData(EntityData data)
     {
-        base.SetInfo(templateId);
+        base.SetData(data);
         
         Animator.runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>(_animControllerName);
         
-        // Only Main Character
-        ControlType = EEntityControlType.Player;
-        Managers.Game.OnTabTriggered -= Roll;
-        Managers.Game.OnTabTriggered += Roll;
-
-        Managers.Game.OnJoystickStateChanged -= HandleJoystickStateChanged;
-        Managers.Game.OnJoystickStateChanged += HandleJoystickStateChanged;
     }
 
-    private void HandleJoystickStateChanged(EJoystickState joystickState)
-    {
-        switch (joystickState)
-        {
-            case EJoystickState.PointerDown:
-                Movement.IsForcedMoving = true;
-                break;
-            case EJoystickState.Drag:
-                break;
-            case EJoystickState.PointerUp:
-                Movement.IsForcedMoving = false;
-                break;
-        }
-    }
-
-    void Roll(float distance)
-    {
-        SkillSystem.CancelTargetSearching();
-        SkillSystem.Roll.Use();
-    }
 
 }

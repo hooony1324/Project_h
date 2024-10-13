@@ -9,8 +9,6 @@ AnimatorOverrideController:
   m_Name: Hero_Bow
   m_Controller: {fileID: 9100000, guid: 0b43c465147197847b63a6bbd274a286, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 209ba5c5ade24174fa708e859cc5fab7, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 209ba5c5ade24174fa708e859cc5fab7, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 7b6a335dedbb9ac41bf80ca4db37d8e1, type: 2}
@@ -19,3 +17,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: 0d67bac72ac6b3442b7a85f4e434ff2c, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 90223407e93330947b4e9df69b108ec8, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 90223407e93330947b4e9df69b108ec8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}

@@ -1,3 +1,5 @@
+
+// 일단 Rolling은 Main Player만 가능 한 것으로
 public class RollingState : State<Entity>
 {
     private PlayerController playerController;

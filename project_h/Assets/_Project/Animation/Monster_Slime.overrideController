@@ -9,8 +9,6 @@ AnimatorOverrideController:
   m_Name: Monster_Slime
   m_Controller: {fileID: 9100000, guid: 0b43c465147197847b63a6bbd274a286, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: b63cfdb263e05214fa41611cc6d5ef49, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 209ba5c5ade24174fa708e859cc5fab7, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 7f4710a7ef7d2bf4ba2d3f464d39e2a8, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 7b6a335dedbb9ac41bf80ca4db37d8e1, type: 2}
@@ -19,3 +17,5 @@ AnimatorOverrideController:
     m_OverrideClip: {fileID: 7400000, guid: d9d1e2545cce55746b6b53f03d44d73e, type: 2}
   - m_OriginalClip: {fileID: 7400000, guid: 90223407e93330947b4e9df69b108ec8, type: 2}
     m_OverrideClip: {fileID: 7400000, guid: 2932c1f6ce6129c4e8c621ee26e82949, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b63cfdb263e05214fa41611cc6d5ef49, type: 2}

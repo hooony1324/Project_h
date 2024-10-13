@@ -20,13 +20,29 @@ public class SelectNearestEntity : TargetSelectionAction
     protected override TargetSelectionResult SelectImmediateByPlayer(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
-        return SelectImmediate(targetSearcher, requesterEntity, requesterObject, Vector2.zero);
+        var target = requesterEntity.Target;
+
+        if (!target)
+            return new TargetSelectionResult(position, SearchResultMessage.Fail);
+        
+        if (targetSearcher.IsInRange(requesterEntity, requesterObject, target.transform.position))
+            return new TargetSelectionResult(target.gameObject, SearchResultMessage.FindTarget);
+        else
+            return new TargetSelectionResult(target.gameObject, SearchResultMessage.OutOfRange);
     }
 
     protected override TargetSelectionResult SelectImmediateByAI(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
-        return SelectImmediate(targetSearcher, requesterEntity, requesterObject, Vector2.zero);
+        var target = requesterEntity.Target;
+
+        if (!target)
+            return new TargetSelectionResult(position, SearchResultMessage.Fail);
+        
+        if (targetSearcher.IsInRange(requesterEntity, requesterObject, target.transform.position))
+            return new TargetSelectionResult(target.gameObject, SearchResultMessage.FindTarget);
+        else
+            return new TargetSelectionResult(target.gameObject, SearchResultMessage.OutOfRange);
     }
 
     private TargetSelectionResult SelectImmediate(TargetSearcher targetSearcher, Entity requesterEntity,
@@ -68,7 +84,7 @@ public class SelectNearestEntity : TargetSelectionAction
     public override void Select(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, SelectCompletedHandler onSelectCompleted)
     {
-        onSelectCompleted.Invoke(SelectImmediate(targetSearcher, requesterEntity, requesterObject, requesterEntity.Position));
+        onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, requesterEntity.Target.Position));
     }
 
     public override void CancelSelect(TargetSearcher targetSearcher)

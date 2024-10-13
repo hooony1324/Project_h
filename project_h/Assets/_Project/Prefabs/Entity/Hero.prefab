@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3334468523802761965}
   - component: {fileID: 7479592598183058480}
   - component: {fileID: 1066998853570300449}
-  - component: {fileID: -6902351287890544523}
   - component: {fileID: -5722365948147448873}
   - component: {fileID: 2945546245996844712}
   - component: {fileID: 1191303508249754646}
@@ -150,33 +149,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 1.0072498}
   serializedVersion: 2
   m_Radius: 1
---- !u!50 &-6902351287890544523
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2836161735788839184}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!195 &-5722365948147448873
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -211,12 +183,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33803a16aaf2e92438a2510aa3c69c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controlType: 0
+  controlType: 1
   categories:
   - {fileID: 11400000, guid: 73cb515e29c0b0342868d05f1b6db486, type: 2}
   Movement: {fileID: 0}
   SkillSystem: {fileID: 0}
   Target: {fileID: 0}
+  enemyCategory: {fileID: 11400000, guid: 3f9e9f38fcf2f754a948140a973012a1, type: 2}
 --- !u!114 &1191303508249754646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,9 +206,12 @@ MonoBehaviour:
   - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
-  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+  - stat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+    isUseOverride: 1
+    overrideDefaultValue: 500
   - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0

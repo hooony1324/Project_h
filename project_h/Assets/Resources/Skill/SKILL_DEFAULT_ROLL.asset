@@ -44,7 +44,7 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     cooldown:
-      defaultValue: 0.4
+      defaultValue: 0.3
       scaleStat: {fileID: 0}
     targetSearcher:
       selectionAction:

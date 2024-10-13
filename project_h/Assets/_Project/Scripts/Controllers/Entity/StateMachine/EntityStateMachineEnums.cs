@@ -8,5 +8,6 @@ public enum EntityStateCommand
     ToInSkillPrecedingActionState,
     ToInSkillActionState,
     ToStunningState,
-    ToSleepingState
+    ToSleepingState,
+    ToPatrolSate,
 }

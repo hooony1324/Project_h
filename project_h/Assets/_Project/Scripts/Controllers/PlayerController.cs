@@ -23,24 +23,35 @@ public class PlayerController : InitOnce
 
     public void SetControlTarget(Entity entity)
     {
-        if (controlTarget != null)
-        {
-            controlTarget.SkillSystem.onSkillTargetSelectionCompleted -= ReserveSkill;
-        }
-
         controlTarget = entity;
         controlTarget.Movement.Stop();
 
-        controlTarget.SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
+        Managers.Game.OnTabTriggered -= Roll; 
+        Managers.Game.OnTabTriggered += Roll;
     }
 
     private void HandleJoystickState(EJoystickState state)
     {
         switch (state)
         {
+            case EJoystickState.PointerDown:
+                // Use안되고 PointerDown                => ReservedSkill
+                // Use후 쫒아가는 중 PointerDown        => 
+                // Use > InSkillActionState 에서        =>
+                controlTarget.Movement.IsForcedMoving = true;
+                controlTarget.SkillSystem.CancelAll(isForce:true);
+                controlTarget.SkillSystem.CancelReservedSkill();
+                controlTarget.Target = null;
+                controlTarget.Movement.TraceTarget = null;
+                break;
+            case EJoystickState.Drag:
+                break;
             case EJoystickState.PointerUp:
-                controlTarget.SkillSystem.DefaultAttack.CancelSelectTarget();
-                controlTarget.SkillSystem.DefaultAttack.Use();
+                controlTarget.Movement.IsForcedMoving = false;
+                controlTarget.SkillSystem.CancelAll(isForce:true);
+                controlTarget.SkillSystem.CancelReservedSkill();
+                controlTarget.Target = null;
+                controlTarget.Movement.TraceTarget = null;
                 break;
         }
     }
@@ -49,22 +60,30 @@ public class PlayerController : InitOnce
     {
         moveDir = Vector3.zero; 
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
-        StartCoroutine("UpdateMovement");
     }
 
     private void OnDisable()
     {
         moveDir = Vector3.zero; 
         Managers.Game.OnMoveDirChanged -= HandleOnMoveDirChanged;
-        StopCoroutine("UpdateMovement");
     }
 
-    private IEnumerator UpdateMovement()
+    private void Update()
     {
-        while (true)
+        if (controlTarget.Movement.enabled == false)
+            return;
+
+        controlTarget.Movement.Move(moveDir);
+
+        if (controlTarget.Movement.IsForcedMoving)
+            return;
+
+        if (controlTarget.Target == null)
+            return;
+
+        if (controlTarget.SkillSystem.DefaultAttack.IsUseable)
         {
-            controlTarget.Movement.Move(moveDir);
-            yield return null;
+            controlTarget.SkillSystem.DefaultAttack.Use();
         }
     }
 
@@ -96,16 +115,9 @@ public class PlayerController : InitOnce
         }
     }
 
-    private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
+    private void Roll(float tabTime)
     {
-        if (result.resultMessage != SearchResultMessage.OutOfRange ||
-            !skill.IsInState<SearchingTargetState>())
-            return;
-        
-        controlTarget.SkillSystem.ReserveSkill(skill);
-
-        var selectionResult = skill.TargetSelectionResult;
-        if (selectionResult.selectedTarget)
-            controlTarget.Movement.TraceTarget = selectionResult.selectedTarget.transform;
+        if (moveDir != Vector3.zero)            
+            controlTarget.Roll(tabTime);
     }
 }

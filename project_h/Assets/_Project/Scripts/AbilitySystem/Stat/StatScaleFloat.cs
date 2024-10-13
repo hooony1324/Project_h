@@ -11,7 +11,12 @@ public struct StatScaleFloat
     public float GetValue(Stats stats)
     {
         if (scaleStat && stats.TryGetStat(scaleStat, out var stat))
-            return defaultValue * (1 + stat.Value);
+        {
+            if (stat.IsPercentType)
+                return defaultValue * (1 + stat.Value);
+            else
+                return defaultValue * stat.Value;
+        }
         else
             return defaultValue;
     }

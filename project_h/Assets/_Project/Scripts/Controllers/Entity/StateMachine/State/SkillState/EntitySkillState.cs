@@ -11,9 +11,6 @@ public class EntitySkillState : State<Entity>
     {
         Entity.Movement?.Stop();
 
-        var playerController = Managers.Game.PlayerController;
-        if (playerController)
-            playerController.enabled = false;
     }
 
     public override void Exit()
@@ -22,9 +19,6 @@ public class EntitySkillState : State<Entity>
 
         RunningSkill = null;
 
-        var playerController = Managers.Game.PlayerController;
-        if (playerController)
-            playerController.enabled = true;
     }
     
     public override bool OnReceiveMessage(int message, object data)

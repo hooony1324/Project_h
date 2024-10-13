@@ -33,7 +33,7 @@ MonoBehaviour:
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 0
+      defaultValue: 0.4
       scaleStat: {fileID: 0}
     applyCount: 1
     applyCycle: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
     - rid: 3506563725652131852
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 5
-        bonusDamageStat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
+        defaultDamage: 10
+        bonusDamageStat: {fileID: 0}
         bonusDamageStatFactor: 0
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0

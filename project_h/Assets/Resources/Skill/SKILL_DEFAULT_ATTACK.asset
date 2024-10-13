@@ -24,7 +24,7 @@ MonoBehaviour:
   applyType: 1
   needSelectionResultType: 0
   targetSelectionTimingOption: 0
-  targetSearchTimingOption: 1
+  targetSearchTimingOption: 0
   acquisitionConditions: []
   acquisitionCosts: []
   useConditions:
@@ -45,8 +45,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     cooldown:
-      defaultValue: 0
-      scaleStat: {fileID: 0}
+      defaultValue: 1
+      scaleStat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
     targetSearcher:
       selectionAction:
         rid: 3506563725652131866

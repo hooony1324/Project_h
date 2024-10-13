@@ -19,7 +19,6 @@ public abstract class Entity : BaseObject
     public event TakeDamageHandler onTakeDamage;
     public event DeadHandler onDead;
 
-
     [SerializeField]
     private EEntityControlType controlType;
     public EEntityControlType ControlType 
@@ -43,8 +42,10 @@ public abstract class Entity : BaseObject
     // 공격 혹은 치유와 같이 대상 지정
     public Entity Target;
     public Category[] Categories => categories;
+    [SerializeField] protected Category enemyCategory;
 
     public bool IsPlayer => controlType == EEntityControlType.Player;
+    public bool IsEnemyTargeted => Target != null && Target.HasCategory(enemyCategory);
     public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
     public override bool Init()
     {
@@ -66,13 +67,102 @@ public abstract class Entity : BaseObject
         SkillSystem.Setup(this);
 
         onTakeDamage += SpawnDamageText;
+        SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
 
         return true;
     }
 
-    public virtual void SetInfo(int templateId)
+    public virtual void SetData(EntityData data)
     {
+        // 공격사거리, 사거리, 기본 스탯 Override 세팅
+
+
+    }
+
+
+    private Coroutine coSearchingEnemy;
+    public bool EnableSearching
+    {
+        set
+        {
+            if (value)
+            {
+                if (coSearchingEnemy == null)
+                    StartCoroutine("SearchingEnemy");
+            }
+            else
+            {
+                if (coSearchingEnemy != null)
+                {
+                    StopCoroutine(coSearchingEnemy);
+                    coSearchingEnemy = null;
+                }
+            }
+        }
+    }
+    private IEnumerator SearchingEnemy()
+    {
+        while (true)
+        {
+            FindNearestEnemy();
+            yield return WaitFor.Seconds(0.5f);
+        }
+    }
+
+    public virtual bool FindNearestEnemy()
+    {
+        if (Target != null)
+            return false;
+
+        float searchRange = Stats.GetValue(Stats.SearchRangeStat);
+        var colliders = Physics2D.OverlapCircleAll(Position, searchRange);
+
+        float nearestDistance = Mathf.Infinity;
+        Entity nearestEnemy = null;
+        foreach (var collider in colliders)
+        {
+            var entity = collider.GetComponent<Entity>();
+            if (entity == this || entity.IsDead)
+                continue;
+
+            if (!entity.HasCategory(enemyCategory))
+                continue;
+
+            float distance = Vector2.Distance(entity.Position, transform.position);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestEnemy = entity;
+            }
+        }
+
+        if (nearestEnemy)
+        {
+            Target = nearestEnemy;
+            return true;
+        }
+
+        Target = null;
+        return false;
+    }
+
+    private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
+    {
+        if (result.resultMessage != SearchResultMessage.OutOfRange ||
+            !skill.IsInState<SearchingTargetState>())
+            return;
         
+        SkillSystem.ReserveSkill(skill);
+
+        var selectionResult = skill.TargetSelectionResult;
+        if (selectionResult.selectedTarget)
+            Movement.TraceTarget = selectionResult.selectedTarget.transform;
+    }
+
+    public void Roll(float distance)
+    {
+        SkillSystem.CancelAll();
+        SkillSystem.Roll.Use();
     }
 
     // instigator : 이즈리얼

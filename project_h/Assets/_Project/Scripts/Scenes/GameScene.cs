@@ -17,7 +17,7 @@ public class GameScene : BaseScene
         Vector3Int startPos = new Vector3Int(8, 10, 0);
 
         Hero hero = Managers.Object.Spawn<Hero>(startPos);
-        Monster monster = Managers.Object.Spawn<Monster>(startPos + Vector3.up * 10);
+        hero.SetData(null);
 
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;

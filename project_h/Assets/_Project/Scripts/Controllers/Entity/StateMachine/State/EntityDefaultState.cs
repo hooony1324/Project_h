@@ -2,6 +2,27 @@ using static Define;
 
 public class EntityDefaultState : State<Entity>
 {
+    protected override void Setup() 
+    {
+        Entity.EnableSearching = true;
+    }
+
+    public override void Enter() 
+    {
+        Entity.Movement.AgentEnabled = true;
+        Entity.EnableSearching = true;
+    }
+
+    public override void Update() 
+    {
+        
+    }
+
+    public override void Exit() 
+    {
+        Entity.EnableSearching = false;
+    }
+
     public override bool OnReceiveMessage(int message, object data)
     {
         if ((EntityStateMessage)message != EntityStateMessage.UsingSkill)

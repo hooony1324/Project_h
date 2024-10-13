@@ -17,9 +17,8 @@ GameObject:
   - component: {fileID: 2375213420811414405}
   - component: {fileID: 3511461692462573818}
   - component: {fileID: 7146395451489560310}
-  - component: {fileID: 7893975378471246714}
   - component: {fileID: -7663793352208277797}
-  - component: {fileID: -3656699690239920050}
+  - component: {fileID: 2576340092341461570}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -190,6 +189,7 @@ MonoBehaviour:
   Movement: {fileID: 0}
   SkillSystem: {fileID: 0}
   Target: {fileID: 0}
+  enemyCategory: {fileID: 11400000, guid: 73cb515e29c0b0342868d05f1b6db486, type: 2}
 --- !u!114 &2375213420811414405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,6 +206,9 @@ MonoBehaviour:
   - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
+    isUseOverride: 1
+    overrideDefaultValue: 2
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
@@ -251,18 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e39f6090724e4a4a8aadeb042afa2bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7893975378471246714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4083777682637181715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 374edda0c81781c4f8f8a30c439b1b04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-7663793352208277797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,30 +271,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
   DefaultAttack: {fileID: 11400000, guid: 226b956c668983e4da21c96449068586, type: 2}
   Roll: {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
---- !u!50 &-3656699690239920050
-Rigidbody2D:
-  serializedVersion: 4
+--- !u!114 &2576340092341461570
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4083777682637181715}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 374edda0c81781c4f8f8a30c439b1b04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

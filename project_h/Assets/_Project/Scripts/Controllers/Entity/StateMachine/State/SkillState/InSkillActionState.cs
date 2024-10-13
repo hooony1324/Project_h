@@ -20,11 +20,14 @@ public class InSkillActionState : EntitySkillState
 
         return true;
     }
-
+    
     public override void Exit()
     {
         IsStateEnded = false;
         RunningSkill.onApplied -= OnSkillApplied;
+
+        Entity.Target = null;
+        Entity.Movement.TraceTarget = null;
 
         base.Exit();
     }

@@ -35,14 +35,6 @@ public class ObjectManager
         //Monsters.Clear();
     }
 
-    // public void ShowDamageFont(Vector2 pos, float damage, Transform parent, EDamageResult result)
-    // {
-    //     string prefabName = "DamageFont";
-
-    //     GameObject go = Managers.Resource.Instantiate(prefabName, pooling: true);
-    //     DamageFont damageText = go.GetComponent<DamageFont>();
-    //     damageText.SetInfo(pos, damage, parent, result);
-    // }
     public void SpawnFloatingText(Vector2 pos, string message)
     {
         GameObject go = Managers.Resource.Instantiate(nameof(UI_FloatingText), pooling: true);
@@ -50,25 +42,10 @@ public class ObjectManager
         floatingText.SetInfo(pos, message);
     }
 
-    public T Spawn<T>(object position, int templateID = 0, string prefabName = "") where T : BaseObject
+    public T Spawn<T>(Vector3 spawnPos, string prefabName = "", int templateID = 0) where T : BaseObject
     {
         System.Type type = typeof(T);
 
-        Vector3 spawnPos = new Vector3();
-        if (position is Vector3)
-        {
-            spawnPos = (Vector3)position;
-        }
-
-        if (type == typeof(HeroCamp))
-        {
-            GameObject go = Managers.Resource.Instantiate("HeroCamp");
-            go.transform.position = spawnPos;
-            go.transform.parent = ProjectileRoot;
-            go.name = "***CampPoint***";
-            HeroCamp= go.GetOrAddComponent<HeroCamp>();
-            return HeroCamp as T;
-        }
 
         if (type == typeof(Hero))
         {
@@ -78,22 +55,35 @@ public class ObjectManager
             go.transform.parent = HeroRoot;
             Hero hc = go.GetOrAddComponent<Hero>();
             Heroes.Add(hc);
-            hc.SetInfo(templateID);
             Hero = hc;
             return hc as T;
         }
-
-        if (type == typeof(Monster))
+        else if (type == typeof(Monster))
         {
             GameObject go = Managers.Resource.Instantiate("Monster", pooling: true);
             go.transform.position = spawnPos;
             go.transform.parent = MonsterRoot;
             Monster mc = go.GetOrAddComponent<Monster>();
             Monsters.Add(mc);
-            mc.SetInfo(templateID);
             return mc as T;
         }
 
         return null;
+    }
+
+    public void Despawn<T>(T baseObject) where T : BaseObject
+    {
+        System.Type type = typeof(T);
+
+        if (type == typeof(Hero))
+        {
+            Heroes.Remove(baseObject as Hero);
+        }
+        else if (type == typeof(Monster))
+        {
+            Monsters.Remove(baseObject as Monster);
+        }
+
+        Managers.Resource.Destroy(baseObject.gameObject);
     }
 }

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 4
+  id: 5
   codeName: RANGE_ATTACK
   displayName: "\uACF5\uACA9 \uC0AC\uAC70\uB9AC"
   description: 
   isPercentType: 0
   maxValue: 20
   minValue: 1
-  defaultValue: 3
+  defaultValue: 2

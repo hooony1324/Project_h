@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NavMeshPlus.Extensions;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -22,6 +23,14 @@ public class EntityMovement : MonoBehaviour
     public float MoveSpeed => agent.speed;
     // 조이스틱에 의한 강제 이동
     public bool IsForcedMoving {get; set;}
+    public bool AgentEnabled
+    {
+        set
+        {
+            if (agent.enabled == false)
+                agent.enabled = value;
+        }
+    }
 
     private NavMeshAgent agent;
     private Stat entityMoveSpeedStat;
@@ -39,7 +48,7 @@ public class EntityMovement : MonoBehaviour
                 return;
             
             Stop();
-
+            
             traceTarget = value;
             if (traceTarget)
                 StartCoroutine("TraceUpdate");
@@ -55,6 +64,8 @@ public class EntityMovement : MonoBehaviour
             SetDestination(value);
         }
     }
+
+    public bool AtDestination => agent.destination.InRangeOf(transform.position, 0.2f);
 
     public void Move(Vector3 moveDir)
     {

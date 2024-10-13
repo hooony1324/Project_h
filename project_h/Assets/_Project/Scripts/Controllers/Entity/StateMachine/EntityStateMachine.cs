@@ -1,14 +1,5 @@
 using UnityEngine;
 
-// public enum EHeroMoveState
-// {
-//     None,
-//     TargetMonster,
-//     CollectEnv,
-//     ReturnToCamp,
-//     ForceMove,
-//     ForcePath,
-// }
 
 public class EntityStateMachine : MonoStateMachine<Entity>
 {
@@ -17,18 +8,8 @@ public class EntityStateMachine : MonoStateMachine<Entity>
         AddState<EntityDefaultState>();
         AddState<DeadState>();
         AddState<RollingState>();
-        // Skill이 Casting 중일 때 Entity의 상태
-        //AddState<CastingSkillState>();
-        // Skill이 Charging 중일 때 Entity의 상태
-        //AddState<ChargingSkillState>();
-        // Skill이 Preceding Action 중일 때 Entity의 상태
         AddState<InSkillPrecedingActionState>();
-        // Skill이 발동 중일 때 Entity의 상태
         AddState<InSkillActionState>();
-        // Entity가 Stun CC기를 맞았을 때의 상태
-        //AddState<StunningState>();
-        // Entity가 Sleep CC기를 맞았을 때의 상태
-        //AddState<SleepingState>();
     }
 
     protected override void MakeTransitions()
