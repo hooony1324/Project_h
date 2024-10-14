@@ -3,16 +3,6 @@ using NavMeshPlus.Extensions;
 using UnityEngine;
 using static Define;
 
-public enum EHeroMoveState
-{
-    None,
-    TargetMonster,
-    CollectEnv,
-    ReturnToCamp,
-    ForceMove,
-    ForcePath,
-}
-
 public class Hero : Entity
 {
     // Experimental Data -> TODO: Data Sheet

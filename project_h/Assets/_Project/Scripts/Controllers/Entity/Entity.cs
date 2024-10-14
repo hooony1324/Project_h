@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering;
+using static Define;
 
 
 public enum EEntityControlType
@@ -68,6 +70,9 @@ public abstract class Entity : BaseObject
 
         onTakeDamage += SpawnDamageText;
         SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
+
+        SortingGroup sg = Util.GetOrAddComponent<SortingGroup>(gameObject);
+        sg.sortingOrder = SortingLayers.ENTITY;
 
         return true;
     }

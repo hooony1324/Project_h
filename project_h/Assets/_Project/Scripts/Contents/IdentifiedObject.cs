@@ -4,7 +4,6 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-[CreateAssetMenu]
 public class IdentifiedObject : ScriptableObject, ICloneable
 {
     [SerializeField]

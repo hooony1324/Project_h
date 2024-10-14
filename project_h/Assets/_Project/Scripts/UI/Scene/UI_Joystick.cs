@@ -48,7 +48,9 @@ public class UI_Joystick : UI_Scene
         GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchUp, EUIEvent.PointerUp);
         GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDrag, EUIEvent.Drag);
 
-        GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+        GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
+        GetComponent<Canvas>().worldCamera = Camera.main;
+
         IsVisible = false;
 
         return true;
@@ -77,9 +79,10 @@ public class UI_Joystick : UI_Scene
         _joystickTouchPos = eventData.position;
         Managers.Game.JoystickState = EJoystickState.PointerDown;
 
-        _joystickCursor.transform.position = _joystickTouchPos;
-        _joystickBG.transform.position = _joystickTouchPos;
+        Vector2 worldTouchPos = Camera.main.ScreenToWorldPoint(_joystickTouchPos);
 
+        _joystickCursor.transform.position = worldTouchPos;
+        _joystickBG.transform.position = worldTouchPos;
 
         Managers.Game.MoveDir = _moveDir;
         Managers.Game.JoystickState = EJoystickState.Drag;
@@ -92,8 +95,10 @@ public class UI_Joystick : UI_Scene
         _moveDir = (dragePos - _joystickTouchPos).normalized;
 
         float joystickDist = (dragePos - _joystickOriginalPos).sqrMagnitude;
+        
         Vector2 newCursorPos = _joystickTouchPos + _moveDir * Mathf.Clamp(joystickDist, 0, _radius);
-        _joystickCursor.transform.position = newCursorPos;
+
+        _joystickCursor.transform.position = Camera.main.ScreenToWorldPoint(newCursorPos);
 
         Managers.Game.JoystickState = EJoystickState.Drag;
         Managers.Game.MoveDir = _moveDir;
@@ -103,8 +108,10 @@ public class UI_Joystick : UI_Scene
     {
         _moveDir = Vector2.zero;
 
-        _joystickCursor.transform.position = _joystickTouchPos;
-        _joystickBG.transform.position = _joystickTouchPos;
+        Vector3 worldTouchPos = Camera.main.ScreenToWorldPoint(eventData.position);
+
+        _joystickCursor.transform.position = worldTouchPos;
+        _joystickBG.transform.position = worldTouchPos;
 
         Managers.Game.MoveDir = _moveDir;
         Managers.Game.JoystickState = EJoystickState.PointerUp;
@@ -112,8 +119,11 @@ public class UI_Joystick : UI_Scene
         IsVisible = false;
     }
 
+    // 터치 후 드래그하는 방향에 따라 다른 스킬?
+    // 탭 하는 시간에 따라 다른 스킬?
     private float tapThreshold = 0.14f;
     private float touchStartTime;
+    
     private void OnTouchDown(PointerEventData eventData)
     {
         touchStartTime = Time.time;
@@ -121,7 +131,6 @@ public class UI_Joystick : UI_Scene
 
     private void OnTouchDrag(PointerEventData eventData)
     {        
-
     }
 
     private void OnTouchUp(PointerEventData eventData)

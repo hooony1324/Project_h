@@ -32,7 +32,8 @@ public class MapManager
 
         Map = map;
         MapName = mapName;
-   
+
+        
     }
 
     public void DestroyMap()

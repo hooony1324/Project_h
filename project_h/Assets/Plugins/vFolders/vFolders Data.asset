@@ -77,6 +77,10 @@ MonoBehaviour:
     - 8c50f7a05164c4e45a407e56008fc60d
     - b2883c89a609acb4f81169ad928ab30d
     - a64064fb502d0a6428bc6aceac765adf
+    - e04822da2f84563468f80e15affc39b1
+    - a98abe09f03745444ae38ea2b58c30e5
+    - 203e08744f96be84984d99000a71604d
+    - e85da6f8ac8f1064fb97b77789483f1a
     values:
     - colorIndex: 1
       iconNameOrGuid: 
@@ -158,49 +162,57 @@ MonoBehaviour:
       iconNameOrGuid: 
     - colorIndex: 1
       iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 1
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
+    - colorIndex: 5
+      iconNameOrGuid: 
     - colorIndex: 10
       iconNameOrGuid: 
-    - colorIndex: 8
+    - colorIndex: 7
       iconNameOrGuid: 
-    - colorIndex: 8
+    - colorIndex: 7
       iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 8
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
-      iconNameOrGuid: 
-    - colorIndex: 1
+    - colorIndex: 7
       iconNameOrGuid: 

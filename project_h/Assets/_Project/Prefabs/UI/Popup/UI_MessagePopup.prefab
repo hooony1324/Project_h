@@ -793,7 +793,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 4294967295
 --- !u!114 &4436620995837049745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,6 +1374,10 @@ PrefabInstance:
     - target: {fileID: 17802695732680482, guid: 5aba59dccceef1b45a1857de7e6c34ec, type: 3}
       propertyPath: m_Name
       value: BlurBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6569163413662978194, guid: 5aba59dccceef1b45a1857de7e6c34ec, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7216623643408977302, guid: 5aba59dccceef1b45a1857de7e6c34ec, type: 3}
       propertyPath: m_Pivot.x

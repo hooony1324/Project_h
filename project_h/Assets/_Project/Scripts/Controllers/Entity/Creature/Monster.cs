@@ -63,6 +63,8 @@ public class Monster : Entity
         Movement.AgentEnabled = false;
         EnableSearching = false;
         EnablePatrol = false;
+        Target = null;
+        Movement.TraceTarget = null;
         Invoke("Despawn", 5.0f);
     }
 

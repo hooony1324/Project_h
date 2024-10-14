@@ -26,6 +26,9 @@ public class Stats : MonoBehaviour
     public virtual void Setup(Entity interactionObject)
     {
         Owner = interactionObject;
+
+
+        // TODO: Data세팅하고 Data의 statOverrides를 가져와야 함
         stats = statOverrides.Select(x => x.CreateStat()).ToArray();
 
         HPStat = hpStat ? GetStat(hpStat) : null;

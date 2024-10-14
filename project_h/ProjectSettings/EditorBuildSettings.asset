@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/LightTestScene.unity
     guid: 3052868faed55354c9ef7d2adf43875c
   - enabled: 1
-    path: Assets/_Project/Scenes/TestAdditiveScene.unity
+    path: Assets/_Project/Scenes/DungeonScene.unity
     guid: e9d8ad00cf6b750409c88acaf5ccbc40
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c5da0f2a1d6af2c4aa091b0fd8c57e31, type: 2}

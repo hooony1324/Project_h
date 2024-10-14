@@ -23,4 +23,18 @@ public class Define
     public const char MAP_TOOL_CHARACTER_WALKABLE = '1'; 
     public const char MAP_TOOL_CAMERA_WALKABLE = '2';	
     public const int HERO_DEFAULT_MOVE_DEPTH = 8;
+
+    public static class SortingLayers
+    {
+        public const int SPELL_INDICATOR = 200;
+        public const int ENTITY = 300;
+        public const int GATHERING_RESOURCES = 300;
+        public const int PROJECTILE = 310;
+        public const int DROP_ITEM = 310;
+        public const int SKILL_EFFECT = 315;
+        public const int DAMAGE_FONT = 410;
+
+        public const int JOYSTICK = 700;
+        public const int NPC_INTERACTION = 800;
+    }
 }
