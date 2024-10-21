@@ -1,21 +1,23 @@
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
+using static Define;
 
-public interface INpcInteraction
+public abstract class NpcInteraction
 {
-    public void HandleNpcInteraction();
+    public abstract void HandleNpcInteraction();
 }
 
-public class Npc : Entity
+public class Npc : BaseObject
 {
-    private Sprite npcSprite;
     private UI_NpcInteraction uiNpcInteraction;
 
     [SerializeReference, SubclassSelector]
-    private EntityCondition[] interactCondition;
+    private EntityCondition[] interactConditions;
 
-    [SerializeReference]
-    private INpcInteraction npcInteraction;
+    [SerializeReference, SubclassSelector]
+    private NpcInteraction npcInteraction;
 
     public override bool Init()
     {
@@ -23,8 +25,9 @@ public class Npc : Entity
             return false;
 
         ObjectType = EObjectType.Npc;
-        
-        npcSprite = Util.FindChild(gameObject, "NpcSprite").GetComponent<Sprite>();
+
+        SortingGroup sg = Util.FindChild(gameObject, "NpcSprite").GetOrAddComponent<SortingGroup>();
+        sg.sortingOrder = SortingLayers.ENTITY;
 
         uiNpcInteraction = Util.FindChild(gameObject, "UI_NpcInteraction").GetComponent<UI_NpcInteraction>();
         uiNpcInteraction.OnInteraction += OnClickNpc;
@@ -32,17 +35,12 @@ public class Npc : Entity
         return true;
     }
 
-    public override void SetData(EntityData data)
-    {
-        base.SetData(data);
-        
-    }
-
     private void OnClickNpc()
     {
         //TODO: Interaction check, ex) player Level
+        //interactConditions.All(x => x.IsPass(Entity));
 
-
+        npcInteraction?.HandleNpcInteraction();
     }
 
 

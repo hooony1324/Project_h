@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    Camera uiCamera;
-    public Camera UICamera;
+    // TEST
+    public Camera camera_1;
 
     [SerializeField] public float smoothSpeed = 6f;
     private int _targetOrthographicSize = 12;
@@ -34,7 +34,7 @@ public class CameraController : MonoBehaviour
     public void Awake()
     {
         State = ECameraState.Following;
-        UICamera = Util.FindChild<Transform>(gameObject, "UI Camera", true).GetComponent<Camera>();
+        camera_1 = Util.FindChild<Transform>(gameObject, "Stack1 Camera", true).GetComponent<Camera>();
     }
 
     private float orthographicSize
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
         set
         {
             Camera.main.orthographicSize = value;
-            UICamera.orthographicSize = value;
+            camera_1.orthographicSize = value;
         }
     }
 

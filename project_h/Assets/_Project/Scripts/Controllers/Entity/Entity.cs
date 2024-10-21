@@ -90,6 +90,9 @@ public abstract class Entity : BaseObject
     {
         set
         {
+            if (IsDead)
+                return;
+
             if (value)
             {
                 if (coSearchingEnemy == null)

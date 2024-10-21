@@ -1,9 +1,10 @@
 using UnityEngine;
 
-public class DungeonEntranceInteraction : INpcInteraction
+[System.Serializable]
+public class DungeonEntranceInteraction : NpcInteraction
 {
-    public void HandleNpcInteraction()
+    public override void HandleNpcInteraction()
     {
-
+        Managers.UI.ShowPopupUI<UI_DungeonSelectPopup>();
     }
 }

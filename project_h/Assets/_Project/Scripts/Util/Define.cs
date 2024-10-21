@@ -34,7 +34,7 @@ public class Define
         public const int SKILL_EFFECT = 315;
         public const int DAMAGE_FONT = 410;
 
-        public const int JOYSTICK = 700;
+        public const int JOYSTICK = 500;
         public const int NPC_INTERACTION = 800;
     }
 }

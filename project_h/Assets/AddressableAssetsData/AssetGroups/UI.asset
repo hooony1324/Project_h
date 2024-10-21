@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8e030f0eedfeb6747ad99c944dd78b08
+    m_Address: UI_DungeonSelectPopup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9bf0947e6655c804ba12f60d770c4a61
     m_Address: UI_FloatingText
     m_ReadOnly: 0

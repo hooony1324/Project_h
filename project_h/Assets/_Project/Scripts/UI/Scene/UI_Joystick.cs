@@ -2,6 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static Define;
 
 public enum EJoystickState
 {
@@ -50,6 +51,7 @@ public class UI_Joystick : UI_Scene
 
         GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
         GetComponent<Canvas>().worldCamera = Camera.main;
+        GetComponent<Canvas>().sortingOrder = SortingLayers.JOYSTICK;
 
         IsVisible = false;
 
@@ -96,10 +98,10 @@ public class UI_Joystick : UI_Scene
 
         float joystickDist = (dragePos - _joystickOriginalPos).sqrMagnitude;
         
-        Vector2 newCursorPos = _joystickTouchPos + _moveDir * Mathf.Clamp(joystickDist, 0, _radius);
+        Vector2 clampedPos = _joystickTouchPos + _moveDir * Mathf.Clamp(joystickDist, 0, _radius);
 
-        _joystickCursor.transform.position = Camera.main.ScreenToWorldPoint(newCursorPos);
-
+        _joystickCursor.transform.position = Camera.main.ScreenToWorldPoint(clampedPos).With(z:0);
+        
         Managers.Game.JoystickState = EJoystickState.Drag;
         Managers.Game.MoveDir = _moveDir;
     }
