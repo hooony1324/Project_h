@@ -41,13 +41,13 @@ public class UI_Joystick : UI_Scene
         _joystickCursor = GetGameObject((int)GameObjects.JoystickCursor);
         _joystickOriginalPos = _joystickBG.transform.position;
 
-        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickDown, EUIEvent.PointerDown);
-        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickUp, EUIEvent.PointerUp);
-        GetGameObject((int)GameObjects.JoystickArea).BindEvent(OnJoystickDrag, EUIEvent.Drag);
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(null, OnJoystickDown, EUIEvent.BeginDrag);
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(null, OnJoystickUp, EUIEvent.EndDrag);
+        GetGameObject((int)GameObjects.JoystickArea).BindEvent(null, OnJoystickDrag, EUIEvent.Drag);
 
-        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDown, EUIEvent.PointerDown);
-        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchUp, EUIEvent.PointerUp);
-        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDrag, EUIEvent.Drag);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchDown, EUIEvent.BeginDrag);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchUp, EUIEvent.EndDrag);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchDrag, EUIEvent.Drag);
 
         GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
         GetComponent<Canvas>().worldCamera = Camera.main;

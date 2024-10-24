@@ -61,13 +61,13 @@ public class UI_MessagePopup : UI_Popup
         GetButton((int)Buttons.ExitButton).gameObject.SetActive(showExitButton);
     }
 
-    private void OnConfirmButtonClicked(PointerEventData eventData)
+    private void OnConfirmButtonClicked()
     {
         OnDecision?.Invoke(true);
         base.ClosePopupUI();
     }
 
-    private void OnCancelButtonClicked(PointerEventData eventData)
+    private void OnCancelButtonClicked()
     {
         OnDecision?.Invoke(false);
         base.ClosePopupUI();

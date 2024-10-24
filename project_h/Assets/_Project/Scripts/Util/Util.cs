@@ -17,6 +17,19 @@ public static class Util
         return component;
     }
 
+    public static T FindAncestor<T>(GameObject go) where T : Object
+    {
+        Transform t = go.transform;
+        while (t != null)
+        {
+            T component = t.GetComponent<T>();
+            if (component != null)
+                return component;
+            t = t.parent;
+        }
+        return null; 
+    }
+
     public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
     {
         Transform transform = FindChild<Transform>(go, name, recursive);

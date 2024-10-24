@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -39,7 +40,7 @@ public class ObjectManager
     {
         GameObject go = Managers.Resource.Instantiate(nameof(UI_FloatingText), pooling: true);
         UI_FloatingText floatingText = go.GetComponent<UI_FloatingText>();
-        floatingText.SetInfo(pos, message);
+        floatingText.SetInfo(message, pos);
     }
 
     public T Spawn<T>(Vector3 spawnPos, string prefabName = "", int templateID = 0) where T : BaseObject
@@ -85,5 +86,14 @@ public class ObjectManager
         }
 
         Managers.Resource.Destroy(baseObject.gameObject);
+    }
+
+    public void ClearSpawnedObjects()
+    {
+        foreach (Monster monster in Monsters)
+        {
+            Managers.Resource.Destroy(monster.gameObject);
+        }
+        Monsters.Clear();
     }
 }

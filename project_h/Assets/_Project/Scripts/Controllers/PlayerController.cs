@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using static Define;
 
 public class PlayerController : InitOnce
@@ -85,6 +86,7 @@ public class PlayerController : InitOnce
         {
             controlTarget.SkillSystem.DefaultAttack.Use();
         }
+
     }
 
     void HandleOnMoveDirChanged(Vector2 dir)

@@ -27,8 +27,7 @@ public class EntityMovement : MonoBehaviour
     {
         set
         {
-            if (agent.enabled == false)
-                agent.enabled = value;
+            agent.enabled = value;
         }
     }
 
@@ -61,6 +60,10 @@ public class EntityMovement : MonoBehaviour
         {
             // traceTarget을 추적하는 것을 멈춤
             TraceTarget = null;
+
+            if (agent.enabled == false)
+                return;
+                
             SetDestination(value);
         }
     }

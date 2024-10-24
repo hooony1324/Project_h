@@ -17,7 +17,7 @@ public class ColorEntry
     public Color color;
 }
 
-[CreateAssetMenu(fileName = "ColorPalette", menuName = "GameDesign/ColorPalette")]
+[CreateAssetMenu(fileName = "ColorPalette", menuName = "GameDesign/ColorPalette", order = 50)]
 public class ColorPalette : ScriptableObject
 {
     public ColorEntry[] colors;

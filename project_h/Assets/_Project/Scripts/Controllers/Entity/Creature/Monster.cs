@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Diagnostics;
 using Random = UnityEngine.Random;
 
 
@@ -29,28 +30,26 @@ public class Monster : Entity
         }
     }
 
+    UI_WorldText infoText;
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
         ObjectType = EObjectType.Monster;
-
+        infoText = Util.FindChild<UI_WorldText>(gameObject);
+        
         return true;
     }
 
     public override void SetData(EntityData data)
     {
         base.SetData(data);
-    }
 
-    private void OnEnable()
-    {   
         onDead += HandleOnDead;
         Stats.Setup(this);
         Movement.AgentEnabled = true;
         Movement.enabled = true;
-        // 순찰 & 공격 시작 코루틴
     }
 
     private void OnDisable()
@@ -66,6 +65,12 @@ public class Monster : Entity
         Target = null;
         Movement.TraceTarget = null;
         Invoke("Despawn", 5.0f);
+    }
+
+
+    void Update()
+    {
+        infoText.SetInfo(StateMachine.GetCurrentState().ToString());
     }
 
     private void Despawn()

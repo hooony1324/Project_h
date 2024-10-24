@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: Prefabs
   m_EditorClassIdentifier: 
   m_GroupName: Prefabs
-  m_Data:
-    m_SerializedData: []
   m_GUID: 5d5ad4b1d3e9df44c831e54144475c1f
   m_SerializeEntries:
   - m_GUID: 1e24125cb8837b044bb7e7888b5c607d
@@ -31,6 +29,18 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5cedca9ead177ff46a925d5e3aa64f7c
     m_Address: BaseMap
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b8ce06c8b4b3874ea334518a21f3c99
+    m_Address: DungeonMap_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6b78352cd5462b4b9a930dc8b988986
+    m_Address: DungeonMap_02
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

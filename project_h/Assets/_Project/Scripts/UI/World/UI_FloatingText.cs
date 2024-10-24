@@ -22,7 +22,7 @@ public class UI_FloatingText : UI_Base
     float distance = 3f;
     float duration = 2f;
 
-    public void SetInfo(Vector2 spawnPosition, string message)
+    public void SetInfo(string message, Vector2 spawnPosition)
     {
         GetTMPText((int)Texts.Text).text = message;
         
@@ -30,9 +30,8 @@ public class UI_FloatingText : UI_Base
 
         Canvas canvas = GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
-        //canvas.worldCamera = Managers.Game.Cam.UICamera;
         canvas.worldCamera = Camera.main;
-        canvas.sortingOrder = SortingLayers.DAMAGE_FONT;
+        canvas.sortingOrder = SortingLayers.WORLD_FONT;
         
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMoveY(transform.position.y + distance, duration).SetEase(Ease.OutCirc))

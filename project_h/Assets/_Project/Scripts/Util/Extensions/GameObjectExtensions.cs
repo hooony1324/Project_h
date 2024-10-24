@@ -12,14 +12,9 @@ public static class GameObjectExtensions
         return Util.GetOrAddComponent<T>(go);
     }
 
-    public static void BindEvent(this GameObject go, Action<PointerEventData> action = null, EUIEvent type = EUIEvent.Click)
+    public static void BindEvent(this GameObject go, Action action = null, Action<PointerEventData> dragAction = null, EUIEvent type = EUIEvent.Click)
     {
-        UI_Base.BindEvent(go, action, type);
-    }
-    
-    public static void BindEvent(this GameObject go, Action action = null, EUIEvent type = EUIEvent.Click)
-    {
-        UI_Base.BindEvent(go, action, type);
+        UI_Base.BindEvent(go, action, dragAction, type);
     }
 
     public static bool IsValid(this GameObject go)

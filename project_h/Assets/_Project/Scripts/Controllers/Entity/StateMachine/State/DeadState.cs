@@ -13,13 +13,19 @@ public class DeadState : State<Entity>
     public override void Enter()
     {
         if (movement)
+        {
             movement.enabled = false;
+            movement.AgentEnabled = false;
+        }
+        
     }
 
     public override void Exit()
     {
         if (movement)
+        {
             movement.enabled = true;
+            movement.AgentEnabled = true;
+        }
     }
-
 }

@@ -32,6 +32,11 @@ public class SceneManagerEx
         }
     }
 
+    public AsyncOperation LoadAdditiveSceneAsync(string sceneName)
+    {
+        return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    }
+
     public bool CheckCurrentScene(EScene type)
     {
         return SceneManager.GetActiveScene().name.Equals(GetSceneName(type));   

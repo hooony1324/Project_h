@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Diagnostics.Tracing;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,6 +13,7 @@ public class GameScene : BaseScene
         SceneType = EScene.GameScene;
         Managers.Scene.SetCurrentScene(this);
         
+        Managers.Map.Init();
         //Managers.Map.LoadMap("BaseMap");
         
         Vector3Int startPos = new Vector3Int(8, 10, 0);
@@ -32,6 +34,7 @@ public class GameScene : BaseScene
         
         return true;
     }
+
 
     public override void Clear()
     {

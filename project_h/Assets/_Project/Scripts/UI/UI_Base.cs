@@ -65,12 +65,21 @@ public class UI_Base : InitOnce
     protected TMP_Dropdown GetTMPDropdown(int idx) { return Get<TMP_Dropdown>(idx); }
     protected TMP_InputField GetTMPInputField(int idx) { return Get<TMP_InputField>(idx); }
 
-    public static void BindEvent(GameObject gameObejct, Action<PointerEventData> action = null, EUIEvent type = EUIEvent.Click)
+    public static void BindEvent(GameObject go, Action action = null, Action<PointerEventData> dragAction = null, EUIEvent type = EUIEvent.Click)
     {
-        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(gameObejct);
+        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
         switch (type)
         {
+            case EUIEvent.Click:
+                //Util.GetOrAddComponent<UI_ButtonAnimation>(go);
+                evt.OnClickHandler -= action;
+                evt.OnClickHandler += action;
+                break;
+            case EUIEvent.Pressed:
+                evt.OnPressedHandler -= action;
+                evt.OnPressedHandler += action;
+                break;
             case EUIEvent.PointerDown:
                 evt.OnPointerDownHandler -= action;
                 evt.OnPointerDownHandler += action;
@@ -80,21 +89,16 @@ public class UI_Base : InitOnce
                 evt.OnPointerUpHandler += action;
                 break;
             case EUIEvent.Drag:
-                evt.OnDragHandler -= action;
-                evt.OnDragHandler += action;
+                evt.OnDragHandler -= dragAction;
+                evt.OnDragHandler += dragAction;
                 break;
-        }
-    }
-    
-    public static void BindEvent(GameObject gameObejct, Action action = null, EUIEvent type = EUIEvent.Click)
-    {
-        UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(gameObejct);
-
-        switch (type)
-        {
-            case EUIEvent.Click:
-                evt.OnClickHandler -= action;
-                evt.OnClickHandler += action;
+            case EUIEvent.BeginDrag:
+                evt.OnBeginDragHandler -= dragAction;
+                evt.OnBeginDragHandler += dragAction;
+                break;
+            case EUIEvent.EndDrag:
+                evt.OnEndDragHandler -= dragAction;
+                evt.OnEndDragHandler += dragAction;
                 break;
         }
     }

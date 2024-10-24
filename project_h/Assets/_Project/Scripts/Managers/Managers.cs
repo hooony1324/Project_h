@@ -16,11 +16,12 @@ public class Managers : MonoBehaviour
     private ResourceManager _resource = new ResourceManager();
     private SceneManagerEx _scene = new SceneManagerEx();
     private UIManager _ui = new UIManager();
-
+    private static CoroutineManager _coroutine;    // need MonoBehavior
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
     public static SceneManagerEx Scene => Instance?._scene;
     public static UIManager UI => Instance?._ui;
+    public static CoroutineManager Coroutines => _coroutine;
 
     // Contents
     private GameManager _game = new GameManager();
@@ -57,10 +58,19 @@ public class Managers : MonoBehaviour
                 eventSystem.AddComponent<StandaloneInputModule>();
             }
 
+            GameObject coroutineManager = GameObject.Find("@CoroutineManager");
+            if (coroutineManager == null)
+            {
+                coroutineManager = new GameObject { name = "@CoroutineManager"};
+                coroutineManager.AddComponent<CoroutineManager>();
+                _coroutine = coroutineManager.GetComponent<CoroutineManager>();
+            }
+
             s_instance = managers.GetComponent<Managers>();
 
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);
+            DontDestroyOnLoad(coroutineManager);
         }
     }
     public static void Clear()
@@ -71,4 +81,17 @@ public class Managers : MonoBehaviour
         //Object.Clear();
         //Pool.Clear();
     }
+
+    
+    [ButtonAttribute("TestBake")]
+    public bool testBake;
+    public void TestBake()
+    {
+        Map.NavMeshSurface2D.RemoveData();
+        Map.NavMeshSurface2D.BuildNavMesh();
+
+        
+    }
+
+
 }

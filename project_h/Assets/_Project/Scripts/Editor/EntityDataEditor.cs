@@ -9,11 +9,11 @@ using UnityEditor;
 [CustomEditor(typeof(EntityData), true)]
 public class EntityDataEditor : Editor
 {
-    SerializedProperty entitySpriteProperty;
+    SerializedProperty spriteProperty;
 
     private void OnEnable()
     {
-        entitySpriteProperty = serializedObject.FindProperty("entitySprite");
+        spriteProperty = serializedObject.FindProperty("sprite");
     }
 
 
@@ -21,7 +21,7 @@ public class EntityDataEditor : Editor
     {
         GUILayout.BeginHorizontal();
     
-        EditorGUILayout.ObjectField(GUIContent.none, entitySpriteProperty.objectReferenceValue,
+        EditorGUILayout.ObjectField(GUIContent.none, spriteProperty.objectReferenceValue,
                  typeof(Sprite), false, GUILayout.Height(100));
 
         GUILayout.EndHorizontal();

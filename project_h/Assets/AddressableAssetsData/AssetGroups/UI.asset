@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: UI
   m_EditorClassIdentifier: 
   m_GroupName: UI
-  m_Data:
-    m_SerializedData: []
   m_GUID: ba78b97d39062ae4994b3df8add9328b
   m_SerializeEntries:
+  - m_GUID: 45414c764bdc2744188dbe64e91badbf
+    m_Address: UI_DungeonStageSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75017431f8ce1b64cac07891df482e99
     m_Address: UI_GameScene
     m_ReadOnly: 0
