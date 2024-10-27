@@ -46,7 +46,7 @@ public class UI_TitleScene : UI_Scene
 
     void OnClickMiddleLayout()
     {
-        Managers.Scene.LoadScene(EScene.GameScene);
+        Managers.Scene.LoadScene(EScene.GameScene, false);
     }
 
     private void OnDisable()

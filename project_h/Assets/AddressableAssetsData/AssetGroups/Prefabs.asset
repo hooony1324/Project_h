@@ -33,6 +33,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 811271f2859eb9f4494a05550ac239c1
+    m_Address: NavMesh
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9b8ce06c8b4b3874ea334518a21f3c99
     m_Address: DungeonMap_01
     m_ReadOnly: 0

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// new WaitForSeconds(second); second를 캐싱하여 최적화
+/// </summary>
 public static class WaitFor {
     static readonly WaitForFixedUpdate fixedUpdate = new WaitForFixedUpdate();
     public static WaitForFixedUpdate FixedUpdate => fixedUpdate;

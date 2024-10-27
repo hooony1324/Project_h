@@ -1,9 +1,12 @@
 using System;
 using System.Collections;
+using System.Text;
+using Cysharp.Threading.Tasks;
 using NavMeshPlus.Components;
 using NavMeshPlus.Extensions;
-using UnityEditor.AI;
+using UnityEditor;
 using UnityEditor.Analytics;
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = UnityEngine.Object;
@@ -17,8 +20,9 @@ public enum ECellCollisionType
 
 public class MapManager
 {
-    public GameObject Map { get; private set; }
+    public MapInfo Info { get; private set; }
     public string MapName { get; private set; }
+
     public NavMeshSurface NavMeshSurface2D => _navMeshSurface;
 
     private int _minX;
@@ -26,52 +30,26 @@ public class MapManager
     private int _minY;
     private int _maxY;
     private NavMeshSurface _navMeshSurface;
-    private IEnumerator _bakeMeshCoroutine;
-
     public void Init()
     {
-        GameObject NavMesh = GameObject.Find("NavMesh");
-        _navMeshSurface = NavMesh.GetComponent<NavMeshSurface>();
-        _bakeMeshCoroutine = BakeNavMeshAsync();
+        GameObject navMesh = Managers.Resource.Instantiate("NavMesh");
+        navMesh.name = "@NavMesh";
+        _navMeshSurface = navMesh.GetComponent<NavMeshSurface>();
     }
-    public void LoadMap(string mapName, Vector3 position)
+
+    public void SetMap(string mapName)
     {
-        DestroyMap();
-
-        GameObject map = Managers.Resource.Instantiate(mapName);
-        map.transform.position = position;
-        map.name = $"@Map_{mapName}";
-
-        Map = map;
         MapName = mapName;
-
-        _navMeshSurface.RemoveData();
-        Managers.Coroutines.Register(_bakeMeshCoroutine);
     }
 
-    private IEnumerator BakeNavMeshAsync()
+    public void LoadMap()
     {
-        AsyncOperation bakeMeshAsync = _navMeshSurface.BuildNavMeshAsync();
+        GameObject map = Managers.Resource.Instantiate(MapName);
+        map.transform.position = Vector3.zero;
+        map.name = $"@Map_{MapName}";
 
-        while (!bakeMeshAsync.isDone)
-        {
-            yield return null;
-        }
-
-        
-
-        // Teleport Hero
-        Map dungeon = Map.GetComponent<Map>();
-        Managers.Object.Hero.Movement.AgentEnabled = false;
-        Managers.Object.Hero.transform.position = dungeon.StartPosition;
-        Managers.Object.Hero.Movement.AgentEnabled = true;
-        Managers.Coroutines.UnRegister(_bakeMeshCoroutine);
-    }
-
-    public void DestroyMap()
-    {
-        if (Map != null)
-            Managers.Resource.Destroy(Map);
+        Info = map.GetComponent<MapInfo>();
+        MapName = MapName;
     }
 
 }

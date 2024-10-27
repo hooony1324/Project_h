@@ -10,7 +10,7 @@ public class RuntimeNavMeshBaker : MonoBehaviour
 
     public IEnumerator Start()
     {
-        _surface2D = GetComponent<NavMeshSurface>();
+        _surface2D = Managers.Map.NavMeshSurface2D;
 
         if (_surface2D.useGeometry == NavMeshCollectGeometry.PhysicsColliders)
         {

@@ -5,8 +5,10 @@ using UnityEngine;
 public enum EScene
 {
     Unknown,
+    LoadingScene,
     TitleScene,
     GameScene,
+    DungeonScene,
 }
 
 public abstract class BaseScene : InitOnce

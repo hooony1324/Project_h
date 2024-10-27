@@ -39,6 +39,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9c46cd11c07cf0c4ca2e389916b1847e
+    m_Address: UI_DungeonScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: edb76cbffe0d8594ea6534dc7ccae100
+    m_Address: UI_LoadingScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f62601728cd2176489cfb173d9522e18
     m_Address: UI_Joystick
     m_ReadOnly: 0

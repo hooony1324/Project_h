@@ -30,7 +30,6 @@ public class UI_DungeonSelectPopup : UI_Popup
     }
 
     private List<DungeonData> _dungeonDatas = new List<DungeonData>();
-
     public void SetInfo(List<DungeonData> dungeonDatas)
     {
         GameObject content = GetGameObject((int)GameObjects.Content_DungeonStages);

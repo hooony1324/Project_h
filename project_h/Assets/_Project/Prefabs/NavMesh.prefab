@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 8644014984242997433}
   - component: {fileID: 3384745687649902019}
   - component: {fileID: 1663928338105260043}
-  - component: {fileID: 6270664884582465094}
-  - component: {fileID: 2550028399476025654}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -81,28 +79,3 @@ MonoBehaviour:
   m_UseMeshPrefab: {fileID: 0}
   m_CompressBounds: 0
   m_OverrideVector: {x: 1, y: 1, z: 1}
---- !u!114 &6270664884582465094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6046525141566808136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fec7b7904f76c4498a68fd145934563, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rootSources: []
---- !u!114 &2550028399476025654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6046525141566808136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6586ceff4a293242911832ddf13cdc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AddressableAssets.Build;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,24 +19,65 @@ public class SceneManagerEx
         _currentScene = scene;
     }
 
-    public void LoadScene(EScene type, bool isAsync = true)
+
+#region Loading...
+    private Action _onLoaderCallback;
+    public Action<float> OnLoadingProgress;
+    private class LoadingMonoBehaviour : MonoBehaviour { }
+    public void LoadScene(EScene scene, bool isUseLoadingScene = true)
     {
         Managers.Clear();
 
-        if (isAsync)
+        // LoadingScene없이 진행
+        if (!isUseLoadingScene)
         {
-            SceneManager.LoadSceneAsync(GetSceneName(type));
+            SceneManager.LoadSceneAsync(GetSceneName(scene));
+            return;
         }
-        else
+        
+        // LoadingScene으로 진행
+        _onLoaderCallback = () => 
         {
-            SceneManager.LoadScene(GetSceneName(type));
+            GameObject loadingGameObject = new GameObject("@Loading Game Object");
+            loadingGameObject.AddComponent<LoadingMonoBehaviour>().StartCoroutine(LoadSceneAsync(scene));
+        };
+
+        SceneManager.LoadScene(GetSceneName(EScene.LoadingScene));
+    }
+
+    private IEnumerator LoadSceneAsync(EScene scene)
+    {
+        OnLoadingProgress?.Invoke(0);
+        yield return null;
+
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(GetSceneName(scene));
+        asyncOperation.allowSceneActivation = false;
+
+        while (asyncOperation.progress < 0.9f)
+        {
+            OnLoadingProgress?.Invoke(asyncOperation.progress);
+            yield return WaitFor.Seconds(0.4f);
+        }
+
+        OnLoadingProgress?.Invoke(1f);
+        yield return WaitFor.Seconds(1);
+        asyncOperation.allowSceneActivation = true;
+
+        while (!asyncOperation.isDone)
+        {
+            yield return null;
         }
     }
 
-    public AsyncOperation LoadAdditiveSceneAsync(string sceneName)
+    public void LoaderCallBack()
     {
-        return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        if (_onLoaderCallback != null)
+        {
+            _onLoaderCallback.Invoke();
+            _onLoaderCallback = null;
+        }
     }
+#endregion
 
     public bool CheckCurrentScene(EScene type)
     {

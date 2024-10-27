@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
+
+    private Hero _hero;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -12,21 +14,24 @@ public class GameScene : BaseScene
 
         SceneType = EScene.GameScene;
         Managers.Scene.SetCurrentScene(this);
-        
+
         Managers.Map.Init();
-        //Managers.Map.LoadMap("BaseMap");
-        
-        Vector3Int startPos = new Vector3Int(8, 10, 0);
+        Managers.Map.SetMap("BaseMap");
+        Managers.Map.LoadMap();
+            
+        GameObject playerController = new GameObject { name = "@PlayerController"};
+        playerController.AddComponent<PlayerController>();
 
-        Hero hero = Managers.Object.Spawn<Hero>(startPos);
-        hero.SetData(null);
+        Vector3 startPosition = Managers.Map.Info.StartPosition;
+        _hero = Managers.Object.Spawn<Hero>(startPosition);
+        _hero.SetData(null);
 
-        Managers.Game.Cam.transform.position = hero.Position;
-        Managers.Game.Cam.Target = hero;
-        Managers.Game.PlayerController.SetControlTarget(hero);
-        
         // Managers.Game.OnBroadcastEvent -= HandleOnBroadcastEvent;
         // Managers.Game.OnBroadcastEvent += HandleOnBroadcastEvent;
+
+        Managers.Game.Cam.transform.position = _hero.Position;
+        Managers.Game.Cam.Target = _hero;
+        Managers.Game.PlayerController.SetControlTarget(_hero);
 
         Managers.UI.ShowSceneUI<UI_Joystick>();
         Managers.UI.ShowSceneUI<UI_GameScene>();
@@ -34,7 +39,6 @@ public class GameScene : BaseScene
         
         return true;
     }
-
 
     public override void Clear()
     {

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class UI_DungeonStageSlot : UI_SubItem
@@ -53,8 +54,12 @@ public class UI_DungeonStageSlot : UI_SubItem
     {
         if (result)
         {
-            Managers.Map.LoadMap(_data.PrefabName, new Vector3(100, -100, 0));
             Managers.UI.CloseAllPopupUI();
+            
+            Managers.Map.SetMap(_data.PrefabName);
+            Managers.Scene.LoadScene(EScene.DungeonScene);
         }
+
+        
     }
 }

@@ -75,11 +75,11 @@ public class Managers : MonoBehaviour
     }
     public static void Clear()
     {
+        Scene.Clear();
+        UI.Clear();
+        Object.Clear();
+        Pool.Clear();
         //Event.Clear();
-        //Scene.Clear();
-        //UI.Clear();
-        //Object.Clear();
-        //Pool.Clear();
     }
 
     
