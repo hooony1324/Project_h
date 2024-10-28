@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Reflection;
 
 /// <summary>
-/// A utility class, PredefinedAssemblyUtil, provides methods to interact with predefined assemblies.
-/// It allows to get all types in the current AppDomain that implement from a specific Interface type.
-/// For more details, <see href="https://docs.unity3d.com/2023.3/Documentation/Manual/ScriptCompileOrderFolders.html">visit Unity Documentation</see>
+/// PredefinedAssemblyUtil 클래스는 사전 정의된 어셈블리와 상호 작용하는 메서드를 제공합니다.
+/// 특정 인터페이스 유형에서 파생된 현재 AppDomain의 모든 타입을 가져올 수 있습니다.
+/// 자세한 내용은 <see href="https://docs.unity3d.com/2023.3/Documentation/Manual/ScriptCompileOrderFolders.html">Unity 문서</see>를 참조하십시오.
 /// </summary>
 public static class PredefinedAssemblyUtil {
     /// <summary>
-    /// Enum that defines the specific predefined types of assemblies for navigation.
+    /// 탐색을 위한 특정 사전 정의 어셈블리 유형을 정의하는 열거형입니다.
     /// </summary>    
     enum AssemblyType {
         AssemblyCSharp,
@@ -19,10 +19,10 @@ public static class PredefinedAssemblyUtil {
     }
 
     /// <summary>
-    /// Maps the assembly name to the corresponding AssemblyType.
+    /// 어셈블리 이름을 해당 AssemblyType으로 매핑합니다.
     /// </summary>
-    /// <param name="assemblyName">Name of the assembly.</param>
-    /// <returns>AssemblyType corresponding to the assembly name, null if no match.</returns>
+    /// <param name="assemblyName">어셈블리의 이름입니다.</param>
+    /// <returns>일치하는 어셈블리 이름이 없을 경우 null을 반환합니다.</returns>
     static AssemblyType? GetAssemblyType(string assemblyName) {
         return assemblyName switch {
             "Assembly-CSharp" => AssemblyType.AssemblyCSharp,
@@ -34,11 +34,11 @@ public static class PredefinedAssemblyUtil {
     }
 
     /// <summary>
-    /// Method looks through a given assembly and adds types that fulfill a certain interface to the provided collection.
+    /// 주어진 어셈블리를 검색하고 특정 인터페이스를 구현하는 타입을 제공된 컬렉션에 추가하는 메서드입니다.
     /// </summary>
-    /// <param name="assemblyTypes">Array of Type objects representing all the types in the assembly.</param>
-    /// <param name="interfaceType">Type representing the interface to be checked against.</param>
-    /// <param name="results">Collection of types where result should be added.</param>
+    /// <param name="assemblyTypes">어셈블리의 모든 타입을 나타내는 Type 객체 배열입니다.</param>
+    /// <param name="interfaceType">확인할 인터페이스 타입입니다.</param>
+    /// <param name="results">결과가 추가될 타입 컬렉션입니다.</param>
     static void AddTypesFromAssembly(Type[] assemblyTypes, Type interfaceType, ICollection<Type> results) {
         if (assemblyTypes == null) return;
         for (int i = 0; i < assemblyTypes.Length; i++) {
@@ -50,10 +50,10 @@ public static class PredefinedAssemblyUtil {
     }
     
     /// <summary>
-    /// Gets all Types from all assemblies in the current AppDomain that implement the provided interface type.
+    /// 현재 AppDomain의 모든 어셈블리에서 제공된 인터페이스 타입을 구현하는 모든 타입을 가져옵니다.
     /// </summary>
-    /// <param name="interfaceType">Interface type to get all the Types for.</param>
-    /// <returns>List of Types implementing the provided interface type.</returns>    
+    /// <param name="interfaceType">구현할 모든 타입을 가져올 인터페이스 타입입니다.</param>
+    /// <returns>제공된 인터페이스 타입을 구현하는 타입 목록입니다.</returns>    
     public static List<Type> GetTypes(Type interfaceType) {
         Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
         

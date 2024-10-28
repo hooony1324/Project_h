@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,16 @@ public class UI_Joystick : UI_Scene
     private HorizontalLayoutGroup layout;
     private GameObject _joystickCursor;
     private GameObject _joystickBG;
-    private Vector2 _moveDir { get; set; }
+    private Vector2 _moveDir;
+    private Vector2 MoveDir
+    {
+        get => _moveDir;
+        set
+        {
+            _moveDir = value;
+            OnRefreshShineBackground();
+        }
+    }
     private Vector2 _joystickTouchPos;
     private Vector2 _joystickOriginalPos;
     private float _radius;
@@ -30,6 +40,35 @@ public class UI_Joystick : UI_Scene
         TouchArea,
     }
 
+
+    private enum ShineBGDirections
+    {
+        TopLeft,
+        TopRight,
+        BottomLeft,
+        BottomRight,
+        None,
+    }
+    private List<GameObject> _shineBG = new List<GameObject>();
+    private ShineBGDirections _shineBGDirection;
+    private ShineBGDirections ShineBGDirection
+    {
+        set
+        {
+            // 이미 세팅된 거면 안 건들고
+            // 새로운 세팅이면 끄고 변경
+            if (_shineBGDirection == value)
+                return;
+
+            if (_shineBGDirection != ShineBGDirections.None)
+                _joystickBG.transform.GetChild((int)_shineBGDirection).gameObject.SetActive(false);
+
+            _shineBGDirection = value;
+
+            if (_shineBGDirection != ShineBGDirections.None)
+                _joystickBG.transform.GetChild((int)_shineBGDirection).gameObject.SetActive(true);
+        }
+    }
     public override bool Init()
     {
         if (base.Init() == false)
@@ -45,13 +84,19 @@ public class UI_Joystick : UI_Scene
         GetGameObject((int)GameObjects.JoystickArea).BindEvent(null, OnJoystickUp, EUIEvent.EndDrag);
         GetGameObject((int)GameObjects.JoystickArea).BindEvent(null, OnJoystickDrag, EUIEvent.Drag);
 
-        GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchDown, EUIEvent.BeginDrag);
-        GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchUp, EUIEvent.EndDrag);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchDown, null, EUIEvent.PointerDown);
+        GetGameObject((int)GameObjects.TouchArea).BindEvent(OnTouchUp, null, EUIEvent.PointerUp);
         GetGameObject((int)GameObjects.TouchArea).BindEvent(null, OnTouchDrag, EUIEvent.Drag);
 
         GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceCamera;
         GetComponent<Canvas>().worldCamera = Camera.main;
         GetComponent<Canvas>().sortingOrder = SortingLayers.JOYSTICK;
+
+        foreach (Transform transform in _joystickBG.transform)
+        {
+            transform.gameObject.SetActive(false);
+            _shineBG.Add(transform.gameObject);
+        }
 
         IsVisible = false;
 
@@ -86,36 +131,36 @@ public class UI_Joystick : UI_Scene
         _joystickCursor.transform.position = worldTouchPos;
         _joystickBG.transform.position = worldTouchPos;
 
-        Managers.Game.MoveDir = _moveDir;
+        Managers.Game.MoveDir = MoveDir;
         Managers.Game.JoystickState = EJoystickState.Drag;
     }
 
     private void OnJoystickDrag(PointerEventData eventData)
     {        
-        Vector2 dragePos = eventData.position;
+        Vector2 dragPos = eventData.position;
 
-        _moveDir = (dragePos - _joystickTouchPos).normalized;
+        MoveDir = (dragPos - _joystickTouchPos).normalized;
 
-        float joystickDist = (dragePos - _joystickOriginalPos).sqrMagnitude;
+        float joystickDist = (dragPos - _joystickOriginalPos).sqrMagnitude;
         
-        Vector2 clampedPos = _joystickTouchPos + _moveDir * Mathf.Clamp(joystickDist, 0, _radius);
+        Vector2 clampedPos = _joystickTouchPos + MoveDir * Mathf.Clamp(joystickDist, 0, _radius);
 
         _joystickCursor.transform.position = Camera.main.ScreenToWorldPoint(clampedPos).With(z:0);
         
         Managers.Game.JoystickState = EJoystickState.Drag;
-        Managers.Game.MoveDir = _moveDir;
+        Managers.Game.MoveDir = MoveDir;
     }
 
     private void OnJoystickUp(PointerEventData eventData)
     {
-        _moveDir = Vector2.zero;
+        MoveDir = Vector2.zero;
 
         Vector3 worldTouchPos = Camera.main.ScreenToWorldPoint(eventData.position);
 
         _joystickCursor.transform.position = worldTouchPos;
         _joystickBG.transform.position = worldTouchPos;
 
-        Managers.Game.MoveDir = _moveDir;
+        Managers.Game.MoveDir = MoveDir;
         Managers.Game.JoystickState = EJoystickState.PointerUp;
 
         IsVisible = false;
@@ -126,7 +171,7 @@ public class UI_Joystick : UI_Scene
     private float tapThreshold = 0.14f;
     private float touchStartTime;
     
-    private void OnTouchDown(PointerEventData eventData)
+    private void OnTouchDown()
     {
         touchStartTime = Time.time;
     }
@@ -135,12 +180,26 @@ public class UI_Joystick : UI_Scene
     {        
     }
 
-    private void OnTouchUp(PointerEventData eventData)
+    private void OnTouchUp()
     {
         float tabTime = Time.time - touchStartTime;
         
         if (tabTime <= tapThreshold)
             Managers.Game.TriggerTab = tabTime;
+    }
+
+    private void OnRefreshShineBackground()
+    {
+        if (_moveDir.x < 0 && _moveDir.y > 0)
+            ShineBGDirection = ShineBGDirections.TopLeft;
+        else if (_moveDir.x > 0 && _moveDir.y > 0)
+            ShineBGDirection = ShineBGDirections.TopRight;
+        else if (_moveDir.x < 0 && _moveDir.y < 0)
+            ShineBGDirection = ShineBGDirections.BottomLeft;
+        else if (_moveDir.x > 0 && _moveDir.y < 0)
+            ShineBGDirection = ShineBGDirections.BottomRight;
+        else
+            ShineBGDirection = ShineBGDirections.None;
     }
     #endregion
 }

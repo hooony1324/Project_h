@@ -118,7 +118,7 @@ public class TitleScene : BaseScene
 
             // 다운로드할지 물어봄
             LoginSceneState = ELoginSceneState.AskingDownload;
-            Managers.UI.ShowPopupUI<UI_MessagePopup>().SetInfo($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", showConfirmButton: true, callback: (result) =>
+            Managers.UI.ShowPopupUI<UI_MessagePopup>().SetMessageCheck($"Wifi 환경이 아니라면 데이터가 많이 소모될 수 있습니다. 다운로드 하시겠습니까? <color=green>({$"{totalSizeUnit}{sizeUnit})</color>"}", showCancelButton: false, callback: (result) =>
             {
                 if (result)
                 {

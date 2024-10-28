@@ -8,18 +8,25 @@ using static TMPro.TMP_Dropdown;
 
 public class UI_GameScene : UI_Scene
 {
-
+    enum GameObjects
+    {
+        SettingsButton,
+    }
 
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
+        BindGameObjects(typeof(GameObjects));
+
+        GetGameObject((int)GameObjects.SettingsButton).BindEvent(OnClickSettings);
+
         return true;
     }
 
-    void OnClickTestSceneButton()
+    void OnClickSettings()
     {
-        SceneManager.LoadScene("LightTestScene");
+        Managers.UI.ShowPopupUI<UI_SettingsPopup>();
     }
 }

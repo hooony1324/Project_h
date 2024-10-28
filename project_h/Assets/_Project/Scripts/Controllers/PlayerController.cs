@@ -15,7 +15,7 @@ public class PlayerController : InitOnce
             return false;
     
         pivot = Managers.Resource.Instantiate(nameof(Pivot), this.transform).GetComponent<Pivot>();
-        pivot.SetRadius(3f);    
+        pivot.SetRadius(4f);    
 
         Managers.Game.OnJoystickStateChanged += HandleJoystickState;
 
@@ -71,6 +71,9 @@ public class PlayerController : InitOnce
 
     private void Update()
     {
+        if (controlTarget)
+            transform.position = controlTarget.Position;
+
         if (controlTarget.Movement.enabled == false)
             return;
 

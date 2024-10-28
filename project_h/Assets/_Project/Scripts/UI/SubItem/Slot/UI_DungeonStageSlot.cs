@@ -26,6 +26,8 @@ public class UI_DungeonStageSlot : UI_SubItem
         GetButton((int)Buttons.StageButton).gameObject.BindEvent(null, OnDrag, EUIEvent.Drag);
         GetButton((int)Buttons.StageButton).gameObject.BindEvent(null, OnEndDrag, EUIEvent.EndDrag);
 
+
+
         return true;
     }
 
@@ -42,12 +44,13 @@ public class UI_DungeonStageSlot : UI_SubItem
     
     private void OnClickDungeon()
     {
+        
+
         UI_MessagePopup messagePopup = Managers.UI.ShowPopupUI<UI_MessagePopup>();
-        messagePopup.SetInfo(
-            "던전에 입장하시겠습니까?",
-            OnClickDecision,
-            showConfirmButton: true,
-            showCancelButton: true);
+        messagePopup.SetMessageCheck(
+            StringTable.GetMessage("AskEnterDungeon"),
+            OnClickDecision
+        );
     }
 
     private void OnClickDecision(bool result)

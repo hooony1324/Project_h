@@ -4,6 +4,7 @@ using System.Runtime.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Localization;
 
 public class Managers : MonoBehaviour
 {
@@ -16,12 +17,14 @@ public class Managers : MonoBehaviour
     private ResourceManager _resource = new ResourceManager();
     private SceneManagerEx _scene = new SceneManagerEx();
     private UIManager _ui = new UIManager();
+    private LocaleManager _locale = new LocaleManager();
     private static CoroutineManager _coroutine;    // need MonoBehavior
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
     public static SceneManagerEx Scene => Instance?._scene;
     public static UIManager UI => Instance?._ui;
     public static CoroutineManager Coroutines => _coroutine;
+    public static LocaleManager Locale => Instance?._locale;
 
     // Contents
     private GameManager _game = new GameManager();
@@ -67,6 +70,8 @@ public class Managers : MonoBehaviour
             }
 
             s_instance = managers.GetComponent<Managers>();
+
+            Locale.Init();
 
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);

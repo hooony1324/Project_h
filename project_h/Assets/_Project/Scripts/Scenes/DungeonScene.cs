@@ -31,7 +31,7 @@ public class DungeonScene : BaseScene
         // Managers.Game.OnBroadcastEvent += HandleOnBroadcastEvent;
 
         Managers.UI.ShowSceneUI<UI_Joystick>();
-        Managers.UI.ShowSceneUI<UI_GameScene>();
+        Managers.UI.ShowSceneUI<UI_DungeonScene>();
           
         
         return true;

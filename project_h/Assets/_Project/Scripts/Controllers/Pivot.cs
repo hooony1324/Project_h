@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pivot : MonoBehaviour
@@ -9,6 +10,8 @@ public class Pivot : MonoBehaviour
     {
         pivot = this.transform;
         Destination = Util.FindChild<Transform>(pivot.gameObject, "Destination", true);
+
+        Destination.GetComponent<SpriteRenderer>().sortingOrder = Define.SortingLayers.JOYSTICK;
     }
 
     public void SetRadius(float radius = 3f)

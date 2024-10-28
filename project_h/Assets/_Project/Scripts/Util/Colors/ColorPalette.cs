@@ -31,6 +31,7 @@ public class ColorPalette : ScriptableObject
             new ColorEntry("Warning Orange", "#FFC107"),
             new ColorEntry("Error Red", "#DC3545"),
             new ColorEntry("Dark Gray", "#343A40"),
+            new ColorEntry("Gray", "#B2B2B2"),
             new ColorEntry("Light Gray", "#F8F9FA"),
             new ColorEntry("Highlight Yellow", "#FFD700"),
             new ColorEntry("Purple Accent", "#6F42C1"),

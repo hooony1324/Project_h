@@ -10,6 +10,7 @@ public class UI_MessagePopup : UI_Popup
 {
     enum Texts
     {
+        TitleText,
         MessageText,
 
         ConfirmText,
@@ -19,7 +20,6 @@ public class UI_MessagePopup : UI_Popup
     {
         ConfirmButton,      // left Button
         CancelButton,       // right Button
-        ExitButton,
     }
 
     private Action<bool> OnDecision;
@@ -34,33 +34,40 @@ public class UI_MessagePopup : UI_Popup
 
         GetButton((int)Buttons.ConfirmButton).gameObject.BindEvent(OnConfirmButtonClicked);
         GetButton((int)Buttons.CancelButton).gameObject.BindEvent(OnCancelButtonClicked);
-        GetButton((int)Buttons.ExitButton).gameObject.BindEvent(ClosePopupUI);
-
+        
+        GetTMPText((int)Texts.TitleText).gameObject.SetActive(false);
         return true;
     }
 
     
-    public void SetInfo(string msgText, Action<bool> callback = null,
-    bool showConfirmButton = false, string confirmButtonText = null,
-    bool showCancelButton = false, string cancelButtonText = null,
-    bool showExitButton = false)
+    public void SetMessageCheck(string msgText, Action<bool> callback = null,
+    bool showConfirmButton = true, bool showCancelButton = true,
+    string confirmButtonText = null, string cancelButtonText = null)
     {
         GetTMPText((int)Texts.MessageText).text = msgText;
 
         Button confirmButton = GetButton((int)Buttons.ConfirmButton);
         confirmButton.gameObject.SetActive(showConfirmButton);        
-        GetTMPText((int)Texts.ConfirmText).text = confirmButtonText ?? "확인";
+        GetTMPText((int)Texts.ConfirmText).text = confirmButtonText ?? StringTable.GetWord("Confirm");
 
         Button cancelButton = GetButton((int)Buttons.CancelButton);
         cancelButton.gameObject.SetActive(showCancelButton);
-        GetTMPText((int)Texts.CancelText).text = cancelButtonText ?? "취소";
+        GetTMPText((int)Texts.CancelText).text = cancelButtonText ?? StringTable.GetWord("Cancel");
 
         if (callback != null)
             OnDecision = callback;
-
-        GetButton((int)Buttons.ExitButton).gameObject.SetActive(showExitButton);
     }
 
+    public void SetTitleAndMessageCheck(string titleText, string msgText, Action<bool> callback = null,
+    bool showConfirmButton = true, string confirmButtonText = null,
+    bool showCancelButton = true, string cancelButtonText = null)
+    {
+        GetText((int)Texts.TitleText).gameObject.SetActive(true);
+        GetTMPText((int)Texts.TitleText).text = titleText;
+
+        SetMessageCheck(msgText, callback, showConfirmButton, showCancelButton, confirmButtonText, cancelButtonText);
+    }
+    
     private void OnConfirmButtonClicked()
     {
         OnDecision?.Invoke(true);

@@ -1,8 +1,5 @@
-using System.Collections.Generic;
 using DG.Tweening;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 public enum ECameraState
 {

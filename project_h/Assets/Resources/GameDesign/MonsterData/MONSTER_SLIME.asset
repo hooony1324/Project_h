@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MONSTER_SLIME
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: e1774ae355ff8de4698cd1471924ad27, type: 3}
-  animatorControllerName: Monster_Slime
   scale: 1
+  animatorControllerName: Monster_Slime
   statsForOverride:
-  - stat: {fileID: 0}
+  - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 0}
