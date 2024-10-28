@@ -1,10 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Localization;
 
 public class Managers : MonoBehaviour
 {
@@ -70,8 +65,6 @@ public class Managers : MonoBehaviour
             }
 
             s_instance = managers.GetComponent<Managers>();
-
-            Locale.Init();
 
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);

@@ -1,5 +1,3 @@
-using Microsoft.Unity.VisualStudio.Editor;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
@@ -27,24 +25,6 @@ public static class AssetTable
 
 public class LocaleManager
 {
-    //private class LocalizingMonoBehaviour : MonoBehaviour { }
-    public void Init()
-    {
-        // GameObject loadingGameObject = new GameObject("@Loading Game Object");
-        // loadingGameObject.AddComponent<LoadingMonoBehaviour>().StartCoroutine(LoadSceneAsync(scene));
-        foreach (var locale in LocalizationSettings.AvailableLocales.Locales)
-        {
-            Debug.Log(locale.LocaleName);
-            // Korean (ko), Japanese (ja), English (en)
-            // 이걸로 settingsUI에서 동적으로 Flag버튼 생성
-            // 시트로 출력 -> GPT에서 자동번역 되는지 여부 확인
-
-            // 코드로 세팅하는 방법
-            //Locale cuurrentLocale = LocalizationSettings.SelectedLocale;
-            //LocalizationSettings.StringDatabase.GetLocalizedString("MyTableName", "key", cuurrentLocale);
-        }
-    }
-
     public string GetWordString(string key) 
         => LocalizationSettings.StringDatabase.GetLocalizedString("WordTable", key, LocalizationSettings.SelectedLocale);
 
