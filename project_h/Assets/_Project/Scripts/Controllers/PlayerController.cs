@@ -71,6 +71,9 @@ public class PlayerController : InitOnce
 
     private void Update()
     {
+        if (controlTarget == null)
+            return;
+
         if (controlTarget)
             transform.position = controlTarget.Position;
 

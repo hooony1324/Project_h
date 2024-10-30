@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 36329320448
-    m_Localized: Would you like to enter the dungeon?
+    m_Localized: Do you want to leave the dungeon?
     m_Metadata:
       m_Items: []
-  - m_Id: 45065718558720
-    m_Localized: Would you like to exit the dungeon?
+  - m_Id: 600358768701440
+    m_Localized: Would you like to enter the dungeon?
     m_Metadata:
       m_Items: []
   references:

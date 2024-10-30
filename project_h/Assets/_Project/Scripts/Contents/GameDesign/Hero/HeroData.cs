@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HeroData", menuName = "GameDesign/HeroData")]
+[CreateAssetMenu(fileName = "HERO_", menuName = "GameDesign/HeroData")]
 public class HeroData : EntityData
 {
 

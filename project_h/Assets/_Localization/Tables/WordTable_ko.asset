@@ -25,11 +25,15 @@ MonoBehaviour:
       m_Items:
       - rid: 3506564209465360873
   - m_Id: 547124244480
-    m_Localized: "\uD655\uC778"
+    m_Localized: "\uC608"
     m_Metadata:
       m_Items: []
   - m_Id: 604783341568
-    m_Localized: "\uCDE8\uC18C"
+    m_Localized: "\uC544\uB2C8\uC624"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 585285757136896
+    m_Localized: "\uC548\uB155"
     m_Metadata:
       m_Items: []
   references:

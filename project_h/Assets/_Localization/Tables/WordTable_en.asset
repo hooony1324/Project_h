@@ -19,15 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 356996444160
-    m_Localized: Language
+    m_Localized: language
     m_Metadata:
       m_Items: []
   - m_Id: 547124244480
-    m_Localized: Confirm
+    m_Localized: yes
     m_Metadata:
       m_Items: []
   - m_Id: 604783341568
-    m_Localized: Cancel
+    m_Localized: no
+    m_Metadata:
+      m_Items: []
+  - m_Id: 585285757136896
+    m_Localized: hi
     m_Metadata:
       m_Items: []
   references:

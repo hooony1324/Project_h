@@ -19,7 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 36329320448
-    m_Localized: jp
+    m_Localized: "\u30C0\u30F3\u30B8\u30E7\u30F3\u3092\u51FA\u307E\u3059\u304B\uFF1F"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 600358768701440
+    m_Localized: "\u30C0\u30F3\u30B8\u30E7\u30F3\u306B\u5165\u5834\u3057\u307E\u3059\u304B\uFF1F"
     m_Metadata:
       m_Items: []
   references:

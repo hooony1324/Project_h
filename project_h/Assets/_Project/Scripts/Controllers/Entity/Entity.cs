@@ -13,7 +13,9 @@ public enum EEntityControlType
     NonPlayer,
 }
 
-
+/// <summary>
+/// 전투를 하는 객체
+/// </summary>
 public abstract class Entity : BaseObject
 {
     public delegate void TakeDamageHandler(Entity entity, Entity instigator, object causer, float damage);
@@ -56,6 +58,19 @@ public abstract class Entity : BaseObject
     
         Animator = GetComponent<Animator>();
 
+        onTakeDamage += SpawnDamageText;
+
+        SortingGroup sg = Util.GetOrAddComponent<SortingGroup>(gameObject);
+        sg.sortingOrder = SortingLayers.ENTITY;        
+
+        return true;
+    }
+
+    public virtual void SetData(EntityData data)
+    {
+        transform.localScale = new Vector3(data.Scale, data.Scale, 1);
+        Animator.runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>(data.AnimatorControllerName);
+
         Stats = GetComponent<Stats>();
         Stats.Setup(this);
 
@@ -67,21 +82,7 @@ public abstract class Entity : BaseObject
 
         SkillSystem = GetComponent<SkillSystem>();
         SkillSystem.Setup(this);
-
-        onTakeDamage += SpawnDamageText;
         SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
-
-        SortingGroup sg = Util.GetOrAddComponent<SortingGroup>(gameObject);
-        sg.sortingOrder = SortingLayers.ENTITY;
-
-        return true;
-    }
-
-    public virtual void SetData(EntityData data)
-    {
-        // 공격사거리, 사거리, 기본 스탯 Override 세팅
-
-
     }
 
 

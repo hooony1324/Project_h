@@ -37,34 +37,4 @@ public class LocaleManager
 
     public T GetAsset<T>(string key, Locale locale) where T : Object
         => LocalizationSettings.AssetDatabase.GetLocalizedAsset<T>("AssetTable", key, locale);
-
-    // 이벤트 방식 동적 변환 예제
-    // ex) Dialogue 떠있는데 언어 변경
-    // [다른 클래스에]
-
-    // private void Init()
-    // {
-    //     LocalizationSettings.SelectedLocaleChanged += OnChangeLocale;
-    // }
-    
-    // void OnChangeLocale(Locale locale)
-    // {
-    //     StartCoroutine(ChangeLocaleRoutine(locale));
-    // }
-
-    // private IEnumerator ChangeLocaleRoutine(Locale locale)
-    // {
-    //     var asyncOperation = LocalizationSettings.StringDatabase.GetTableAsync("MyTable");
-        
-    //     yield return asyncOperation;
-        
-    //     if (asyncOperation.Status == AsyncOperationStatus.Succeeded)
-    //     {
-    //         StringTable table = asyncOperation.Result;
-            
-    //         string tableValue = table.GetEntry("Key")?.GetLocalizedString();
-    //         // content.text = tableValue;
-    //     }
-    // }
-    
 }

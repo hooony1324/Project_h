@@ -13,6 +13,7 @@ public class Managers : MonoBehaviour
     private SceneManagerEx _scene = new SceneManagerEx();
     private UIManager _ui = new UIManager();
     private LocaleManager _locale = new LocaleManager();
+    private DataManager _data = new DataManager();
     private static CoroutineManager _coroutine;    // need MonoBehavior
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
@@ -20,6 +21,7 @@ public class Managers : MonoBehaviour
     public static UIManager UI => Instance?._ui;
     public static CoroutineManager Coroutines => _coroutine;
     public static LocaleManager Locale => Instance?._locale;
+    public static DataManager Data => Instance?._data;
 
     // Contents
     private GameManager _game = new GameManager();
@@ -66,6 +68,8 @@ public class Managers : MonoBehaviour
 
             s_instance = managers.GetComponent<Managers>();
 
+            Data.Init();
+
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);
             DontDestroyOnLoad(coroutineManager);
@@ -79,17 +83,4 @@ public class Managers : MonoBehaviour
         Pool.Clear();
         //Event.Clear();
     }
-
-    
-    [ButtonAttribute("TestBake")]
-    public bool testBake;
-    public void TestBake()
-    {
-        Map.NavMeshSurface2D.RemoveData();
-        Map.NavMeshSurface2D.BuildNavMesh();
-
-        
-    }
-
-
 }

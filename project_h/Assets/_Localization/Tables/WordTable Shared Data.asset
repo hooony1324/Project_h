@@ -15,6 +15,10 @@ MonoBehaviour:
   m_TableCollectionName: WordTable
   m_TableCollectionNameGuidString: b1c27d1413a84ee4d9dfd0486d336cfd
   m_Entries:
+  - m_Id: 585285757136896
+    m_Key: Hello
+    m_Metadata:
+      m_Items: []
   - m_Id: 356996444160
     m_Key: Language
     m_Metadata:

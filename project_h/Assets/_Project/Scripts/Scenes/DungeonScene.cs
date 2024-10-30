@@ -13,7 +13,7 @@ public class DungeonScene : BaseScene
         SceneType = EScene.DungeonScene;
         Managers.Scene.SetCurrentScene(this);
         
-        Managers.Map.Init();
+        Managers.Map.SetNavMesh();
         Managers.Map.LoadMap();
 
         GameObject playerController = new GameObject { name = "@PlayerController"};

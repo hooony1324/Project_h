@@ -5,8 +5,6 @@ using static Define;
 
 public class Hero : Entity
 {
-    // Experimental Data -> TODO: Data Sheet
-    string _animControllerName = "Hero_Warrior";
 
     public override bool Init()
     {
@@ -23,9 +21,6 @@ public class Hero : Entity
     {
         base.SetData(data);
         
-        Animator.runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>(_animControllerName);
         
     }
-
-
 }

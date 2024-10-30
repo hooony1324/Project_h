@@ -14,13 +14,8 @@ public class MapManager
     public string MapName { get; private set; }
 
     public NavMeshSurface NavMeshSurface2D => _navMeshSurface;
-
-    private int _minX;
-    private int _maxX;
-    private int _minY;
-    private int _maxY;
     private NavMeshSurface _navMeshSurface;
-    public void Init()
+    public void SetNavMesh()
     {
         GameObject navMesh = Managers.Resource.Instantiate("NavMesh");
         navMesh.name = "@NavMesh";
@@ -41,5 +36,6 @@ public class MapManager
         Info = map.GetComponent<MapInfo>();
         MapName = MapName;
     }
+
 
 }

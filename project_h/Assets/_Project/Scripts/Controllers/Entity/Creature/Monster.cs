@@ -46,6 +46,12 @@ public class Monster : Entity
     {
         base.SetData(data);
 
+        MonsterData monsterData = data as MonsterData;
+        if (monsterData != null)
+        {
+            // Set MonsterData
+        }
+
         onDead += HandleOnDead;
         Stats.Setup(this);
         Movement.AgentEnabled = true;

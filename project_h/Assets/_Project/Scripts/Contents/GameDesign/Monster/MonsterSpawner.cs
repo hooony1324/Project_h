@@ -27,19 +27,16 @@ public class MonsterSpawner : InitOnce
         if (base.Init() == false)
             return false;
 
-        StartCoroutine("CoSpawnMonster");
+        if (spawnCycle <= 0)
+        {
+            
+        }   
+        else
+        {
+            StartCoroutine("CoSpawnMonster");
+        }
 
         return true;
-    }
-
-    [ButtonAttribute("TestSpawnMonster")]
-    public bool TestSpawnButton;
-    public void TestSpawnMonster()
-    {
-        if (spawnCount >= spawnMax)
-            return;
-        
-        SpawnMonster();
     }
 
     private IEnumerator CoSpawnMonster()
@@ -60,7 +57,6 @@ public class MonsterSpawner : InitOnce
     {
         Vector2 randomPos = transform.position;
         randomPos = randomPos.RandomPointInAnnulus(1, spawnRange);
-        
         
         if (NavMesh.SamplePosition(randomPos, out NavMeshHit hit, 4, NavMesh.AllAreas))
         {
