@@ -19,12 +19,24 @@ public class EntityDataEditor : Editor
 
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
+        
+        if (GUILayout.Button("Load Stats"))
+        {
+            EntityData entityData = (EntityData)target;
+            entityData.LoadStats();
+
+            // 변경 사항을 저장하고 Inspector 업데이트
+            EditorUtility.SetDirty(target);
+        }
+
         GUILayout.BeginHorizontal();
     
         EditorGUILayout.ObjectField(GUIContent.none, spriteProperty.objectReferenceValue,
                  typeof(Sprite), false, GUILayout.Height(100));
 
+
+
         GUILayout.EndHorizontal();
-        base.OnInspectorGUI();
     }
 }

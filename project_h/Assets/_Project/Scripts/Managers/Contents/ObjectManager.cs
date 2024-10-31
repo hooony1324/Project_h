@@ -43,15 +43,13 @@ public class ObjectManager
         floatingText.SetInfo(message, pos);
     }
 
-    public T Spawn<T>(Vector3 spawnPos, string prefabName = "", int templateID = 0) where T : BaseObject
+    public T Spawn<T>(Vector3 spawnPos, string prefabName = "", string dataName = "") where T : BaseObject
     {
         System.Type type = typeof(T);
-
 
         if (type == typeof(Hero))
         {
             GameObject go = Managers.Resource.Instantiate("Hero");
-            // go.name = Managers.Data.HeroDic[templateID].DescriptionTextID;
             go.transform.position = spawnPos;
             go.transform.parent = HeroRoot;
             Hero hc = go.GetOrAddComponent<Hero>();

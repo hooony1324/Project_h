@@ -27,10 +27,12 @@ public class Managers : MonoBehaviour
     private GameManager _game = new GameManager();
     private MapManager _map = new MapManager();
     private ObjectManager _object = new ObjectManager();
+    private HeroManager _hero = new HeroManager();
 
     public static GameManager Game => Instance?._game;
     public static MapManager Map => Instance?._map;
     public static ObjectManager Object => Instance?._object;
+    public static HeroManager Hero => Instance?._hero;
 
     public static void Init()
     {
@@ -67,8 +69,6 @@ public class Managers : MonoBehaviour
             }
 
             s_instance = managers.GetComponent<Managers>();
-
-            Data.Init();
 
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);

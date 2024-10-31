@@ -19,6 +19,6 @@ MonoBehaviour:
   displayName: 
   description: 
   isPercentType: 0
-  maxValue: 100
-  minValue: 0
+  maxValue: 99999
+  minValue: -99999
   defaultValue: 10

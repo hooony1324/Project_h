@@ -105,6 +105,9 @@ public class TitleScene : BaseScene
                 {
                     text = "Loading Completed";
                     LoginSceneState = ELoginSceneState.ResourceLoadFinished;
+
+                    Managers.Data.Init();
+                    Managers.Game.Init();
                 }
 
                 OnDownloadStateStateChanged?.Invoke(text);

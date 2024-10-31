@@ -15,13 +15,25 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: e1774ae355ff8de4698cd1471924ad27, type: 3}
   scale: 1
   animatorControllerName: Monster_Slime
-  statsForOverride:
+  statOverrides:
   - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
-  - stat: {fileID: 0}
+  - stat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
-  - stat: {fileID: 0}
+  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0

@@ -21,7 +21,7 @@ public class DungeonScene : BaseScene
 
         Vector3 startPos = Managers.Map.Info.StartPosition;
         Hero hero = Managers.Object.Spawn<Hero>(startPos);
-        hero.SetData(null);
+        hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
 
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;

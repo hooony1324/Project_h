@@ -11,7 +11,7 @@ public class GameManager
 
     public void Init()
     {
-        
+        // Init or LoadGAme
     }
 
 

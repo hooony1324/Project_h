@@ -17,6 +17,8 @@ public class MonsterSpawner : InitOnce
 {
     [SerializeField] private MonsterData monsterData;
     [SerializeField] private float spawnRange = 8;
+
+    [HelpBox("spawnCycle: 0 => 한번만 소환함")]
     [SerializeField] private float spawnCycle = 10;
     [SerializeField, Min(1)] private int spawnMax = 5;
 
@@ -27,14 +29,7 @@ public class MonsterSpawner : InitOnce
         if (base.Init() == false)
             return false;
 
-        if (spawnCycle <= 0)
-        {
-            
-        }   
-        else
-        {
-            StartCoroutine("CoSpawnMonster");
-        }
+        StartCoroutine("CoSpawnMonster");
 
         return true;
     }
@@ -50,6 +45,9 @@ public class MonsterSpawner : InitOnce
                 SpawnMonster();
                 yield return WaitFor.Seconds(1);
             }
+
+            if (spawnCycle == 0)
+                break;
         }
 
     }

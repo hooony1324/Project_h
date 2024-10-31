@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
-
-    private Hero _hero;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -22,25 +20,22 @@ public class GameScene : BaseScene
         Managers.UI.ShowSceneUI<UI_Joystick>();
         Managers.UI.ShowSceneUI<UI_GameScene>();
 
-        return true;
-    }
+        Vector3 startPosition = Managers.Map.Info.StartPosition;
+        Hero hero = Managers.Object.Spawn<Hero>(startPosition);
+        Managers.Hero.SetMainHero(hero);
+        hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
 
-    private void Start()
-    {
         GameObject playerController = new GameObject { name = "@PlayerController"};
         playerController.AddComponent<PlayerController>();
 
-        Vector3 startPosition = Managers.Map.Info.StartPosition;
-        _hero = Managers.Object.Spawn<Hero>(startPosition);
-        _hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
+        Managers.Game.Cam.transform.position = hero.Position;
+        Managers.Game.Cam.Target = hero;
+        Managers.Game.PlayerController.SetControlTarget(hero);
 
-        Managers.Game.Cam.transform.position = _hero.Position;
-        Managers.Game.Cam.Target = _hero;
+        //Monster monster = Managers.Object.Spawn<Monster>(new Vector3(10, -10, 0), nameof(Monster));
+        //monster.SetData(Managers.Data.GetMonsterData("MONSTER_SLIME_BOSS"));
 
-        Monster monster = Managers.Object.Spawn<Monster>(new Vector3(10, -10, 0), nameof(Monster));
-        monster.SetData(Managers.Data.GetMonsterData("MONSTER_SLIME_BOSS"));
-
-        Managers.Game.PlayerController.SetControlTarget(_hero);
+        return true;
     }
 
     public override void Clear()

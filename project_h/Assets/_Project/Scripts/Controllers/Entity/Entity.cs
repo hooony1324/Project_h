@@ -72,17 +72,17 @@ public abstract class Entity : BaseObject
         Animator.runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>(data.AnimatorControllerName);
 
         Stats = GetComponent<Stats>();
-        Stats.Setup(this);
+        Stats.Setup(this, data.StatOverrides);
 
         Movement = GetComponent<EntityMovement>();
         Movement.Setup(this);
 
-        StateMachine = GetComponent<MonoStateMachine<Entity>>();
-        StateMachine.Setup(this);
-
         SkillSystem = GetComponent<SkillSystem>();
         SkillSystem.Setup(this);
         SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
+
+        StateMachine = GetComponent<MonoStateMachine<Entity>>();
+        StateMachine.Setup(this);
     }
 
 

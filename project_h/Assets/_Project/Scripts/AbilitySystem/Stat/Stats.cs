@@ -23,18 +23,18 @@ public class Stats : MonoBehaviour
 
     public Entity Owner { get; private set; }
 
-    public virtual void Setup(Entity interactionObject)
+    public virtual void Setup(Entity interactionObject, StatOverride[] statOverrides)
     {
         Owner = interactionObject;
 
         // TODO: Data세팅하고 Data의 statOverrides를 가져와야 함
         stats = statOverrides.Select(x => x.CreateStat()).ToArray();
 
-        HPStat = hpStat ? GetStat(hpStat) : null;
-        MoveSpeedStat = moveSpeedStat ? GetStat(moveSpeedStat) : null;
-        LevelStat = levelStat ? GetStat(levelStat) : null;
-        SearchRangeStat = searchRangeStat ? GetStat(searchRangeStat) : null;
-        AttackRangeStat = attackRangeStat ? GetStat(attackRangeStat) : null;
+        HPStat =  GetStat("HP");
+        MoveSpeedStat = GetStat("MOVE_SPEED");
+        LevelStat = GetStat("LEVEL");
+        SearchRangeStat = GetStat("RANGE_SEARCH");
+        AttackRangeStat = GetStat("RANGE_ATTACK");
     }
 
     private void OnDestroy()
@@ -104,14 +104,5 @@ public class Stats : MonoBehaviour
         => GetStat(stat).ContainsBonusValue(key);
     public bool ContainsBonusValue(Stat stat, object key, object subKey)
         => GetStat(stat).ContainsBonusValue(key, subKey);
-
-#if UNITY_EDITOR
-    [ContextMenu("LoadStats")]
-    private void LoadStats()
-    {
-        var stats = Resources.LoadAll<Stat>("Stat").OrderBy(x => x.ID);
-        statOverrides = stats.Select(x => new StatOverride(x)).ToArray();
-    }
-#endif
 
 }

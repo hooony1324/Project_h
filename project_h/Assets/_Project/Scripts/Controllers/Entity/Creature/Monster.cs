@@ -53,7 +53,6 @@ public class Monster : Entity
         }
 
         onDead += HandleOnDead;
-        Stats.Setup(this);
         Movement.AgentEnabled = true;
         Movement.enabled = true;
     }
