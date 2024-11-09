@@ -39,14 +39,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 9b8ce06c8b4b3874ea334518a21f3c99
+  - m_GUID: 89386ec271ac92b41a2abc75b4606097
     m_Address: DungeonMap_01
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreGame
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b6b78352cd5462b4b9a930dc8b988986
-    m_Address: DungeonMap_02
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class DungeonScene : BaseScene
 {
+    [SerializeField] private SceneField _sceneTL;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -19,7 +21,7 @@ public class DungeonScene : BaseScene
         GameObject playerController = new GameObject { name = "@PlayerController"};
         playerController.AddComponent<PlayerController>();
 
-        Vector3 startPos = Managers.Map.Info.StartPosition;
+        Vector3 startPos = Managers.Map.CurrentMap.StartPosition;
         Hero hero = Managers.Object.Spawn<Hero>(startPos);
         hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
 

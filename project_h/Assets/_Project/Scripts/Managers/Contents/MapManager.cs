@@ -10,7 +10,7 @@ public enum ECellCollisionType
 
 public class MapManager
 {
-    public MapInfo Info { get; private set; }
+    public Map CurrentMap { get; private set; }
     public string MapName { get; private set; }
 
     public NavMeshSurface NavMeshSurface2D => _navMeshSurface;
@@ -33,7 +33,7 @@ public class MapManager
         map.transform.position = Vector3.zero;
         map.name = $"@Map_{MapName}";
 
-        Info = map.GetComponent<MapInfo>();
+        CurrentMap = map.GetComponent<Map>();
         MapName = MapName;
     }
 

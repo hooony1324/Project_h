@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001ef2438e43aa040b1e210226602c42, type: 3}
   m_Name: DUNGEON_4
   m_EditorClassIdentifier: 
-  _prefabName: DungeonMap_02
+  _prefabName: DungeonMap_01
   _dungeonName: "\uB358\uC8044"

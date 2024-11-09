@@ -163,6 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f667b32933d176a44bd746dbd6ad0626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sceneTL:
+    sceneAsset: {fileID: 0}
+    sceneName: 
 --- !u!1 &1575046670
 GameObject:
   m_ObjectHideFlags: 0
@@ -226,7 +229,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

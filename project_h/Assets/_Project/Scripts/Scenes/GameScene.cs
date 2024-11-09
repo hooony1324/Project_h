@@ -20,7 +20,7 @@ public class GameScene : BaseScene
         Managers.UI.ShowSceneUI<UI_Joystick>();
         Managers.UI.ShowSceneUI<UI_GameScene>();
 
-        Vector3 startPosition = Managers.Map.Info.StartPosition;
+        Vector3 startPosition = Managers.Map.CurrentMap.StartPosition;
         Hero hero = Managers.Object.Spawn<Hero>(startPosition);
         Managers.Hero.SetMainHero(hero);
         hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));

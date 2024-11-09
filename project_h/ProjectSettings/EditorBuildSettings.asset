@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/GameScene.unity
     guid: d317bad4c5a2aa5418fc4360777023ec
   - enabled: 1
-    path: Assets/_Project/Scenes/LightTestScene.unity
+    path: Assets/_Project/Scenes/TestScene_ProceduralMap.unity
     guid: 3052868faed55354c9ef7d2adf43875c
   - enabled: 1
     path: Assets/_Project/Scenes/DungeonScene.unity
