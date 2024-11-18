@@ -20,9 +20,11 @@ public class EntityMovement : MonoBehaviour
     public event SetDestinationHandler onSetDestination;
 
     public Entity Owner { get; private set; }
-    public float MoveSpeed => agent.speed;
+    public bool IsAgentMoving => agent.velocity.sqrMagnitude > 0f;
+
     // 조이스틱에 의한 강제 이동
     public bool IsForcedMoving {get; set;}
+
     public bool AgentEnabled
     {
         set
@@ -90,10 +92,6 @@ public class EntityMovement : MonoBehaviour
 
         agent = Owner.GetComponent<NavMeshAgent>();
 
-        var animator = Owner.Animator;
-        if (animator)
-            animator.SetFloat("rollSpeed", 1 / rollTime);
-
         entityMoveSpeedStat = Owner.Stats.MoveSpeedStat ?? Owner.Stats.GetStat("MOVESPEED");
         if (entityMoveSpeedStat)
         {
@@ -143,6 +141,10 @@ public class EntityMovement : MonoBehaviour
     public void Roll(float distance, Vector3 direction)
     {
         Stop();
+
+        var animator = Owner.Animator;
+        if (animator)
+            animator.SetFloat("rollSpeed", 1 / rollTime);
 
         rollDirection = direction;
         // +a) agent끄고(회피는 유닛 지나가게) NavMesh로 distance계산

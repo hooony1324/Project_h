@@ -27,10 +27,9 @@ public class BaseLayerBehavior : StateMachineBehaviour
     // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
-        if (agent)
-            animator.SetFloat(kSpeedHash, agent.velocity.sqrMagnitude / (agent.speed * agent.speed));
-            
-        // roll
+        if (entity)
+            animator.SetFloat(kSpeedHash, entity.IsMoving ? 1f : 0f);
+
         if (movement)
             animator.SetBool(kIsRollingHash, movement.IsRolling);
 

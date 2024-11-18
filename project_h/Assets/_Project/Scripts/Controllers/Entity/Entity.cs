@@ -48,6 +48,7 @@ public abstract class Entity : BaseObject
     public Category[] Categories => categories;
     [SerializeField] protected Category enemyCategory;
 
+    public virtual bool IsMoving => Movement.IsAgentMoving;
     public bool IsPlayer => controlType == EEntityControlType.Player;
     public bool IsEnemyTargeted => Target != null && Target.HasCategory(enemyCategory);
     public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
@@ -166,12 +167,6 @@ public abstract class Entity : BaseObject
         var selectionResult = skill.TargetSelectionResult;
         if (selectionResult.selectedTarget)
             Movement.TraceTarget = selectionResult.selectedTarget.transform;
-    }
-
-    public void Roll()
-    {
-        SkillSystem.CancelAll();
-        SkillSystem.Roll.Use();
     }
 
     // instigator : 이즈리얼

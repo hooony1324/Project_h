@@ -14,7 +14,6 @@ public class GameManager
         // Init or LoadGAme
     }
 
-
     private Vector2 _moveDir = Vector2.zero;
     public Vector2 MoveDir 
     {

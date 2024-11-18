@@ -64,7 +64,7 @@ public class Dungeon : InitOnce
         await Managers.Map.CurrentMap.NavMeshSurface2D.BuildNavMeshAsync();
     }
 
-    // for test
+    // for test : 모든 문 강제 오픈
     public void ForceClearAllRooms()
     {
         _rooms.ForEach(room => room.State = DungeonRoom.RoomState.Cleared);

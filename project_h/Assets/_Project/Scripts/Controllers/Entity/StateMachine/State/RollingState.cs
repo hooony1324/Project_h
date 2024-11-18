@@ -11,6 +11,8 @@ public class RollingState : State<Entity>
 
     public override void Enter()
     {
+        Entity.SkillSystem.CancelAll();
+
         if (playerController)
             playerController.enabled = false;
     }

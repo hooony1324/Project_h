@@ -35,7 +35,9 @@ public class GameScene : BaseScene
     {
         Managers.Map.CurrentMap.NavMeshSurface2D.BuildNavMesh();
 
-        Managers.UI.ShowSceneUI<UI_Joystick>();
+        yield return null;
+
+        Managers.UI.Joystick = Managers.UI.ShowSceneUI<UI_Joystick>();
         Managers.UI.ShowSceneUI<UI_GameScene>();
 
         hero.gameObject.SetActive(true);
@@ -46,12 +48,10 @@ public class GameScene : BaseScene
 
         //Monster monster = Managers.Object.Spawn<Monster>(new Vector3(10, -10, 0), nameof(Monster));
         //monster.SetData(Managers.Data.GetMonsterData("MONSTER_SLIME_BOSS"));
-
-        yield return null;
     }
 
     public override void Clear()
     {
-        
+        Managers.UI.Joystick = null;
     }
 }

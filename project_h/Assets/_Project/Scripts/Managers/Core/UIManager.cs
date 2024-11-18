@@ -18,6 +18,13 @@ public class UIManager
         get { return _sceneUI; }
     }
 
+    private UI_Joystick _joystick;
+    public UI_Joystick Joystick
+    {
+        get => _joystick;
+        set => _joystick = value;
+    }
+
     private Dictionary<string, UI_Popup> _popups = new Dictionary<string, UI_Popup>();
     public GameObject Root
     {

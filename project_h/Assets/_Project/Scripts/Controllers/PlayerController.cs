@@ -7,7 +7,7 @@ using static Define;
 
 public class PlayerController : InitOnce
 {
-    private Entity controlTarget;
+    private Hero controlTarget;
     private Pivot pivot;
     private Vector3 moveDir;
 
@@ -26,10 +26,19 @@ public class PlayerController : InitOnce
 
     public void SetControlTarget(Entity entity)
     {
-        controlTarget = entity;
+        Hero hero = entity as Hero;
+        if (!hero)
+            return;
+
+        if (controlTarget)
+            controlTarget.IsMainHero = false;
+
+        controlTarget = hero;
+        controlTarget.IsMainHero = true;
         controlTarget.Movement.Stop();
 
-        // TODO: Joystick에 등록된 해당 Hero의 스킬 다시 세팅
+        // Joystick에 등록된 해당 Hero의 스킬 다시 세팅
+        Managers.UI.Joystick.SetupActionButtons(controlTarget);
     }
 
     private void HandleJoystickState(EJoystickState state)
@@ -104,11 +113,5 @@ public class PlayerController : InitOnce
             float angle = Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI;
             pivot.SetAngle(angle);
         }
-    }
-
-    public void Roll()
-    {
-        if (moveDir != Vector3.zero)            
-            controlTarget.Roll();
     }
 }

@@ -41,7 +41,6 @@ public class UI_Joystick : UI_Scene
         JoystickBG,
         JoystickCursor,
         JoystickArea,
-        TouchArea,
         Joystick_ActionButtons,
     }
 

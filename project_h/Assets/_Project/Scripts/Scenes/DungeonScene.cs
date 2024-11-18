@@ -35,17 +35,14 @@ public class DungeonScene : BaseScene
     {
         await Managers.Dungeon.GenerateDungeon();
 
+        Managers.UI.Joystick = Managers.UI.ShowSceneUI<UI_Joystick>();
+        Managers.UI.ShowSceneUI<UI_DungeonScene>();
+
         hero.gameObject.SetActive(true);
 
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
-        
-        // Managers.Game.OnBroadcastEvent -= HandleOnBroadcastEvent;
-        // Managers.Game.OnBroadcastEvent += HandleOnBroadcastEvent;
-
-        Managers.UI.ShowSceneUI<UI_Joystick>();
-        Managers.UI.ShowSceneUI<UI_DungeonScene>();
 
         Managers.Dungeon.CurrentDungeon.ForceClearAllRooms();
     }
@@ -53,6 +50,6 @@ public class DungeonScene : BaseScene
 
     public override void Clear()
     {
-        
+        Managers.UI.Joystick = null;
     }
 }
