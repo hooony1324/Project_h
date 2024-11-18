@@ -43,7 +43,7 @@ public class TitleScene : BaseScene
     {
         if (base.Init() == false)
             return false;
-    
+
         SceneType = EScene.TitleScene;
         Managers.Scene.SetCurrentScene(this);
 

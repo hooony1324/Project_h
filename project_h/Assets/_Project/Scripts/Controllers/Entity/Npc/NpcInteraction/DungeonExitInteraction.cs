@@ -14,6 +14,8 @@ public class DungeonExitInteraction : NpcInteraction
     private void OnClickConfirm(bool result)
     {
         if (result)
+        {
             Managers.Scene.LoadScene(EScene.GameScene);
+        }
     }
 }

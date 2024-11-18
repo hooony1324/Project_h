@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 [RequireComponent(typeof(CircleCollider2D))]

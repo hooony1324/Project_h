@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 201d66461873ed6448715bce50e37246
+    m_Address: DungeonMap_01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 477addb85c46a714ebd22097ffb15f13
     m_Address: Pivot
     m_ReadOnly: 0
@@ -35,12 +41,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 811271f2859eb9f4494a05550ac239c1
     m_Address: NavMesh
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - PreGame
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 89386ec271ac92b41a2abc75b4606097
-    m_Address: DungeonMap_01
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

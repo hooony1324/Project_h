@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class Managers : MonoBehaviour
 {
-    public static bool Initialized { get; set; }
+    private static bool Initialized { get; set; } = false;
     private static Managers s_instance;
     private static Managers Instance { get { Init(); return s_instance; } }
 
@@ -28,13 +28,15 @@ public class Managers : MonoBehaviour
     private MapManager _map = new MapManager();
     private ObjectManager _object = new ObjectManager();
     private HeroManager _hero = new HeroManager();
+    private DungeonManager _dungeon = new DungeonManager();
 
     public static GameManager Game => Instance?._game;
     public static MapManager Map => Instance?._map;
     public static ObjectManager Object => Instance?._object;
     public static HeroManager Hero => Instance?._hero;
+    public static DungeonManager Dungeon => Instance?._dungeon;
 
-    public static void Init()
+    private static void Init()
     {
         if (s_instance == null && Initialized == false)
         {

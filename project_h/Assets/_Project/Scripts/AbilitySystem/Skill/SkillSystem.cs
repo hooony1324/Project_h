@@ -60,6 +60,8 @@ public class SkillSystem : MonoBehaviour
     public Skill DefaultAttack;
     [SerializeReference]
     public Skill Roll;
+    // SkillA, SkilB ??
+
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects.Where(x => !x.IsReleased).ToArray();

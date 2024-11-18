@@ -168,7 +168,7 @@ public abstract class Entity : BaseObject
             Movement.TraceTarget = selectionResult.selectedTarget.transform;
     }
 
-    public void Roll(float distance)
+    public void Roll()
     {
         SkillSystem.CancelAll();
         SkillSystem.Roll.Use();

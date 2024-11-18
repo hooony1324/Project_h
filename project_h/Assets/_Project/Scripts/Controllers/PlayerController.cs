@@ -1,6 +1,8 @@
 using System.Collections;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Scripting.APIUpdating;
 using static Define;
 
 public class PlayerController : InitOnce
@@ -27,8 +29,7 @@ public class PlayerController : InitOnce
         controlTarget = entity;
         controlTarget.Movement.Stop();
 
-        Managers.Game.OnTabTriggered -= Roll; 
-        Managers.Game.OnTabTriggered += Roll;
+        // TODO: Joystick에 등록된 해당 Hero의 스킬 다시 세팅
     }
 
     private void HandleJoystickState(EJoystickState state)
@@ -100,32 +101,14 @@ public class PlayerController : InitOnce
         moveDir = dir;
         if (dir != Vector2.zero)
         {
-            float angle = Mathf.Atan2(-dir.x, +dir.y) * 180 / Mathf.PI;
-
-            if (angle > 15f && angle <= 75f)
-                moveDir = MoveDir.TOP_LEFT;
-            else if (angle > 75f && angle <= 105f)
-                moveDir = MoveDir.LEFT;
-            else if (angle > 105f && angle <= 160f)
-                moveDir = MoveDir.BOTTOM_LEFT;
-            else if (angle > 160f || angle <= -160f)
-                moveDir = MoveDir.BOTTOM;
-            else if (angle < -15f && angle >= -75f)
-                moveDir = MoveDir.TOP_RIGHT;
-            else if (angle < -75f && angle >= -105f)
-                moveDir = MoveDir.RIGHT;
-            else if (angle < -105f && angle >= -160f)
-                moveDir = MoveDir.BOTTOM_RIGHT;
-            else
-                moveDir = MoveDir.TOP;
-
+            float angle = Mathf.Atan2(-dir.x, dir.y) * 180 / Mathf.PI;
             pivot.SetAngle(angle);
         }
     }
 
-    private void Roll(float tabTime)
+    public void Roll()
     {
         if (moveDir != Vector3.zero)            
-            controlTarget.Roll(tabTime);
+            controlTarget.Roll();
     }
 }

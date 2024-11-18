@@ -10,12 +10,14 @@ public class DataManager
     {
         foreach (MonsterData monsterData in Resources.LoadAll<MonsterData>("GameDesign/MonsterData"))
         {
-            _monsterDatas.Add(monsterData.name, monsterData);
+            if (!_monsterDatas.ContainsKey(monsterData.name))
+                _monsterDatas.Add(monsterData.name, monsterData);
         }
 
         foreach (HeroData heroData in Resources.LoadAll<HeroData>("GameDesign/HeroData"))
         {
-            _heroDatas.Add(heroData.name, heroData);
+            if (!_heroDatas.ContainsKey(heroData.name))
+                _heroDatas.Add(heroData.name, heroData);
         }
     }
 

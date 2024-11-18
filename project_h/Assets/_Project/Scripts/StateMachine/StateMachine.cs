@@ -17,6 +17,9 @@ public class StateMachine<EntityType>
     private class StateData
     {
         // State가 실행되는 Layer
+        // ex) Toggle Skill StateMachine
+        // - States : Ready, Cooldown, InAction(발동 중)
+        // - Toggle On 하면 Ready > InAction(layer 0) & Cooldown(layer 1) > Ready
         public int Layer { get; private set; }
         // State의 등록 순서
         public int Priority { get; private set; }

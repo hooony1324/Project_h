@@ -1,18 +1,14 @@
+using NavMeshPlus.Components;
 using UnityEngine;
 
 public class Map : InitOnce
 {
-    // List<DungeonRoom> _dungeonRooms;
-    // DungeonRoom _startRoom;
-    // _startRoom.HeroSpawnPosition
-
-    // Init과정
-    // 1. LinkRooms : Link Doors and Transport other Room
-    //  - 현재는 프리팹에 미리 위치시킴, 추후에 Procedural되면 위치를 랜덤 자동 배치
-    // 2. 
+    public NavMeshSurface NavMeshSurface2D => _navMeshSurface;
+    private NavMeshSurface _navMeshSurface;
 
     public Vector3 StartPosition => _startPoint.position;
     private Transform _startPoint;
+    
     public override bool Init()
     {
         if (base.Init() == false)
@@ -20,8 +16,10 @@ public class Map : InitOnce
 
         _startPoint = Util.FindChild(gameObject, "StartPoint").transform;
 
+        GameObject navMesh = Managers.Resource.Instantiate("NavMesh");
+        navMesh.name = "@NavMesh";
+        _navMeshSurface = navMesh.GetComponent<NavMeshSurface>();
+
         return true;
     }
-
-
 }

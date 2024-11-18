@@ -17,6 +17,8 @@ public class TilemapEditor : Editor
                 return;
 
             tilemap.ClearAllTiles();
+
+            EditorUtility.SetDirty(tilemap);
         }
     }
 
