@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6f474d73aade44fbc91f8455c9868e, type: 3}
   m_Name: HERO_BOW
   m_EditorClassIdentifier: 
+  entityId: bow
   sprite: {fileID: 21300000, guid: 94c904cf52ddb5c40bfd5ade2e9d0f7e, type: 3}
   scale: 1
   animatorControllerName: Hero_Bow

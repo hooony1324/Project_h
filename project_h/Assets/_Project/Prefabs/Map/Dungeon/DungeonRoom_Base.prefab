@@ -64,6 +64,7 @@ Transform:
   m_Children:
   - {fileID: 8331818176885687162}
   - {fileID: 501099272482439826}
+  - {fileID: 1811146706455113612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &7687362863295079579
@@ -251,3 +252,81 @@ MonoBehaviour:
   - tile: {fileID: 11400000, guid: 20595755d0988c84a85c115d30eefb14, type: 2}
     overrideArea: 1
     area: 1
+--- !u!1001 &457957172867989688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6625039839546207255}
+    m_Modifications:
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5124149448750938252, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5589446593607665431, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: _waveDurationList.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7307747803466715684, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7563965717823792924, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_Name
+      value: MonsterWaveController
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874125488021537513, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+--- !u!4 &1811146706455113612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2267705117925158708, guid: ea117d3f9dd964a4985aebdd70fea3f4, type: 3}
+  m_PrefabInstance: {fileID: 457957172867989688}
+  m_PrefabAsset: {fileID: 0}

@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DungeonDoor : InitOnce
+public class DungeonDoor : BaseObject
 {
     public Action OnTriggered = () => {};
     private TilemapCollider2D _collider;
@@ -39,11 +39,13 @@ public class DungeonDoor : InitOnce
     public void Open()
     {
         _isOpened = true;
+        gameObject.SetActive(true);
     }
 
     public void Close()
     {
         _isOpened = false;
+        gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -58,6 +60,7 @@ public class DungeonDoor : InitOnce
         _targetDoor.Close();// 왔다갔다 방지
         Managers.Hero.TeleportHero(TeleportPosition);
         
+        TargetRoom.HandleHeroVisited();
         //OnTriggered.Invoke();
     }
 

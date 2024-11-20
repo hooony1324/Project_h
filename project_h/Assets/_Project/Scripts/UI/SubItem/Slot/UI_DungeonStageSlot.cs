@@ -47,7 +47,7 @@ public class UI_DungeonStageSlot : UI_SubItem
         
 
         UI_MessagePopup messagePopup = Managers.UI.ShowPopupUI<UI_MessagePopup>();
-        messagePopup.SetMessageCheck(
+        messagePopup.SetupMessageConfrim(
             StringTable.GetMessage("AskEnterDungeon"),
             OnClickDecision
         );

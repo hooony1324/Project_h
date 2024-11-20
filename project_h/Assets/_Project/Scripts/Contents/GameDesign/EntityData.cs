@@ -4,6 +4,9 @@ using UnityEngine;
 public class EntityData : ScriptableObject
 {
     [SerializeField]
+    public string entityId;
+
+    [SerializeField]
     private Sprite sprite;
 
     [SerializeField]
@@ -26,6 +29,8 @@ public class EntityData : ScriptableObject
         var stats = Resources.LoadAll<Stat>("Stat").OrderBy(x => x.ID);
         statOverrides = stats.Select(x => new StatOverride(x)).ToArray();
     }
+
+    public virtual string GetAssetPrefix() => string.Empty;
 
 #endif
 }

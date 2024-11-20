@@ -27,7 +27,7 @@ public class Dungeon : InitOnce
 
     [SerializeField] int _gridSizeX = 20;
     [SerializeField] int _gridSizeY = 20;
-    [SerializeField] DungeonRoom _startRoom;
+    private DungeonRoom _startRoom;
 
     private List<DungeonRoom> _rooms = new List<DungeonRoom>();
     private List<Vector2Int> _openedIndexes = new List<Vector2Int>();   // 방을 설치할 수 있는 Grid 위치
@@ -54,6 +54,9 @@ public class Dungeon : InitOnce
         Vector2Int initialRoomIndex = new Vector2Int(_gridSizeX / 2, _gridSizeY / 2);
         _openedIndexes.Add(initialRoomIndex);
 
+        _startRoom = _rooms[0];
+        _startRoom.State = DungeonRoom.RoomState.Cleared;
+
         return true;
     }
 
@@ -64,11 +67,6 @@ public class Dungeon : InitOnce
         await Managers.Map.CurrentMap.NavMeshSurface2D.BuildNavMeshAsync();
     }
 
-    // for test : 모든 문 강제 오픈
-    public void ForceClearAllRooms()
-    {
-        _rooms.ForEach(room => room.State = DungeonRoom.RoomState.Cleared);
-    }
 
     #region Room Generation
 
@@ -226,6 +224,11 @@ public class Dungeon : InitOnce
 
                 PlaceDoorsBetweenRooms(roomA, roomB);
             }
+        }
+
+        foreach (var room in _rooms)
+        {
+            room.InitWaveController();
         }
     }
 

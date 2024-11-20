@@ -7,6 +7,18 @@ using UnityEngine.Tilemaps;
 
 public class DungeonRoom : InitOnce
 {
+    public override bool Init()
+    {
+        if (base.Init() == false)
+            return false;
+
+        _teleportPoint = Util.FindChild(gameObject, "TeleportPoint").transform;
+        _generatedGrid = GetPatternIndexes();
+        _waveController = Util.FindChild(gameObject, "MonsterWaveController").GetComponent<MonsterWaveController>();
+
+        return true;
+    }
+
     #region Dungeon Generation
     enum RoomDirection
     {
@@ -29,7 +41,6 @@ public class DungeonRoom : InitOnce
 
     [SerializeField] private Pattern _roomPattern;
     [SerializeField] private RoomDirection _roomDirection = RoomDirection.UP;
-    [SerializeField] private GameObject _doorPrefab;
 
     ///<summary> Dungeon Grid에 소환된 Index </summary>
     private Vector2Int _spawnedIndex;
@@ -52,17 +63,6 @@ public class DungeonRoom : InitOnce
 
     public Vector3 TeleportPosition => _teleportPoint.position;
     public List<DungeonDoor> Doors => _doors;
-
-    public override bool Init()
-    {
-        if (base.Init() == false)
-            return false;
-
-        _teleportPoint = Util.FindChild(gameObject, "TeleportPoint").transform;
-        _generatedGrid = GetPatternIndexes();
-
-        return true;
-    }
 
     public Vector2Int[] GetPatternIndexes()
     {
@@ -103,9 +103,7 @@ public class DungeonRoom : InitOnce
     /// <summary> ex) L모양 패턴의 특정 인덱스에서 선택한 방향에 Door를 소환한다 </summary>
     public DungeonDoor SpawnDoor(Vector3 spawnPosition)
     {
-        GameObject doorObj = Instantiate(_doorPrefab); // TODO : Manager.Object.Instantiate
-        DungeonDoor door = doorObj.GetComponent<DungeonDoor>();
-
+        DungeonDoor door = Managers.Object.Spawn<DungeonDoor>(spawnPosition); // TODO : Manager.Object.Instantiate
         // do something
         // ex) targetRoom(BossRoom) > door.Sprite = "BossDoor"
 
@@ -117,18 +115,20 @@ public class DungeonRoom : InitOnce
 
     #endregion
 
-    #region Room State
-    
+    #region Room State & Wave Control
+
     public enum RoomState
     {
         Locked,
 
-        Unlocked,   // Monster Wave 시작
+        Unlocked,
 
-        Cleared,    // Monster Wave 다 처리함
+        WaveStarted, // (Locked)
+        Cleared,    // (Unlocked) Monster Wave 다 처리함
     }
 
-    public bool IsCleared => (_state == RoomState.Cleared);
+    public bool IsCleared => _isCleared;
+    private bool _isCleared = false;
 
     private RoomState _state = RoomState.Locked;
 
@@ -154,9 +154,13 @@ public class DungeonRoom : InitOnce
                 break;
             case RoomState.Unlocked:
                 UnlockRoom();
-                //StartWave();
+                break;
+            case RoomState.WaveStarted:
+                LockRoom();
+                StartWave();
                 break;
             case RoomState.Cleared:
+                ClearWave();
                 UnlockRoom();
                 break;
         }
@@ -172,10 +176,38 @@ public class DungeonRoom : InitOnce
         _doors.ForEach(x => x.Open());
     }
 
-    void StartWave()
+    private MonsterWaveController _waveController;
+    public void InitWaveController()
     {
-        //if (!_isCleared)
-        // WaveGenerator.cs -> Spawn Wave Coroutine()
+        _waveController.InitWaveDatas();
+    }
+
+    private async Awaitable StartWave()
+    {
+        if (_isCleared)
+            return;
+
+        _waveController.onWavesCleared += () =>
+        {
+            State = RoomState.Cleared;
+        };
+
+        await Awaitable.WaitForSecondsAsync(1f);
+
+        _waveController.StartWave();
+    }
+
+    void ClearWave()
+    {
+        _isCleared = true;
+    }
+
+    public void HandleHeroVisited()
+    {
+        if (_isCleared == true)
+            return;
+
+        State = RoomState.WaveStarted;
     }
 
     #endregion

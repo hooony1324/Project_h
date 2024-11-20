@@ -43,8 +43,7 @@ public class DungeonScene : BaseScene
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
-
-        Managers.Dungeon.CurrentDungeon.ForceClearAllRooms();
+        
     }
 
 

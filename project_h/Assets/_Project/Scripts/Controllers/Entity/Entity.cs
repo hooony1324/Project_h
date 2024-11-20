@@ -198,6 +198,7 @@ public abstract class Entity : BaseObject
         SkillSystem.CancelAll(true);
 
         onDead?.Invoke(this);
+        onDead = null;
     }
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
 

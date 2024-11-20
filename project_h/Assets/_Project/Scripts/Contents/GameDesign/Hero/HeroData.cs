@@ -4,4 +4,9 @@ using UnityEngine;
 public class HeroData : EntityData
 {
 
+
+    #if UNITY_EDITOR
+    public override string GetAssetPrefix() => "HERO";
+
+    #endif
 }

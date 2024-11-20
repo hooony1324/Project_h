@@ -8,7 +8,7 @@ public class DungeonExitInteraction : NpcInteraction
     public override void HandleNpcInteraction()
     {
         UI_MessagePopup messagePopup = Managers.UI.ShowPopupUI<UI_MessagePopup>();
-        messagePopup.SetMessageCheck(StringTable.GetMessage("AskExitDungeon"), OnClickConfirm);
+        messagePopup.SetupMessageConfrim(StringTable.GetMessage("AskExitDungeon"), OnClickConfirm);
     }
 
     private void OnClickConfirm(bool result)

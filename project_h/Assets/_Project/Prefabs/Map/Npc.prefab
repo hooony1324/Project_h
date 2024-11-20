@@ -133,18 +133,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08b8ae26f70fd7a48a8ca7fa1b50ccdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isClickInteraction: 1
   interactConditions: []
   npcInteraction:
-    rid: 3506563909570265091
+    rid: 4885778232288477280
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 3506563909570265091
-      type: {class: DungeonEntranceInteraction, ns: , asm: Assembly-CSharp}
-      data:
-        _dungeonDatas: []
+    - rid: 4885778232288477280
+      type: {class: EnterNextDungeonInteraction, ns: , asm: Assembly-CSharp}
+      data: 
 --- !u!1001 &6314833016213582317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -250,6 +248,30 @@ PrefabInstance:
       value: 0.9098039
       objectReference: {fileID: 0}
     - target: {fileID: 1667480805640238490, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627158619904944570, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448427591544048388, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_Color.a
+      value: 0.34117648
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448427591544048388, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_Color.b
+      value: 0.27058825
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448427591544048388, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_Color.g
+      value: 0.20784314
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448427591544048388, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448427591544048388, guid: 2c9d8c9ca80a72548b4d1d0b42314e57, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

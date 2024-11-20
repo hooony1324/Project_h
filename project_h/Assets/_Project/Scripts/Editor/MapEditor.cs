@@ -50,5 +50,34 @@ public class MapEditor : MonoBehaviour
         Debug.Log("Map Collision Generation Complete");
     }
 
+    [MenuItem("Tools/MapEditor/GenerateMonsterTile")]
+    private static void GenerateMonsterTile()
+    {
+        Object[] monsterDatas = Resources.LoadAll<MonsterData>("GameDesign/MonsterData");
+
+        foreach (Object monsterData in monsterDatas)
+        {
+            MonsterData data = monsterData as MonsterData;
+            EntityTile tile = AssetDatabase.LoadAssetAtPath<EntityTile>("Assets/Resources/GameDesign/EntityTileData/Monster");
+
+            if (tile != null)
+            {
+                tile.entityDataName = data.entityId;
+                tile.sprite = data.Sprite;
+
+                EditorUtility.SetDirty(tile);
+            }
+            else
+            {
+                tile = ScriptableObject.CreateInstance<EntityTile>();
+                tile.entityDataName = data.entityId;
+                tile.sprite = data.Sprite;
+                
+                AssetDatabase.CreateAsset(tile, $"Assets/Resources/GameDesign/EntityTileData/Monster/{data.entityId}.asset");
+                EditorUtility.SetDirty(tile);
+            }
+        }
+    }
+
 }
 #endif

@@ -39,8 +39,11 @@ public class UI_MessagePopup : UI_Popup
         return true;
     }
 
-    
-    public void SetMessageCheck(string msgText, Action<bool> callback = null,
+    /// <summary>
+    ///   "~~하시겠습니까"
+    ///     yes     no
+    /// </summary>
+    public void SetupMessageConfrim(string msgText, Action<bool> callback = null,
     bool showConfirmButton = true, bool showCancelButton = true,
     string confirmButtonText = null, string cancelButtonText = null)
     {
@@ -58,14 +61,14 @@ public class UI_MessagePopup : UI_Popup
             OnDecision = callback;
     }
 
-    public void SetTitleAndMessageCheck(string titleText, string msgText, Action<bool> callback = null,
+    public void SetupTitleAndMessageConfirm(string titleText, string msgText, Action<bool> callback = null,
     bool showConfirmButton = true, string confirmButtonText = null,
     bool showCancelButton = true, string cancelButtonText = null)
     {
         GetText((int)Texts.TitleText).gameObject.SetActive(true);
         GetTMPText((int)Texts.TitleText).text = titleText;
 
-        SetMessageCheck(msgText, callback, showConfirmButton, showCancelButton, confirmButtonText, cancelButtonText);
+        SetupMessageConfrim(msgText, callback, showConfirmButton, showCancelButton, confirmButtonText, cancelButtonText);
     }
     
     private void OnConfirmButtonClicked()

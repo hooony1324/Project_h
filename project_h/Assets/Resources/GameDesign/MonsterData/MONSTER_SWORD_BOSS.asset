@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9182aa49bd339499b367d52089971c, type: 3}
   m_Name: MONSTER_SWORD_BOSS
   m_EditorClassIdentifier: 
+  entityId: MONSTER_SWORD_BOSS
   sprite: {fileID: 21300000, guid: 1f250e33fe31f3d49b9ecbaf5d373370, type: 3}
   scale: 3
   animatorControllerName: Hero_Warrior

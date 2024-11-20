@@ -11,8 +11,15 @@ public abstract class NpcInteraction
 
 public class Npc : BaseObject
 {
-    private UI_NpcInteraction uiNpcInteraction;
+    private UI_NpcInteraction _uiNpcInteraction;
 
+    [HelpBox("isClickInteraction(true) : NPC클릭으로 Interaction\nisClickIn teraction(false) : NPC영역에 충돌하여 Interaction")]
+    [SerializeField]
+    private bool _isClickInteraction = true;
+
+
+    [Space(20)]
+    [HelpBox("Interaction에 제한 설정\n - ex) 레벨 10이 안되었으니 던전 입장 불가 \n - ex) 퀘스트 안 깨서 대화 못함")]
     [SerializeReference, SubclassSelector]
     private EntityCondition[] interactConditions;
 
@@ -29,13 +36,17 @@ public class Npc : BaseObject
         SortingGroup sg = Util.FindChild(gameObject, "NpcSprite").GetOrAddComponent<SortingGroup>();
         sg.sortingOrder = SortingLayers.ENTITY;
 
-        uiNpcInteraction = Util.FindChild(gameObject, "UI_NpcInteraction").GetComponent<UI_NpcInteraction>();
-        uiNpcInteraction.OnInteraction += OnClickNpc;
-
+        _uiNpcInteraction = Util.FindChild(gameObject, "UI_NpcInteraction").GetComponent<UI_NpcInteraction>();
+        
         return true;
     }
 
-    private void OnClickNpc()
+    private void Start()
+    {
+        _uiNpcInteraction.SetInfo(OnNpcInteracted, _isClickInteraction);
+    }
+
+    private void OnNpcInteracted()
     {
         //TODO: Interaction check, ex) player Level
         //interactConditions.All(x => x.IsPass(Entity));

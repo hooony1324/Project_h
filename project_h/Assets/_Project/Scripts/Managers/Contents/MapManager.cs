@@ -20,8 +20,6 @@ public class MapManager
     
     public void LoadMap()
     {
-        Managers.Dungeon.Clear();
-
         GameObject map = Managers.Resource.Instantiate(MapName);
         map.transform.position = Vector3.zero;
         map.name = $"@Map_{MapName}";

@@ -10,6 +10,7 @@ public class ObjectManager
     public Hero Hero { get; private set; }
     public HashSet<Hero> Heroes { get; } = new HashSet<Hero>();
     public HashSet<Monster> Monsters { get; } = new HashSet<Monster>();
+    public HashSet<DungeonDoor> Doors { get; } = new HashSet<DungeonDoor>();
     // public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
     // public HashSet<Env> Envs { get; } = new HashSet<Env>();
     // public HashSet<Npc> Npcs { get; } = new HashSet<Npc>();
@@ -30,6 +31,7 @@ public class ObjectManager
     public Transform EffectRoot { get { return GetRootTransform("@Effects"); } }
     public Transform NpcRoot { get { return GetRootTransform("@Npc"); } }
     public Transform ItemHolderRoot { get { return GetRootTransform("@ItemHolders"); } }
+    public Transform DoorRoot { get { return GetRootTransform("@Doors"); } }
 
     public void Clear()
     {
@@ -66,6 +68,15 @@ public class ObjectManager
             Monsters.Add(mc);
             return mc as T;
         }
+        else if (type == typeof(DungeonDoor))
+        {
+            GameObject go = Managers.Resource.Instantiate(nameof(DungeonDoor), pooling: true);
+            go.transform.position = spawnPos;
+            go.transform.parent = DoorRoot;
+            DungeonDoor dc = go.GetOrAddComponent<DungeonDoor>();
+            Doors.Add(dc);
+            return dc as T;
+        }
 
         return null;
     }
@@ -81,6 +92,10 @@ public class ObjectManager
         else if (type == typeof(Monster))
         {
             Monsters.Remove(baseObject as Monster);
+        }
+        else if (type == typeof(DungeonDoor))
+        {
+            Doors.Remove(baseObject as DungeonDoor);
         }
 
         Managers.Resource.Destroy(baseObject.gameObject);

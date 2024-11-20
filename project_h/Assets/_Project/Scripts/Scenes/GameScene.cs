@@ -12,9 +12,11 @@ public class GameScene : BaseScene
         if (base.Init() == false)
             return false;
 
+
         SceneType = EScene.GameScene;
         Managers.Scene.SetCurrentScene(this);
 
+        Managers.Dungeon.Clear();
         Managers.Map.SetMap("BaseMap");
         Managers.Map.LoadMap();
 

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9182aa49bd339499b367d52089971c, type: 3}
   m_Name: MONSTER_SLIME
   m_EditorClassIdentifier: 
+  entityId: MONSTER_SLIME
   sprite: {fileID: 21300000, guid: e1774ae355ff8de4698cd1471924ad27, type: 3}
   scale: 1
   animatorControllerName: Monster_Slime
