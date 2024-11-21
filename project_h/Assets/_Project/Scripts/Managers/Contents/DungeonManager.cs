@@ -23,7 +23,8 @@ public class DungeonManager
         // Dungeon마지막에서 TryEnter
         if (_nextIdx >= _dungeonDatas.Count - 1)
         {
-            Debug.Log("마지막 던전");
+            Managers.Map.SetMap("BaseMap");
+            Managers.Scene.LoadScene(EScene.GameScene);
             return false;
         }
         

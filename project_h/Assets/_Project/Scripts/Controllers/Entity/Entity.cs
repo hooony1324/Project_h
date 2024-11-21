@@ -119,42 +119,7 @@ public abstract class Entity : BaseObject
         }
     }
 
-    public virtual bool FindNearestEnemy()
-    {
-        if (Target != null)
-            return false;
-
-        float searchRange = Stats.GetValue(Stats.SearchRangeStat);
-        var colliders = Physics2D.OverlapCircleAll(Position, searchRange);
-
-        float nearestDistance = Mathf.Infinity;
-        Entity nearestEnemy = null;
-        foreach (var collider in colliders)
-        {
-            var entity = collider.GetComponent<Entity>();
-            if (entity == this || entity.IsDead)
-                continue;
-
-            if (!entity.HasCategory(enemyCategory))
-                continue;
-
-            float distance = Vector2.Distance(entity.Position, transform.position);
-            if (distance < nearestDistance)
-            {
-                nearestDistance = distance;
-                nearestEnemy = entity;
-            }
-        }
-
-        if (nearestEnemy)
-        {
-            Target = nearestEnemy;
-            return true;
-        }
-
-        Target = null;
-        return false;
-    }
+    public virtual void FindNearestEnemy() { }
 
     private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
     {

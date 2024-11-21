@@ -102,10 +102,12 @@ public class Monster : Entity
         }
     }
 
-    public override bool FindNearestEnemy()
+    public override void FindNearestEnemy()
     {
         float searchRange = Stats.GetValue(Stats.SearchRangeStat);
-        var colliders = Physics2D.OverlapCircleAll(Position, searchRange);
+
+        int heroLayer = Util.GetLayerMask("Hero");
+        var colliders = Physics2D.OverlapCircleAll(Position, searchRange, heroLayer);
 
         float nearestDistance = Mathf.Infinity;
         Entity nearestEnemy = null;
@@ -140,6 +142,6 @@ public class Monster : Entity
             EnablePatrol = true;
         }
 
-        return nearestEnemy != null;
+        return;
     }
 }

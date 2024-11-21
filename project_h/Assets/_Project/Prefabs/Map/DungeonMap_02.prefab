@@ -143,7 +143,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gridSizeX: 20
   _gridSizeY: 20
-  _startRoom: {fileID: 0}
   test: 0
   clean: 0
   door: 0
@@ -54094,10 +54093,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
       propertyPath: npcInteraction
-      value: 4885778232288477285
+      value: 4885778253878394995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: _isClickInteraction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
       propertyPath: 'managedReferences[4885778232288477285]'
+      value: Assembly-CSharp EnterNextDungeonInteraction
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: 'managedReferences[4885778253878394995]'
       value: Assembly-CSharp EnterNextDungeonInteraction
       objectReference: {fileID: 0}
     - target: {fileID: 8705213645089640575, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}

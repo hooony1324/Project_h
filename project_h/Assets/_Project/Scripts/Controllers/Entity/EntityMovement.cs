@@ -66,6 +66,9 @@ public class EntityMovement : MonoBehaviour
             if (agent.enabled == false)
                 return;
                 
+            if (Owner.IsDead)
+                return;
+
             SetDestination(value);
         }
     }
@@ -113,6 +116,12 @@ public class EntityMovement : MonoBehaviour
 
     private void SetDestination(Vector3 destination)
     {
+        if (Owner.Target != null && Owner.Target.IsDead)
+        {
+            traceTarget = null;
+            return;
+        }
+
         agent.destination = destination;
         LookAt(destination);
 

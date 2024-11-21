@@ -82,6 +82,21 @@ public static class Util
         return (T)Enum.Parse(typeof(T), value, true);
     }
 
+    public static int GetLayerMask(string layerName)
+    {
+        return 1 << LayerMask.NameToLayer(layerName);
+    }
+
+    public static int GetLayerMasks(params string[] layerNames)
+    {
+        int mask = 0;
+        foreach (var layerName in layerNames)
+        {
+            mask |= 1 << LayerMask.NameToLayer(layerName);
+        }
+        return mask;
+    }
+
     #region Download
     public enum ESizeUnits
     {

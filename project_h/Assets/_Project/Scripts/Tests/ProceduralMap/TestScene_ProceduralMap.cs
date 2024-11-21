@@ -8,7 +8,20 @@ public class TestScene_ProceduralMap : BaseScene
             return false;
 
 
+
+
         return true;
+    }
+
+    async Awaitable LoadResources()
+    {
+        Managers.Resource.LoadAllAsync<Object>("PreTitle", (key, current, total) =>
+        {
+            if (current == total)
+            {
+                
+            }
+        });
     }
 
     public override void Clear()
