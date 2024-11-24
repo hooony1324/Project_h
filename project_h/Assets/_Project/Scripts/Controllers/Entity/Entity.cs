@@ -5,6 +5,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.Rendering;
 using static Define;
+using Unity.Collections;
 
 
 public enum EEntityControlType
@@ -36,9 +37,8 @@ public abstract class Entity : BaseObject
 
     [SerializeField]
     private Category[] categories;
-
     public Animator Animator {get; private set; }
-    public Stats Stats { get; private set; }
+    [SerializeField]public Stats Stats { get; private set; }
     public EntityMovement Movement;
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;
@@ -47,8 +47,10 @@ public abstract class Entity : BaseObject
     public Entity Target;
     public Category[] Categories => categories;
     [SerializeField] protected Category enemyCategory;
+    protected int enemyLayer = 0;
+    public int EnemyLayer => enemyLayer;
 
-    public virtual bool IsMoving => Movement.IsAgentMoving;
+    public virtual bool IsMoving => Movement.IsMoving; 
     public bool IsPlayer => controlType == EEntityControlType.Player;
     public bool IsEnemyTargeted => Target != null && Target.HasCategory(enemyCategory);
     public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
@@ -85,41 +87,6 @@ public abstract class Entity : BaseObject
         StateMachine = GetComponent<MonoStateMachine<Entity>>();
         StateMachine.Setup(this);
     }
-
-
-    private Coroutine coSearchingEnemy;
-    public bool EnableSearching
-    {
-        set
-        {
-            if (IsDead)
-                return;
-
-            if (value)
-            {
-                if (coSearchingEnemy == null)
-                    StartCoroutine("SearchingEnemy");
-            }
-            else
-            {
-                if (coSearchingEnemy != null)
-                {
-                    StopCoroutine(coSearchingEnemy);
-                    coSearchingEnemy = null;
-                }
-            }
-        }
-    }
-    private IEnumerator SearchingEnemy()
-    {
-        while (true)
-        {
-            FindNearestEnemy();
-            yield return WaitFor.Seconds(0.5f);
-        }
-    }
-
-    public virtual void FindNearestEnemy() { }
 
     private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
     {

@@ -6,6 +6,7 @@ public class Pivot : MonoBehaviour
     private Transform pivot;
     public Transform Destination { get; protected set; }
     
+
     private void Awake()
     {
         pivot = this.transform;
@@ -13,6 +14,7 @@ public class Pivot : MonoBehaviour
 
         Destination.GetComponent<SpriteRenderer>().sortingOrder = Define.SortingLayers.JOYSTICK;
     }
+
 
     public void SetRadius(float radius = 3f)
     {
@@ -23,4 +25,5 @@ public class Pivot : MonoBehaviour
     {
         pivot.eulerAngles = new Vector3(0, 0 , angle);
     }
+
 }

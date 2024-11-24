@@ -84,6 +84,12 @@ public class SelectNearestEntity : TargetSelectionAction
     public override void Select(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, SelectCompletedHandler onSelectCompleted)
     {
+        if (requesterEntity.Target == null)
+        {
+            onSelectCompleted.Invoke(SelectImmediate(targetSearcher, requesterEntity, requesterObject, requesterEntity.Position));
+            return;
+        }
+
         onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, requesterEntity.Target.Position));
     }
 

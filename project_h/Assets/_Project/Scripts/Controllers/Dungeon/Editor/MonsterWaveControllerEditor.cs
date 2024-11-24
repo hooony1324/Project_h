@@ -19,7 +19,16 @@ public class MonsterWaveControllerEditor : Editor
     {
         serializedObject.Update();
 
-        DrawPropertiesExcluding(serializedObject, "_waveDurationList");
+        // _forceSpawnAfterDuration 속성을 직접 그리고 즉시 적용
+        EditorGUI.BeginChangeCheck();
+        EditorGUILayout.PropertyField(_forceSpawnAfterDurationProperty);
+        if (EditorGUI.EndChangeCheck())
+        {
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        // 나머지 속성들 (_waveDurationList 제외)
+        DrawPropertiesExcluding(serializedObject, "_waveDurationList", "_forceSpawnAfterDuration");
 
         EditorGUILayout.Space();
         EditorGUILayout.LabelField("Wave Duration List", EditorStyles.boldLabel);

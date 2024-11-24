@@ -55,7 +55,6 @@ public class Dungeon : InitOnce
         _openedIndexes.Add(initialRoomIndex);
 
         _startRoom = _rooms[0];
-        _startRoom.State = DungeonRoom.RoomState.Cleared;
 
         return true;
     }
@@ -301,8 +300,8 @@ public class Dungeon : InitOnce
         Vector3 gridAPos = GetIsometricPosition(gridA[indexA]);
         Vector3 gridBPos = GetIsometricPosition(gridB[indexB]);
 
-        Vector3 doorAOffset = GetDoorVector(doorADir);
-        Vector3 doorBOffset = GetDoorVector(doorBDir);
+        Vector3 doorAOffset = GetDoorVector(doorADir, 2);
+        Vector3 doorBOffset = GetDoorVector(doorBDir, 2);
 
         Vector3 doorAPos = gridAPos + doorAOffset;
         Vector3 doorBPos = gridBPos + doorBOffset;

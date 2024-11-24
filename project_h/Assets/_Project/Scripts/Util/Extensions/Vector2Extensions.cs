@@ -26,7 +26,7 @@ public static class Vector2Extensions
         float minRadiusSquared = minRadius * minRadius;
         float maxRadiusSquared = maxRadius * maxRadius;
         float distance = Mathf.Sqrt(Random.value * (maxRadiusSquared - minRadiusSquared) + minRadiusSquared);
-
+        
         Vector2 position = direction * distance;
         return origin + position;
     }

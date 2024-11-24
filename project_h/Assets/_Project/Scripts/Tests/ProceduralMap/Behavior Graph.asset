@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VersionTimestamp: 0
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 16490889037881281651
+    m_Value1: 5655240296147222987
   m_Blackboard:
     m_Variables: []
   m_SharedBlackboardVariableGuids: []
@@ -35,16 +35,16 @@ MonoBehaviour:
   m_Name: Behavior Graph
   m_EditorClassIdentifier: 
   Graphs:
-  - rid: 4885778253878394895
+  - rid: 4885778253878395006
   RootGraph:
-    rid: 4885778253878394895
+    rid: 4885778253878395006
   m_DebugInfo: {fileID: 695390379490817923}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4885778253878394895
+    - rid: 4885778253878395006
       type: {class: BehaviorGraphModule, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         AuthoringAssetID:
@@ -52,31 +52,31 @@ MonoBehaviour:
           m_Value1: 5655240296147222987
         m_DebugInfo: {fileID: 0}
         Root:
-          rid: 4885778253878394896
+          rid: 4885778253878395007
         BlackboardReference:
-          rid: 4885778253878394897
+          rid: 4885778253878395008
         BlackboardGroupReferences: []
         m_VersionTimestamp: 0
-    - rid: 4885778253878394896
+    - rid: 4885778253878395007
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
           m_Value0: 2163945558146412289
           m_Value1: 8622083377728340035
         Graph:
-          rid: 4885778253878394895
+          rid: 4885778253878395006
         m_Parent:
           rid: -2
         m_Child:
           rid: -2
         Repeat: 1
-    - rid: 4885778253878394897
+    - rid: 4885778253878395008
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Blackboard:
-          rid: 4885778253878394898
+          rid: 4885778253878395009
         m_Source: {fileID: -8493609746134266230}
-    - rid: 4885778253878394898
+    - rid: 4885778253878395009
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables: []
@@ -165,8 +165,8 @@ MonoBehaviour:
   m_Name: Behavior Graph Blackboard Editor
   m_EditorClassIdentifier: 
   AssetID:
-    m_Value0: 0
-    m_Value1: 0
+    m_Value0: 16490889037881281651
+    m_Value1: 5655240296147222987
   m_Variables:
   - rid: 4885778253878394882
   m_VersionTimestamp: 0

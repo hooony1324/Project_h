@@ -48461,6 +48461,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7139243201026328405}
     m_Modifications:
+    - target: {fileID: 316257979744284412, guid: ba5f82cc79608484b8607151290fed11, type: 3}
+      propertyPath: _waveDurationList.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3518593987989479839, guid: ba5f82cc79608484b8607151290fed11, type: 3}
       propertyPath: m_TileModifiers.Array.size
       value: 2

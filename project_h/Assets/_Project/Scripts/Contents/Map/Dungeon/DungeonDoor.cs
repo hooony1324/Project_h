@@ -39,13 +39,15 @@ public class DungeonDoor : BaseObject
     public void Open()
     {
         _isOpened = true;
-        gameObject.SetActive(true);
+
+        // 열림 처리(애니메이션, Sprite, 소리 등)
     }
 
     public void Close()
     {
         _isOpened = false;
-        gameObject.SetActive(false);
+
+        // 닫힘 처리(애니메이션, Sprite, 소리 등)
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -69,7 +71,7 @@ public class DungeonDoor : BaseObject
         if (!other.CompareTag("Player"))
             return;
 
-        if (Owner.IsCleared)
+        if (Owner.IsWaveCleared)
             Open();
     }
 

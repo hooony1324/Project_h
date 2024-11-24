@@ -1,15 +1,22 @@
 using static Define;
+using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 
+/// <summary> 주변에 적을 감지하면 추적하여 공격한다 </summary>
 public class EntityDefaultState : State<Entity>
 {
+
+
     protected override void Setup() 
     {
-        
+
     }
 
     public override void Enter() 
     {
-        Entity.EnableSearching = true;
+        
     }
 
     public override void Update() 
@@ -19,8 +26,9 @@ public class EntityDefaultState : State<Entity>
 
     public override void Exit() 
     {
-        Entity.EnableSearching = false;
+        
     }
+
 
     public override bool OnReceiveMessage(int message, object data)
     {

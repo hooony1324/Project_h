@@ -7,7 +7,6 @@ using UnityEditor;
 public class EntityDataEditor : Editor
 {
     SerializedProperty spriteProperty;
-
     SerializedProperty entityIdProperty;
 
     protected virtual void OnEnable()
@@ -18,43 +17,56 @@ public class EntityDataEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        EditorGUI.BeginChangeCheck();
-        base.OnInspectorGUI();
+        serializedObject.Update();
 
-        string newValue = EditorGUILayout.DelayedTextField(entityIdProperty.stringValue);
-        entityIdProperty.stringValue = newValue;
+        // Draw all serialized fields
+        EditorGUILayout.PropertyField(spriteProperty);
+        DrawPropertiesExcluding(serializedObject, "m_Script", "entityId", "sprite");
+
+        // entityId 변경 시 에셋 이름 변경 로직
+        EditorGUI.BeginChangeCheck();
+        var prevCodeName = entityIdProperty.stringValue;
+        EditorGUILayout.DelayedTextField(entityIdProperty);
 
         if (EditorGUI.EndChangeCheck())
         {
-            var entityData = (EntityData)target;
-            if (!string.IsNullOrEmpty(newValue))
+            var assetPath = AssetDatabase.GetAssetPath(target);
+            EntityData entityData = (EntityData)target;
+
+            // entityId를 대문자로 변환
+            var newName = $"{entityData.GetAssetPrefix().ToUpper()}_{entityIdProperty.stringValue.ToUpper()}";
+            entityIdProperty.stringValue = newName;
+
+            serializedObject.ApplyModifiedProperties();
+            
+            target.name = newName;
+
+            var message = AssetDatabase.RenameAsset(assetPath, newName);
+            if (!string.IsNullOrEmpty(message))
             {
-                string prefix = entityData.GetAssetPrefix();
-                string newId = $"{prefix}_{newValue.ToUpper()}";
-                entityData.entityId = newId;
-
-                string assetPath = AssetDatabase.GetAssetPath(entityData);
-                AssetDatabase.RenameAsset(assetPath, newId);
-
+                // 실패시 원래 값으로 되돌림
+                entityIdProperty.stringValue = prevCodeName;
+                target.name = prevCodeName;
                 serializedObject.ApplyModifiedProperties();
+                Debug.LogError($"Failed to rename asset: {message}");
             }
         }
 
+        // Load Stats 버튼
         if (GUILayout.Button("Load Stats"))
         {
             EntityData entityData = (EntityData)target;
             entityData.LoadStats();
-
-            // 변경 사항을 저장하고 Inspector 업데이트
             EditorUtility.SetDirty(target);
         }
 
+        // Sprite 프리뷰
         GUILayout.BeginHorizontal();
-    
         EditorGUILayout.ObjectField(GUIContent.none, spriteProperty.objectReferenceValue,
                  typeof(Sprite), false, GUILayout.Height(100));
-
         GUILayout.EndHorizontal();
+
+        serializedObject.ApplyModifiedProperties();
     }
 }
 #endif

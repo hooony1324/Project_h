@@ -49,20 +49,20 @@ public class PlayerController : InitOnce
                 // Use안되고 PointerDown                => ReservedSkill
                 // Use후 쫒아가는 중 PointerDown        => 
                 // Use > InSkillActionState 에서        =>
-                controlTarget.Movement.IsForcedMoving = true;
+                controlTarget.Movement.TraceTarget = null;
                 controlTarget.SkillSystem.CancelAll(isForce:true);
                 controlTarget.SkillSystem.CancelReservedSkill();
+                controlTarget.Movement.IsForcedMoving = true;
                 controlTarget.Target = null;
-                controlTarget.Movement.TraceTarget = null;
                 break;
             case EJoystickState.Drag:
                 break;
             case EJoystickState.PointerUp:
-                controlTarget.Movement.IsForcedMoving = false;
+                controlTarget.Movement.TraceTarget = null;
                 controlTarget.SkillSystem.CancelAll(isForce:true);
                 controlTarget.SkillSystem.CancelReservedSkill();
+                controlTarget.Movement.IsForcedMoving = false;
                 controlTarget.Target = null;
-                controlTarget.Movement.TraceTarget = null;
                 break;
         }
     }
@@ -84,25 +84,17 @@ public class PlayerController : InitOnce
         if (controlTarget == null)
             return;
 
-        if (controlTarget)
-            transform.position = controlTarget.Position;
+        transform.position = controlTarget.Position;
 
+        UpdateTargetMovement();
+    }
+
+    void UpdateTargetMovement()
+    {
         if (controlTarget.Movement.enabled == false)
             return;
 
         controlTarget.Movement.Move(moveDir);
-
-        if (controlTarget.Movement.IsForcedMoving)
-            return;
-
-        if (controlTarget.Target == null)
-            return;
-
-        if (controlTarget.SkillSystem.DefaultAttack.IsUseable)
-        {
-            controlTarget.SkillSystem.DefaultAttack.Use();
-        }
-
     }
 
     void HandleOnMoveDirChanged(Vector2 dir)

@@ -10,7 +10,6 @@ public class MonsterWaveController : InitOnce
     public event WavesClearedHandler onWavesCleared = () => { };
 
     private int _currentWaveIndex = 0;
-    private int _killedMonsterCount = 0;
     private float _waveTimer = 0f;
     private bool _isWaveInProgress = false;
 
@@ -20,6 +19,9 @@ public class MonsterWaveController : InitOnce
     [SerializeField] private bool _forceSpawnAfterDuration = false;
 
     
+    private int _killCount = 0;
+    private int _targetKillCount = 0;
+    private int _totalKillCount = 0;
     private int _totalMonsterCount = 0;
 
     [Space(20)]
@@ -31,11 +33,13 @@ public class MonsterWaveController : InitOnce
         public Vector3 position;
     }
 
-    private SpawnData[][] _spawnDataList;
+    private List<List<SpawnData>> _spawnDataList;
 
-    public void InitWaveDatas()
+    public void InitWaveDatas(DungeonRoom owner)
     {
-        _spawnDataList = new SpawnData[transform.childCount][];
+        _spawnDataList = new ();
+
+        _totalMonsterCount = 0;
         for (int i = 0; i < transform.childCount; i++)
         {
             Tilemap tilemap = transform.GetChild(i).GetComponent<Tilemap>();
@@ -45,7 +49,8 @@ public class MonsterWaveController : InitOnce
 
             var bounds = tilemap.cellBounds;
             var size = bounds.size;
-            _spawnDataList[i] = new SpawnData[size.x * size.y];
+
+            _spawnDataList.Add(new List<SpawnData>());
 
             for (int x = bounds.min.x; x < bounds.max.x; x++)
             {
@@ -57,16 +62,22 @@ public class MonsterWaveController : InitOnce
                     if (tile != null)
                     {
                         int index = (x - bounds.min.x) * size.y + (y - bounds.min.y);
-                        _spawnDataList[i][index] = new SpawnData()
+                        _spawnDataList[i].Add(new SpawnData()
                         {
                             monsterDataName = tile.entityDataName,
                             position = tilemap.CellToWorld(tilePos),
-                        };
+                        });
+                        _totalMonsterCount++;
                     }
                 }
             }
 
             tilemap.gameObject.SetActive(false);
+        }
+
+        if (_totalMonsterCount == 0)
+        {
+            owner.State = DungeonRoom.RoomState.Cleared;
         }
     }
 
@@ -76,6 +87,7 @@ public class MonsterWaveController : InitOnce
         if (!_isWaveInProgress)
             return;
 
+        // 웨이브 처리 못해도 진행하는 경우
         if (_forceSpawnAfterDuration)
         {
             if (Time.time >= _waveTimer)
@@ -87,27 +99,23 @@ public class MonsterWaveController : InitOnce
 
     public void StartWave(int waveIndex = 0)
     {
-        if (waveIndex >= _spawnDataList.Length)
-        {
-            onWavesCleared.Invoke();
-            return;
-        }
-
         _currentWaveIndex = waveIndex;
-        _killedMonsterCount = 0;
-        _waveTimer = Time.time + _waveDurationList[waveIndex];
+        _killCount = 0;
         _isWaveInProgress = true;
-        _totalMonsterCount = 0;
+        _targetKillCount = 0;
+
+        if (_forceSpawnAfterDuration)
+        {
+            _waveTimer = Time.time + _waveDurationList[waveIndex];
+        }
 
         foreach (var spawnData in _spawnDataList[waveIndex])
         {
             if (spawnData == null)
                 continue;
 
-
-
             SpawnMonster(spawnData.monsterDataName, spawnData.position);
-            _totalMonsterCount++;
+            _targetKillCount++;
         }
 
     }
@@ -121,11 +129,19 @@ public class MonsterWaveController : InitOnce
 
     private void OnMonsterDeath(Entity entity)
     {
-        _killedMonsterCount++;
+        _killCount++;
+        _totalKillCount++;
         
-        if (_killedMonsterCount >= _totalMonsterCount)
+        if (_killCount >= _targetKillCount)
         {
-            StartNextWave();
+            if (_totalKillCount >= _totalMonsterCount)
+            {
+                onWavesCleared.Invoke();
+            }
+            else
+            {
+                StartNextWave();
+            }
         }
     }
 

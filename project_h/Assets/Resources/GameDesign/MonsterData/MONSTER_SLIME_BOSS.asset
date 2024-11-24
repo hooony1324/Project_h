@@ -21,8 +21,8 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
+    isUseOverride: 1
+    overrideDefaultValue: 3
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0

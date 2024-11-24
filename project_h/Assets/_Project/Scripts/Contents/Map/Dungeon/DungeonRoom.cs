@@ -127,8 +127,8 @@ public class DungeonRoom : InitOnce
         Cleared,    // (Unlocked) Monster Wave 다 처리함
     }
 
-    public bool IsCleared => _isCleared;
-    private bool _isCleared = false;
+    public bool IsWaveCleared => _isWaveCleared;
+    private bool _isWaveCleared = false;
 
     private RoomState _state = RoomState.Locked;
 
@@ -179,12 +179,12 @@ public class DungeonRoom : InitOnce
     private MonsterWaveController _waveController;
     public void InitWaveController()
     {
-        _waveController.InitWaveDatas();
+        _waveController.InitWaveDatas(this);
     }
 
     private async Awaitable StartWave()
     {
-        if (_isCleared)
+        if (_isWaveCleared)
             return;
 
         _waveController.onWavesCleared += () =>
@@ -199,12 +199,12 @@ public class DungeonRoom : InitOnce
 
     void ClearWave()
     {
-        _isCleared = true;
+        _isWaveCleared = true;
     }
 
     public void HandleHeroVisited()
     {
-        if (_isCleared == true)
+        if (_isWaveCleared == true)
             return;
 
         State = RoomState.WaveStarted;

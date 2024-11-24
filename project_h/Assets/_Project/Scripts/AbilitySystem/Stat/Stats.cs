@@ -1,3 +1,5 @@
+using System;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,16 +12,17 @@ public class Stats : MonoBehaviour
     private StatOverride[] statOverrides;
     private Stat[] stats;
 
-    [SerializeField] private Stat hpStat;
-    [SerializeField] private Stat moveSpeedStat;
-    [SerializeField] private Stat levelStat;
-    [SerializeField] private Stat searchRangeStat;
-    [SerializeField] private Stat attackRangeStat;
-    public Stat HPStat { get; private set; }
-    public Stat MoveSpeedStat { get; private set; }
-    public Stat LevelStat { get; private set; }
-    public Stat SearchRangeStat { get; private set; }
-    public Stat AttackRangeStat { get; private set; }
+    public Stat HPStat => hpStat;
+    public Stat MoveSpeedStat => moveSpeedStat;
+    public Stat LevelStat => levelStat;
+    public Stat SearchRangeStat => searchRangeStat;
+    public Stat AttackRangeStat => attackRangeStat;
+
+    [SerializeField, ReadOnly] private Stat hpStat;
+    [SerializeField, ReadOnly] private Stat moveSpeedStat;
+    [SerializeField, ReadOnly] private Stat levelStat;
+    [SerializeField, ReadOnly] private Stat searchRangeStat;
+    [SerializeField, ReadOnly] private Stat attackRangeStat;
 
     public Entity Owner { get; private set; }
 
@@ -27,14 +30,13 @@ public class Stats : MonoBehaviour
     {
         Owner = interactionObject;
 
-        // TODO: Data세팅하고 Data의 statOverrides를 가져와야 함
         stats = statOverrides.Select(x => x.CreateStat()).ToArray();
 
-        HPStat =  GetStat("HP");
-        MoveSpeedStat = GetStat("MOVE_SPEED");
-        LevelStat = GetStat("LEVEL");
-        SearchRangeStat = GetStat("RANGE_SEARCH");
-        AttackRangeStat = GetStat("RANGE_ATTACK");
+        hpStat =  GetStat("HP");
+        moveSpeedStat = GetStat("MOVE_SPEED");
+        levelStat = GetStat("LEVEL");
+        searchRangeStat = GetStat("RANGE_SEARCH");
+        attackRangeStat = GetStat("RANGE_ATTACK");
     }
 
     private void OnDestroy()

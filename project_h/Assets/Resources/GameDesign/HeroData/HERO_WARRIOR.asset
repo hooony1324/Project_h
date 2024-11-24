@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6f474d73aade44fbc91f8455c9868e, type: 3}
   m_Name: HERO_WARRIOR
   m_EditorClassIdentifier: 
-  entityId: warrior
+  entityId: HERO_WARRIOR
   sprite: {fileID: 21300000, guid: 1f250e33fe31f3d49b9ecbaf5d373370, type: 3}
   scale: 1
   animatorControllerName: Hero_Warrior
@@ -24,8 +24,8 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
+    isUseOverride: 1
+    overrideDefaultValue: 500
   - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0

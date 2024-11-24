@@ -20,9 +20,9 @@ public class EntityMovement : MonoBehaviour
     public event SetDestinationHandler onSetDestination;
 
     public Entity Owner { get; private set; }
-    public bool IsAgentMoving => agent.velocity.sqrMagnitude > 0f;
+    public bool IsMoving => IsForcedMoving ? IsForcedMoving : agent.velocity.sqrMagnitude > 0.2f;
 
-    // 조이스틱에 의한 강제 이동
+    // 외부에 의한 강제 이동
     public bool IsForcedMoving {get; set;}
 
     public bool AgentEnabled
@@ -122,6 +122,9 @@ public class EntityMovement : MonoBehaviour
             return;
         }
 
+        if (agent.enabled == false)
+            return;
+
         agent.destination = destination;
         LookAt(destination);
 
@@ -214,7 +217,9 @@ public class EntityMovement : MonoBehaviour
                 yield return null;
             }
             else
+            {
                 break;
+            }
         }
     }
 }
