@@ -78,7 +78,7 @@ public enum InSkillActionFinishOption
 public enum NeedSelectionResultType
 {
     Target,
-    Position
+    Position,
 }
 
 // TargetSearcher의 SelectTarget이 실행되는 타이밍이 언제인가?

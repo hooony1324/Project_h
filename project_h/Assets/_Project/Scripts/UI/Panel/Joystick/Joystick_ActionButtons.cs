@@ -22,10 +22,12 @@ public class Joystick_ActionButtons : InitOnce
         _owner = owner;
 
         _rollButton.UnBindSkill();
-        //_attackButton.UnBindSkill();
+        _attackButton.UnBindSkill();
 
-        _rollButton.BindSkill(_owner.SkillSystem.Roll);
-        //_attackButton.BindSkill();
+        _rollButton.BindSkill(_owner, _owner.SkillSystem.Roll);
+        _attackButton.BindSkill(_owner, _owner.SkillSystem.TestSkill);
+
+        
     }
 
 

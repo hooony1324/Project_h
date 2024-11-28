@@ -61,6 +61,15 @@ public class SkillSystem : MonoBehaviour
     [SerializeReference]
     public Skill Roll;
     // SkillA, SkilB ??
+    [SerializeReference]
+    public Skill TestSkill;
+
+    [Button("TestSkillClicked")]
+    public bool bTestSkillClicked = true;
+    public void TestSkillClicked()
+    {
+        TestSkill?.Use();
+    }
 
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
@@ -74,6 +83,7 @@ public class SkillSystem : MonoBehaviour
 
         DefaultAttack = ownSkills.Find(x => x.ID == DefaultAttack.ID);
         Roll = ownSkills.Find(x => x.ID == Roll.ID);
+        TestSkill = ownSkills.Find(x => x.ID == TestSkill.ID);
     }
 
     private void SetupSkills()

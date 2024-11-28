@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 [System.Serializable]
@@ -7,17 +8,21 @@ public class CircleIndicatorViewAction : IndicatorViewAction
 {
     [SerializeField]
     private GameObject indicatorPrefab;
+
     // 생성한 indicator의 radius 값
     // 만약 0이면 targetSearcher의 range를 대신 사용함
     [SerializeField]
     private float indicatorRadiusOverride;
+
     // 생성한 indicator의 angle 값
     // 만약 0이면 targetSearcher의 angle을 대신 사용함
     [SerializeField]
     private float indicatorAngleOverride;
+
     // Indicator의 속을 채우는 fillAmount Property를 사용할 것인가?
     [SerializeField]
     private bool isUseIndicatorFillAmount;
+    
     // Indicator를 requsterObject의 자식 Object로 만들 것인가?
     [SerializeField]
     private bool isAttachIndicatorToRequester;
@@ -46,7 +51,14 @@ public class CircleIndicatorViewAction : IndicatorViewAction
 
         // Indicator를 생성하고, Setup 함수로 위에서 정한 값들을 Setting해줌
         spawnedRangeIndicator = GameObject.Instantiate(indicatorPrefab).GetComponent<Indicator>();
-        spawnedRangeIndicator.Setup(angle, radius, fillAmount, attachTarget);
+        spawnedRangeIndicator.Setup(new CircleIndicator.CircleArea() { angle = angle, radius = radius }, fillAmount, traceTarget: attachTarget);
+
+        // Rotate Indicator to target position
+        var targetPos = targetSearcher.SelectionResult.selectedPosition;
+        var dir = targetPos - requesterObject.transform.position;
+        spawnedRangeIndicator.transform.localRotation = Quaternion.identity;
+        float rotateAngle = Vector2.SignedAngle(Vector2.up, new Vector2(dir.x, dir.y));
+        spawnedRangeIndicator.transform.Rotate(Vector3.forward, rotateAngle);
     }
 
     public override void HideIndicator()

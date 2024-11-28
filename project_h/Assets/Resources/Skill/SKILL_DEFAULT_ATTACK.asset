@@ -49,9 +49,11 @@ MonoBehaviour:
       scaleStat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
     targetSearcher:
       selectionAction:
-        rid: 3506563725652131866
+        rid: 4885778306204434602
       searchAction:
-        rid: 3506563725652131867
+        rid: 4885778306204434601
+      scale: 1
+      <IsSearching>k__BackingField: 0
     costs: []
     isUseCast: 0
     castTime:
@@ -70,19 +72,88 @@ MonoBehaviour:
     castAnimatorParamter:
       type: 0
       name: 
+      hash: 0
     chargeAnimatorParameter:
       type: 0
       name: 
+      hash: 0
     precedingActionAnimatorParameter:
       type: 0
       name: 
+      hash: 0
     actionAnimatorParameter:
       type: 0
       name: isDefaultAttack
+      hash: 0
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []
     customActionsOnAction: []
+  currentData:
+    level: 0
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: -2
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 0
+    applyCycle: 0
+    cooldown:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 4885778306204434600
+      searchAction:
+        rid: -2
+      scale: 1
+      <IsSearching>k__BackingField: 0
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    effectSelectors: []
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+      hash: 0
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    actionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  level: 0
+  currentApplyCount: 0
+  currentCastTime: 0
+  currentCooldown: 0
+  currentDuration: 0
+  currentChargePower: 0
+  currentChargeDuration: 0
+  <Owner>k__BackingField: {fileID: 0}
+  <CurrentApplyCycle>k__BackingField: 0
+  <IsActivated>k__BackingField: 0
   references:
     version: 2
     RefIds:
@@ -90,22 +161,33 @@ MonoBehaviour:
       type: {class: , ns: , asm: }
     - rid: 3506563672370053137
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-      data: 
+      data: {}
     - rid: 3506563672370053164
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 3506563725652131866
-      type: {class: SelectNearestEntity, ns: , asm: Assembly-CSharp}
+      data: {}
+    - rid: 4885778306204434600
+      type: {class: SelectMeleeTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
+        scale: 0
         isSelectSameCategory: 0
-    - rid: 3506563725652131867
+    - rid: 4885778306204434601
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
+        scale: 0
+    - rid: 4885778306204434602
+      type: {class: SelectAutoByAttackRange, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        scale: 0
+        isSelectSameCategory: 0

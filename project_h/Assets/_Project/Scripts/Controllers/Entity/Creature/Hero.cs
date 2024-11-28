@@ -65,10 +65,10 @@ public class Hero : Entity
         if (Target == null)
             return;
 
-        if (SkillSystem.DefaultAttack.IsUseable)
-        {
-            SkillSystem.DefaultAttack.Use();
-        }
+        // if (SkillSystem.DefaultAttack.IsUseable)
+        // {
+        //     SkillSystem.DefaultAttack.Use();
+        // }
 
     }
 
@@ -81,7 +81,7 @@ public class Hero : Entity
                 break;
             }
 
-            if (Target != null || Stats == null)
+            if (Stats == null)
             {
                 await UniTask.NextFrame();
                 continue;
@@ -114,43 +114,5 @@ public class Hero : Entity
         }
     }
 
-    // public override void FindNearestEnemy()
-    // {
-    //     if (Target != null)
-    //         return;
-
-    //     float searchRange = Stats.GetValue(Stats.SearchRangeStat);
-
-    //     int monsterLayer = Util.GetLayerMask("Monster");
-    //     var colliders = Physics2D.OverlapCircleAll(Position, searchRange, monsterLayer);
-
-    //     float nearestDistance = Mathf.Infinity;
-    //     Entity nearestEnemy = null;
-    //     foreach (var collider in colliders)
-    //     {
-    //         var entity = collider.GetComponent<Entity>();
-    //         if (entity == this || entity.IsDead)
-    //             continue;
-
-    //         if (!entity.HasCategory(enemyCategory))
-    //             continue;
-
-    //         float distance = Vector2.Distance(entity.Position, transform.position);
-    //         if (distance < nearestDistance)
-    //         {
-    //             nearestDistance = distance;
-    //             nearestEnemy = entity;
-    //         }
-    //     }
-
-    //     if (nearestEnemy)
-    //     {
-    //         Target = nearestEnemy;
-    //         return;
-    //     }
-
-    //     Target = null;
-    //     return;
-    // }
 
 }

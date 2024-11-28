@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-public class Joystick_SkillButton_CoolTime : UI_Base
+public class Joystick_SkillButton_CoolTime : SkillButton
 {
-    private Skill _skill;
 
     enum Sliders
     {
@@ -32,8 +31,6 @@ public class Joystick_SkillButton_CoolTime : UI_Base
         BindImages(typeof(Images));
         BindTMPTexts(typeof(TMPTexts));
 
-        gameObject.BindEvent(OnClickButton);
-
         GetSlider((int)Sliders.RadialSlider).value = 0;
         GetImage((int)Images.SkillIcon).gameObject.SetActive(false);
         GetTMPText((int)TMPTexts.CooltimeText).gameObject.SetActive(false);
@@ -41,12 +38,12 @@ public class Joystick_SkillButton_CoolTime : UI_Base
         return true;
     }
 
-    public void BindSkill(Skill skill)
+    public override void BindSkill(Entity owner, Skill skill)
     {
-        if (_skill)
-            _skill.onStateChanged -= OnSkillStateChanged;
+        if (Skill)
+            Skill.onStateChanged -= OnSkillStateChanged;
         
-        _skill = skill;
+        base.BindSkill(owner, skill);
         
         if (skill != null)
         {
@@ -64,19 +61,14 @@ public class Joystick_SkillButton_CoolTime : UI_Base
         
     }
 
-    public void UnBindSkill()
+    public override void UnBindSkill()
     {
-        if (_skill)
+        base.UnBindSkill();
+        if (Skill != null)
         {
-            _skill.onStateChanged -= OnSkillStateChanged;
+            Skill.onStateChanged -= OnSkillStateChanged;
             GetImage((int)Images.SkillIcon).gameObject.SetActive(false);
         }
-    }
-
-    private void OnClickButton()
-    {
-        if (_skill.IsUseable)
-            _skill.Use();
     }
 
     // private void Update()
@@ -106,13 +98,13 @@ public class Joystick_SkillButton_CoolTime : UI_Base
         slider.gameObject.SetActive(true);
         cooltime.gameObject.SetActive(true);
 
-        if (_skill.ApplyCycle > 0f)
+        if (Skill.ApplyCycle > 0f)
             slider.value = 1;
         
-        while (_skill.IsInState<CooldownState>())
+        while (Skill.IsInState<CooldownState>())
         {
-            cooltime.text = _skill.CurrentCooldown.ToString("F1");
-            slider.value = _skill.CurrentCooldown / _skill.Cooldown;
+            cooltime.text = Skill.CurrentCooldown.ToString("F1");
+            slider.value = Skill.CurrentCooldown / Skill.Cooldown;
 
             await Awaitable.EndOfFrameAsync();
         }
@@ -125,13 +117,13 @@ public class Joystick_SkillButton_CoolTime : UI_Base
     {
         Slider slider = GetSlider((int)Sliders.RadialSlider);
 
-        if (_skill.ApplyCycle > 0f)
+        if (Skill.ApplyCycle > 0f)
             slider.value = 1;
 
-        while (_skill.IsInState<InActionState>())
+        while (Skill.IsInState<InActionState>())
         {
             if (slider.gameObject.activeSelf)
-                slider.value = 1f - (_skill.CurrentApplyCycle / _skill.ApplyCycle);
+                slider.value = 1f - (Skill.CurrentApplyCycle / Skill.ApplyCycle);
             
             // 리븐 Q 스킬(총 3번 누름) 1번 > 2번 > 3번
             // - 1번 ~ 2번, 2번 ~ 3번 스킬을 누를 수 있는 제한시간 있음, 제한시간을 테두리로 표현
@@ -140,9 +132,10 @@ public class Joystick_SkillButton_CoolTime : UI_Base
             // borderImage.fillAmount = 1f (_skill.CurrentDuration / _skill.Duration);
 
             await Awaitable.EndOfFrameAsync();
+
         }
 
-        if (!_skill.IsInState<CooldownState>())
+        if (!Skill.IsInState<CooldownState>())
             slider.value = 0;
         
     }

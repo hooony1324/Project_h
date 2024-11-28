@@ -7,6 +7,7 @@ public class HeroStateMachine : EntityStateMachine
         AddState<EntityDefaultState>();
         AddState<DeadState>();
         AddState<RollingState>();
+        AddState<ChargingSkillState>();
         AddState<InSkillPrecedingActionState>();
         AddState<InSkillActionState>();
     }
@@ -16,12 +17,17 @@ public class HeroStateMachine : EntityStateMachine
         // Default State
         MakeTransition<EntityDefaultState, RollingState>(state => Owner.Movement?.IsRolling ?? false);
         // MakeTransition<EntityDefaultState, CastingSkillState>(EntityStateCommand.ToCastingSkillState);
-        // MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
+        MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
         MakeTransition<EntityDefaultState, InSkillPrecedingActionState>(EntityStateCommand.ToInSkillPrecedingActionState);
         MakeTransition<EntityDefaultState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
 
         // Rolling State
         MakeTransition<RollingState, EntityDefaultState>(state => !Owner.Movement.IsRolling);
+
+        // Charging State
+        MakeTransition<ChargingSkillState, InSkillPrecedingActionState>(EntityStateCommand.ToInSkillPrecedingActionState);
+        MakeTransition<ChargingSkillState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
+        MakeTransition<ChargingSkillState, EntityDefaultState>(state => !IsSkillInState<ChargingState>(state));
 
         // PrecedingAction State
         MakeTransition<InSkillPrecedingActionState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);

@@ -90,10 +90,12 @@ public abstract class Entity : BaseObject
 
     private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
     {
-        if (result.resultMessage != SearchResultMessage.OutOfRange ||
-            !skill.IsInState<SearchingTargetState>())
+        if (result.resultMessage != SearchResultMessage.OutOfRange)
             return;
         
+        if (!skill.IsInState<SearchingTargetState>())
+            return;
+            
         SkillSystem.ReserveSkill(skill);
 
         var selectionResult = skill.TargetSelectionResult;

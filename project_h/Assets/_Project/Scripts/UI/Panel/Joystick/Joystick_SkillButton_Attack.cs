@@ -1,16 +1,25 @@
 using UnityEngine;
 
-public class Joystick_SkillButton_Attack : MonoBehaviour
+public class Joystick_SkillButton_Attack : SkillButton
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override bool Init()
     {
-        
+        if (base.Init() == false)
+            return false;
+    
+
+
+        return true;
+    }
+    public override void BindSkill(Entity owner, Skill skill)
+    {
+        base.BindSkill(owner, skill);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UnBindSkill()
     {
-        
+        base.UnBindSkill();
     }
+
+
 }

@@ -461,11 +461,12 @@ public class Skill : IdentifiedObject
         if (isShowIndicator)
             ShowIndicator();
 
+        // TargetSearcher의 OnSelectCompleted 함수 실행시 실행될 익명 함수
         TargetSearcher.SelectTarget(Owner, Owner.gameObject, (targetSearcher, result) =>
         {
             if (isShowIndicator)
                 HideIndicator();
-
+ 
             // Skill이 필요로 하는 Type의 기준점 검색에 성공했고,
             // SearchTiming이 기준점 검색 직후라면(TargetSelectionCompleted) Target 검색 실행
             if (IsTargetSelectSuccessful && targetSearchTimingOption == TargetSearchTimingOption.TargetSelectionCompleted)

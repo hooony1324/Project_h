@@ -71,7 +71,7 @@ public abstract class TargetSelectionAction : ICloneable
         => requesterEntity.IsPlayer ? SelectImmediateByPlayer(targetSearcher, requesterEntity, requesterObject, position) :
         SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, position);
 
-    // 기준점을 찾았거나, 검색에 실패했을 시 onSelectCompleted callback 함수로 결과를 return해줌.
+    // [비동기] 기준점을 찾았거나, 검색에 실패했을 시 onSelectCompleted callback 함수로 결과를 return해줌.
     public abstract void Select(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, SelectCompletedHandler onSelectCompleted);
 

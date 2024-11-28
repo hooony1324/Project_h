@@ -3,15 +3,12 @@ using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
-public class SearchArea: TargetSearchAction
+public class SearchBoxArea : TargetSearchAction
 {
     [Header("Data")]
-    [Min(0f)]
     [SerializeField]
-    private float range;
-    [Range(0f, 360f)]
-    [SerializeField]
-    private float angle = 360f;
+    private Vector2 range;
+    
     // 검색을 요청한 Entity도 검색 대상에 포함할 것인가?
     [SerializeField]
     private bool isIncludeSelf;
@@ -20,15 +17,15 @@ public class SearchArea: TargetSearchAction
     private bool isSearchSameCategory;
 
     public override object Range => range;
+    // SearchAction의 Scale에 따라 검색 범위가 달라짐
     public override object ScaledRange => range * Scale;
-    public override float Angle => angle;
+    public override float Angle => 0;
 
-    public SearchArea() { }
+    public SearchBoxArea() { }
 
-    public SearchArea(SearchArea copy)
+    public SearchBoxArea(SearchBoxArea copy)
         : base(copy)
     {
-        range = copy.range;
         isIncludeSelf = copy.isIncludeSelf;
         isSearchSameCategory = copy.isSearchSameCategory;
     }
@@ -37,11 +34,18 @@ public class SearchArea: TargetSearchAction
         GameObject requesterObject, TargetSelectionResult selectResult)
     {
         var targets = new List<GameObject>();
-        var spherePosition = selectResult.resultMessage == SearchResultMessage.FindTarget ?
+        var targetPoint = selectResult.resultMessage == SearchResultMessage.FindTarget ?
             selectResult.selectedTarget.transform.position : selectResult.selectedPosition;
-        //var colliders = Physics.OverlapSphere(spherePosition, (float)ProperRange);
-        var colliders = Physics2D.OverlapCircleAll(spherePosition, (float)ProperRange);
+
+        Vector2 boxSize = (Vector2)ProperRange;
         Vector3 requesterPosition = requesterObject.transform.position;
+        Vector3 rushDirection = targetPoint - requesterPosition;
+        rushDirection = rushDirection.With(z:0).normalized * boxSize.y;
+
+        Vector2 boxPosition = requesterPosition + rushDirection * 0.5f;
+        float angle = Mathf.Atan2(rushDirection.y, rushDirection.x) * Mathf.Rad2Deg + 90f;
+        
+        var colliders = Physics2D.OverlapBoxAll(boxPosition, boxSize, angle);
 
         foreach (var collider in colliders)
         {
@@ -54,19 +58,19 @@ public class SearchArea: TargetSearchAction
             {
                 // Requester와 Entity가 공유하는 Category가 있는지 확인
                 var hasCategory = requesterEntity.Categories.Any(x => entity.HasCategory(x));
-                // 공유하는 Category가 있지만 isSearchSameCategory가 false거나,
+                // 공유 Category가 있지만 isSearchSameCategory가 false거나,
                 // 공유하는 Category가 없지만 isSearchSameCategory가 true라면 넘어감
                 if ((hasCategory && !isSearchSameCategory) || (!hasCategory && isSearchSameCategory))
                     continue;
             }
 
-            Vector3 entityPosition = entity.transform.position;
-            entityPosition.y = requesterPosition.y;
-            var direction = entityPosition - requesterPosition;
-            
-            if (Vector3.Angle(requesterObject.transform.forward, direction) < (angle * 0.5f))
-                targets.Add(entity.gameObject);
+            targets.Add(entity.gameObject);
         }
+
+        #if UNITY_EDITOR
+        GizmoSpawner.Instance.DrawDebugBox(boxPosition, boxSize, angle, 4f);
+        #endif
+
         return new(targets.ToArray());
     }
 
@@ -76,5 +80,5 @@ public class SearchArea: TargetSearchAction
         return dictionary;
     }
 
-    public override object Clone() => new SearchArea(this);
+    public override object Clone() => new SearchBoxArea(this);
 }

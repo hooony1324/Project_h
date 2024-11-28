@@ -52,6 +52,8 @@ public abstract class SelectTarget : TargetSelectionAction
             this.requesterEntity = requesterEntity;
             this.requesterObject = requesterObject;
             this.onSelectCompleted = onSelectCompleted;
+
+            // 사용자의 Select 액션 발생(ex.마우스 클릭) > Invoke onSelectCompleted 
         }
         else
             onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity,

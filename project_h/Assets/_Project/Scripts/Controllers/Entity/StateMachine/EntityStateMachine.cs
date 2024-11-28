@@ -8,6 +8,9 @@ public class EntityStateMachine : MonoStateMachine<Entity>
         AddState<EntityDefaultState>();
         AddState<DeadState>();
         AddState<RollingState>();
+
+        //AddState<ChargingSkillState>();
+
         AddState<InSkillPrecedingActionState>();
         AddState<InSkillActionState>();
     }
@@ -17,7 +20,7 @@ public class EntityStateMachine : MonoStateMachine<Entity>
         // Default State
         MakeTransition<EntityDefaultState, RollingState>(state => Owner.Movement?.IsRolling ?? false);
         // MakeTransition<EntityDefaultState, CastingSkillState>(EntityStateCommand.ToCastingSkillState);
-        // MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
+        //MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
         MakeTransition<EntityDefaultState, InSkillPrecedingActionState>(EntityStateCommand.ToInSkillPrecedingActionState);
         MakeTransition<EntityDefaultState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
 

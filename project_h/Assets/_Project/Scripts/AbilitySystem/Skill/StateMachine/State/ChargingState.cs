@@ -10,6 +10,7 @@ public class ChargingState : SkillState
     // 위와 마찬가지로 true라면 다른 State로 전이됨
     public bool IsChargeSuccessed { get; private set; }
 
+
     public override void Enter()
     {
         Entity.Activate();
@@ -17,6 +18,19 @@ public class ChargingState : SkillState
         if (Entity.Owner.IsPlayer)
         {
             Entity.SelectTarget(OnTargetSearchCompleted, false);
+        }
+        else
+        {
+            // 현재 상황 : SelectAction의 IsRange체크 실패 시 Charging Skill은 쓰지 못함
+            // - Charge > Searching > InActionState로 전이, Searching에서 Reserve가능
+            // => Charging Skill은 Reserve못함
+            TargetSelectionResult result = Entity.SelectTargetImmediate(Entity.Owner.Position);
+            if (result.resultMessage == SearchResultMessage.Fail || result.resultMessage == SearchResultMessage.OutOfRange)
+            {
+                Entity.Cancel();
+                Entity.Owner.StateMachine.ExecuteCommand(EntityStateCommand.ToDefaultState);
+                return;
+            }
         }
         Entity.ShowIndicator();
         Entity.StartCustomActions(SkillCustomActionType.Charge);

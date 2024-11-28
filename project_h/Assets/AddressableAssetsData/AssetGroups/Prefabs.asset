@@ -51,6 +51,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5e2d12db8a656443be3f7fc0a9549d9
+    m_Address: SquareIndicator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1efae1d281bf15419315ef54d0d01f7
     m_Address: Hero
     m_ReadOnly: 0
@@ -59,6 +65,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: da2001c82f0699b44aee93633a9897aa
     m_Address: DungeonMap_03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dbb040b56bfb0574b926b5dae80e0fae
+    m_Address: CircleIndicator
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

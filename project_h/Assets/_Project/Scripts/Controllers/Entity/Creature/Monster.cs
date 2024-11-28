@@ -54,8 +54,6 @@ public class Monster : Entity
         base.SetData(data);
 
         MonsterData monsterData = data as MonsterData;
-        SkillSystem.DefaultAttack.onUsed -= OnDefaultAttackUsed;
-        SkillSystem.DefaultAttack.onUsed += OnDefaultAttackUsed;
 
         onDead += HandleOnDead;
         Movement.AgentEnabled = true;
@@ -76,7 +74,6 @@ public class Monster : Entity
     void OnDisable()
     {
         ClearCancellationToken();
-        SkillSystem.DefaultAttack.onUsed -= OnDefaultAttackUsed;
     }
 
     void ClearCancellationToken()
@@ -162,7 +159,6 @@ public class Monster : Entity
         while (this.isActiveAndEnabled)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(1, 5)), cancellationToken: _stateControllCts.Token);
-
             Vector2 randomPos = transform.position;
             randomPos = randomPos.RandomPointInAnnulus(2, 5);
             NavMesh.Raycast(Position, randomPos, out NavMeshHit hit, NavMesh.AllAreas);     
@@ -192,12 +188,6 @@ public class Monster : Entity
         }
     }
 
-    // 쫓아가서 기본공격을 하고 다시 Idle로 돌아감
-    void OnDefaultAttackUsed(Skill skill)
-    {
-        CurrentState = MonsterState.Patrol;
-    }
-
     void SearchTarget()
     {
         if (Target != null || Stats == null || !isActiveAndEnabled)
@@ -209,6 +199,7 @@ public class Monster : Entity
         if (colliders == null || colliders.Length == 0)
         {
             Target = null;
+            Movement.TraceTarget = null;
             CurrentState = MonsterState.Patrol;
             return;
         }
@@ -230,8 +221,15 @@ public class Monster : Entity
             }
         }
 
+        // Combat 상태로 변경
+        // - SerachRange안에 들어온 적에게 Skill.Use()한다
+        // - Skill.Use() 하면 Select의 결과로 Find 혹은 OutOfRange가 반환됨
+        // - Find인 경우 바로 Apply한다
+        // - OutOfRange인 경우 Reserve하여 사정거리가 될 때 Apply한다
+        // -- UseImmediately > SelectTargetImmediate > Skill StateMachine에 Use 명령
+        // -- Skill 의 사용상태(Casting, Charge, InAction)에 들어가며 Effect Apply됨
         Target = nearestEnemy;
-        CurrentState = MonsterState.Combat;    
+        CurrentState = MonsterState.Combat;
     }
 
 
