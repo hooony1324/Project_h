@@ -16,7 +16,7 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
     private LayerMask layerMask;
 
     public override object Range => targettingRange;
-    public override object ScaledRange => 0;
+    public override object ScaledRange => targettingRange * Scale;
     public override float Angle => 0;
 
     public SelectAutoByTargettingRange() { }

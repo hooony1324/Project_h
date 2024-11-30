@@ -33,8 +33,8 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
+    isUseOverride: 1
+    overrideDefaultValue: 5
   - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
     isUseOverride: 1
-    overrideDefaultValue: 20
+    overrideDefaultValue: 25

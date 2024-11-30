@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static Define;
 
 public class ObjectManager
@@ -11,7 +12,8 @@ public class ObjectManager
     public HashSet<Hero> Heroes { get; } = new HashSet<Hero>();
     public HashSet<Monster> Monsters { get; } = new HashSet<Monster>();
     public HashSet<DungeonDoor> Doors { get; } = new HashSet<DungeonDoor>();
-    // public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
+    public HashSet<Projectile> Projectiles { get; } = new HashSet<Projectile>();
+    public HashSet<GameObject> Effects { get; } = new HashSet<GameObject>();
     // public HashSet<Env> Envs { get; } = new HashSet<Env>();
     // public HashSet<Npc> Npcs { get; } = new HashSet<Npc>();
     // public HashSet<ItemHolder> ItemHolders { get; } = new HashSet<ItemHolder>();
@@ -35,7 +37,9 @@ public class ObjectManager
 
     public void Clear()
     {
-        //Monsters.Clear();
+        Monsters.Clear();
+        Projectiles.Clear();
+        Doors.Clear();
     }
 
     public void SpawnFloatingText(Vector2 pos, string message)
@@ -99,6 +103,40 @@ public class ObjectManager
         }
 
         Managers.Resource.Destroy(baseObject.gameObject);
+    }
+
+    public Projectile SpawnProjectile(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        GameObject go = Managers.Resource.Instantiate(prefab.name, pooling: true);
+        go.transform.position = position;
+        go.transform.rotation = rotation;
+        go.transform.parent = ProjectileRoot;
+        Projectile projectile = go.GetOrAddComponent<Projectile>();
+        Projectiles.Add(projectile);
+        return go.GetOrAddComponent<Projectile>();
+    }
+
+    public void DespawnProjectile(Projectile projectile)
+    {
+        Projectiles.Remove(projectile);
+        Managers.Resource.Destroy(projectile.gameObject);
+    }
+
+    public GameObject SpawnEffect(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        GameObject go = Managers.Resource.Instantiate(prefab.name, EffectRoot, pooling: true);
+        go.transform.position = position;
+        go.transform.rotation = rotation;
+        go.transform.parent = EffectRoot;
+        go.AddComponent<SortingGroup>().sortingOrder = SortingLayers.SKILL_EFFECT;
+        Effects.Add(go);
+        return go;
+    }
+
+    public void DespawnEffect(GameObject effect)
+    {
+        Effects.Remove(effect);
+        Managers.Resource.Destroy(effect);
     }
 
     public void ClearSpawnedObjects()

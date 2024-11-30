@@ -64,13 +64,6 @@ public class SkillSystem : MonoBehaviour
     [SerializeReference]
     public Skill TestSkill;
 
-    [Button("TestSkillClicked")]
-    public bool bTestSkillClicked = true;
-    public void TestSkillClicked()
-    {
-        TestSkill?.Use();
-    }
-
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects.Where(x => !x.IsReleased).ToArray();

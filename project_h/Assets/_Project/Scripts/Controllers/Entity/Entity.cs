@@ -54,6 +54,8 @@ public abstract class Entity : BaseObject
     public bool IsPlayer => controlType == EEntityControlType.Player;
     public bool IsEnemyTargeted => Target != null && Target.HasCategory(enemyCategory);
     public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
+
+    private Transform _fireSocket;
     public override bool Init()
     {
         if (base.Init() == false)
@@ -117,6 +119,14 @@ public abstract class Entity : BaseObject
 
         if (Mathf.Approximately(Stats.HPStat.DefaultValue, 0f))
             OnDead(); 
+    }
+
+    public Transform GetFireSocket()
+    {
+        if (_fireSocket == null)
+            _fireSocket = Util.FindChild<Transform>(gameObject, "FireSocket", recursive: true);
+
+        return _fireSocket;
     }
 
     private void SpawnDamageText(Entity entity, Entity instigator, object causer, float damage)

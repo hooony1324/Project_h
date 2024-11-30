@@ -32,6 +32,7 @@ public abstract class SkillButton : UI_Base
     {
         if (_skill != null && _skill.IsUseable)
         {
+            // TODO : 대상이 없는 경우 스킬 사용 불가 > Use() 시도 쪽으로
             if (_owner.Target == null)
                 return;
                 

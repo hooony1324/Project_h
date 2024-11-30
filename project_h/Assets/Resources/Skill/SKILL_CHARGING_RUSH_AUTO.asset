@@ -117,7 +117,5 @@ MonoBehaviour:
       type: {class: SquareIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 735806894715857630, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
-        indicatorRadiusOverride: 0
-        indicatorAngleOverride: 0
         isUseIndicatorFillAmount: 1
         isAttachIndicatorToRequester: 1
