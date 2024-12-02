@@ -73,6 +73,10 @@ public class EntityMovement : MonoBehaviour
         }
     }
 
+    private Vector3 _movedDirection;
+    public Vector3 MovedDirection => _movedDirection;
+    public Vector3 MovedPosition => transform.position + _movedDirection;
+
     public bool AtDestination => agent.destination.InRangeOf(transform.position, 0.2f);
 
     public void Move(Vector3 moveDir)
@@ -127,6 +131,8 @@ public class EntityMovement : MonoBehaviour
 
         agent.destination = destination;
         LookAt(destination);
+
+        _movedDirection = (destination - transform.position).normalized;
 
         onSetDestination?.Invoke(this, destination);
     }

@@ -7,16 +7,14 @@ using UnityEngine;
 [System.Serializable]
 public class SelectAutoByTargettingRange : TargetSelectionAction
 {
-    [Min(0f)]
-    [SerializeField]
-    private float targettingRange;
+    public StatScaleFloat targettingRange;
 
     [Header("Layer")]
     [SerializeField]
     private LayerMask layerMask;
 
-    public override object Range => targettingRange;
-    public override object ScaledRange => targettingRange * Scale;
+    public override object Range => 0;
+    public override object ScaledRange => 0;
     public override float Angle => 0;
 
     public SelectAutoByTargettingRange() { }
@@ -58,9 +56,8 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
     public override bool IsInRange(TargetSearcher targetSearcher, Entity requesterEntity, GameObject requesterObject, Vector3 targetPosition)
     {
         float distance = Vector2.Distance(requesterEntity.Position, targetPosition);
-        float properRange = (float)ProperRange;
-        
-        return !(distance > properRange);
+        float properRange = targettingRange.GetValue(requesterEntity.Stats);
+        return distance <= properRange;
     }
     public override object Clone() => new SelectAutoByTargettingRange(this);
 

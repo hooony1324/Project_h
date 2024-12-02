@@ -48,9 +48,9 @@ MonoBehaviour:
       scaleStat: {fileID: 0}
     targetSearcher:
       selectionAction:
-        rid: 4885778437199888704
+        rid: 2868446648299159649
       searchAction:
-        rid: 4885778437199888705
+        rid: 4885778437199888712
     costs: []
     isUseCast: 0
     castTime:
@@ -87,35 +87,42 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4885778437199888701
-      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
-      data:
-        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
-        spawnPointSocketName: FireSocket
-        speed: 1
-        impactAction:
-          rid: 4885778437199888702
-        projectileMotion:
-          rid: 4885778437199888703
-    - rid: 4885778437199888702
-      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
-      data:
-        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
-    - rid: 4885778437199888703
-      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 4885778437199888704
+    - rid: 2868446648299159649
       type: {class: SelectAutoByTargettingRange, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        targettingRange: 30
+        targettingRange:
+          defaultValue: 2
+          scaleStat: {fileID: 11400000, guid: ebcd69fe6d4cea34bab25afd3cd0486a, type: 2}
         layerMask:
           serializedVersion: 2
           m_Bits: 0
-    - rid: 4885778437199888705
+    - rid: 4885778437199888701
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 10
+        impactAction:
+          rid: 4885778437199888710
+        projectileMotion:
+          rid: 4885778437199888703
+        shootInfos:
+        - angle: 0
+        - angle: 90
+        - angle: 180
+        - angle: 270
+    - rid: 4885778437199888703
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 4885778437199888710
+      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+    - rid: 4885778437199888712
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

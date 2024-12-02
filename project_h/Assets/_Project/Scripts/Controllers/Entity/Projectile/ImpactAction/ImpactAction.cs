@@ -19,10 +19,19 @@ public abstract class ImpactAction : ICloneable
     protected Projectile Owner => _owner;
     protected Skill Skill => _skill;
     
-    public virtual void Setup(Projectile owner, Skill skill)
+    public ImpactAction() {}
+    public ImpactAction(ImpactAction other)
+    {
+        _impactEffect = other._impactEffect;
+        _owner = other._owner;
+        _skill = other._skill;
+    }
+
+    public virtual void Setup(Projectile owner, Skill skill, GameObject impactEffect)
     {
         _owner = owner;
         _skill = skill;
+        _impactEffect = impactEffect;
     }
 
     public abstract void Apply();

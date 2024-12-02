@@ -3,7 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class ImpactAndDestroy : ImpactAction
 {
-
+    public ImpactAndDestroy() {}
+    public ImpactAndDestroy(ImpactAndDestroy other) : base(other) {}
 
     public override void Apply()
     {
@@ -13,5 +14,5 @@ public class ImpactAndDestroy : ImpactAction
         Managers.Object.DespawnProjectile(Owner);
     }
 
-    public override object Clone() => new ImpactAndDestroy();
+    public override object Clone() => new ImpactAndDestroy(this);
 }

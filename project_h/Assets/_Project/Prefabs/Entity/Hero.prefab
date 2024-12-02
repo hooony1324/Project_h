@@ -224,7 +224,6 @@ MonoBehaviour:
   DefaultAttack: {fileID: 11400000, guid: 226b956c668983e4da21c96449068586, type: 2}
   Roll: {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
   TestSkill: {fileID: 11400000, guid: 1170df94496ec5d4bbdb7750f0a631b1, type: 2}
-  bTestSkillClicked: 1
 --- !u!50 &757317807149808681
 Rigidbody2D:
   serializedVersion: 5
@@ -325,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 8548491248542043758}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2, y: 0.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
