@@ -47,8 +47,8 @@ public abstract class Entity : BaseObject
     public Entity Target;
     public Category[] Categories => categories;
     [SerializeField] protected Category enemyCategory;
-    protected int enemyLayer = 0;
-    public int EnemyLayer => enemyLayer;
+    protected int enemyLayerMask = 0;
+    public int EnemyLayerMask => enemyLayerMask;
 
     public virtual bool IsMoving => Movement.IsMoving; 
     public bool IsPlayer => controlType == EEntityControlType.Player;

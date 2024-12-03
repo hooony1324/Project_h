@@ -1,5 +1,6 @@
 using NavMeshPlus.Components;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Map : InitOnce
 {
@@ -17,6 +18,10 @@ public class Map : InitOnce
         _startPoint = Util.FindChild(gameObject, "StartPoint").transform;
 
         GameObject navMesh = Managers.Resource.Instantiate("NavMesh");
+        if (navMesh == null)
+        {
+            navMesh = GameObject.Find("NavMesh");
+        }
         navMesh.name = "@NavMesh";
         _navMeshSurface = navMesh.GetComponent<NavMeshSurface>();
 

@@ -50,7 +50,7 @@ public class UI_NpcInteraction : UI_Base
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-        OnCollisionInteraction.Invoke();
+        if (other.gameObject.tag.Equals("Player"))
+            OnCollisionInteraction.Invoke();
     }
 }

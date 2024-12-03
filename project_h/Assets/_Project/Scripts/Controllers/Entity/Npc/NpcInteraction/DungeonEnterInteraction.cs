@@ -5,6 +5,9 @@ using UnityEngine;
 public class DungeonEnterInteraction : NpcInteraction
 {
     [SerializeField] private List<DungeonData> _dungeonDatas = new List<DungeonData>();
+
+    public override void Setup(Npc npc) {}
+
     public override void HandleNpcInteraction()
     {
         Managers.Dungeon.SetupDungeons(_dungeonDatas);

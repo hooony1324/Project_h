@@ -21,7 +21,7 @@ MonoBehaviour:
   type: 0
   useType: 0
   executionType: 0
-  applyType: 1
+  applyType: 0
   needSelectionResultType: 0
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
@@ -40,17 +40,17 @@ MonoBehaviour:
     action:
       rid: 4885778437199888701
     runningFinishOption: 0
-    duration: 10
-    applyCount: 1
-    applyCycle: 0
+    duration: 5
+    applyCount: 5
+    applyCycle: 0.5
     cooldown:
       defaultValue: 1
       scaleStat: {fileID: 0}
     targetSearcher:
       selectionAction:
-        rid: 2868446648299159649
+        rid: 2868446688828457061
       searchAction:
-        rid: 4885778437199888712
+        rid: 2868446688828457060
     costs: []
     isUseCast: 0
     castTime:
@@ -87,7 +87,19 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2868446648299159649
+    - rid: 2868446688828457055
+      type: {class: ImpactAndReflect, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+        _reflectCount: 3
+    - rid: 2868446688828457060
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2868446688828457061
       type: {class: SelectAutoByTargettingRange, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
@@ -107,7 +119,7 @@ MonoBehaviour:
         spawnPointSocketName: FireSocket
         speed: 10
         impactAction:
-          rid: 4885778437199888710
+          rid: 2868446688828457055
         projectileMotion:
           rid: 4885778437199888703
         shootInfos:
@@ -118,14 +130,3 @@ MonoBehaviour:
     - rid: 4885778437199888703
       type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 4885778437199888710
-      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
-      data:
-        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
-    - rid: 4885778437199888712
-      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0

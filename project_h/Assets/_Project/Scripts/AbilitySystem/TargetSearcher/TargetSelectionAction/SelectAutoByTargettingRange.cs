@@ -22,7 +22,9 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
         : base(copy)
     {
         layerMask = copy.layerMask;
+        targettingRange = copy.targettingRange;
     }
+
     protected override TargetSelectionResult SelectImmediateByPlayer(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
@@ -32,8 +34,9 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
     protected override TargetSelectionResult SelectImmediateByAI(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
-        var target = requesterEntity.Target;
-
+        Collider2D collider = Physics2D.OverlapCircle(position, targettingRange.GetValue(requesterEntity.Stats), requesterEntity.EnemyLayerMask);
+        Entity target = collider?.GetComponent<Entity>();
+    
         if (!target)
             return new TargetSelectionResult(position, SearchResultMessage.Fail);
         
@@ -45,7 +48,7 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
 
     public override void Select(TargetSearcher targetSearcher, Entity requesterEntity, GameObject requesterObject, SelectCompletedHandler onSelectCompleted)
     {
-        onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, requesterEntity.Target.Position));
+        onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity, requesterObject, requesterEntity.Position));
     }
 
     public override void CancelSelect(TargetSearcher targetSearcher)

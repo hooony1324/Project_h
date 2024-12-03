@@ -5,6 +5,11 @@ using System.Linq;
 [System.Serializable]
 public class DungeonExitInteraction : NpcInteraction
 {
+    public override void Setup(Npc npc)
+    {
+        
+    }
+
     public override void HandleNpcInteraction()
     {
         UI_MessagePopup messagePopup = Managers.UI.ShowPopupUI<UI_MessagePopup>();

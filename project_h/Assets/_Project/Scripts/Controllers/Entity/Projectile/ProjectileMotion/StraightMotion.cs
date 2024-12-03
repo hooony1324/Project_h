@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [System.Serializable]
 public class StraightMotion : ProjectileMotion
@@ -6,17 +7,14 @@ public class StraightMotion : ProjectileMotion
     public StraightMotion() {}
     public StraightMotion(StraightMotion other) : base(other) {}
 
-    public override void Setup(Projectile owner, Skill skill, Vector3 direction)
+    public override void Setup(Projectile owner, Skill skill)
     {
-        base.Setup(owner, skill, direction);
-
-        float angle = Vector2.SignedAngle(Vector2.up, Direction);
-        Owner.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        base.Setup(owner, skill);
     }
 
     public override void Move()
     {
-        Owner.transform.Translate(Owner.Speed * Time.deltaTime * Vector3.up);
+        Owner.transform.position += Owner.Speed * Time.deltaTime * Owner.Direction;
     }
 
     public override object Clone() => new StraightMotion(this);

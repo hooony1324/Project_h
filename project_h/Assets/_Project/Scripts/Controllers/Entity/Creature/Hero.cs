@@ -22,7 +22,7 @@ public class Hero : Entity
 
         ObjectType = EObjectType.Hero;
         infoText = Util.FindChild<UI_WorldText>(gameObject);
-        enemyLayer = Util.GetLayerMask("Monster");
+        enemyLayerMask = Util.GetLayerMask("Monster");
 
         return true;
     }
@@ -88,7 +88,7 @@ public class Hero : Entity
             }
 
             float searchRange = Stats.GetValue(Stats.SearchRangeStat);
-            var colliders = Physics2D.OverlapCircleAll(Position, searchRange, enemyLayer);
+            var colliders = Physics2D.OverlapCircleAll(Position, searchRange, EnemyLayerMask);
 
             float nearestDistance = Mathf.Infinity;
             Entity nearestEnemy = null;

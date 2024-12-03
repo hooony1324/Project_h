@@ -16,6 +16,8 @@ public class DungeonRoom : InitOnce
         _generatedGrid = GetPatternIndexes();
         _waveController = Util.FindChild(gameObject, "MonsterWaveController").GetComponent<MonsterWaveController>();
 
+        CreateCollisionBorder();
+
         return true;
     }
 
@@ -111,6 +113,35 @@ public class DungeonRoom : InitOnce
         _doors.Add(door);
 
         return door;
+    }
+
+    public void CreateCollisionBorder()
+    {
+        Tilemap tilemap = Util.FindChild(gameObject, "Tilemap_Room").GetComponent<Tilemap>();
+        Tilemap collisionTilemap = Util.FindChild(gameObject, "Tilemap_Collider").GetComponent<Tilemap>();
+
+        if (collisionTilemap == null)
+            return;
+
+        // tilemap의 범위를 가져옵니다
+        tilemap.CompressBounds();
+        BoundsInt bounds = tilemap.cellBounds;
+
+        // tilemap의 모든 타일을 순회합니다
+        for (int x = bounds.min.x; x < bounds.max.x; x++)
+        {
+            for (int y = bounds.min.y; y < bounds.max.y; y++)
+            {
+                Vector3Int tilePosition = new Vector3Int(x, y, 0);
+                TileBase tile = tilemap.GetTile(tilePosition);
+
+                // 타일이 존재하고 경계에 위치한 타일인 경우
+                if (tile.name.Contains("darksmog"))
+                {
+                    collisionTilemap.SetTile(tilePosition, tile);
+                }
+            }
+        }
     }
 
     #endregion

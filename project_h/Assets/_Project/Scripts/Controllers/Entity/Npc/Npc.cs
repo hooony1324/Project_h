@@ -1,11 +1,11 @@
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.UI;
+
 using static Define;
 
 public abstract class NpcInteraction
 {
+    public abstract void Setup(Npc npc);
     public abstract void HandleNpcInteraction();
 }
 
@@ -44,6 +44,7 @@ public class Npc : BaseObject
     private void Start()
     {
         _uiNpcInteraction.SetInfo(OnNpcInteracted, _isClickInteraction);
+        npcInteraction.Setup(this);
     }
 
     private void OnNpcInteracted()

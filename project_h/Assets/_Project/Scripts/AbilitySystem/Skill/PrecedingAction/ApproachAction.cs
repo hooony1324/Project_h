@@ -20,7 +20,7 @@ public class ApproachAction : SkillPrecedingAction
 
     public override void Start(Skill skill)
     {
-        var collider = Physics2D.OverlapCircle(skill.Owner.Position, searchRange, skill.Owner.EnemyLayer);
+        var collider = Physics2D.OverlapCircle(skill.Owner.Position, searchRange, skill.Owner.EnemyLayerMask);
         if (collider == null)
             return;
         

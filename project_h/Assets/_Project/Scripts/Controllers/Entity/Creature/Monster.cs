@@ -44,7 +44,7 @@ public class Monster : Entity
 
         ObjectType = EObjectType.Monster;
         infoText = Util.FindChild<UI_WorldText>(gameObject);
-        enemyLayer = Util.GetLayerMask("Hero");
+        enemyLayerMask = Util.GetLayerMask("Hero");
 
         return true;
     }
@@ -194,7 +194,7 @@ public class Monster : Entity
             return;
 
         float searchRange = Stats.GetValue(Stats.SearchRangeStat);
-        var colliders = Physics2D.OverlapCircleAll(Position, searchRange, enemyLayer);
+        var colliders = Physics2D.OverlapCircleAll(Position, searchRange, EnemyLayerMask);
 
         if (colliders == null || colliders.Length == 0)
         {

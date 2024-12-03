@@ -9,19 +9,32 @@ public class Projectile : BaseObject
     private Entity _owner;
     private float _speed;
     private Skill _skill;
+    private Rigidbody2D _rigidbody;
 
     public Entity Owner => _owner;
     public Skill Skill => _skill;
     public float Speed => _speed;
+    public Rigidbody2D Rigidbody => _rigidbody;
 
     // Impact때 옵션 : Destroy, 튕김 등
     private ImpactAction _impactAction;
-
     // 움직임 옵션
     private ProjectileMotion _projectileMotion;
 
     private CancellationTokenSource _destroyCTS;
 
+    private Vector3 _direction;
+    public Vector3 Direction 
+    {
+        get => _direction;
+        set 
+        {
+            _direction = value;
+            
+            float angle = Vector2.SignedAngle(Vector2.up, value);
+            transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
+    }
 
     public override bool Init()
     {
@@ -31,29 +44,32 @@ public class Projectile : BaseObject
         ObjectType = EObjectType.Projectile;
         GetComponent<SpriteRenderer>().sortingOrder = SortingLayers.PROJECTILE;
 
+        _rigidbody = GetComponent<Rigidbody2D>();
+
         return true;
     }
 
-    public async UniTask Setup(Entity owner, float speed, Vector3 direction, Skill skill, ImpactAction impactAction, ProjectileMotion projectileMotion)
+    public void Setup(Entity owner, float speed, Vector3 direction, Skill skill, float lifetime, ImpactAction impactAction, ProjectileMotion projectileMotion)
     {
         _owner = owner;
         _speed = speed;
         _skill = skill;
+        Direction = direction;
 
         _impactAction = impactAction.Clone() as ImpactAction;
         _projectileMotion = projectileMotion.Clone() as ProjectileMotion;
 
         _impactAction.Setup(this, skill, impactAction.ImpactEffect);
-        _projectileMotion.Setup(this, skill, direction);
+        _projectileMotion.Setup(this, skill);
 
-        if (_skill.Duration > 0)
-        {
-            _destroyCTS = new CancellationTokenSource();
+        SetLifeTime(lifetime).Forget();
+    }
 
-            await UniTask.Delay(TimeSpan.FromSeconds(_skill.Duration), cancellationToken: _destroyCTS.Token);
-            if (this != null)
-                Managers.Object.DespawnProjectile(this);
-        }
+    public async UniTask SetLifeTime(float duration)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: _destroyCTS.Token);
+        if (this != null)
+            Managers.Object.DespawnProjectile(this);   
     }
 
     private void Update()
@@ -61,15 +77,17 @@ public class Projectile : BaseObject
         _projectileMotion.Move();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        Entity target = other.GetComponent<Entity>();
-
-        if (target == _owner || target == null)
+        if (other.gameObject == Owner.gameObject)
             return;
 
-        target.SkillSystem.Apply(_skill);
-        _impactAction.Apply();
+        _impactAction.Apply(other);
+    }
+
+    private void OnEnable()
+    {
+        _destroyCTS = new CancellationTokenSource();
     }
 
     private void OnDisable()

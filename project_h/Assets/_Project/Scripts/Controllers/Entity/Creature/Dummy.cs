@@ -8,7 +8,7 @@ public class Dummy : Entity
             return false;
 
         ObjectType = EObjectType.Monster;
-        enemyLayer = Util.GetLayerMask("Hero");
+        enemyLayerMask = Util.GetLayerMask("Hero");
 
         SetData(Managers.Data.GetMonsterData("MONSTER_DUMMY"));
         return true;
