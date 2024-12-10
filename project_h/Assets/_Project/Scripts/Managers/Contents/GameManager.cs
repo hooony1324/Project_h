@@ -4,14 +4,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-
 public class GameManager
 {
+    public string HeroDataName => _heroDataName;
+    private string _heroDataName;
+    public void SetHeroData(string heroDataName) => _heroDataName = heroDataName;
+    public HeroData CurrentHeroData => Managers.Data.GetHeroData(_heroDataName);
 
-
-    public void Init()
+    public void InitGame()
     {
         // Init or LoadGAme
+    }
+
+    public void SaveGame()
+    {
+
     }
 
     private Vector2 _moveDir = Vector2.zero;
@@ -75,4 +82,6 @@ public class GameManager
             return playerController;
         }
     }
+
 }
+

@@ -107,7 +107,7 @@ public class TitleScene : BaseScene
                     LoginSceneState = ELoginSceneState.ResourceLoadFinished;
 
                     Managers.Data.Init();
-                    Managers.Game.Init();
+                    Managers.Game.InitGame();
                 }
 
                 OnDownloadStateStateChanged?.Invoke(text);

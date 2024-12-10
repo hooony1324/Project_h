@@ -9,10 +9,11 @@ using static Define;
 
 public class Hero : Entity
 {
+    
     private CancellationTokenSource _searchTargetCts;
 
     public bool IsMainHero { get; set; }
-    
+
     UI_WorldText infoText;
 
     public override bool Init()
@@ -113,6 +114,4 @@ public class Hero : Entity
         
         }
     }
-
-
 }

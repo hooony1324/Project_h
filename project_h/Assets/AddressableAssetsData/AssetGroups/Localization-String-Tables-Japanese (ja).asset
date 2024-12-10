@@ -22,6 +22,13 @@ MonoBehaviour:
     - Locale-ja
     - Preload
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59807302d2e5f154997ac6154f0f434a
+    m_Address: TestTable_ja
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ja
+    - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 640925f3a2cf8884dbce185818d9353a
     m_Address: MessageTable_ja
     m_ReadOnly: 1

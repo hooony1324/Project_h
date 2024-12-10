@@ -44,7 +44,7 @@ MonoBehaviour:
     - rid: 3506563725652131852
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
       data:
-        defaultDamage: 10
+        defaultDamage: 1
         bonusDamageStat: {fileID: 0}
         bonusDamageStatFactor: 0
         bonusDamagePerLevel: 0

@@ -117,7 +117,7 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
         spawnPointSocketName: FireSocket
-        speed: 10
+        speed: 5
         impactAction:
           rid: 2868446688828457055
         projectileMotion:

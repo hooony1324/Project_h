@@ -27,8 +27,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 72db79bdaace9d341818e91f7fc1dab8
+    m_Address: UI_HeroSelectSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75017431f8ce1b64cac07891df482e99
     m_Address: UI_GameScene
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7a5999abee6887b498109040af2608a9
+    m_Address: UI_Heart
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame
@@ -65,6 +77,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f62601728cd2176489cfb173d9522e18
     m_Address: UI_Joystick
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fc18db87b8954d04a997bdacaa4d5b9d
+    m_Address: UI_SelectHeroScene
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

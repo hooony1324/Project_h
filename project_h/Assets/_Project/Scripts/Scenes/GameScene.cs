@@ -26,8 +26,10 @@ public class GameScene : BaseScene
         // Start에서 Animator Dynamic하게 설정하면 캐릭터 안보임
         Vector3 startPosition = Managers.Map.CurrentMap.StartPosition;
         hero = Managers.Object.Spawn<Hero>(startPosition);
+
         Managers.Hero.SetMainHero(hero);
-        hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
+        hero.SetData(Managers.Game.CurrentHeroData);
+
         hero.gameObject.SetActive(false);
 
         return true;

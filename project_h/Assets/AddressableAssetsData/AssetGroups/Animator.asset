@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: Animator
   m_EditorClassIdentifier: 
   m_GroupName: Animator
-  m_Data:
-    m_SerializedData: []
   m_GUID: a37339bb9d602f0439ae2671a38727db
   m_SerializeEntries:
+  - m_GUID: 089d21db4021f024eabec224f1486a0f
+    m_Address: Hero_Warrior_Selection
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 242ee89986cbe8b4ca410ca71f617005
     m_Address: Hero_Bow
     m_ReadOnly: 0
@@ -31,6 +35,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac7c034f28b85d94db65de0da6ebd022
     m_Address: Hero_Warrior
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe0823e5affc2ee41930d3cf49bd5542
+    m_Address: Hero_Bow_Selection
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

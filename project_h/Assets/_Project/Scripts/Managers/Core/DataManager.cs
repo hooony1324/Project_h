@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class DataManager
 {
-    private Dictionary<string /*dataName*/, MonsterData> _monsterDatas = new Dictionary<string, MonsterData>(); 
-    private Dictionary<string /*dataName*/, HeroData> _heroDatas = new Dictionary<string, HeroData>(); 
+    private readonly Dictionary<string /*dataName*/, MonsterData> _monsterDatas = new Dictionary<string, MonsterData>(); 
+    private readonly Dictionary<string /*dataName*/, HeroData> _heroDatas = new Dictionary<string, HeroData>(); 
+
+    public Dictionary<string, HeroData> HeroDatas => _heroDatas;
+    public Dictionary<string, MonsterData> MonsterDatas => _monsterDatas;
+    
     public void Init()
     {
         foreach (MonsterData monsterData in Resources.LoadAll<MonsterData>("GameDesign/MonsterData"))

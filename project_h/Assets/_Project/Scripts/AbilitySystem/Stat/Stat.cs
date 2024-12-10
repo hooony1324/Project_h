@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ public class Stat : IdentifiedObject
     public delegate void ValueChangedHandler(Stat stat, float currentValue, float prevValue);
     public event ValueChangedHandler onValueChanged;
     public event ValueChangedHandler onValueMax;
-    public event ValueChangedHandler onValueMin;
+    public event ValueChangedHandler onValueMin;    
 
     // 1 => 100%, 0 => 0%
     [Tooltip("확률형 Stat이면 적용\n ex) 쿨 다운 감소율, 기술 자원 소모율, 스킬 지속시간 증가율...")]
@@ -56,7 +57,12 @@ public class Stat : IdentifiedObject
             TryInvokeValueChangedEvent(Value, prevValue);
         }
     }
-    public float BonusValue { get; private set; }
+    public float BonusValue 
+    { 
+        get; 
+        private set; 
+    }
+
     // Default + Bonus, 현재 총 수치
     public float Value => Mathf.Clamp(defaultValue + BonusValue, MinValue, MaxValue);
     public bool IsMax => Mathf.Approximately(Value, maxValue);

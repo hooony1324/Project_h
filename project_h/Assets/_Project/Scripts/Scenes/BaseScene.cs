@@ -7,6 +7,7 @@ public enum EScene
     Unknown,
     LoadingScene,
     TitleScene,
+    SelectHeroScene,
     GameScene,
     DungeonScene,
 }

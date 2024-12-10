@@ -36,6 +36,14 @@ MonoBehaviour:
     m_Localized: "\uC548\uB155"
     m_Metadata:
       m_Items: []
+  - m_Id: 15201023281164288
+    m_Localized: GameStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15402077599920128
+    m_Localized: "\uD14C\uC2A4\uD2B8"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

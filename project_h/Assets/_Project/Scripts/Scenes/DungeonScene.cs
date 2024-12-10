@@ -36,13 +36,15 @@ public class DungeonScene : BaseScene
         await Managers.Dungeon.GenerateDungeon();
 
         Managers.UI.Joystick = Managers.UI.ShowSceneUI<UI_Joystick>();
-        Managers.UI.ShowSceneUI<UI_DungeonScene>();
+        Managers.UI.ShowSceneUI<UI_DungeonScene>().Setup(hero);
 
         hero.gameObject.SetActive(true);
 
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
+
+        
         
     }
 
