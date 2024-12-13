@@ -32,6 +32,10 @@ public class GameScene : BaseScene
 
         hero.gameObject.SetActive(false);
 
+
+        Managers.SaveLoad.SaveGame();
+
+
         return true;
     }
 

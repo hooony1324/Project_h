@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DataManager
 {
     private readonly Dictionary<string /*dataName*/, MonsterData> _monsterDatas = new Dictionary<string, MonsterData>(); 
     private readonly Dictionary<string /*dataName*/, HeroData> _heroDatas = new Dictionary<string, HeroData>(); 
+    private readonly List<DungeonData> _dungeonDatas = new List<DungeonData>();
 
     public Dictionary<string, HeroData> HeroDatas => _heroDatas;
     public Dictionary<string, MonsterData> MonsterDatas => _monsterDatas;
@@ -23,6 +25,11 @@ public class DataManager
             if (!_heroDatas.ContainsKey(heroData.name))
                 _heroDatas.Add(heroData.name, heroData);
         }
+
+        foreach (DungeonData dungeonData in Resources.LoadAll<DungeonData>("GameDesign/DungeonData"))
+        {
+            _dungeonDatas.Add(dungeonData);
+        }
     }
 
     public MonsterData GetMonsterData(string dataName)
@@ -37,5 +44,9 @@ public class DataManager
         return heroData;
     }
 
+    public DungeonData GetDungeonData(int dungeonId)
+    {
+        return _dungeonDatas.FirstOrDefault(x => x.Id == dungeonId);
+    }
 }
 

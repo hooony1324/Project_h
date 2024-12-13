@@ -11,16 +11,6 @@ public class GameManager
     public void SetHeroData(string heroDataName) => _heroDataName = heroDataName;
     public HeroData CurrentHeroData => Managers.Data.GetHeroData(_heroDataName);
 
-    public void InitGame()
-    {
-        // Init or LoadGAme
-    }
-
-    public void SaveGame()
-    {
-
-    }
-
     private Vector2 _moveDir = Vector2.zero;
     public Vector2 MoveDir 
     {

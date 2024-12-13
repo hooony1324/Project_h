@@ -6,46 +6,73 @@ public class DungeonManager
 {
     public Dungeon CurrentDungeon { get; private set; }
 
-    private List<DungeonData> _dungeonDatas = new List<DungeonData>();
-    int _nextIdx = 0;
+    private DungeonData _currentDungeonData;
 
-    public void SetupDungeons(List<DungeonData> dungeonDatas)
-    {
-        _dungeonDatas.Clear();
-        _dungeonDatas = dungeonDatas.ToList();
-    }
+    public int CurrentDungeonId => _currentDungeonData ? _currentDungeonData.Id : 0;
+    // TODO: 이전 던전 HERO스탯(HP), 정보 스냅샷?
 
-    public bool TryEnterNextDungeon()
-    {
-        if (_dungeonDatas.Count == 0)
-            return false;
-
-        // Dungeon마지막에서 TryEnter
-        if (_nextIdx >= _dungeonDatas.Count - 1)
-        {
-            Managers.Map.SetMap("BaseMap");
-            Managers.Scene.LoadScene(EScene.GameScene);
-            return false;
-        }
-        
-        Managers.Map.SetMap(_dungeonDatas[_nextIdx].PrefabName);
-        Managers.Scene.LoadScene(EScene.DungeonScene);
-
-        _nextIdx++;
-
-        return true;
-    }
-
-    public void SetDungeon(Dungeon dungeon)
+    public void Setup(Dungeon dungeon)
     {
         CurrentDungeon = dungeon;
     }
 
+    public void SetFirstDungeon(DungeonData firstDungeonData)
+    {
+        _currentDungeonData = firstDungeonData;
+    }
+
+    public void EnterFirstDungeon()
+    {
+        if (_currentDungeonData == null)
+            return;
+
+        Managers.Map.SetMap(_currentDungeonData.PrefabName);
+        Managers.Scene.LoadScene(EScene.DungeonScene);
+    }
+
+    public void TryEnterNextDungeon()
+    {
+        if (_currentDungeonData == null)
+            return;
+
+        // data: 1_1, 1_2, 1_3,
+        if (!_currentDungeonData.HasNextDungeon)
+        {
+            // 마지막 던전 -> 마을
+            if  (_currentDungeonData.IsFinalDungeon)
+            {
+                
+                Managers.Map.SetMap("BaseMap");
+                Managers.Scene.LoadScene(EScene.GameScene);
+            }
+
+            return;
+        }
+
+        DungeonData nextDungeonData = Managers.Data.GetDungeonData(_currentDungeonData.NextDungeonId);
+        if (nextDungeonData == null)
+        {
+            Debug.Log("다음 던전 데이터를 설정하지 않았습니다.");
+            return;
+        }
+        
+        // 재입장 할 경우의 상황 저장
+        _currentDungeonData = nextDungeonData;
+        // HeroInfo = asdfasdfsda;
+
+        // 다음 던전으로 입장
+        Managers.Map.SetMap(nextDungeonData.PrefabName);
+        Managers.Scene.LoadScene(EScene.DungeonScene);
+
+        return;
+    }
+
+
+
     public void Clear()
     {
-        _dungeonDatas.Clear();
         CurrentDungeon = null;
-        _nextIdx = 0;
+        _currentDungeonData = null;
     }
 
     public async Awaitable GenerateDungeon()

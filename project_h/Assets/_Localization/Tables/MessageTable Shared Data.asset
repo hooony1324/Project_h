@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: AskExitDungeon
     m_Metadata:
       m_Items: []
+  - m_Id: 16541756210638848
+    m_Key: AskContinueDungeon
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

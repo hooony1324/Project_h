@@ -7,7 +7,7 @@ public class DungeonExitInteraction : NpcInteraction
 {
     public override void Setup(Npc npc)
     {
-        
+
     }
 
     public override void HandleNpcInteraction()
@@ -20,6 +20,8 @@ public class DungeonExitInteraction : NpcInteraction
     {
         if (result)
         {
+            // Save Index => 0으로
+
             Managers.Scene.LoadScene(EScene.GameScene);
         }
     }

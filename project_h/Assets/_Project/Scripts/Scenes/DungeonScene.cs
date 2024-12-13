@@ -19,15 +19,22 @@ public class DungeonScene : BaseScene
         
         Managers.Map.LoadMap();
 
+
         GameObject playerController = new GameObject { name = "@PlayerController"};
         playerController.AddComponent<PlayerController>();
 
         Vector3 startPosition = Managers.Map.CurrentMap.StartPosition;
         hero = Managers.Object.Spawn<Hero>(startPosition);
+
         Managers.Hero.SetMainHero(hero);
-        hero.SetData(Managers.Data.GetHeroData("HERO_WARRIOR"));
+        hero.SetData(Managers.Game.CurrentHeroData);
+
         hero.gameObject.SetActive(false);
         
+
+        Managers.SaveLoad.SaveGame();
+
+
         return true;
     }
 

@@ -26,6 +26,12 @@ MonoBehaviour:
     m_Localized: Would you like to enter the dungeon?
     m_Metadata:
       m_Items: []
+  - m_Id: 16541756210638848
+    m_Localized: '"There''s an ongoing dungeon. \n
+
+      Would you like to continue?"'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

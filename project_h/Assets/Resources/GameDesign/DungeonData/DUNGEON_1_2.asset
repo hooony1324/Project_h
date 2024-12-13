@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 001ef2438e43aa040b1e210226602c42, type: 3}
   m_Name: DUNGEON_1_2
   m_EditorClassIdentifier: 
+  _id: 12
+  _prevDungeonId: 11
+  _nextDungeonId: 13
+  _isFinalDungeon: 0
   _prefabName: DungeonMap_02
-  _dungeonName: Chapter1_2
+  _dungeonName: "\uBCF4\uC11D\uAD74"

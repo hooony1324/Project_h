@@ -75,6 +75,7 @@ public class DungeonRoom : InitOnce
             Vector2Int p = rotatedIndexes[i];
             rotatedIndexes[i] = _roomDirection switch
             {
+                // UP이 기본 형태
                 RoomDirection.RIGHT => new Vector2Int(p.y, -p.x),
                 RoomDirection.DOWN => new Vector2Int(-p.x, -p.y),
                 RoomDirection.LEFT => new Vector2Int(-p.y, p.x),
@@ -136,6 +137,9 @@ public class DungeonRoom : InitOnce
                 TileBase tile = tilemap.GetTile(tilePosition);
 
                 // 타일이 존재하고 경계에 위치한 타일인 경우
+                if (tile == null)
+                    continue;
+
                 if (tile.name.Contains("darksmog"))
                 {
                     collisionTilemap.SetTile(tilePosition, tile);

@@ -15,12 +15,4 @@ public class EnterNextDungeonInteraction : NpcInteraction
     {
         Managers.Dungeon.TryEnterNextDungeon();
     }
-
-    private void EnterDungeon(bool result)
-    {
-        if (!result)
-            return;
-        
-        Managers.Dungeon.TryEnterNextDungeon();
-    }
 }

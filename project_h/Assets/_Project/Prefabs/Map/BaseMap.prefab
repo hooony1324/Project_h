@@ -79607,6 +79607,10 @@ PrefabInstance:
       value: Assembly-CSharp DungeonEnterInteraction
       objectReference: {fileID: 0}
     - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: managedReferences[4885778232288477281]._firstDungeonData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b43318d00eceff4693bb4c07654a01e, type: 2}
+    - target: {fileID: 3746021214690284570, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
       propertyPath: managedReferences[4885778232288477281]._dungeonDatas.Array.size
       value: 3
       objectReference: {fileID: 0}

@@ -23,7 +23,23 @@ public class SelectHeroScene : BaseScene
 
     void Start()
     {
+        int currentDungeonId = Managers.Dungeon.CurrentDungeonId;
+        Debug.Log($"Current Progressed Dungeon Id:{currentDungeonId}");
 
+        if (currentDungeonId != 0)
+        {
+            var messagePopup = Managers.UI.ShowPopupUI<UI_MessagePopup>();
+            string message = StringTable.GetMessage("AskContinueDungeon");
+            messagePopup.SetupMessageConfrim(message, ContinueDungeon);
+        }
+    }
+
+    void ContinueDungeon(bool result)
+    {
+        if (result)
+        {
+            Managers.Dungeon.EnterFirstDungeon();
+        }
     }
 
     public override void Clear()

@@ -4,13 +4,13 @@ using UnityEngine;
 [System.Serializable]
 public class DungeonEnterInteraction : NpcInteraction
 {
-    [SerializeField] private List<DungeonData> _dungeonDatas = new List<DungeonData>();
+    [SerializeField] private DungeonData _firstDungeonData;
 
     public override void Setup(Npc npc) {}
 
     public override void HandleNpcInteraction()
     {
-        Managers.Dungeon.SetupDungeons(_dungeonDatas);
+        Managers.Dungeon.SetFirstDungeon(_firstDungeonData);
 
         // 입장하시겠습니까??
         
@@ -23,6 +23,6 @@ public class DungeonEnterInteraction : NpcInteraction
         if (!result)
             return;
         
-        Managers.Dungeon.TryEnterNextDungeon();
+        Managers.Dungeon.EnterFirstDungeon();
     }
 }

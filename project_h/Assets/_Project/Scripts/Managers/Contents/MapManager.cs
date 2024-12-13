@@ -28,7 +28,7 @@ public class MapManager
         MapName = MapName;
 
         var dungeon = map.GetComponent<Dungeon>();
-        Managers.Dungeon.SetDungeon(dungeon);
+        Managers.Dungeon.Setup(dungeon);
     }
 
 

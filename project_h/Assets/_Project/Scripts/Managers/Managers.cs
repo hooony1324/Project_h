@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,14 +15,15 @@ public class Managers : MonoBehaviour
     private UIManager _ui = new UIManager();
     private LocaleManager _locale = new LocaleManager();
     private DataManager _data = new DataManager();
-    private static CoroutineManager _coroutine;    // need MonoBehavior
+    private SaveLoadManager _saveLoad = new SaveLoadManager();
+
     public static PoolManager Pool => Instance?._pool;
     public static ResourceManager Resource => Instance?._resource;
     public static SceneManagerEx Scene => Instance?._scene;
     public static UIManager UI => Instance?._ui;
-    public static CoroutineManager Coroutines => _coroutine;
     public static LocaleManager Locale => Instance?._locale;
     public static DataManager Data => Instance?._data;
+    public static SaveLoadManager SaveLoad => Instance?._saveLoad;
 
     // Contents
     private GameManager _game = new GameManager();
@@ -62,19 +64,11 @@ public class Managers : MonoBehaviour
                 eventSystem.AddComponent<StandaloneInputModule>();
             }
 
-            GameObject coroutineManager = GameObject.Find("@CoroutineManager");
-            if (coroutineManager == null)
-            {
-                coroutineManager = new GameObject { name = "@CoroutineManager"};
-                coroutineManager.AddComponent<CoroutineManager>();
-                _coroutine = coroutineManager.GetComponent<CoroutineManager>();
-            }
 
             s_instance = managers.GetComponent<Managers>();
 
             DontDestroyOnLoad(managers);
             DontDestroyOnLoad(eventSystem);
-            DontDestroyOnLoad(coroutineManager);
         }
     }
     public static void Clear()
