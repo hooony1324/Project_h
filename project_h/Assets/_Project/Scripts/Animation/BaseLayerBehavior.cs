@@ -28,12 +28,15 @@ public class BaseLayerBehavior : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {   
         if (entity)
+        {
             animator.SetFloat(kSpeedHash, entity.IsMoving ? 1f : 0f);
+            animator.SetBool(kIsDeadHash, entity.IsDead);
+        }
 
         if (movement)
             animator.SetBool(kIsRollingHash, movement.IsRolling);
 
-        animator.SetBool(kIsDeadHash, entity.IsDead);
+        
 
         // animator.SetBool(kIsStunningHash, entity.IsInState<StunningState>());
         // animator.SetBool(kIsSleepingHash, entity.IsInState<SleepingState>());

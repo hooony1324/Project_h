@@ -66,10 +66,6 @@ public class Projectile : BaseObject
         SetLifeTime(lifetime).Forget();
     }
 
-    void Update()
-    {
-    }
-
     void FixedUpdate()
     {
         _projectileMotion.Move();

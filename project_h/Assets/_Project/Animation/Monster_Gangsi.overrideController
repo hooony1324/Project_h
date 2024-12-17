@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Monster_Gangsi
+  m_Controller: {fileID: 9100000, guid: 0b43c465147197847b63a6bbd274a286, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 209ba5c5ade24174fa708e859cc5fab7, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8f46a8adcd7697840b1ab840a0036aa1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 7b6a335dedbb9ac41bf80ca4db37d8e1, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8789eed8b29df97469f224803fac5b27, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 0d67bac72ac6b3442b7a85f4e434ff2c, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: dbefec06ba616d642ab098497b1fdc24, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d583bf0a22c4e4348ae09de003dd78cf, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d6484057576e4b940b23aac6a34f7ba0, type: 2}
