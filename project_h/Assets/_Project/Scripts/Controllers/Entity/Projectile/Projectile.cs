@@ -32,6 +32,7 @@ public class Projectile : BaseObject
             _direction = value;
             
             float angle = Vector2.SignedAngle(Vector2.up, value);
+            transform.rotation = Quaternion.identity;
             transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
     }
@@ -65,16 +66,20 @@ public class Projectile : BaseObject
         SetLifeTime(lifetime).Forget();
     }
 
+    void Update()
+    {
+    }
+
+    void FixedUpdate()
+    {
+        _projectileMotion.Move();
+    }
+
     public async UniTask SetLifeTime(float duration)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: _destroyCTS.Token);
         if (this != null)
             Managers.Object.DespawnProjectile(this);   
-    }
-
-    private void Update()
-    {
-        _projectileMotion.Move();
     }
 
     private void OnCollisionEnter2D(Collision2D other)

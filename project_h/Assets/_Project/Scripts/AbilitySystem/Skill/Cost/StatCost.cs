@@ -11,15 +11,15 @@ public class StatCost : Cost
     public override string Description => stat.DisplayName;
 
     public override bool HasEnoughCost(Entity entity)
-        => entity.Stats.GetValue(stat) >= value.GetValue(entity.Stats);
+        => entity.StatsComponent.GetValue(stat) >= value.GetValue(entity.StatsComponent);
 
     public override void UseCost(Entity entity)
-        => entity.Stats.IncreaseDefaultValue(stat, -value.GetValue(entity.Stats));
+        => entity.StatsComponent.IncreaseDefaultValue(stat, -value.GetValue(entity.StatsComponent));
 
     public override void UseDeltaCost(Entity entity)
-        => entity.Stats.IncreaseDefaultValue(stat, -value.GetValue(entity.Stats) * Time.deltaTime);
+        => entity.StatsComponent.IncreaseDefaultValue(stat, -value.GetValue(entity.StatsComponent) * Time.deltaTime);
 
-    public override float GetValue(Entity entity) => value.GetValue(entity.Stats);
+    public override float GetValue(Entity entity) => value.GetValue(entity.StatsComponent);
 
     public override object Clone()
         => new StatCost() { stat = stat, value = value };

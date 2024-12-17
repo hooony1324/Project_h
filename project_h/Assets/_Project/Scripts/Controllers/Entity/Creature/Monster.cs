@@ -190,10 +190,10 @@ public class Monster : Entity
 
     void SearchTarget()
     {
-        if (Target != null || Stats == null || !isActiveAndEnabled)
+        if (Target != null || StatsComponent == null || !isActiveAndEnabled)
             return;
 
-        float searchRange = Stats.GetValue(Stats.SearchRangeStat);
+        float searchRange = StatsComponent.GetValue(StatsComponent.SearchRangeStat);
         var colliders = Physics2D.OverlapCircleAll(Position, searchRange, EnemyLayerMask);
 
         if (colliders == null || colliders.Length == 0)

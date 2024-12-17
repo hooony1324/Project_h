@@ -77,6 +77,5 @@ public class Managers : MonoBehaviour
         UI.Clear();
         Object.Clear();
         Pool.Clear();
-        //Event.Clear();
     }
 }

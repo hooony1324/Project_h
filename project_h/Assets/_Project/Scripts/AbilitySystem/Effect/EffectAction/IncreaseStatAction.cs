@@ -34,7 +34,7 @@ public class IncreaseStatAction : EffectAction
         => (stack - 1) * bonusValuePerStack;
 
     private float GetBonusStatValue(Entity user)
-        => user.Stats.GetValue(bonusValueStat) * bonusValueStatFactor;
+        => user.StatsComponent.GetValue(bonusValueStat) * bonusValueStatFactor;
 
     private float GetTotalValue(Effect effect, Entity user, int stack, float scale)
     {
@@ -52,9 +52,9 @@ public class IncreaseStatAction : EffectAction
         totalValue = GetTotalValue(effect, user, stack, scale);
 
         if (isBonusType)
-            target.Stats.SetBonusValue(stat, this, totalValue);
+            target.StatsComponent.SetBonusValue(stat, this, totalValue);
         else
-            target.Stats.IncreaseDefaultValue(stat, totalValue);
+            target.StatsComponent.IncreaseDefaultValue(stat, totalValue);
 
         return true;
     }
@@ -65,9 +65,9 @@ public class IncreaseStatAction : EffectAction
             return;
 
         if (isBonusType)
-            target.Stats.RemoveBonusValue(stat, this);
+            target.StatsComponent.RemoveBonusValue(stat, this);
         else
-            target.Stats.IncreaseDefaultValue(stat, -totalValue);
+            target.StatsComponent.IncreaseDefaultValue(stat, -totalValue);
     }
 
     public override void OnEffectStackChanged(Effect effect, Entity user, Entity target, int level, int stack, float scale)

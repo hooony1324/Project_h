@@ -7,9 +7,7 @@ public class DungeonManager
     public Dungeon CurrentDungeon { get; private set; }
 
     private DungeonData _currentDungeonData;
-
     public int CurrentDungeonId => _currentDungeonData ? _currentDungeonData.Id : 0;
-    // TODO: 이전 던전 HERO스탯(HP), 정보 스냅샷?
 
     public void Setup(Dungeon dungeon)
     {
@@ -35,7 +33,6 @@ public class DungeonManager
         if (_currentDungeonData == null)
             return;
 
-        // data: 1_1, 1_2, 1_3,
         if (!_currentDungeonData.HasNextDungeon)
         {
             // 마지막 던전 -> 마을
@@ -49,6 +46,9 @@ public class DungeonManager
             return;
         }
 
+        // 스탯 저장 -> 다음 던전 시작 시 적용
+        //_heroStats = Managers.Hero.MainHero.Stats;
+        
         DungeonData nextDungeonData = Managers.Data.GetDungeonData(_currentDungeonData.NextDungeonId);
         if (nextDungeonData == null)
         {

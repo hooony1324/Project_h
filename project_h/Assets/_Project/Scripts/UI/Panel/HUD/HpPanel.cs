@@ -29,13 +29,13 @@ public class HpPanel : UI_Base
         // 하트 만들기
         SetupHp();
 
-        entity.Stats.HPStat.onValueChanged += OnHPStatValueChanged;        
+        entity.StatsComponent.HPStat.onValueChanged += OnHPStatValueChanged;        
     }
 
     void OnDisable()
     {
         if (_owner != null)
-            _owner.Stats.HPStat.onValueChanged -= OnHPStatValueChanged;        
+            _owner.StatsComponent.HPStat.onValueChanged -= OnHPStatValueChanged;        
     }
 
     void OnHPStatValueChanged(Stat stat, float currentValue, float prevValue)
@@ -51,14 +51,14 @@ public class HpPanel : UI_Base
 
     void SetupHp()
     {
-        int maxCount = Mathf.FloorToInt(_owner.Stats.HPStat.MaxValue);
+        int maxCount = Mathf.FloorToInt(_owner.StatsComponent.HPStat.MaxValue);
         _hearts = new UI_Heart[maxCount];
 
         for (int i = 0; i < maxCount; i++)
         {
             _hearts[i] = Managers.Resource.Instantiate(nameof(UI_Heart), transform).GetComponent<UI_Heart>();
             
-            if (i < _owner.Stats.HPStat.Value)
+            if (i < _owner.StatsComponent.HPStat.Value)
                 _hearts[i].On();
             else
                 _hearts[i].Off();

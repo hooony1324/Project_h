@@ -46,7 +46,7 @@ public class UI_HeroInfo : UI_Base
 
     private void HandleHeroSelectEvent(HeroSelectEvent selectEvent)
     {
-        Managers.Game.SetHeroData(selectEvent.heroDataName);
+        Managers.Hero.SetHeroData(selectEvent.heroDataName);
 
         HeroData heroData = Managers.Data.GetHeroData(selectEvent.heroDataName);
         Stat[] stats = heroData.StatOverrides.Select(x => x.CreateStat()).ToArray();

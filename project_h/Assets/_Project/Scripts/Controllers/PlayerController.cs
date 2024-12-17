@@ -50,7 +50,7 @@ public class PlayerController : InitOnce
                 // Use후 쫒아가는 중 PointerDown        => 
                 // Use > InSkillActionState 에서        =>
                 controlTarget.Movement.TraceTarget = null;
-                controlTarget.SkillSystem.CancelAll(isForce:true);
+                //controlTarget.SkillSystem.CancelAll(isForce:true);
                 controlTarget.SkillSystem.CancelReservedSkill();
                 controlTarget.Movement.IsForcedMoving = true;
                 controlTarget.Target = null;
@@ -59,7 +59,7 @@ public class PlayerController : InitOnce
                 break;
             case EJoystickState.PointerUp:
                 controlTarget.Movement.TraceTarget = null;
-                controlTarget.SkillSystem.CancelAll(isForce:true);
+                //controlTarget.SkillSystem.CancelAll(isForce:true);
                 controlTarget.SkillSystem.CancelReservedSkill();
                 controlTarget.Movement.IsForcedMoving = false;
                 controlTarget.Target = null;

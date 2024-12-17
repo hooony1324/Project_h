@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Define;
 
 [System.Serializable]
 public class ImpactAndReflect : ImpactAction
@@ -20,14 +21,25 @@ public class ImpactAndReflect : ImpactAction
         {
             if (_reflectCount > 0)
             {
+
                 // 입사각과 반사각 계산
-                Vector2 normal = other.contacts[0].normal; 
                 Vector2 incomingVector = Owner.Direction;
+                // contacts[0].normal -> contact가 여러개 발생 시 부정확함
+                ContactPoint2D[] contacts = new ContactPoint2D[other.contactCount];
+                other.GetContacts(contacts);
+
+                Vector2 normal = Vector2.zero;
+                for (int i = 0; i < contacts.Length; i++)
+                {
+                    normal += contacts[i].normal;
+                }
+                normal /= contacts.Length;
                 
                 Vector2 reflectVector = Vector2.Reflect(incomingVector, normal);
 
                 // 반사 벡터를 방향으로 설정
-                Owner.Direction = reflectVector;
+                Owner.Direction = reflectVector.normalized;
+
 
                 _reflectCount--;
             }
@@ -41,7 +53,7 @@ public class ImpactAndReflect : ImpactAction
         }
         else
         {
-            Entity target = other.collider.GetComponent<Entity>( );
+            Entity target = other.collider.GetComponent<Entity>();
             if (target == null)
                 return;
 

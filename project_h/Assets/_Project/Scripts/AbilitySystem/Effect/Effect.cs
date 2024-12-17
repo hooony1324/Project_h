@@ -95,7 +95,7 @@ public class Effect : IdentifiedObject
     public int DataBonusLevel => Mathf.Max(level - currentData.level, 0);
 
     // Effect의 지속 시간
-    public float Duration => currentData.duration.GetValue(User.Stats);
+    public float Duration => currentData.duration.GetValue(User.StatsComponent);
     // Duration이 0이면 무한 지속
     public bool IsTimeless => Mathf.Approximately(Duration, kInfinity);
     public float CurrentDuration

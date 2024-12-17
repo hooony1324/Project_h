@@ -19,6 +19,14 @@ public class Define
         public static Vector2 RIGHT = new Vector2(1f, 0f);
     }
 
+    public static class IsoDir
+    {
+        public static Vector2 TOP_RIGHT = new Vector2(0.984f, 0.447f);
+        public static Vector2 TOP_LEFT = new Vector2(-0.894f, 0.447f);
+        public static Vector2 BOTTOM_RIGHT = new Vector2(0.894f, -0.447f);
+        public static Vector2 BOTTOM_LEFT = new Vector2(-0.894f, -0.447f);
+    }
+
     public const char MAP_TOOL_WALL = '0';
     public const char MAP_TOOL_CHARACTER_WALKABLE = '1'; 
     public const char MAP_TOOL_CAMERA_WALKABLE = '2';	

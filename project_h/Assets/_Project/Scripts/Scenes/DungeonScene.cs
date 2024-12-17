@@ -27,7 +27,10 @@ public class DungeonScene : BaseScene
         hero = Managers.Object.Spawn<Hero>(startPosition);
 
         Managers.Hero.SetMainHero(hero);
-        hero.SetData(Managers.Game.CurrentHeroData);
+        hero.SetData(Managers.Hero.CurrentHeroData);
+
+        // Load HeroStat
+        Managers.Hero.LoadStats();
 
         hero.gameObject.SetActive(false);
         
@@ -59,5 +62,8 @@ public class DungeonScene : BaseScene
     public override void Clear()
     {
         Managers.UI.Joystick = null;
+
+        // Save Hero Stat
+        Managers.Hero.SaveStats();
     }
 }

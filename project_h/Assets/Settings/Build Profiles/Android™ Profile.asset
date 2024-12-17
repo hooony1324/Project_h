@@ -20,7 +20,9 @@ MonoBehaviour:
     rid: 3506564066614444251
   m_OverrideGlobalSceneList: 0
   m_Scenes: []
-  m_ScriptingDefines: []
+  m_ScriptingDefines:
+  - DEBUG
+  - CHEAT
   m_PlayerSettingsYaml:
     m_Settings:
     - line: '| PlayerSettings:'

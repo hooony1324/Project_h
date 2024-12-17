@@ -77,7 +77,7 @@ public class SelectAutoByAttackRange : TargetSelectionAction
     {
         float distance = Vector2.Distance(requesterEntity.Position, targetPosition);
 
-        float attackRange = requesterEntity.Stats.GetValue(requesterEntity.Stats.AttackRangeStat);
+        float attackRange = requesterEntity.StatsComponent.GetValue(requesterEntity.StatsComponent.AttackRangeStat);
         
         return !(distance > attackRange);
     }

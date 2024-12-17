@@ -38,7 +38,7 @@ public abstract class Entity : BaseObject
     [SerializeField]
     private Category[] categories;
     public Animator Animator {get; private set; }
-    [SerializeField]public Stats Stats { get; private set; }
+    [SerializeField]public StatsComponent StatsComponent { get; private set; }
     public EntityMovement Movement;
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;
@@ -53,7 +53,7 @@ public abstract class Entity : BaseObject
     public virtual bool IsMoving => Movement.IsMoving; 
     public bool IsPlayer => controlType == EEntityControlType.Player;
     public bool IsEnemyTargeted => Target != null && Target.HasCategory(enemyCategory);
-    public virtual bool IsDead => Stats.HPStat != null && Mathf.Approximately(Stats.HPStat.DefaultValue, 0f);
+    public virtual bool IsDead => StatsComponent.HPStat != null && Mathf.Approximately(StatsComponent.HPStat.DefaultValue, 0f);
 
     private Transform _fireSocket;
     public override bool Init()
@@ -76,8 +76,8 @@ public abstract class Entity : BaseObject
         transform.localScale = new Vector3(data.Scale, data.Scale, 1);
         Animator.runtimeAnimatorController = Managers.Resource.Load<AnimatorOverrideController>(data.AnimatorControllerName);
 
-        Stats = GetComponent<Stats>();
-        Stats.Setup(this, data.StatOverrides);
+        StatsComponent = GetComponent<StatsComponent>();
+        StatsComponent.Setup(this, data.StatOverrides);
 
         Movement = GetComponent<EntityMovement>();
         Movement.Setup(this);
@@ -112,12 +112,12 @@ public abstract class Entity : BaseObject
         if (IsDead)
             return;
 
-        float prevValue = Stats.HPStat.DefaultValue;
-        Stats.HPStat.DefaultValue -= damage;
+        float prevValue = StatsComponent.HPStat.DefaultValue;
+        StatsComponent.HPStat.DefaultValue -= damage;
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
 
-        if (Mathf.Approximately(Stats.HPStat.DefaultValue, 0f))
+        if (Mathf.Approximately(StatsComponent.HPStat.DefaultValue, 0f))
             OnDead(); 
     }
 

@@ -12,13 +12,10 @@ public class SaveLoadManager
     public static string Path => Application.persistentDataPath + "/SaveData.json";
     public void Init()
     {
-        //InitGame();
-
         if (File.Exists(Path) == false)
             InitGame();
         else
             LoadGame();
-
     }
 
 
@@ -33,7 +30,7 @@ public class SaveLoadManager
     {
         _gameSaveData = new GameSaveData();
 
-        _gameSaveData.DungeonPlayInfo = new DungeonPlayInfo();
+        _gameSaveData.DungeonPlaySaveData = new DungeonPlaySaveData();
         // 초반 진행 데이터 세팅
         // EX)
         // - 첫 퀘스트 세팅
@@ -45,7 +42,7 @@ public class SaveLoadManager
 
     public void SaveGame()
     {
-        _gameSaveData.DungeonPlayInfo.Save();
+        _gameSaveData.DungeonPlaySaveData.Save();
 
 
         string jsonStr = JsonUtility.ToJson(_gameSaveData);
@@ -65,9 +62,9 @@ public class SaveLoadManager
 
         _gameSaveData = saveData;
 
-
+        
         // Load Dungeon Play Data
-        _gameSaveData.DungeonPlayInfo.Load();
+        _gameSaveData.DungeonPlaySaveData.Load(saveData.DungeonPlaySaveData);
         
     }
 

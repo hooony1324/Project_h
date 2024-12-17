@@ -8,7 +8,7 @@ public struct StatScaleFloat
     public float defaultValue;
     public Stat scaleStat;
 
-    public float GetValue(Stats stats)
+    public float GetValue(StatsComponent stats)
     {
         if (scaleStat && stats.TryGetStat(scaleStat, out var stat))
         {

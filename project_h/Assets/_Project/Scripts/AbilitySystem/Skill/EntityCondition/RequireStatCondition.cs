@@ -13,7 +13,7 @@ public class RequireStatCondition : EntityCondition
     public override string Description => $"{stat.DisplayName} {needValue}";
 
     public override bool IsPass(Entity entity)
-        => entity.Stats.GetStat(stat)?.Value >= needValue;
+        => entity.StatsComponent.GetStat(stat)?.Value >= needValue;
 
     public override object Clone()
         => new RequireStatCondition() { stat = stat, needValue = needValue };

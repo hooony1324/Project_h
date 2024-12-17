@@ -6,10 +6,7 @@ using Object = UnityEngine.Object;
 
 public class GameManager
 {
-    public string HeroDataName => _heroDataName;
-    private string _heroDataName;
-    public void SetHeroData(string heroDataName) => _heroDataName = heroDataName;
-    public HeroData CurrentHeroData => Managers.Data.GetHeroData(_heroDataName);
+
 
     private Vector2 _moveDir = Vector2.zero;
     public Vector2 MoveDir 

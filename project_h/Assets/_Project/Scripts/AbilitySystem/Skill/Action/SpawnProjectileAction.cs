@@ -5,12 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class SpawnProjectileAction : SkillAction
 {
-    [SerializeField]
-    private GameObject projectilePrefab;
-    [SerializeField]
-    private string spawnPointSocketName;
-    [SerializeField]
-    private float speed;
+    [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private string spawnPointSocketName;
+    [SerializeField] private float speed;
+    [SerializeField] private float lifetime;
 
     [SerializeReference, SubclassSelector]
     private ImpactAction impactAction;
@@ -38,7 +36,7 @@ public class SpawnProjectileAction : SkillAction
         if (targetSelectionResult.resultMessage == SearchResultMessage.FindTarget)
             direction = targetSelectionResult.selectedTarget.transform.position - spawnPosition;
 
-        direction.With(z:0).Normalize();
+        direction = direction.With(z:0).normalized;
         foreach (var shootInfo in shootInfos)
         {
             var projectile = Managers.Object.SpawnProjectile(projectilePrefab, spawnPosition, Quaternion.identity);
@@ -47,7 +45,7 @@ public class SpawnProjectileAction : SkillAction
             // direction을 angle만큼 회전
             var angle = shootInfo.angle;
             Vector3 shootDir = Quaternion.Euler(0, 0, angle) * direction;
-            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, shootDir, skill, skill.Duration, impactAction, projectileMotion);
+            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, shootDir, skill, lifetime, impactAction, projectileMotion);
         }
         
     }
@@ -61,7 +59,8 @@ public class SpawnProjectileAction : SkillAction
             speed = speed,
             shootInfos = shootInfos,
             impactAction = impactAction,
-            projectileMotion = projectileMotion
+            projectileMotion = projectileMotion,
+            lifetime = lifetime,
         };
     }
 

@@ -34,7 +34,7 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
     protected override TargetSelectionResult SelectImmediateByAI(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
-        Collider2D collider = Physics2D.OverlapCircle(position, targettingRange.GetValue(requesterEntity.Stats), requesterEntity.EnemyLayerMask);
+        Collider2D collider = Physics2D.OverlapCircle(position, targettingRange.GetValue(requesterEntity.StatsComponent), requesterEntity.EnemyLayerMask);
         Entity target = collider?.GetComponent<Entity>();
     
         if (!target)
@@ -59,7 +59,7 @@ public class SelectAutoByTargettingRange : TargetSelectionAction
     public override bool IsInRange(TargetSearcher targetSearcher, Entity requesterEntity, GameObject requesterObject, Vector3 targetPosition)
     {
         float distance = Vector2.Distance(requesterEntity.Position, targetPosition);
-        float properRange = targettingRange.GetValue(requesterEntity.Stats);
+        float properRange = targettingRange.GetValue(requesterEntity.StatsComponent);
         return distance <= properRange;
     }
     public override object Clone() => new SelectAutoByTargettingRange(this);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UIElements;
 
 [System.Serializable]
 public class StraightMotion : ProjectileMotion
@@ -14,7 +15,7 @@ public class StraightMotion : ProjectileMotion
 
     public override void Move()
     {
-        Owner.transform.position += Owner.Speed * Time.deltaTime * Owner.Direction;
+        Owner.transform.position += Owner.Direction * Owner.Speed * Time.deltaTime;
     }
 
     public override object Clone() => new StraightMotion(this);

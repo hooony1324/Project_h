@@ -27,7 +27,7 @@ public class DealDamageAction : EffectAction
         => (stack - 1) * bonusDamagePerStack;
 
     private float GetBonusStatDamage(Entity user)
-        => user.Stats.GetValue(bonusDamageStat) * bonusDamageStatFactor;
+        => user.StatsComponent.GetValue(bonusDamageStat) * bonusDamageStatFactor;
 
     private float GetTotalDamage(Effect effect, Entity user, int stack, float scale)
     {

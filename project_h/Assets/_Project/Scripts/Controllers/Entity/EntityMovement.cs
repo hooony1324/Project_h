@@ -73,7 +73,7 @@ public class EntityMovement : MonoBehaviour
         }
     }
 
-    private Vector3 _movedDirection;
+    private Vector3 _movedDirection = Vector3.left;
     public Vector3 MovedDirection => _movedDirection;
     public Vector3 MovedPosition => transform.position + _movedDirection;
 
@@ -99,7 +99,7 @@ public class EntityMovement : MonoBehaviour
 
         agent = Owner.GetComponent<NavMeshAgent>();
 
-        entityMoveSpeedStat = Owner.Stats.MoveSpeedStat ?? Owner.Stats.GetStat("MOVESPEED");
+        entityMoveSpeedStat = Owner.StatsComponent.MoveSpeedStat ?? Owner.StatsComponent.GetStat("MOVESPEED");
         if (entityMoveSpeedStat)
         {
             agent.speed = entityMoveSpeedStat.Value;

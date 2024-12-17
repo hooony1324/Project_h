@@ -22,12 +22,13 @@ MonoBehaviour:
   useType: 0
   executionType: 0
   applyType: 0
-  needSelectionResultType: 0
+  needSelectionResultType: 1
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   acquisitionConditions: []
   acquisitionCosts: []
-  useConditions: []
+  useConditions:
+  - rid: 2868446983629570152
   isAllowLevelExceedDatas: 0
   maxLevel: 1
   defaultLevel: 1
@@ -40,17 +41,17 @@ MonoBehaviour:
     action:
       rid: 4885778437199888701
     runningFinishOption: 0
-    duration: 5
-    applyCount: 5
-    applyCycle: 0.5
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
     cooldown:
       defaultValue: 1
       scaleStat: {fileID: 0}
     targetSearcher:
       selectionAction:
-        rid: 2868446688828457061
+        rid: 2868446983629570150
       searchAction:
-        rid: 2868446688828457060
+        rid: 2868446983629570151
     costs: []
     isUseCast: 0
     castTime:
@@ -76,8 +77,8 @@ MonoBehaviour:
       type: 0
       name: 
     actionAnimatorParameter:
-      type: 0
-      name: isDefaultAttack
+      type: 1
+      name: isMovingAttack
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []
@@ -92,41 +93,36 @@ MonoBehaviour:
       data:
         _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
         _reflectCount: 3
-    - rid: 2868446688828457060
+    - rid: 2868446983629570150
+      type: {class: SelectByMovingDirection, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2868446983629570151
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 2868446688828457061
-      type: {class: SelectAutoByTargettingRange, ns: , asm: Assembly-CSharp}
-      data:
-        isShowIndicatorPlayerOnly: 0
-        indicatorViewAction:
-          rid: -2
-        isUseScale: 0
-        targettingRange:
-          defaultValue: 2
-          scaleStat: {fileID: 11400000, guid: ebcd69fe6d4cea34bab25afd3cd0486a, type: 2}
-        layerMask:
-          serializedVersion: 2
-          m_Bits: 0
+    - rid: 2868446983629570152
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: 
     - rid: 4885778437199888701
       type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
       data:
         projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
         spawnPointSocketName: FireSocket
-        speed: 5
+        speed: 20
+        lifetime: 5
         impactAction:
           rid: 2868446688828457055
         projectileMotion:
           rid: 4885778437199888703
         shootInfos:
         - angle: 0
-        - angle: 90
-        - angle: 180
-        - angle: 270
     - rid: 4885778437199888703
       type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
       data: 

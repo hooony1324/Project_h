@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Entity))]
-public class Stats : MonoBehaviour
+public class StatsComponent : MonoBehaviour
 {
     [Space]
     [SerializeField]
@@ -17,6 +17,7 @@ public class Stats : MonoBehaviour
     public Stat LevelStat => levelStat;
     public Stat SearchRangeStat => searchRangeStat;
     public Stat AttackRangeStat => attackRangeStat;
+    public Stat[] Stats => stats;
 
     [SerializeField, ReadOnly] private Stat hpStat;
     [SerializeField, ReadOnly] private Stat moveSpeedStat;
@@ -52,6 +53,12 @@ public class Stats : MonoBehaviour
         return stats.FirstOrDefault(x => x.ID == stat.ID);
     }
 
+    public Stat GetStat(int id)
+    {
+        return stats.FirstOrDefault(x => x.ID == id);
+    }
+
+    // Try Use GetStat(int)
     public Stat GetStat(string codeName)
     {
         Debug.Assert(codeName != null, "Stats::GetStat - stat의 codeName은 null이 될 수 없습니다.");

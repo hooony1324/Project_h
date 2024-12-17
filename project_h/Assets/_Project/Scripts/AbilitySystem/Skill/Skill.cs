@@ -180,7 +180,7 @@ public class Skill : IdentifiedObject
     public bool HasCost => Costs.Count > 0;
     public bool HasEnoughCost => Costs.All(x => x.HasEnoughCost(Owner));
 
-    public float Cooldown => currentData.cooldown.GetValue(Owner.Stats);
+    public float Cooldown => currentData.cooldown.GetValue(Owner.StatsComponent);
     public bool HasCooldown => Cooldown > 0f;
     public float CurrentCooldown
     {
@@ -222,7 +222,7 @@ public class Skill : IdentifiedObject
     public float CurrentApplyCycle { get; set; }
 
     public bool IsUseCast => currentData.isUseCast;
-    public float CastTime => currentData.castTime.GetValue(Owner.Stats);
+    public float CastTime => currentData.castTime.GetValue(Owner.StatsComponent);
     public float CurrentCastTime
     {
         get => currentCastTime;

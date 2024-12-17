@@ -82,13 +82,13 @@ public class Hero : Entity
                 break;
             }
 
-            if (Stats == null)
+            if (StatsComponent == null)
             {
                 await UniTask.NextFrame();
                 continue;
             }
 
-            float searchRange = Stats.GetValue(Stats.SearchRangeStat);
+            float searchRange = StatsComponent.GetValue(StatsComponent.SearchRangeStat);
             var colliders = Physics2D.OverlapCircleAll(Position, searchRange, EnemyLayerMask);
 
             float nearestDistance = Mathf.Infinity;

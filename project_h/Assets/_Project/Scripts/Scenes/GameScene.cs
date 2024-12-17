@@ -28,12 +28,12 @@ public class GameScene : BaseScene
         hero = Managers.Object.Spawn<Hero>(startPosition);
 
         Managers.Hero.SetMainHero(hero);
-        hero.SetData(Managers.Game.CurrentHeroData);
+        hero.SetData(Managers.Hero.CurrentHeroData);
 
         hero.gameObject.SetActive(false);
 
-
-        Managers.SaveLoad.SaveGame();
+        Managers.Hero.SaveStats();
+        //Managers.SaveLoad.SaveGame();
 
 
         return true;
@@ -61,5 +61,12 @@ public class GameScene : BaseScene
     public override void Clear()
     {
         Managers.UI.Joystick = null;
+
+    }
+
+    void OnApplicationQuit()
+    {
+        Managers.Dungeon.SetFirstDungeon(null);
+        Managers.SaveLoad.SaveGame();
     }
 }
