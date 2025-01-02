@@ -39,7 +39,7 @@ MonoBehaviour:
     precedingAction:
       rid: -2
     action:
-      rid: 3506563672370053164
+      rid: 2868447186741625729
     runningFinishOption: 0
     duration: 0
     applyCount: 1
@@ -49,7 +49,7 @@ MonoBehaviour:
       scaleStat: {fileID: 11400000, guid: 6d172059db6eacd4e9fa8c17f3fa78fe, type: 2}
     targetSearcher:
       selectionAction:
-        rid: 4885778306204434602
+        rid: 2868447304799486073
       searchAction:
         rid: 4885778306204434601
       scale: 1
@@ -106,7 +106,7 @@ MonoBehaviour:
       scaleStat: {fileID: 0}
     targetSearcher:
       selectionAction:
-        rid: 4885778306204434600
+        rid: 4885778306204434602
       searchAction:
         rid: -2
       scale: 1
@@ -159,14 +159,11 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3506563672370053137
-      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-      data: {}
-    - rid: 3506563672370053164
+    - rid: 2868447186741625729
       type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
       data: {}
-    - rid: 4885778306204434600
-      type: {class: SelectMeleeTarget, ns: , asm: Assembly-CSharp}
+    - rid: 2868447304799486073
+      type: {class: SelectTargetByAttackRange, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
@@ -174,6 +171,9 @@ MonoBehaviour:
         isUseScale: 0
         scale: 0
         isSelectSameCategory: 0
+    - rid: 3506563672370053137
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: {}
     - rid: 4885778306204434601
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:

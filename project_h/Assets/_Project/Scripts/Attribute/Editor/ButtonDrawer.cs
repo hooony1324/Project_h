@@ -12,6 +12,11 @@ public class ButtonDrawer: PropertyDrawer
         Object target = property.serializedObject.targetObject;
         System.Type type = target.GetType();
         System.Reflection.MethodInfo method = type.GetMethod(methodName);
+
+        ButtonAttribute buttonAttribute = (ButtonAttribute)attribute;
+        Color prevColor = GUI.backgroundColor;
+        GUI.backgroundColor = buttonAttribute.GetColor();
+
         if (method == null)
         {
             GUI.Label(position, "Method could not be found. Is it public?");
@@ -22,10 +27,21 @@ public class ButtonDrawer: PropertyDrawer
             GUI.Label(position, "Method cannot have parameters.");
             return;
         }
+
+        position.height = buttonAttribute.Height;
+
         if (GUI.Button(position, method.Name))
         {
             method.Invoke(target, null);
         }
+
+        GUI.backgroundColor = prevColor;
+    }
+
+    public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+    {
+        ButtonAttribute buttonAttribute = (ButtonAttribute)attribute;
+        return buttonAttribute.Height;
     }
 }
 #endif

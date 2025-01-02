@@ -18,10 +18,18 @@ public class EntityData : ScriptableObject
     [SerializeField]
     private StatOverride[] statOverrides;
 
+    [SerializeField]
+    private string[] defaultSkills;
+
+    [SerializeField]
+    private string rollingSkill;
+
     public Sprite Sprite => sprite;
     public float Scale => scale;
     public string AnimatorControllerName => animatorControllerName;
     public StatOverride[] StatOverrides => statOverrides;
+    public string[] DefaultSkills => defaultSkills;
+    public string RollingSkill => rollingSkill;
 
 #if UNITY_EDITOR
     public void LoadStats()

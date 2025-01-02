@@ -47,8 +47,11 @@ public abstract class Entity : BaseObject
     public Entity Target;
     public Category[] Categories => categories;
     [SerializeField] protected Category enemyCategory;
+
+    protected int layerMask = 0;
     protected int enemyLayerMask = 0;
     public int EnemyLayerMask => enemyLayerMask;
+    public int LayerMask => layerMask;
 
     public virtual bool IsMoving => Movement.IsMoving; 
     public bool IsPlayer => controlType == EEntityControlType.Player;
@@ -56,17 +59,22 @@ public abstract class Entity : BaseObject
     public virtual bool IsDead => StatsComponent.HPStat != null && Mathf.Approximately(StatsComponent.HPStat.DefaultValue, 0f);
 
     private Transform _fireSocket;
+    private CircleCollider2D _collider;
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
     
         Animator = GetComponent<Animator>();
+        _collider = GetComponent<CircleCollider2D>();
 
         onTakeDamage += SpawnDamageText;
 
         SortingGroup sg = Util.GetOrAddComponent<SortingGroup>(gameObject);
         sg.sortingOrder = SortingLayers.ENTITY;        
+
+        StateMachine = GetComponent<MonoStateMachine<Entity>>();
+        StateMachine.Setup(this);
 
         return true;
     }
@@ -83,11 +91,12 @@ public abstract class Entity : BaseObject
         Movement.Setup(this);
 
         SkillSystem = GetComponent<SkillSystem>();
-        SkillSystem.Setup(this);
+        SkillSystem.Setup(this, data);
         SkillSystem.onSkillTargetSelectionCompleted += ReserveSkill;
 
-        StateMachine = GetComponent<MonoStateMachine<Entity>>();
-        StateMachine.Setup(this);
+        Movement.enabled = true;
+        Movement.AgentEnabled = true;
+        _collider.enabled = true;
     }
 
     private void ReserveSkill(SkillSystem skillSystem, Skill skill, TargetSearcher targetSearcher, TargetSelectionResult result)
@@ -136,10 +145,9 @@ public abstract class Entity : BaseObject
 
     private void OnDead()
     {
-        if (Movement)
-            Movement.enabled = false;
-
         SkillSystem.CancelAll(true);
+
+        _collider.enabled = false;
 
         onDead?.Invoke(this);
         onDead = null;

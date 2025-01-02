@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf04442dfadda1b4e8c72e6fa8f2857d
+    m_Address: Projectile_Bats
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d1efae1d281bf15419315ef54d0d01f7
     m_Address: Hero
     m_ReadOnly: 0

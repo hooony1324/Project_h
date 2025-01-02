@@ -25,9 +25,6 @@ MonoBehaviour:
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
     isUseOverride: 0
-    overrideDefaultValue: 5
-  - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
-    isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
     isUseOverride: 0
@@ -40,4 +37,7 @@ MonoBehaviour:
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: ebcd69fe6d4cea34bab25afd3cd0486a, type: 2}
     isUseOverride: 0
-    overrideDefaultValue: 15
+    overrideDefaultValue: 0
+  defaultSkills:
+  - DEFAULT_ATTACK
+  rollingSkill: DEFAULT_ROLL

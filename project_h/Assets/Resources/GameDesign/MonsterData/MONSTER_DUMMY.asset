@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9182aa49bd339499b367d52089971c, type: 3}
   m_Name: MONSTER_DUMMY
   m_EditorClassIdentifier: 
-  entityId: 
-  sprite: {fileID: 21300000, guid: f10031b379c6a764a80bd5801ca0c6a9, type: 3}
+  entityId: MONSTER_DUMMY
+  sprite: {fileID: 21300000, guid: e1774ae355ff8de4698cd1471924ad27, type: 3}
   scale: 1
-  animatorControllerName: 
+  animatorControllerName: Monster_Slime
   statOverrides:
   - stat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     isUseOverride: 0
@@ -24,9 +24,6 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
-    isUseOverride: 1
-    overrideDefaultValue: 10000
-  - stat: {fileID: 11400000, guid: c2bd108ab3a9d054c9eb6d6f21352ffd, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
@@ -36,5 +33,8 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
   - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+  - stat: {fileID: 11400000, guid: ebcd69fe6d4cea34bab25afd3cd0486a, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0

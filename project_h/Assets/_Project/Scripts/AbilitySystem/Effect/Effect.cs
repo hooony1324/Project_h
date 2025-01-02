@@ -193,6 +193,8 @@ public class Effect : IdentifiedObject
     public event ReleasedHandler onReleased;
     public event StackChangedHandler onStackChanged;
 
+    public Effect AntiEffect => currentData.antiEffect;
+
     public void Setup(object owner, Entity user, int level, float scale = 1f)
     {
         Owner = owner;

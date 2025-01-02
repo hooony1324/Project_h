@@ -24,8 +24,9 @@ public class Joystick_ActionButtons : InitOnce
         _rollButton.UnBindSkill();
         _attackButton.UnBindSkill();
 
+
         _rollButton.BindSkill(_owner, _owner.SkillSystem.Roll);
-        _attackButton.BindSkill(_owner, _owner.SkillSystem.TestSkill);
+        _attackButton.BindSkill(_owner, _owner.SkillSystem.DefaultAttack);
 
         
     }

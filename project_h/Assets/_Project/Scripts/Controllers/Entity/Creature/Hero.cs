@@ -23,6 +23,7 @@ public class Hero : Entity
 
         ObjectType = EObjectType.Hero;
         infoText = Util.FindChild<UI_WorldText>(gameObject);
+        layerMask = Util.GetLayerMask("Hero");
         enemyLayerMask = Util.GetLayerMask("Monster");
 
         return true;

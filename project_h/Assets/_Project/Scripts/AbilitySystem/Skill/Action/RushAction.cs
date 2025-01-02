@@ -22,6 +22,7 @@ public class RushAction : SkillAction
         DOTween.To(() => skill.Owner.transform.position, (v) => skill.Owner.transform.position = v, destPos, 0.5f)
             .SetEase(Ease.OutExpo);
 
+        skill.SearchTargets();
         foreach (var target in skill.Targets)
             target.SkillSystem.Apply(skill);
     }

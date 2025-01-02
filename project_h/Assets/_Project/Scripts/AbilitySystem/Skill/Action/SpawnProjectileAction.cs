@@ -9,6 +9,7 @@ public class SpawnProjectileAction : SkillAction
     [SerializeField] private string spawnPointSocketName;
     [SerializeField] private float speed;
     [SerializeField] private float lifetime;
+    [SerializeField] private bool useObjectPool = true;
 
     [SerializeReference, SubclassSelector]
     private ImpactAction impactAction;
@@ -17,6 +18,7 @@ public class SpawnProjectileAction : SkillAction
     private ProjectileMotion projectileMotion;
 
     [SerializeField]
+    [Tooltip("기본 Direction을 기준으로 상대적인 발사 각도를 설정, Info가 한개도 없다면 기본 Direction으로 발사")]
     private ShootInfo[] shootInfos;
     
     public override void Apply(Skill skill)
@@ -35,19 +37,31 @@ public class SpawnProjectileAction : SkillAction
         var targetSelectionResult = skill.TargetSelectionResult;
         if (targetSelectionResult.resultMessage == SearchResultMessage.FindTarget)
             direction = targetSelectionResult.selectedTarget.transform.position - spawnPosition;
+        else if (targetSelectionResult.resultMessage == SearchResultMessage.FindPosition)
+            direction = targetSelectionResult.selectedPosition;
+
 
         direction = direction.With(z:0).normalized;
-        foreach (var shootInfo in shootInfos)
-        {
-            var projectile = Managers.Object.SpawnProjectile(projectilePrefab, spawnPosition, Quaternion.identity);
-            projectile.transform.position = spawnPosition;
 
-            // direction을 angle만큼 회전
-            var angle = shootInfo.angle;
-            Vector3 shootDir = Quaternion.Euler(0, 0, angle) * direction;
-            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, shootDir, skill, lifetime, impactAction, projectileMotion);
+        if (shootInfos.Length == 0)
+        {
+            var projectile = Managers.Object.SpawnProjectile(projectilePrefab, spawnPosition, Quaternion.identity, useObjectPool);
+            projectile.transform.position = spawnPosition;
+            projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, direction, skill, lifetime, impactAction, projectileMotion);
         }
-        
+        else
+        {
+            foreach (var shootInfo in shootInfos)
+            {
+                var projectile = Managers.Object.SpawnProjectile(projectilePrefab, spawnPosition, Quaternion.identity, useObjectPool);
+                projectile.transform.position = spawnPosition;
+
+                // direction을 angle만큼 회전
+                var angle = shootInfo.angle;
+                Vector3 shootDir = Quaternion.Euler(0, 0, angle) * direction;
+                projectile.GetComponent<Projectile>().Setup(skill.Owner, speed, shootDir, skill, lifetime, impactAction, projectileMotion);
+            }
+        }
     }
 
     public override object Clone()

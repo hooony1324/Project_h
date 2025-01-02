@@ -6,9 +6,9 @@ using static Define;
 
 public class Projectile : BaseObject
 {
-    private Entity _owner;
-    private float _speed;
-    private Skill _skill;
+    protected Entity _owner;
+    protected float _speed;
+    protected Skill _skill;
     private Rigidbody2D _rigidbody;
 
     public Entity Owner => _owner;
@@ -23,7 +23,7 @@ public class Projectile : BaseObject
 
     private CancellationTokenSource _destroyCTS;
 
-    private Vector3 _direction;
+    protected Vector3 _direction;
     public Vector3 Direction 
     {
         get => _direction;
@@ -43,19 +43,19 @@ public class Projectile : BaseObject
             return false;
 
         ObjectType = EObjectType.Projectile;
-        GetComponent<SpriteRenderer>().sortingOrder = SortingLayers.PROJECTILE;
-
-        _rigidbody = GetComponent<Rigidbody2D>();
 
         return true;
     }
 
-    public void Setup(Entity owner, float speed, Vector3 direction, Skill skill, float lifetime, ImpactAction impactAction, ProjectileMotion projectileMotion)
+    public virtual void Setup(Entity owner, float speed, Vector3 direction, Skill skill, float lifetime, ImpactAction impactAction, ProjectileMotion projectileMotion)
     {
         _owner = owner;
         _speed = speed;
         _skill = skill;
         Direction = direction;
+
+        GetComponent<SpriteRenderer>().sortingOrder = SortingLayers.PROJECTILE;
+        _rigidbody = GetComponent<Rigidbody2D>();
 
         _impactAction = impactAction.Clone() as ImpactAction;
         _projectileMotion = projectileMotion.Clone() as ProjectileMotion;
@@ -67,6 +67,11 @@ public class Projectile : BaseObject
     }
 
     void FixedUpdate()
+    {
+        UpdateMovement();
+    }
+
+    protected virtual void UpdateMovement()
     {
         _projectileMotion.Move();
     }

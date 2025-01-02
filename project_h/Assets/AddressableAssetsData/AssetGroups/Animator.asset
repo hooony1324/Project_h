@@ -21,14 +21,44 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0abef7ed281229a4a94f75c6683896cd
+    m_Address: Monster_Bat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 11c89dd71600b3f4b8ea4af02c82f4ea
+    m_Address: Monster_Chariot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 242ee89986cbe8b4ca410ca71f617005
     m_Address: Hero_Bow
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 282c87b096e7b194080ca1adac0bfd41
+    m_Address: Monster_Gangsi
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f086b312e0d78443bb947dd207924bd
     m_Address: Monster_Slime
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 437d86b3060b07b498730c6720fe3e7b
+    m_Address: Monster_Ballista
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 439209afdc3ab39419dd079fe57951bb
+    m_Address: Monster_GeneralStatue
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

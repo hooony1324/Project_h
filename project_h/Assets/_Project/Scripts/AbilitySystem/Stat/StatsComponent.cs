@@ -14,14 +14,12 @@ public class StatsComponent : MonoBehaviour
 
     public Stat HPStat => hpStat;
     public Stat MoveSpeedStat => moveSpeedStat;
-    public Stat LevelStat => levelStat;
     public Stat SearchRangeStat => searchRangeStat;
     public Stat AttackRangeStat => attackRangeStat;
     public Stat[] Stats => stats;
 
     [SerializeField, ReadOnly] private Stat hpStat;
     [SerializeField, ReadOnly] private Stat moveSpeedStat;
-    [SerializeField, ReadOnly] private Stat levelStat;
     [SerializeField, ReadOnly] private Stat searchRangeStat;
     [SerializeField, ReadOnly] private Stat attackRangeStat;
 
@@ -35,7 +33,6 @@ public class StatsComponent : MonoBehaviour
 
         hpStat =  GetStat("HP");
         moveSpeedStat = GetStat("MOVE_SPEED");
-        levelStat = GetStat("LEVEL");
         searchRangeStat = GetStat("RANGE_SEARCH");
         attackRangeStat = GetStat("RANGE_ATTACK");
     }

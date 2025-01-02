@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1eac66e6f3b740b59fc034f726393, type: 3}
   m_Name: EFFECT_STUN
   m_EditorClassIdentifier: 
-  categories: []
+  categories:
+  - {fileID: 11400000, guid: db4ae58d44ea3a54eaf5bb56ad389581, type: 2}
   icon: {fileID: 0}
-  id: 0
+  id: 2
   codeName: STUN
   displayName: 
   description: 

@@ -9,10 +9,12 @@ public class EntityStateMachine : MonoStateMachine<Entity>
         AddState<DeadState>();
         AddState<RollingState>();
 
-        //AddState<ChargingSkillState>();
-
+        AddState<ChargingSkillState>();
         AddState<InSkillPrecedingActionState>();
         AddState<InSkillActionState>();
+
+        AddState<StunningState>();
+        AddState<SleepingState>();
     }
 
     protected override void MakeTransitions()
@@ -20,19 +22,28 @@ public class EntityStateMachine : MonoStateMachine<Entity>
         // Default State
         MakeTransition<EntityDefaultState, RollingState>(state => Owner.Movement?.IsRolling ?? false);
         // MakeTransition<EntityDefaultState, CastingSkillState>(EntityStateCommand.ToCastingSkillState);
-        //MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
+        MakeTransition<EntityDefaultState, ChargingSkillState>(EntityStateCommand.ToChargingSkillState);
         MakeTransition<EntityDefaultState, InSkillPrecedingActionState>(EntityStateCommand.ToInSkillPrecedingActionState);
         MakeTransition<EntityDefaultState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
 
         // Rolling State
         MakeTransition<RollingState, EntityDefaultState>(state => !Owner.Movement.IsRolling);
 
+        // Charging State
+        MakeTransition<ChargingSkillState, InSkillPrecedingActionState>(EntityStateCommand.ToInSkillPrecedingActionState);
+        MakeTransition<ChargingSkillState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
+        MakeTransition<ChargingSkillState, EntityDefaultState>(state => !IsSkillInState<ChargingState>(state));
+
         // PrecedingAction State
         MakeTransition<InSkillPrecedingActionState, InSkillActionState>(EntityStateCommand.ToInSkillActionState);
         MakeTransition<InSkillPrecedingActionState, EntityDefaultState>(state => !IsSkillInState<InPrecedingActionState>(state));
 
-        //Action State
+        // Action State
         MakeTransition<InSkillActionState, EntityDefaultState>(state => (state as InSkillActionState).IsStateEnded);
+
+        // CC State
+        MakeAnyTransition<StunningState>(EntityStateCommand.ToStunningState);
+        MakeAnyTransition<SleepingState>(EntityStateCommand.ToSleepingState);
 
         // Any Transitions
         MakeAnyTransition<EntityDefaultState>(EntityStateCommand.ToDefaultState);

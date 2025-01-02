@@ -45,7 +45,8 @@ public class ChargingState : SkillState
         if (!Entity.Owner.IsPlayer && Entity.IsMaxChargeCompleted)
         {
             IsChargeEnded = true;
-            Entity.SelectTarget(false);
+            //Entity.SelectTarget(false);
+            Entity.HideIndicator();
             TryUse();
         }
         else if (Entity.IsChargeDurationEnded)

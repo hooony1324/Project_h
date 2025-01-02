@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: EffectDatabase
   m_EditorClassIdentifier: 
   datas:
-  - {fileID: 11400000, guid: 76bd6974536d51b4a98ebd2dc87f801e, type: 2}
   - {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
+  - {fileID: 11400000, guid: f2d5281d8367f29429133689d58b4ada, type: 2}
+  - {fileID: 11400000, guid: 76bd6974536d51b4a98ebd2dc87f801e, type: 2}
   - {fileID: 11400000, guid: f9c5c9834cec6834cb666174ad3b0cff, type: 2}
+  - {fileID: 11400000, guid: 9d4bb3d57998a884c8ffe8e51cf0a60d, type: 2}

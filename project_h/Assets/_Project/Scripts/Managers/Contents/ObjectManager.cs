@@ -105,9 +105,9 @@ public class ObjectManager
         Managers.Resource.Destroy(baseObject.gameObject);
     }
 
-    public Projectile SpawnProjectile(GameObject prefab, Vector3 position, Quaternion rotation)
+    public Projectile SpawnProjectile(GameObject prefab, Vector3 position, Quaternion rotation, bool bUsePool = true)
     {
-        GameObject go = Managers.Resource.Instantiate(prefab.name, pooling: true);
+        GameObject go = Managers.Resource.Instantiate(prefab.name, pooling: bUsePool);
         go.transform.position = position;
         go.transform.rotation = rotation;
         go.transform.parent = ProjectileRoot;

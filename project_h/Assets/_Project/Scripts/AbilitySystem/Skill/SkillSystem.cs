@@ -41,8 +41,7 @@ public class SkillSystem : MonoBehaviour
 
     public Entity Owner { get; private set; }
 
-    [SerializeField]
-    private Skill[] defaultSkills;
+    private List<Skill> defaultSkills = new();
 
     private List<Skill> ownSkills = new();
     private Skill reservedSkill;
@@ -58,25 +57,47 @@ public class SkillSystem : MonoBehaviour
 
     [SerializeReference]
     public Skill DefaultAttack;
-    [SerializeReference]
+    [SerializeReference]    
     public Skill Roll;
-    // SkillA, SkilB ??
-    [SerializeReference]
-    public Skill TestSkill;
 
     public IReadOnlyList<Skill> OwnSkills => ownSkills;
     public IReadOnlyList<Skill> RunningSkills => runningSkills;
     public IReadOnlyList<Effect> RunningEffects => runningEffects.Where(x => !x.IsReleased).ToArray();
     //public SkillTree DefaultSkillTree => defaultSkillTree;
 
-    public void Setup(Entity entity)
+    public void Setup(Entity entity, EntityData entityData)
     {
         Owner = entity;
+
+        reservedSkill = null;
+        defaultSkills.Clear();
+        ownSkills.Clear();
+        runningSkills.Clear();
+        runningEffects.Clear();
+
+        // Default Skill
+        if (entityData.DefaultSkills.Length > 0)
+            AddDefaultSkills(entityData.DefaultSkills);
+
+        // Default Roll Skill
+        if (!string.IsNullOrEmpty(entityData.RollingSkill))
+            AddDefaultSkills(new string[] { entityData.RollingSkill });
+
+        // Register Default Skills
         SetupSkills();
 
-        DefaultAttack = ownSkills.Find(x => x.ID == DefaultAttack.ID);
-        Roll = ownSkills.Find(x => x.ID == Roll.ID);
-        TestSkill = ownSkills.Find(x => x.ID == TestSkill.ID);
+        DefaultAttack = ownSkills.Find(x => x.CodeName == entityData.DefaultSkills[0]);
+        Roll = ownSkills.Find(x => x.CodeName == entityData.RollingSkill);
+    }
+
+    private void AddDefaultSkills(string[] defaultSkillCodeNames)
+    {
+        for(int i = 0; i < defaultSkillCodeNames.Length; i++)
+        {
+            Skill skill = Managers.Data.GetSkillData(defaultSkillCodeNames[i]);
+            if (skill != null)
+                defaultSkills.Add(skill);
+        }
     }
 
     private void SetupSkills()
@@ -251,6 +272,14 @@ public class SkillSystem : MonoBehaviour
     public void Apply(Effect effect)
     {
         var runningEffect = Find(effect);
+
+        if (effect.AntiEffect != null)
+        {
+            var antiEffect = Find(effect.AntiEffect);
+            if (antiEffect != null)
+                return;
+        }
+
         if (runningEffect == null || effect.IsAllowDuplicate)
             ApplyNewEffect(effect);
         else
@@ -299,6 +328,9 @@ public class SkillSystem : MonoBehaviour
         foreach (var skill in runningSkills.ToArray())
             skill.Cancel();
     }
+
+    public Skill FindOwnedSkill(int skillId)
+        => ownSkills.Find(x => x.ID == skillId);
 
     public Skill Find(Skill skill)
         => skill.Owner == Owner ? skill : ownSkills.Find(x => x.ID == skill.ID);

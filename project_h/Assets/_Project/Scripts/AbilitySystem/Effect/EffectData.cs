@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.EditorTools;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,6 +17,10 @@ public struct EffectData
     public int maxStack;
     // Stack에 따른 추가 효과들
     public EffectStackAction[] stackActions;
+
+    [UnderlineTitle("Anti-CC Effect"), Tooltip("해당 이펙트가 발동중인 상대에게 현재 이펙트는 적용되지 않습니다")]
+    [SerializeReference]
+    public Effect antiEffect;
 
     [UnderlineTitle("Action")]
     [SerializeReference, SubclassSelector]
