@@ -85,12 +85,31 @@ public static class CustomEditorUtility
         EditorGUI.DrawRect(lastRect, Color.gray);
     }
 
-    public static void DrawEnumToolbar(SerializedProperty enumProperty)
+    public static void DrawEnumToolbar(SerializedProperty enumProperty, GUIContent tooltipContent = null)
     {
-        EditorGUILayout.BeginHorizontal();
-        EditorGUILayout.PrefixLabel(enumProperty.displayName);
-        enumProperty.enumValueIndex = GUILayout.Toolbar(enumProperty.enumValueIndex, enumProperty.enumDisplayNames);
-        EditorGUILayout.EndHorizontal();
+        if (tooltipContent == null)
+        {
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.PrefixLabel(enumProperty.displayName);
+            enumProperty.enumValueIndex = GUILayout.Toolbar(enumProperty.enumValueIndex, enumProperty.enumDisplayNames);
+            EditorGUILayout.EndHorizontal();
+        }
+        else
+        {
+            var enumNames = enumProperty.enumNames;
+            var enumValues = new int[enumNames.Length];
+            for (int i = 0; i < enumNames.Length; i++)
+                enumValues[i] = i;
+
+            EditorGUILayout.BeginHorizontal();
+            EditorGUI.BeginChangeCheck();
+            EditorGUILayout.PrefixLabel(tooltipContent);
+            var newValue = GUILayout.Toolbar(enumProperty.enumValueIndex, enumNames);
+            if (EditorGUI.EndChangeCheck())
+                enumProperty.enumValueIndex = newValue;
+            EditorGUILayout.EndHorizontal();
+        }
+
     }
 
     // T는 Deep Copy할 객체의 Type

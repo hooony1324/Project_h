@@ -371,6 +371,7 @@ MonoBehaviour:
   registerHeroTestSkill: 0
   unregisterHeroTestSkill: 0
   executeHeroTestSkill: 0
+  EnablePatrol: 0
   monsterDataName: MONSTER_SLIME
   monsterSpawnPos: {fileID: 202487936}
   registeredMonsterSkills: []

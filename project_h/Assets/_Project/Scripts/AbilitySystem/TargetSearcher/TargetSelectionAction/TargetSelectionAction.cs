@@ -16,7 +16,7 @@ public abstract class TargetSelectionAction : ICloneable
 
     // Range에 Scale을 적용할지 여부
     [Header("Option")]
-    [SerializeField]
+    [SerializeField, Tooltip("Scale값은 차징에 의해 0~1까지 값이 정해짐\nSelect행위에서 차징 정도를 이용하고 싶을 때 사용")]
     private bool isUseScale;
 
     // Range에 적용되어 Range 값을 조절할 때 사용되는 변수

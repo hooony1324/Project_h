@@ -17,7 +17,7 @@ public abstract class TargetSearchAction : ICloneable
 
     // Range에 Scale을 적용할지 여부
     [Header("Option")]
-    [SerializeField]
+    [SerializeField, Tooltip("Scale값은 차징에 의해 0~1까지 값이 정해짐\n Search행위에서 Range에 Scale을 적용할지 여부\nex. Range : 3, Scale : 0.5 => 50% Charge됨, Charge한 영역만큼 적을Search")]
     private bool isUseScale;
 
     // Range에 적용되어 Range 값을 조절할 때 사용되는 변수

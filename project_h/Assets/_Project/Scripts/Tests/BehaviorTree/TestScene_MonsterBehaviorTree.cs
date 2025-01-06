@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Unity.Behavior;
 using UnityEditor.Rendering;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -27,6 +28,8 @@ public class TestScene_MonsterBehaviorScene : BaseScene
     
     [Space(20)]
     [UnderlineTitle("Monster")]
+    [SerializeField] bool EnablePatrol = false;
+    bool prevEnablePatrol;
     [SerializeField] string monsterDataName;
     [SerializeField] Transform monsterSpawnPos;
     [SerializeField, ReadOnly] List<Skill> registeredMonsterSkills = new();
@@ -47,6 +50,7 @@ public class TestScene_MonsterBehaviorScene : BaseScene
             return false;
 
         Managers.Data.Init();
+        prevEnablePatrol = EnablePatrol;
 
         return true;
     }
@@ -170,5 +174,16 @@ public class TestScene_MonsterBehaviorScene : BaseScene
     public override void Clear()
     {
         throw new NotImplementedException();
+    }
+
+
+    void OnValidate()
+    {
+        if (!Application.isPlaying || EnablePatrol == prevEnablePatrol)
+            return;
+
+        BehaviorGraphAgent monsterBehavior = monster.GetComponent<BehaviorGraphAgent>();
+        monsterBehavior.SetVariableValue("EnablePatrol", EnablePatrol);
+        prevEnablePatrol = EnablePatrol;
     }
 }

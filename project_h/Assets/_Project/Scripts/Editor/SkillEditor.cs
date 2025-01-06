@@ -85,9 +85,18 @@ public class SkillEditor : IdentifiedObjectEditor
         if (!DrawFoldoutTitle("Setting"))
             return;
 
-        CustomEditorUtility.DrawEnumToolbar(typeProperty);
+        // Tooltips...
+        GUIContent typeContent = new GUIContent(typeProperty.displayName, "Active : 직접 사용\nPassive : 자동 사용");
+        GUIContent useTypeContent = new GUIContent(useTypeProperty.displayName, "Instant : 단발성\nToggle : 껏다, 켯다 가능");
+        GUIContent executionTypeContent = new GUIContent(executionTypeProperty.displayName, "Auto : ApplyCount만큼 자동 실행\nInput : 특정 Key를 눌러야 실행");
+        GUIContent applyTypeContent = new GUIContent(applyTypeProperty.displayName, "Instant : 스킬 실행되면 바로 적용\nAnimation : 애니메이션에 설정된 타이밍에 따라 적용(ex. 검을 내려칠 때");
+        GUIContent needSelectionResultTypeContent = new GUIContent(needSelectionResultTypeProperty.displayName, "TargetSearcher결과에 필요한 타입\n\nTarget : 특정 대상(적, 나무, 상자 등)\nPosition : 특정 위치나 방향(Vector3[float, float, float]로 표현한 것)");
+        GUIContent targetSelectionTimingOptionContent = new GUIContent(targetSelectionTimingOptionProperty.displayName, "TargetSearcher의 SelectTarget이 실행되는 타이밍\n\nUse : 스킬 사용할 때\nUseInAction : ExecutionType이 Input일 때 Skill을 실행할 때마다 선택");
+        GUIContent targetSearchTimingOptionContent = new GUIContent(targetSearchTimingOptionProperty.displayName, "TargetSearcher가 언제 Target을 Search하는가\n\nTargetSelectionCompleted : Target이 선택 되었을 때 바로 Search, Skill의 Target이 변하지 않고 고정일 때 사용\nApply : Skill이 적용될 때 Search수행, Skill이 적용될 때마다 Target이 달라질 수 있는 상황에 사용");
+
+        CustomEditorUtility.DrawEnumToolbar(typeProperty, typeContent);
         if (!IsPassive)
-            CustomEditorUtility.DrawEnumToolbar(useTypeProperty);
+            CustomEditorUtility.DrawEnumToolbar(useTypeProperty, useTypeContent);
         else
             // instant로 고정
             useTypeProperty.enumValueIndex = 0;
@@ -98,8 +107,8 @@ public class SkillEditor : IdentifiedObjectEditor
             CustomEditorUtility.DrawUnderline();
             EditorGUILayout.Space();
 
-            CustomEditorUtility.DrawEnumToolbar(executionTypeProperty);
-            CustomEditorUtility.DrawEnumToolbar(applyTypeProperty);
+            CustomEditorUtility.DrawEnumToolbar(executionTypeProperty, executionTypeContent);
+            CustomEditorUtility.DrawEnumToolbar(applyTypeProperty, applyTypeContent);
         }
         else
         {
@@ -113,9 +122,9 @@ public class SkillEditor : IdentifiedObjectEditor
         CustomEditorUtility.DrawUnderline();
         EditorGUILayout.Space();
 
-        CustomEditorUtility.DrawEnumToolbar(needSelectionResultTypeProperty);
-        CustomEditorUtility.DrawEnumToolbar(targetSelectionTimingOptionProperty);
-        CustomEditorUtility.DrawEnumToolbar(targetSearchTimingOptionProperty);
+        CustomEditorUtility.DrawEnumToolbar(needSelectionResultTypeProperty, needSelectionResultTypeContent);
+        CustomEditorUtility.DrawEnumToolbar(targetSelectionTimingOptionProperty, targetSelectionTimingOptionContent);
+        CustomEditorUtility.DrawEnumToolbar(targetSearchTimingOptionProperty, targetSearchTimingOptionContent);
     }
 
     private void DrawAcquisition()
