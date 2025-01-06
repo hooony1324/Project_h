@@ -31,7 +31,7 @@ public class CircleIndicatorViewAction : IndicatorViewAction
     private Indicator spawnedRangeIndicator;
 
     public override void ShowIndicator(TargetSearcher targetSearcher, GameObject requesterObject,
-        object range, float angle, float fillAmount)
+        object range, float angle, float fillAmount, bool isTransparent)
     {
         Debug.Assert(range is float, "CircleIndicatorViewAction::ShowIndicator - range는 null 또는 float형만 허용됩니다.");
 
@@ -51,7 +51,7 @@ public class CircleIndicatorViewAction : IndicatorViewAction
 
         // Indicator를 생성하고, Setup 함수로 위에서 정한 값들을 Setting해줌
         spawnedRangeIndicator = GameObject.Instantiate(indicatorPrefab).GetComponent<Indicator>();
-        spawnedRangeIndicator.Setup(new CircleIndicator.CircleArea() { angle = angle, radius = radius }, fillAmount, traceTarget: attachTarget);
+        spawnedRangeIndicator.Setup(new CircleIndicator.CircleArea() { angle = angle, radius = radius }, fillAmount, traceTarget: attachTarget, isTransparent);
 
         // Rotate Indicator to target position
         var targetPos = targetSearcher.SelectionResult.selectedPosition;

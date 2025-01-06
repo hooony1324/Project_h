@@ -9,6 +9,8 @@ public abstract class TargetSearchAction : ICloneable
     [Header("Indicator")]
     [SerializeField]
     private bool isShowIndicatorPlayerOnly;
+    [SerializeField]
+    private bool isTransparentIndicator;
     // Indicator를 보여주는 Module
     [SerializeReference, SubclassSelector]
     private IndicatorViewAction indicatorViewAction;
@@ -69,7 +71,7 @@ public abstract class TargetSearchAction : ICloneable
         if (isShowIndicatorPlayerOnly && (entity == null || !entity.IsPlayer))
             return;
 
-        indicatorViewAction?.ShowIndicator(targetSearcher, requesterObject, Range, Angle, fillAmount);
+        indicatorViewAction?.ShowIndicator(targetSearcher, requesterObject, Range, Angle, fillAmount, isTransparentIndicator);
     }
 
     public virtual void HideIndicator() => indicatorViewAction?.HideIndicator();

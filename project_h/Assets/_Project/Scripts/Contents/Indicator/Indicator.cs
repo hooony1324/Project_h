@@ -30,6 +30,31 @@ public abstract class Indicator : InitOnce
         }
     }
 
+    public bool IsTransparent
+    {
+        set
+        {
+            if (value)
+            {
+                // TODO: White or Transparent로 변경
+                Color borderColor, fillColor;
+                ColorUtility.TryParseHtmlString("#00ECFF00", out borderColor);
+                ColorUtility.TryParseHtmlString("#FF000000", out fillColor);
+                BorderImage.color = borderColor;
+                FillImage.color = fillColor;
+            }
+            else
+            {
+                Color borderColor, fillColor;
+                ColorUtility.TryParseHtmlString("#00ECFF4C", out borderColor);
+                ColorUtility.TryParseHtmlString("#FF000099", out fillColor);
+                BorderImage.color = borderColor;
+                FillImage.color = fillColor;
+            }
+
+        }
+    }
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -45,7 +70,7 @@ public abstract class Indicator : InitOnce
         return true;
     }
 
-    public abstract void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null);
+    public abstract void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null, bool isTransparent = false);
 
     public abstract float FillAmount { get; set; }
 }

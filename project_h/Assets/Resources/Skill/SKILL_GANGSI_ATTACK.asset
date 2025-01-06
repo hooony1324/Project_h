@@ -106,6 +106,7 @@ MonoBehaviour:
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 1
         indicatorViewAction:
           rid: 9152563583850119286
         isUseScale: 0

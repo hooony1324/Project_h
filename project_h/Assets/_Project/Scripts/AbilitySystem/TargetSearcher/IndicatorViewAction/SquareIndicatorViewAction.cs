@@ -21,7 +21,7 @@ public class SquareIndicatorViewAction : IndicatorViewAction
     private Indicator spawnedRangeIndicator;
 
     public override void ShowIndicator(TargetSearcher targetSearcher, GameObject requesterObject,
-        object range, float angle, float fillAmount)
+        object range, float angle, float fillAmount, bool isTransparent)
     {
         Debug.Assert(range is Vector2, "SquareIndicatorViewAction::ShowIndicator - range는 null 또는 Vector2형만 허용됩니다.");
 
@@ -35,7 +35,7 @@ public class SquareIndicatorViewAction : IndicatorViewAction
         Vector2 rangeScale = (Vector2)range;
         // Indicator를 생성하고, Setup 함수로 위에서 정한 값들을 Setting해줌
         spawnedRangeIndicator = GameObject.Instantiate(indicatorPrefab).GetComponent<Indicator>();
-        spawnedRangeIndicator.Setup(new SquareIndicator.SquareArea() { scale = new Vector2(rangeScale.x, rangeScale.y) }, fillAmount, traceTarget:attachTarget);
+        spawnedRangeIndicator.Setup(new SquareIndicator.SquareArea() { scale = new Vector2(rangeScale.x, rangeScale.y) }, fillAmount, traceTarget:attachTarget, isTransparent);
 
         // Rotate Indicator to target position
         var targetPos = targetSearcher.SelectionResult.selectedPosition;

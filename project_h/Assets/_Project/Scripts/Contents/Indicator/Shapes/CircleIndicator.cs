@@ -17,7 +17,7 @@ public class CircleIndicator : Indicator
         return true;
     }
 
-    public override void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null)
+    public override void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null, bool isTransparent = false)
     {
         CircleArea circleShape = (CircleArea)shape;
 
@@ -26,7 +26,8 @@ public class CircleIndicator : Indicator
 
         float angle = Mathf.Clamp(circleShape.angle, 0f, 360f);
         BorderImage.fillAmount = angle / 360f;
-        FillImage.fillAmount = BorderImage.fillAmount;  
+        FillImage.fillAmount = BorderImage.fillAmount; 
+        IsTransparent = isTransparent;
 
         // Y벡터를 향한 부채꼴
         Canvas.transform.eulerAngles = new Vector3(0, 0, angle * 0.5f);

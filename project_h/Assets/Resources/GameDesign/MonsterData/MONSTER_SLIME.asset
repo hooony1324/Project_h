@@ -40,5 +40,4 @@ MonoBehaviour:
     overrideDefaultValue: 0
   defaultSkills:
   - DEFAULT_ATTACK
-  - GENERAL_SUPERARMOR
   rollingSkill: 

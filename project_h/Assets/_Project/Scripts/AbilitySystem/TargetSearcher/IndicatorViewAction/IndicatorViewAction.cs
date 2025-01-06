@@ -8,7 +8,7 @@ using UnityEngine;
 public abstract class IndicatorViewAction : ICloneable
 {
     public abstract void ShowIndicator(TargetSearcher targetSearcher, GameObject requesterObject,
-        object range, float angle, float fillAmount);
+        object range, float angle, float fillAmount, bool isTransparent = false);
     public abstract void HideIndicator();
     // 생성된 Indicator의 FillAmount를 수정할 때 사용
     public abstract void SetFillAmount(float fillAmount);

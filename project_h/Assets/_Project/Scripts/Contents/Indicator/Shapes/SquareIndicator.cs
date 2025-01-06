@@ -17,12 +17,13 @@ public class SquareIndicator : Indicator
         return true;
     }
 
-    public override void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null)
+    public override void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null, bool isTransparent = false)
     {
         SquareArea squareShape = (SquareArea)shape;
 
         TraceTarget = traceTarget;
         Area.transform.localScale = new Vector3(squareShape.scale.x, squareShape.scale.y, 1);
+        IsTransparent = isTransparent;
 
         FillAmount = fillAmount;
     }
