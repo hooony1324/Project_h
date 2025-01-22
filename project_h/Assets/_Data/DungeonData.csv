@@ -1,0 +1,4 @@
+﻿Name,Id,Prev Dungeon Id,Next Dungeon Id,Is Final Dungeon,X,Y,Prefab Name,Dungeon Name
+DUNGEON_1_1,11,0,12,FALSE,1,5,DungeonMap_01,슬라임동굴
+DUNGEON_1_2,12,11,13,FALSE,1,5,DungeonMap_02,보석굴
+DUNGEON_1_3,13,12,0,TRUE,1,5,DungeonMap_03,용암굴

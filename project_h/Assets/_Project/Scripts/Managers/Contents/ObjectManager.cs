@@ -16,7 +16,7 @@ public class ObjectManager
     public HashSet<GameObject> Effects { get; } = new HashSet<GameObject>();
     // public HashSet<Env> Envs { get; } = new HashSet<Env>();
     // public HashSet<Npc> Npcs { get; } = new HashSet<Npc>();
-    // public HashSet<ItemHolder> ItemHolders { get; } = new HashSet<ItemHolder>();
+    public HashSet<ItemHolder> ItemHolders { get; } = new HashSet<ItemHolder>();
 
     public Transform GetRootTransform(string name)
     {
@@ -81,6 +81,14 @@ public class ObjectManager
             Doors.Add(dc);
             return dc as T;
         }
+        else if (type == typeof(ItemHolder))
+        {
+            GameObject go = Managers.Resource.Instantiate(nameof(ItemHolder), pooling: true);
+            go.transform.position = spawnPos;
+            ItemHolder itemHolder = go.GetOrAddComponent<ItemHolder>();
+            ItemHolders.Add(itemHolder);
+            return itemHolder as T;
+        }
 
         return null;
     }
@@ -100,6 +108,10 @@ public class ObjectManager
         else if (type == typeof(DungeonDoor))
         {
             Doors.Remove(baseObject as DungeonDoor);
+        }
+        else if (type == typeof(ItemHolder))
+        {
+            ItemHolders.Remove(baseObject as ItemHolder);
         }
 
         Managers.Resource.Destroy(baseObject.gameObject);

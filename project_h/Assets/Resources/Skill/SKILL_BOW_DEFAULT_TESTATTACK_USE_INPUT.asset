@@ -1,0 +1,122 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
+  m_Name: SKILL_BOW_DEFAULT_TESTATTACK_USE_INPUT
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 28f8b2106a4934d4cb68046595ae0fd4, type: 3}
+  id: 70001
+  codeName: BOW_DEFAULT_TESTATTACK_USE_INPUT
+  displayName: 
+  description: 
+  type: 0
+  useType: 0
+  executionType: 1
+  applyType: 1
+  needSelectionResultType: 1
+  targetSelectionTimingOption: 1
+  targetSearchTimingOption: 0
+  acquisitionConditions: []
+  acquisitionCosts: []
+  useConditions: []
+  isAllowLevelExceedDatas: 0
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: 2123022040293704507
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 3
+    applyCycle: 0
+    cooldown:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 2123022040293704510
+      searchAction:
+        rid: 2123022040293704511
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    effectSelectors: []
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+    actionAnimatorParameter:
+      type: 0
+      name: isDefaultAttack
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2123022040293704507
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 20
+        lifetime: 5
+        useObjectPool: 1
+        impactAction:
+          rid: 2123022040293704508
+        projectileMotion:
+          rid: 2123022040293704509
+        shootInfos: []
+    - rid: 2123022040293704508
+      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 0}
+    - rid: 2123022040293704509
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2123022040293704510
+      type: {class: SelectPositionByMovingDirection, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2123022040293704511
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0

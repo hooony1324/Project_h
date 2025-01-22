@@ -6,6 +6,7 @@ public class DungeonManager
 {
     public Dungeon CurrentDungeon { get; private set; }
 
+    public DungeonData CurrentDungeonData => _currentDungeonData;
     private DungeonData _currentDungeonData;
     public int CurrentDungeonId => _currentDungeonData ? _currentDungeonData.Id : 0;
 
@@ -66,8 +67,6 @@ public class DungeonManager
 
         return;
     }
-
-
 
     public void Clear()
     {

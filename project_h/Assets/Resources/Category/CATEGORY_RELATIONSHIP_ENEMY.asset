@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bd172a39a96f1b4dafc2244c56c1f8a, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e4063242619fab4392e89ea3a9d8b37, type: 3}
   m_Name: CATEGORY_RELATIONSHIP_ENEMY
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 1
+  id: 3
   codeName: RELATIONSHIP_ENEMY
   displayName: 
   description: 

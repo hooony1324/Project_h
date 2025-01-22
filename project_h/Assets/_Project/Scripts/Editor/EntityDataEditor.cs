@@ -7,12 +7,14 @@ using UnityEditor;
 public class EntityDataEditor : Editor
 {
     SerializedProperty spriteProperty;
-    SerializedProperty entityIdProperty;
+    SerializedProperty idProperty;
+    SerializedProperty entityNameProperty;
 
     protected virtual void OnEnable()
     {
         spriteProperty = serializedObject.FindProperty("sprite");
-        entityIdProperty = serializedObject.FindProperty("entityId");
+        idProperty = serializedObject.FindProperty("id");
+        entityNameProperty = serializedObject.FindProperty("entityName");
     }
 
     public override void OnInspectorGUI()
@@ -21,12 +23,12 @@ public class EntityDataEditor : Editor
 
         // Draw all serialized fields
         EditorGUILayout.PropertyField(spriteProperty);
-        DrawPropertiesExcluding(serializedObject, "m_Script", "entityId", "sprite");
+        DrawPropertiesExcluding(serializedObject, "m_Script", "sprite", "id", "entityName");
 
         // entityId 변경 시 에셋 이름 변경 로직
         EditorGUI.BeginChangeCheck();
-        var prevCodeName = entityIdProperty.stringValue;
-        EditorGUILayout.DelayedTextField(entityIdProperty);
+        var prevCodeName = entityNameProperty.stringValue;
+        EditorGUILayout.DelayedTextField(entityNameProperty);
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -34,8 +36,8 @@ public class EntityDataEditor : Editor
             EntityData entityData = (EntityData)target;
 
             // entityId를 대문자로 변환
-            var newName = $"{entityData.GetAssetPrefix().ToUpper()}_{entityIdProperty.stringValue.ToUpper()}";
-            entityIdProperty.stringValue = newName;
+            var newName = $"{entityData.GetAssetPrefix().ToUpper()}_{entityNameProperty.stringValue.ToUpper()}";
+            entityNameProperty.stringValue = newName;
 
             serializedObject.ApplyModifiedProperties();
             
@@ -45,7 +47,7 @@ public class EntityDataEditor : Editor
             if (!string.IsNullOrEmpty(message))
             {
                 // 실패시 원래 값으로 되돌림
-                entityIdProperty.stringValue = prevCodeName;
+                entityNameProperty.stringValue = prevCodeName;
                 target.name = prevCodeName;
                 serializedObject.ApplyModifiedProperties();
                 Debug.LogError($"Failed to rename asset: {message}");

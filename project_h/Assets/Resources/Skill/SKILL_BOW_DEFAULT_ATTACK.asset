@@ -1,0 +1,142 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
+  m_Name: SKILL_BOW_DEFAULT_ATTACK
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 39ef3ee733c904f08a85268391803a80, type: 3}
+  id: 10001
+  codeName: BOW_DEFAULT_ATTACK
+  displayName: 
+  description: "3\uBC29\uD5A5, \uC5F0\uC18D \uBC1C\uC0AC, \uAD00\uD1B5 \uC2A4\uD0AC\uC774
+    \uD3EC\uD568\uB418\uC5B4 \uC788\uB294 \uC2A4\uD0AC(Description\uC740 UI\uC5D0
+    \uD45C\uD604 \uC218 \uC788\uC74C) "
+  type: 0
+  useType: 0
+  executionType: 0
+  applyType: 0
+  needSelectionResultType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  acquisitionConditions: []
+  acquisitionCosts: []
+  useConditions:
+  - rid: 2868446983629570152
+  isAllowLevelExceedDatas: 0
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    isDefaultSkill: 0
+    defaultSkillDescription: 
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: 4885778437199888701
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    cooldown:
+      defaultValue: 1
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 2868447306621911098
+      searchAction:
+        rid: 2868446983629570151
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
+    - level: 1
+      effect: {fileID: 11400000, guid: f2d5281d8367f29429133689d58b4ada, type: 2}
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+    actionAnimatorParameter:
+      type: 1
+      name: isMovingAttack
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2868446688828457055
+      type: {class: ImpactAndReflect, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
+        _reflectCount: 3
+    - rid: 2868446983629570151
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 2868446983629570152
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2868447305151807989
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2868447306621911098
+      type: {class: SelectTargetByTargettingRange, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        targettingRange:
+          defaultValue: 20
+          scaleStat: {fileID: 0}
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 0
+    - rid: 4885778437199888701
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 20
+        lifetime: 5
+        useObjectPool: 1
+        impactAction:
+          rid: 2868446688828457055
+        projectileMotion:
+          rid: 2868447305151807989
+        shootInfos:
+        - angle: 0

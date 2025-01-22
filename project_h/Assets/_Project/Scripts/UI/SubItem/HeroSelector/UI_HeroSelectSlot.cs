@@ -1,4 +1,3 @@
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class UI_HeroSelectSlot : UI_Base
@@ -11,7 +10,7 @@ public class UI_HeroSelectSlot : UI_Base
     EventBinding<HeroSelectEvent> _heroSelectionEventBinding;
 
     // dataName, AnimatorController'
-    private string _heroDataName;
+    private int _heroDataID;
     private string _animatorControllerName;
     private Animator _animator;
 
@@ -31,9 +30,9 @@ public class UI_HeroSelectSlot : UI_Base
 
         return true;
     }
-    public void Setup(string heroDataName, string animatorControllerName)
+    public void Setup(int heroDataID, string animatorControllerName)
     {
-        _heroDataName = heroDataName;
+        _heroDataID = heroDataID;
         _animatorControllerName = animatorControllerName;
 
         string controllerName = $"{_animatorControllerName}_Selection";
@@ -56,14 +55,14 @@ public class UI_HeroSelectSlot : UI_Base
     {
         EventBus<HeroSelectEvent>.Raise(new HeroSelectEvent
         {
-            heroDataName = _heroDataName,
+            heroDataID = _heroDataID,
             selectPosition = transform.position,        // for SelectionGlow Position
         });
     }
 
     void HandleHeroSelectEvent(HeroSelectEvent selectEvent)
     {
-        if (selectEvent.heroDataName == _heroDataName)
+        if (selectEvent.heroDataID == _heroDataID)
         {
             // 선택됨
             _animator.Play(_walkHash);

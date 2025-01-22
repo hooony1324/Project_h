@@ -4,7 +4,10 @@ using UnityEngine;
 public class EntityData : ScriptableObject
 {
     [SerializeField]
-    public string entityId;
+    private int id;
+
+    [SerializeField]
+    private string entityName;
 
     [SerializeField]
     private Sprite sprite;
@@ -16,25 +19,29 @@ public class EntityData : ScriptableObject
     private string animatorControllerName;
 
     [SerializeField]
-    private StatOverride[] statOverrides;
+    protected StatOverride[] statOverrides;
 
     [SerializeField]
     private string[] defaultSkills;
 
     [SerializeField]
-    private string rollingSkill;
+    private string dodgeSkill;
 
+    public int ID => id;
+    public string EntityName => entityName;
     public Sprite Sprite => sprite;
     public float Scale => scale;
     public string AnimatorControllerName => animatorControllerName;
     public StatOverride[] StatOverrides => statOverrides;
     public string[] DefaultSkills => defaultSkills;
-    public string RollingSkill => rollingSkill;
+    public string DodgeSkill => dodgeSkill;
 
 #if UNITY_EDITOR
-    public void LoadStats()
+    public virtual void LoadStats()
     {
-        var stats = Resources.LoadAll<Stat>("Stat").OrderBy(x => x.ID);
+        var stats = Resources.LoadAll<Stat>("Stat")
+            .Where(x => !x.IsConsumable)
+            .OrderBy(x => x.ID);
         statOverrides = stats.Select(x => new StatOverride(x)).ToArray();
     }
 

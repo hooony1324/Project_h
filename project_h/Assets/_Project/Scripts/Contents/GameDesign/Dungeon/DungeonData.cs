@@ -9,6 +9,7 @@ public class DungeonData : ScriptableObject, ICloneable
     [SerializeField] private int _prevDungeonId;
     [SerializeField] private int _nextDungeonId;
     [SerializeField] private bool _isFinalDungeon;
+    [SerializeField] private Vector2Int _goldDropRange = new(1, 5);
     public int Id => _id;
     public int PrevDungeonId => _prevDungeonId;
     public int NextDungeonId => _nextDungeonId;
@@ -23,6 +24,8 @@ public class DungeonData : ScriptableObject, ICloneable
     public bool HasNextDungeon => _nextDungeonId != 0;
     public bool HasPrevDungeon => _prevDungeonId != 0;
     public bool IsFinalDungeon => _isFinalDungeon;
+
+    public Vector2Int GoldDropRange => _goldDropRange;
 
     public virtual object Clone() => Instantiate(this);
 }

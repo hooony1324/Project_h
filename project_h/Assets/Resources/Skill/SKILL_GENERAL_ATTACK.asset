@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 7
+  id: 50004
   codeName: GENERAL_ATTACK
   displayName: 
   description: "\uAC70\uB300\uC7A5\uAD70\uC0C1 \uC6D0 \uC778\uB514\uCF00\uC774\uD130
@@ -96,6 +96,7 @@ MonoBehaviour:
       type: {class: SearchCircleArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
         indicatorViewAction:
           rid: 9152563583850119268
         isUseScale: 0

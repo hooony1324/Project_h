@@ -29,14 +29,10 @@ public class DungeonScene : BaseScene
         Managers.Hero.SetMainHero(hero);
         hero.SetData(Managers.Hero.CurrentHeroData);
 
-        // Load HeroStat
-        Managers.Hero.LoadStats();
-
         hero.gameObject.SetActive(false);
         
-
+        Managers.SaveLoad.LoadPlayData();
         Managers.SaveLoad.SaveGame();
-
 
         return true;
     }
@@ -53,8 +49,6 @@ public class DungeonScene : BaseScene
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
-
-        
         
     }
 
@@ -64,6 +58,6 @@ public class DungeonScene : BaseScene
         Managers.UI.Joystick = null;
 
         // Save Hero Stat
-        Managers.Hero.SaveStats();
+        Managers.SaveLoad.SaveGame();
     }
 }

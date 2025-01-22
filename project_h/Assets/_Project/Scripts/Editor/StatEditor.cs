@@ -6,6 +6,7 @@ using UnityEditor;
 [CustomEditor(typeof(Stat))]
 public class StatEditor : IdentifiedObjectEditor
 {
+    private SerializedProperty isConsumableProperty;
     private SerializedProperty isPercentTypeProperty;
     private SerializedProperty maxValueProperty;
     private SerializedProperty minValueProperty;
@@ -15,6 +16,7 @@ public class StatEditor : IdentifiedObjectEditor
     {
         base.OnEnable();
 
+        isConsumableProperty = serializedObject.FindProperty("isConsumable");
         isPercentTypeProperty = serializedObject.FindProperty("isPercentType");
         maxValueProperty = serializedObject.FindProperty("maxValue");
         minValueProperty = serializedObject.FindProperty("minValue");
@@ -29,6 +31,7 @@ public class StatEditor : IdentifiedObjectEditor
 
         if (DrawFoldoutTitle("Setting"))
         {
+            EditorGUILayout.PropertyField(isConsumableProperty);
             EditorGUILayout.PropertyField(isPercentTypeProperty);
             EditorGUILayout.PropertyField(maxValueProperty);
             EditorGUILayout.PropertyField(minValueProperty);

@@ -1,0 +1,188 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
+  m_Name: SKILL_BOW_DEFAULT_ATTACK_A
+  m_EditorClassIdentifier: 
+  categories: []
+  icon: {fileID: 21300000, guid: 39ef3ee733c904f08a85268391803a80, type: 3}
+  id: 100001
+  codeName: BOW_DEFAULT_ATTACK_A
+  displayName: 
+  description: attack_a
+  type: 0
+  useType: 0
+  executionType: 0
+  applyType: 0
+  needSelectionResultType: 1
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  acquisitionConditions: []
+  acquisitionCosts: []
+  useConditions:
+  - rid: 2123022065556521022
+  isAllowLevelExceedDatas: 0
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: 2123022065556520976
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    cooldown:
+      defaultValue: 3
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: 2123022045973054337
+      searchAction:
+        rid: 2123022045973054340
+      scale: 1
+      <IsSearching>k__BackingField: 0
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 1
+    chargeFinishActionOption: 0
+    chargeDuration: 5
+    chargeTime: 3
+    needChargeTimeToUse: 1
+    startChargePower: 0
+    effectSelectors: []
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+      hash: 0
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    actionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  currentData:
+    level: 0
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: 2123022045973054436
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 0
+    applyCycle: 0
+    cooldown:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    targetSearcher:
+      selectionAction:
+        rid: -2
+      searchAction:
+        rid: -2
+      scale: 1
+      <IsSearching>k__BackingField: 0
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    effectSelectors: []
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+      hash: 0
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    actionAnimatorParameter:
+      type: 0
+      name: 
+      hash: 0
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  level: 0
+  currentApplyCount: 0
+  currentCastTime: 0
+  currentCooldown: 0
+  currentDuration: 0
+  currentChargePower: 0
+  currentChargeDuration: 0
+  <Owner>k__BackingField: {fileID: 0}
+  <CurrentApplyCycle>k__BackingField: 0
+  <IsActivated>k__BackingField: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 2123022045973054337
+      type: {class: SelectPositionByMovingDirection, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        scale: 0
+    - rid: 2123022045973054340
+      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 1
+        scale: 0
+        range: {x: 1, y: 6}
+        isIncludeSelf: 0
+        isSearchSameCategory: 0
+    - rid: 2123022045973054436
+      type: {class: RushAction, ns: , asm: Assembly-CSharp}
+      data: {}
+    - rid: 2123022065556520976
+      type: {class: ChargingRushAction, ns: , asm: Assembly-CSharp}
+      data: {}
+    - rid: 2123022065556521022
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: {}

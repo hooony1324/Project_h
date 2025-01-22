@@ -1,0 +1,9 @@
+﻿Name,Id,Item Holder Sprite,Is Allow Multiple
+0_ITEM_MAX(지우지 마세요),-1,null,FALSE
+TEST_기본스킬선택아이템,100,a5fc30f71fb854fbdb6fa55c19d87d2b&Icon_Sword_01,FALSE
+TEST_이속증가,101,13e401d825c214d5b9eb0bf4c0c6e07a&equip_icon_potion_red_0,FALSE
+TEST_최대체력증가,102,9430155fd8d464dd99118576941d050b&equip_icon_potion_red_4,FALSE
+TEST_체력회복,103,640b629e706514d1097a05faac1009de&equip_icon_leaf,TRUE
+TEST_체력회복+이동속도증가,104,aa9906e804b974fa99babcae8c9a7bff&MenuIcon_Boots_Focus,FALSE
+TEST_현재몬스터처치,105,711e54b18d920433a89247353713f9a8&MenuIcon_Monster,TRUE
+TEST_골드획득(던전별로),106,e557639d1acd84734b384b6a04b18720&Resource_Icon_Coins,TRUE

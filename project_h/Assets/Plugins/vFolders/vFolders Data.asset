@@ -93,6 +93,11 @@ MonoBehaviour:
     - ca63d7efe9d303946a45be7da714d3ae
     - 2e261a1cdd0e34b4cb2c894b28c2b787
     - 06057a4738a40f448ad0aeba07dff622
+    - aa8c882bc5030e04cb6a5dabe5931409
+    - 018a1792e64c1534692a9f22dc1b51da
+    - 1bf12c8acf9a7014b9bd37c60b7b2e57
+    - a9101dc845df3ce45814cbfc5cd82da6
+    - 801fa1cf361c53e4c9669daeafe3e1a1
     values:
     - colorIndex: 1
       iconNameOrGuid: 
@@ -251,4 +256,14 @@ MonoBehaviour:
     - colorIndex: 4
       iconNameOrGuid: 
     - colorIndex: 8
+      iconNameOrGuid: 
+    - colorIndex: 2
+      iconNameOrGuid: 
+    - colorIndex: 2
+      iconNameOrGuid: 
+    - colorIndex: 2
+      iconNameOrGuid: 
+    - colorIndex: 2
+      iconNameOrGuid: 
+    - colorIndex: 2
       iconNameOrGuid: 

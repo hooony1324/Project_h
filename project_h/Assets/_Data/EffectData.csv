@@ -1,0 +1,6 @@
+﻿Name,Size,Icon,Id,Code Name,Display Name,Description,Type,Is Allow Duplicate,Remove Duplicate Target Option,Is Show In UI,Is Allow Level Exceed Datas,Max Level,Size,Level,Max Stack,Size,Anti Effect,Default Damage,Bonus Damage Stat,Bonus Damage Stat Factor,Bonus Damage Per Level,Bonus Damage Per Stack,Running Finish Option,Is Apply All When Duration Expires,Default Value,Scale Stat,Apply Count,Apply Cycle,Size
+EFFECT_DEFAULT_DAMAGE,0,null,0,DEFAULT_DAMAGE,기본공격 데미지,,None,FALSE,New,FALSE,FALSE,1,1,1,1,0,null,1,f1d5fa2073b8b564aaf4d0aafd57dc9a&STAT_DAMAGE,0,0,0,FinishWhenDurationEnded,FALSE,2,f1d5fa2073b8b564aaf4d0aafd57dc9a&STAT_DAMAGE,1,0,0
+EFFECT_KNOCKBACK,1,null,1,KNOCKBACK,,,None,TRUE,New,FALSE,FALSE,1,1,1,1,0,f9c5c9834cec6834cb666174ad3b0cff&EFFECT_SUPERARMOR,,,,,,FinishWhenDurationEnded,FALSE,1,null,1,0,0
+EFFECT_STUN,1,null,2,STUN,,,None,TRUE,Old,FALSE,FALSE,1,1,1,1,0,null,,,,,,FinishWhenApplyCompleted,FALSE,0,null,0,0,0
+EFFECT_SUPERARMOR,0,null,3,SUPERARMOR,CC방어,,None,TRUE,Old,FALSE,FALSE,1,1,1,1,0,null,,,,,,FinishWhenApplyCompleted,FALSE,3,null,0,0,1
+EFFECT_SLEEP,1,null,4,SLEEP,,,None,TRUE,Old,FALSE,FALSE,1,1,1,1,0,null,,,,,,FinishWhenApplyCompleted,FALSE,0,null,0,0,0

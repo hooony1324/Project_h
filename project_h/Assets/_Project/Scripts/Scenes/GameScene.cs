@@ -32,10 +32,6 @@ public class GameScene : BaseScene
 
         hero.gameObject.SetActive(false);
 
-        Managers.Hero.SaveStats();
-        //Managers.SaveLoad.SaveGame();
-
-
         return true;
     }
 
@@ -53,9 +49,6 @@ public class GameScene : BaseScene
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
-
-        //Monster monster = Managers.Object.Spawn<Monster>(new Vector3(10, -10, 0), nameof(Monster));
-        //monster.SetData(Managers.Data.GetMonsterData("MONSTER_SLIME_BOSS"));
     }
 
     public override void Clear()
@@ -64,9 +57,9 @@ public class GameScene : BaseScene
 
     }
 
-    void OnApplicationQuit()
-    {
-        Managers.Dungeon.SetFirstDungeon(null);
-        Managers.SaveLoad.SaveGame();
-    }
+    // void OnApplicationQuit()
+    // {
+    //     Managers.Dungeon.SetFirstDungeon(null);
+    //     Managers.SaveLoad.SaveGame();
+    // }
 }

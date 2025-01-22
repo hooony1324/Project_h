@@ -18,6 +18,7 @@ MonoBehaviour:
   codeName: RANGE_ATTACK
   displayName: "\uACF5\uACA9 \uC0AC\uAC70\uB9AC"
   description: 
+  isNotAbility: 0
   isPercentType: 0
   maxValue: 20
   minValue: 1

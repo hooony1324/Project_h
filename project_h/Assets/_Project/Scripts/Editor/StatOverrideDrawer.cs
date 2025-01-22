@@ -33,6 +33,8 @@ public class StatOverrideDrawer : PropertyDrawer
             {
                 propertyRect.y += EditorGUIUtility.singleLineHeight;
                 EditorGUI.PropertyField(propertyRect, property.FindPropertyRelative("overrideDefaultValue"));
+                propertyRect.y += EditorGUIUtility.singleLineHeight;
+                EditorGUI.PropertyField(propertyRect, property.FindPropertyRelative("overrideMaxValue"));
             }
         }
 
@@ -46,7 +48,7 @@ public class StatOverrideDrawer : PropertyDrawer
         else
         {
             bool isUseOverride = property.FindPropertyRelative("isUseOverride").boolValue;
-            int propertyLine = isUseOverride ? 4 : 3;
+            int propertyLine = isUseOverride ? 5 : 3;
             return (EditorGUIUtility.singleLineHeight * propertyLine) + propertyLine;
         }
     }

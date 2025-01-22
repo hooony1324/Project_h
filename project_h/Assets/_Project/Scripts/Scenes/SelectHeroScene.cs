@@ -40,6 +40,10 @@ public class SelectHeroScene : BaseScene
         {
             Managers.Dungeon.EnterFirstDungeon();
         }
+        else
+        {
+            Managers.SaveLoad.RemovePlayData();
+        }
     }
 
     public override void Clear()

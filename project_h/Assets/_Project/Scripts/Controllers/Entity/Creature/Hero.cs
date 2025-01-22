@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using JetBrains.Annotations;
-using NavMeshPlus.Extensions;
 using UnityEngine;
-using static Define;
+
 
 public class Hero : Entity
 {

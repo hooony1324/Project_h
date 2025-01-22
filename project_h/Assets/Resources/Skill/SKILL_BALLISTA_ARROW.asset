@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 4
+  id: 50002
   codeName: BALLISTA_ARROW
   displayName: 
   description: 
@@ -109,6 +109,7 @@ MonoBehaviour:
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0

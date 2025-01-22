@@ -29,7 +29,7 @@ public class MonsterWaveController : InitOnce
     
     private class SpawnData
     {
-        public string monsterDataName;
+        public int monsterID;
         public Vector3 position;
     }
 
@@ -64,7 +64,7 @@ public class MonsterWaveController : InitOnce
                         int index = (x - bounds.min.x) * size.y + (y - bounds.min.y);
                         _spawnDataList[i].Add(new SpawnData()
                         {
-                            monsterDataName = tile.entityDataName,
+                            monsterID = tile.ID,
                             position = tilemap.CellToWorld(tilePos),
                         });
                         _totalMonsterCount++;
@@ -114,16 +114,16 @@ public class MonsterWaveController : InitOnce
             if (spawnData == null)
                 continue;
 
-            SpawnMonster(spawnData.monsterDataName, spawnData.position);
+            SpawnMonster(spawnData.monsterID, spawnData.position);
             _targetKillCount++;
         }
 
     }
 
-    private void SpawnMonster(string monsterDataName, Vector3 position)
+    private void SpawnMonster(int monsterID, Vector3 position)
     {
         Monster monster = Managers.Object.Spawn<Monster>(position);
-        monster.SetData(Managers.Data.GetMonsterData(monsterDataName));
+        monster.SetData(Managers.Data.GetMonsterData(monsterID));
         monster.onDead += OnMonsterDeath;
     }
 

@@ -1,16 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Define;
 
 public class HeroManager
 {
     public Hero MainHero { get; private set;}
-
-    private string _heroDataName;
-    public string HeroDataName => _heroDataName;
-    public void SetHeroData(string heroDataName) => _heroDataName = heroDataName;
-    public HeroData CurrentHeroData => Managers.Data.GetHeroData(HeroDataName);
-
-    public StatSaveData[] StatSaveDatas { get; private set;}
 
     public void SetMainHero(Hero hero)
     {
@@ -25,33 +20,105 @@ public class HeroManager
         MainHero.Movement.AgentEnabled = true;
     }
 
-    // 던전 1 플레이 중 게임 중단 > 재시작 > 던전1 의 시작 시점 HeroStats 복구용
-    public void LoadStatSaveData(StatSaveData[] heroSaveData)
+    #region Save&Load
+    private int heroDataID;
+    public int HeroDataID => heroDataID;
+    public HeroData CurrentHeroData => Managers.Data.GetHeroData(HeroDataID);
+    public List<StatSaveData> StatSaveDatas = new();
+    public int DefaultAttackID;
+    public int DodgeID;
+    public List<int> PassiveSkills { get; } = new();
+
+    // for SaveLoadManager
+    public void LoadHeroData(int heroDataID) => this.heroDataID = heroDataID;
+    public void LoadStatSaveData(IReadOnlyList<StatSaveData> heroSaveData)
     {
-        StatSaveDatas = heroSaveData.ToArray();
+        StatSaveDatas = heroSaveData.ToList();
+    }
+    public void LoadSkills()
+    {
+        DefaultAttackID = Managers.SaveLoad.SaveData.DefaultAttackID;
+        DodgeID = Managers.SaveLoad.SaveData.DodgeID;
     }
 
     // Dungeon1 -> Dungeon2 스탯 유지용도
-    public void SaveStats()
+    public void SavePlayDatas()
     {
+        if (MainHero == null)
+            return;
+
+        StatSaveDatas.Clear();
+
+        // Stats
         Stat[] stats = MainHero.StatsComponent.Stats;
-        StatSaveDatas = new StatSaveData[stats.Count()];
-        int i = 0;
         foreach (Stat stat in stats)
         {
-            StatSaveDatas[i] = new StatSaveData{ ID = stat.ID, DefaultValue = stat.DefaultValue };
-            i++;   
+            StatSaveDatas.Add(new StatSaveData
+            { 
+                ID = stat.ID, 
+                DefaultValue = stat.DefaultValue,
+                MaxValue = stat.MaxValue,
+            });
         }
+
+        // Default Skills
+        DefaultAttackID = MainHero.SkillSystem.DefaultAttack.ID;
+        DodgeID = MainHero.SkillSystem.Dodge.ID;
+
+        // Passive Skills
+        // - item Acquire시 저장됨
     }
 
-    // Dungeon1 -> Dungeon2 스탯 유지용도
-    public void LoadStats()
+    // 저장된 데이터를 Entity에 적용
+    // - Dungeon1 -> Dungeon2 스탯 유지용도
+    public void LoadPlayDatas()
     {
+        if (MainHero == null)
+            return;
+
         StatsComponent stats = MainHero.StatsComponent;
         foreach (StatSaveData savedStat in StatSaveDatas)
         {
             Stat stat = stats.GetStat(savedStat.ID);
             stat.DefaultValue = savedStat.DefaultValue;
+            //stat.MaxValue = savedStat.MaxValue; => MaxValue는 Item을 통해 복구
+        }
+
+        // Default Skills
+        if (DefaultAttackID != 0)
+            ChangeDefaultSkill(DefaultAttackID, EDefaultSkillSlot.DefaultAttack);
+        if (DodgeID != 0)
+            ChangeDefaultSkill(DodgeID, EDefaultSkillSlot.Dodge);
+
+        // Passive Skills
+        foreach (int passiveSkillID in PassiveSkills)
+        {
+            Skill skill = Managers.Data.GetSkillData(passiveSkillID);
+            MainHero.SkillSystem.RegisterWithoutCost(skill);
+        }
+    }
+    #endregion
+
+    public void ChangeDefaultSkill(int skillID, EDefaultSkillSlot slot)
+    {
+        Hero hero = Managers.Hero.MainHero;
+        Skill newDefaultSkill = Managers.Data.GetSkillData(skillID);
+
+        if (hero.SkillSystem.Find(newDefaultSkill))
+            return;
+
+        switch (slot)
+        {
+            case EDefaultSkillSlot.DefaultAttack:
+                hero.SkillSystem.Unregister(hero.SkillSystem.DefaultAttack);
+                hero.SkillSystem.RegisterWithoutCost(newDefaultSkill);
+                hero.SkillSystem.DefaultAttack = newDefaultSkill;
+                break;
+            case EDefaultSkillSlot.Dodge:
+                hero.SkillSystem.Unregister(hero.SkillSystem.Dodge);
+                hero.SkillSystem.RegisterWithoutCost(newDefaultSkill);
+                hero.SkillSystem.Dodge = newDefaultSkill;
+                break;
         }
     }
 }

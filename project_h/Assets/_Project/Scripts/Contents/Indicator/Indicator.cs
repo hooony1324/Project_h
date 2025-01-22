@@ -36,20 +36,14 @@ public abstract class Indicator : InitOnce
         {
             if (value)
             {
-                // TODO: White or Transparent로 변경
-                Color borderColor, fillColor;
-                ColorUtility.TryParseHtmlString("#00ECFF00", out borderColor);
-                ColorUtility.TryParseHtmlString("#FF000000", out fillColor);
-                BorderImage.color = borderColor;
-                FillImage.color = fillColor;
+                Color transparent = new Color(1, 1, 1, 0);
+                BorderImage.color = transparent;
+                FillImage.color = transparent;
             }
             else
             {
-                Color borderColor, fillColor;
-                ColorUtility.TryParseHtmlString("#00ECFF4C", out borderColor);
-                ColorUtility.TryParseHtmlString("#FF000099", out fillColor);
-                BorderImage.color = borderColor;
-                FillImage.color = fillColor;
+                BorderImage.color = Color.white;
+                FillImage.color = Color.white;
             }
 
         }

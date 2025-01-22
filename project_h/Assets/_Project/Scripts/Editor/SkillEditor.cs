@@ -254,7 +254,10 @@ public class SkillEditor : IdentifiedObjectEditor
                     {
                         property.NextVisible(false);
                         if (isUseChargeProperty.boolValue)
+                        {
                             EditorGUILayout.PropertyField(property);
+                        }
+                            
                     }
 
                     // 최대 chargeTime 값을 chargeDuration 값으로 제한

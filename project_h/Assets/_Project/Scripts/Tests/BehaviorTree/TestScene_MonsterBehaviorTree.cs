@@ -1,22 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Unity.Behavior;
-using UnityEditor.Rendering;
+using Unity.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
 
 public class TestScene_MonsterBehaviorScene : BaseScene
 {
     [UnderlineTitle("Hero")]
-    [SerializeField] string heroDataName;
+    [SerializeField] int heroDataID;
     [SerializeField] Transform heroSpawnPos;
     [SerializeField, ReadOnly] List<Skill> registeredHeroSkills = new();
 
     [Space(20)]
-    [SerializeField] Skill heroTestSkill;
+    [SerializeField] Skill DefaultAttackSkill;
+    [SerializeField] Skill DodgeSkill;
+    [SerializeField] Skill PassiveSkill;
+
+    [Space(20)]
     [Button("RegisterHeroTestSkill")] public bool registerHeroTestSkill;
     [Button("UnregisterHeroTestSkill")] public bool unregisterHeroTestSkill;
 
@@ -30,7 +36,7 @@ public class TestScene_MonsterBehaviorScene : BaseScene
     [UnderlineTitle("Monster")]
     [SerializeField] bool EnablePatrol = false;
     bool prevEnablePatrol;
-    [SerializeField] string monsterDataName;
+    [SerializeField] int monsterDataID;
     [SerializeField] Transform monsterSpawnPos;
     [SerializeField, ReadOnly] List<Skill> registeredMonsterSkills = new();
 
@@ -44,12 +50,17 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
     Monster monster;
 
+    [Space(20)]
+    [UnderlineTitle("Drop Item")]
+    [SerializeField] int dropTableID = -1;
+    [Button("DropItem")] public bool dropItem;
+
+
     public override bool Init()
     {
         if (base.Init() == false)
             return false;
 
-        Managers.Data.Init();
         prevEnablePatrol = EnablePatrol;
 
         return true;
@@ -72,17 +83,17 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
     async void Start()
     {
-        await LoadAddressableAssets();
-
         Managers.Data.Init();
 
+        await LoadAddressableAssets();
+
         monster = Managers.Object.Spawn<Monster>(monsterSpawnPos.position.With(z: 0));
-        monster.SetData(Managers.Data.GetMonsterData(monsterDataName));
+        monster.SetData(Managers.Data.GetMonsterData(monsterDataID));
 
         hero = Managers.Object.Spawn<Hero>(heroSpawnPos.position.With(z: 0));
-        hero.SetData(Managers.Data.GetHeroData(heroDataName));
+        hero.SetData(Managers.Data.GetHeroData(heroDataID));
 
-        var monsterSkillsToUnregister = monster.SkillSystem.OwnSkills.ToList();
+        var monsterSkillsToUnregister = monster.SkillSystem.OwnSkills.ToList(); 
         foreach (Skill monsterSkill in monsterSkillsToUnregister)
         {
             monster.SkillSystem.Unregister(monsterSkill);
@@ -99,39 +110,107 @@ public class TestScene_MonsterBehaviorScene : BaseScene
         hero.SkillSystem.RemoveEffectAll();
 
         Managers.Hero.SetMainHero(hero);
+        
+        EventBus<TEST_HeroSpawnEvent>.Raise(new TEST_HeroSpawnEvent
+        {
+        });
+
+
+        if (DefaultAttackSkill)
+            hero.SkillSystem.RegisterWithoutCost(DefaultAttackSkill);
+
+        if (DodgeSkill)
+            hero.SkillSystem.RegisterWithoutCost(DodgeSkill);
+
+        if (PassiveSkill)
+            hero.SkillSystem.RegisterWithoutCost(PassiveSkill);
+
+    
+        // joystick
+        GameObject playerController = new GameObject { name = "@PlayerController"};
+        playerController.AddComponent<PlayerController>();
+
+        Managers.UI.Joystick = Managers.UI.ShowSceneUI<UI_Joystick>();
+
+        Managers.Game.Cam.transform.position = hero.Position;
+        Managers.Game.Cam.Target = hero;
+        Managers.Game.PlayerController.SetControlTarget(hero);
     }
 
     public void RegisterHeroTestSkill()
     {
-        if (hero.SkillSystem.Find(heroTestSkill) != null)
+        if (PassiveSkill != null)
         {
-            Debug.Log($"{heroTestSkill.CodeName}이미 등록어있습니다");
-            return;
+            if (hero.SkillSystem.Find(PassiveSkill) != null)
+            {
+                Debug.Log($"{PassiveSkill.CodeName}이미 등록어있습니다");
+            }
+            else
+            {
+                hero.SkillSystem.RegisterWithoutCost(PassiveSkill);
+            }
         }
 
-        hero.SkillSystem.RegisterWithoutCost(heroTestSkill);
+        if (DefaultAttackSkill != null)
+        {
+            if (hero.SkillSystem.Find(DefaultAttackSkill) != null)
+            {
+                Debug.Log($"{DefaultAttackSkill.CodeName}이미 등록어있습니다");
+            }
+            else
+            {
+                hero.SkillSystem.RegisterWithoutCost(DefaultAttackSkill);
+                hero.SkillSystem.DefaultAttack = hero.SkillSystem.Find(DefaultAttackSkill);
+            }
+        }
+
+
+        if (DodgeSkill != null)
+        {
+            if (hero.SkillSystem.Find(DodgeSkill) != null)
+            {
+                Debug.Log($"{DodgeSkill.CodeName}이미 등록어있습니다");
+            }
+            else
+            {
+                hero.SkillSystem.RegisterWithoutCost(DodgeSkill);
+                hero.SkillSystem.Dodge = hero.SkillSystem.Find(DodgeSkill);
+            }
+        }
+
+        Managers.UI.Joystick.SetupActionButtons(hero);
+
         registeredHeroSkills = hero.SkillSystem.OwnSkills.ToList();
 
-        Debug.Log($"{heroTestSkill.CodeName}이 등록되었습니다");
+        Debug.Log($"{DefaultAttackSkill?.CodeName}, {DodgeSkill?.CodeName}, {PassiveSkill?.CodeName}이 등록되었습니다");
     }
 
     public void UnregisterHeroTestSkill()
     {
-        hero.SkillSystem.Unregister(heroTestSkill);
+        if (DefaultAttackSkill)
+            hero.SkillSystem.Unregister(DefaultAttackSkill);
+        if (DodgeSkill)
+            hero.SkillSystem.Unregister(DodgeSkill);
+        if (PassiveSkill)            
+            hero.SkillSystem.Unregister(PassiveSkill);
+
+        hero.SkillSystem.DefaultAttack = null;
+        hero.SkillSystem.Dodge = null;
+
         registeredHeroSkills = hero.SkillSystem.OwnSkills.ToList();
 
-        Debug.Log($"{heroTestSkill.CodeName}이 해제되었습니다");
+        Debug.Log($"{DefaultAttackSkill?.CodeName}, {DodgeSkill?.CodeName}, {PassiveSkill?.CodeName}이 해제되었습니다");
     }
 
     public void ExecuteHeroTestSkill()
     {
-        if (heroTestSkill == null)
+        if (PassiveSkill == null)
         {
             Debug.Log("heroTestSkill에 테스트 할 스킬을 설정해주세요");
             return;
         }
 
-        Skill skill = hero.SkillSystem.Find(heroTestSkill);
+        Skill skill = hero.SkillSystem.Find(PassiveSkill);
         if (skill != null && skill.IsUseable)
             skill.Use();
     }
@@ -169,6 +248,11 @@ public class TestScene_MonsterBehaviorScene : BaseScene
         Skill skill = monster.SkillSystem.Find(monsterTestSkill);
         if (skill != null && skill.IsUseable)
             skill.Use();
+    }
+
+    public void DropItem()
+    {
+        monster.TestDropItem(dropTableID);
     }
 
     public override void Clear()

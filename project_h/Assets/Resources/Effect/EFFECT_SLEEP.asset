@@ -29,6 +29,7 @@ MonoBehaviour:
   - level: 1
     maxStack: 1
     stackActions: []
+    antiEffect: {fileID: 0}
     action:
       rid: -2
     runningFinishOption: 0

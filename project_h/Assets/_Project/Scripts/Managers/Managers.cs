@@ -31,12 +31,14 @@ public class Managers : MonoBehaviour
     private ObjectManager _object = new ObjectManager();
     private HeroManager _hero = new HeroManager();
     private DungeonManager _dungeon = new DungeonManager();
+    private InventoryManager _inventory = new InventoryManager();
 
     public static GameManager Game => Instance?._game;
     public static MapManager Map => Instance?._map;
     public static ObjectManager Object => Instance?._object;
     public static HeroManager Hero => Instance?._hero;
     public static DungeonManager Dungeon => Instance?._dungeon;
+    public static InventoryManager Inventory => Instance?._inventory;
 
     private static void Init()
     {

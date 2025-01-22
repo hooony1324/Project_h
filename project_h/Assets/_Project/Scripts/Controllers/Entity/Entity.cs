@@ -38,7 +38,7 @@ public abstract class Entity : BaseObject
     [SerializeField]
     private Category[] categories;
     public Animator Animator {get; private set; }
-    [SerializeField]public StatsComponent StatsComponent { get; private set; }
+    [SerializeField] public StatsComponent StatsComponent { get; private set; }
     public EntityMovement Movement;
     public MonoStateMachine<Entity> StateMachine { get; private set; }
     public SkillSystem SkillSystem;

@@ -57,6 +57,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9027349a5df57d841949dd966018d561
+    m_Address: ItemHolder
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c5e2d12db8a656443be3f7fc0a9549d9
     m_Address: SquareIndicator
     m_ReadOnly: 0

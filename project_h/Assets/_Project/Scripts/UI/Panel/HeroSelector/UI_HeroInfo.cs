@@ -46,9 +46,9 @@ public class UI_HeroInfo : UI_Base
 
     private void HandleHeroSelectEvent(HeroSelectEvent selectEvent)
     {
-        Managers.Hero.SetHeroData(selectEvent.heroDataName);
+        Managers.Hero.LoadHeroData(selectEvent.heroDataID);
 
-        HeroData heroData = Managers.Data.GetHeroData(selectEvent.heroDataName);
+        HeroData heroData = Managers.Data.GetHeroData(selectEvent.heroDataID);
         Stat[] stats = heroData.StatOverrides.Select(x => x.CreateStat()).ToArray();
 
         StringBuilder sb = new StringBuilder();
@@ -59,7 +59,7 @@ public class UI_HeroInfo : UI_Base
 
         sb.AppendLine("부연 설명...");
 
-        GetTMPText((int)TMPTexts.HeroNameText).text = heroData.entityId;
+        GetTMPText((int)TMPTexts.HeroNameText).text = heroData.EntityName.ToString();
         GetTMPText((int)TMPTexts.HeroInfoText).text = sb.ToString();
 
         GetGameObject((int)GameObjects.FlexibleLayout).SetActive(true);

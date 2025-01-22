@@ -2,6 +2,7 @@ using UnityEngine;
 
 
 #if UNITY_EDITOR
+// 콜리전 영역 체크 용도
 public class GizmoSpawner : MonoBehaviour
 {
     public static GizmoSpawner Instance 

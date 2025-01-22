@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 2
+  id: 50001
   codeName: CHARIOT_CHARGING_RUSH
   displayName: "\uB3CC\uC9C4"
   description: "\uBA87 \uCD08\uAC04 \uCC28\uC9C0\uD558\uACE0 \uB3CC\uC9C4\uD55C\uB2E4."
@@ -39,7 +39,7 @@ MonoBehaviour:
     precedingAction:
       rid: -2
     action:
-      rid: 4885778306204434608
+      rid: 2123022065556520977
     runningFinishOption: 0
     duration: 0
     applyCount: 1
@@ -88,6 +88,9 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2123022065556520977
+      type: {class: ChargingRushAction, ns: , asm: Assembly-CSharp}
+      data: 
     - rid: 2868447305151808126
       type: {class: SelectPositionByAttackRange, ns: , asm: Assembly-CSharp}
       data:
@@ -99,13 +102,11 @@ MonoBehaviour:
     - rid: 4885778306204434540
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 4885778306204434608
-      type: {class: RushAction, ns: , asm: Assembly-CSharp}
-      data: 
     - rid: 4885778415748382818
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
         indicatorViewAction:
           rid: 4885778415748382819
         isUseScale: 0

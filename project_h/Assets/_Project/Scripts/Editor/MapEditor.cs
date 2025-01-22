@@ -62,7 +62,7 @@ public class MapEditor : MonoBehaviour
 
             if (tile != null)
             {
-                tile.entityDataName = data.entityId;
+                tile.ID = data.ID;
                 tile.sprite = data.Sprite;
 
                 EditorUtility.SetDirty(tile);
@@ -70,10 +70,10 @@ public class MapEditor : MonoBehaviour
             else
             {
                 tile = ScriptableObject.CreateInstance<EntityTile>();
-                tile.entityDataName = data.entityId;
+                tile.ID = data.ID;
                 tile.sprite = data.Sprite;
                 
-                AssetDatabase.CreateAsset(tile, $"Assets/Resources/GameDesign/EntityTileData/Monster/{data.entityId}.asset");
+                AssetDatabase.CreateAsset(tile, $"Assets/Resources/GameDesign/EntityTileData/Monster/{data.EntityName}.asset");
                 EditorUtility.SetDirty(tile);
             }
         }

@@ -68,20 +68,20 @@ public class SkillSystemWindow : EditorWindow
         if (databasesByType.Count == 0)
         {
             // Resources Folder에 Database Folder가 있는지 확인
-            if (!AssetDatabase.IsValidFolder("Assets/Resources/Database"))
+            if (!AssetDatabase.IsValidFolder("Assets/Resources/AbilitySystemDatabase"))
             {
                 // 없다면 Database Folder를 만들어줌
-                AssetDatabase.CreateFolder("Assets/Resources", "Database");
+                AssetDatabase.CreateFolder("Assets/Resources", "AbilitySystemDatabase");
             }
 
             foreach (var type in dataTypes)
             {
-                var database = AssetDatabase.LoadAssetAtPath<IODatabase>($"Assets/Resources/Database/{type.Name}Database.asset");
+                var database = AssetDatabase.LoadAssetAtPath<IODatabase>($"Assets/Resources/AbilitySystemDatabase/{type.Name}Database.asset");
                 if (database == null)
                 {
                     database = CreateInstance<IODatabase>();
                     // 지정한 주소에 IODatabase를 생성
-                    AssetDatabase.CreateAsset(database, $"Assets/Resources/Database/{type.Name}Database.asset");
+                    AssetDatabase.CreateAsset(database, $"Assets/Resources/AbilitySystemDatabase/{type.Name}Database.asset");
                     // 지정한 주소의 하위 Folder를 생성, 이 Folder는 Window에 의해 생성된 IdentifiedObject가 저장될 장소임
                     AssetDatabase.CreateFolder("Assets/Resources", type.Name);
                 }
@@ -183,6 +183,16 @@ public class SkillSystemWindow : EditorWindow
 
                 // 지금부터 그릴 GUI는 Cyan
                 GUI.color = Color.cyan;
+
+                if (GUILayout.Button($"Sort By ID"))
+                {
+                    // 정렬 실행
+                    database.SortByID();
+                    // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
+                    EditorUtility.SetDirty(database);
+                    AssetDatabase.SaveAssets();
+                }
+
                 // Data를 이름 순으로 정렬하는 Button을 그림
                 if (GUILayout.Button($"Sort By Name"))
                 {
@@ -192,6 +202,7 @@ public class SkillSystemWindow : EditorWindow
                     EditorUtility.SetDirty(database);
                     AssetDatabase.SaveAssets();
                 }
+
                 // 지금부터 그릴 GUI는 하얀색(=원래색)
                 GUI.color = Color.white;
 

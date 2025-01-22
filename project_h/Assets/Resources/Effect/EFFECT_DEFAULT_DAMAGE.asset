@@ -34,7 +34,7 @@ MonoBehaviour:
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 2
+      defaultValue: 1
       scaleStat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
     applyCount: 1
     applyCycle: 0

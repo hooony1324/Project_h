@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 6
+  id: 50006
   codeName: BAT_SWEEPWORLD
   displayName: 
   description: 
@@ -111,6 +111,7 @@ MonoBehaviour:
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0

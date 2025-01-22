@@ -1,0 +1,10 @@
+﻿Name,Id,Size,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability,Item ID,Probability
+0_DOPTABLE_MAX(지우지마세요),-1,10,0,100,0,10,0,20,0,30,0,0,0,0,0,0,0,0,0,0,0,0
+TEST_기본스킬선택,1000,1,100,100,,,,,,,,,,,,,,,,,,
+TEST_스탯장착_최대체력,1001,1,101,100,,,,,,,,,,,,,,,,,,
+TEST_스탯장착_이동속도,1002,1,102,100,,,,,,,,,,,,,,,,,,
+TEST_체력회복,1003,1,103,100,,,,,,,,,,,,,,,,,,
+TEST_체력회복_이동속도,1004,1,104,100,,,,,,,,,,,,,,,,,,
+TEST_현재몬스터처치,1005,1,105,100,,,,,,,,,,,,,,,,,,
+TEST_골드획득,1006,1,106,100,,,,,,,,,,,,,,,,,,
+TEST_슬라임드랍,2000,1,102,100,,,,,,,,,,,,,,,,,,

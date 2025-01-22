@@ -18,8 +18,11 @@ public struct GameStartEvent : IEvent
 
 public struct HeroSelectEvent : IEvent
 {
-    public string heroDataName;
+    public int heroDataID;
     public Vector3 selectPosition;
 }
 
- 
+public struct TEST_HeroSpawnEvent : IEvent
+{
+
+}

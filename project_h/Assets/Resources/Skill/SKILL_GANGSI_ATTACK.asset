@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 8
+  id: 50005
   codeName: GANGSI_ATTACK
   displayName: 
   description: "\uAC15\uC2DC \uACF5\uACA9"

@@ -47,4 +47,10 @@ public class Define
         public const int JOYSTICK = 500;
         public const int NPC_INTERACTION = 800;
     }
+
+    public enum EDefaultSkillSlot
+    {
+        DefaultAttack,
+        Dodge,
+    }
 }
