@@ -10,6 +10,7 @@ public class UI_DungeonScene : UI_Scene
     enum GameObjects
     {
         HpPanel,
+        InventoryButton,
     }
 
     
@@ -21,12 +22,19 @@ public class UI_DungeonScene : UI_Scene
             
         BindGameObjects(typeof(GameObjects));
 
+        GetGameObject((int)GameObjects.InventoryButton).BindEvent(OnClickEquipment);
+
         return true;
     }
 
     public void Setup(Entity mainHero)
     {
         GetGameObject((int)GameObjects.HpPanel).GetComponent<HpPanel>().Setup(mainHero);
+    }
+
+    void OnClickEquipment()
+    {
+        var popup = Managers.UI.ShowPopupUI<UI_EquipmentPopup>();
     }
 
 }

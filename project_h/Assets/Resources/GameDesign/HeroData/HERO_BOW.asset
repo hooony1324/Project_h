@@ -47,5 +47,5 @@ MonoBehaviour:
     overrideDefaultValue: 2
     overrideMaxValue: 0
   defaultSkills:
-  - BOW_DEFAULT_TESTATTACK_USE_INPUT
+  - BOW_DEFAULT_ATTACK
   dodgeSkill: DEFAULT_ROLL

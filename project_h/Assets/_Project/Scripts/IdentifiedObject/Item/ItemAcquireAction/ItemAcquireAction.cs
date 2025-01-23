@@ -93,7 +93,8 @@ public class AddStatItem : ItemAcquireAction
 
         }
 
-        Managers.Inventory.AllItems.Add(owner.ID);
+        
+        Managers.Inventory.AddItem(owner);
     }
 
     public void Load()
@@ -122,7 +123,7 @@ public class AddStatItem : ItemAcquireAction
     class StatItemData
     {   
         public int id;
-        [Tooltip("isDynamicValue - '현재체력'과 같이 게임 중 변화가 자주 일어나는 값(재시작 시 해당 수치는 복구되지 않음)\nex)체력회복++ 과 공격속도++인 아이템\n - 아이템을 획득 당시 체력은 회복, 공속 획득\n - 게임 재시작시 아이템 재획득하여 스탯 복구, 체력회복X, 공속복구O")]
+        [Tooltip("isDynamicValue - '현재체력'과 같이 게임 중 변화가 자주 일어나는 값(재시작 시 해당 수치는 복구되지 않음)\nex)체력회복++(Dynamic O) 과 공격속도++(Dynamic X)인 아이템\n - 아이템을 획득 당시 체력은 회복, 공속 획득\n - 게임 재시작시 아이템 재획득하여 스탯 복구, 체력회복X, 공속복구O")]
         public bool isDynamicValue; // 재시작하고 로드, 체크되어 있다면 복구 안함
         public EValueType valueType;
         public float value;

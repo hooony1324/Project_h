@@ -7,6 +7,7 @@ public class UI_TitleScene : UI_Scene
     enum GameObjects
     {
         MiddleLayout,
+        RemoveCacheButton,
     }
 
     enum Texts
@@ -25,11 +26,22 @@ public class UI_TitleScene : UI_Scene
         BindTMPTexts(typeof(Texts));
 
         GetGameObject((int)GameObjects.MiddleLayout).gameObject.BindEvent(OnClickMiddleLayout);
-        GetGameObject((int)GameObjects.MiddleLayout).gameObject.SetActive(false);
+        GetGameObject((int)GameObjects.MiddleLayout).SetActive(false);
+        GetGameObject((int)GameObjects.RemoveCacheButton).SetActive(false);
 
         TitleScene titleScene = Managers.Scene.GetCurrentScene<TitleScene>();
         titleScene.OnDownloadEnd += HandleDownloadEnded;
         titleScene.OnDownloadStateStateChanged += HandleDownloadStateChanged;
+
+        #if DEBUGCODE
+        GetGameObject((int)GameObjects.RemoveCacheButton).SetActive(true);
+        GetGameObject((int)GameObjects.RemoveCacheButton).BindEvent(
+            () => 
+            {
+                Managers.SaveLoad.RemovePlayData();
+            }
+        );
+        #endif 
 
         return true;
     }

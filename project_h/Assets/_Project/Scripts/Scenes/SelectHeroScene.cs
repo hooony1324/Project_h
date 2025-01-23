@@ -12,6 +12,8 @@ public class SelectHeroScene : BaseScene
         if (base.Init() == false)
             return false;
 
+        Managers.SaveLoad.Init();
+
         SceneType = EScene.SelectHeroScene;
         Managers.Scene.SetCurrentScene(this);
 

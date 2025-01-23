@@ -21,7 +21,7 @@ MonoBehaviour:
   type: 0
   useType: 0
   executionType: 1
-  applyType: 1
+  applyType: 0
   needSelectionResultType: 1
   targetSelectionTimingOption: 1
   targetSearchTimingOption: 0
@@ -62,7 +62,9 @@ MonoBehaviour:
     chargeTime: 0
     needChargeTimeToUse: 0
     startChargePower: 0
-    effectSelectors: []
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
     inSkillActionFinishOption: 0
     castAnimatorParamter:
       type: 0
@@ -74,8 +76,8 @@ MonoBehaviour:
       type: 0
       name: 
     actionAnimatorParameter:
-      type: 0
-      name: isDefaultAttack
+      type: 1
+      name: isMovingAttack
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []

@@ -45,6 +45,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b189971716c7814faeebad3bb6795ac
+    m_Address: UI_EquipmentPopupSlot
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e030f0eedfeb6747ad99c944dd78b08
     m_Address: UI_DungeonSelectPopup
     m_ReadOnly: 0
@@ -83,6 +89,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f62601728cd2176489cfb173d9522e18
     m_Address: UI_Joystick
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f7664f8be48cac240bb705cadcbba751
+    m_Address: UI_EquipmentPopup
     m_ReadOnly: 0
     m_SerializedLabels:
     - PreGame

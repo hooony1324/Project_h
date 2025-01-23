@@ -58,7 +58,7 @@ public class SaveLoadManager
 
         // 아이템
         SaveData.ItemSaveDatas.Clear();
-        SaveData.ItemSaveDatas = Managers.Inventory.AllItems.ToList();
+        SaveData.ItemSaveDatas = Managers.Inventory.AllItems.Select(x => x.ID).ToList();
 
         // 스킬
         SaveData.DefaultAttackID = Managers.Hero.DefaultAttackID;
@@ -124,7 +124,7 @@ public class SaveLoadManager
         }
     }
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     [MenuItem("Tools/RemoveSavedata")]
     public static void RemoveSaveData()
     {
@@ -138,8 +138,7 @@ public class SaveLoadManager
             Debug.Log("Savedata not found!");
         }
     }
-
-#endif
+    #endif
 
 }
 

@@ -15,6 +15,7 @@ MonoBehaviour:
   id: 103
   itemHolderSprite: {fileID: 21300000, guid: 640b629e706514d1097a05faac1009de, type: 3}
   isAllowMultiple: 1
+  isEquipment: 0
   itemAcquireAction:
     rid: 2123022169425314662
   references:
