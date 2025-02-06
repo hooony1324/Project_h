@@ -80197,7 +80197,7 @@ PrefabInstance:
     - target: {fileID: 783537442047940175, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 720118652224413485, guid: b786e931c65a44e4f96d9a38650783f0, type: 3}
+      objectReference: {fileID: 21300000, guid: b786e931c65a44e4f96d9a38650783f0, type: 3}
     - target: {fileID: 783537442047940175, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -80216,7 +80216,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 783537442047940175, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_FillAmount
-      value: 0.611
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 783537442047940175, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_FillMethod
@@ -80333,7 +80333,7 @@ PrefabInstance:
     - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 2033960975386372411, guid: f87e3da1be7501142974b8c4d9037cca, type: 3}
+      objectReference: {fileID: 21300000, guid: f87e3da1be7501142974b8c4d9037cca, type: 3}
     - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_Color.a
       value: 1
@@ -80349,6 +80349,18 @@ PrefabInstance:
     - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
+      propertyPath: m_FillOrigin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7481387285023137121, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
       propertyPath: m_PreserveAspect

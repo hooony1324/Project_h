@@ -46,7 +46,10 @@ public partial class SelectAndUseSkillAction : Action
     protected override Status OnUpdate()
     {
         if (selectedSkill.IsActivated == false)
+        {
+            selectedSkill = null;
             return Status.Failure;
+        }
 
         if (selectedSkill.IsFinished)
         {

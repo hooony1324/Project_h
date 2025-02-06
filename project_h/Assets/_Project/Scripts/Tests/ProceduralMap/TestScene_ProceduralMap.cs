@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class TestScene_ProceduralMap : BaseScene
@@ -13,15 +14,24 @@ public class TestScene_ProceduralMap : BaseScene
         return true;
     }
 
-    async Awaitable LoadResources()
+    private async UniTask LoadAddressableAssets()
     {
-        Managers.Resource.LoadAllAsync<Object>("PreTitle", (key, current, total) =>
+        bool bResourceLoaded = false;
+
+        Managers.Resource.LoadAllAsync<Object>("PreGame", (key, current, total) =>
         {
             if (current == total)
             {
-                
+                bResourceLoaded = true;
             }
         });
+
+        await UniTask.WaitUntil(() => bResourceLoaded);
+    }
+
+    async void Start()
+    {
+        await LoadAddressableAssets();
     }
 
     public override void Clear()

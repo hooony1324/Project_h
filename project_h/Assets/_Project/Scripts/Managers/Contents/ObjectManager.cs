@@ -145,6 +145,17 @@ public class ObjectManager
         return go;
     }
 
+    public GameObject SpawnEffect(string prefabName, Vector3 position, Quaternion rotation)
+    {
+        GameObject go = Managers.Resource.Instantiate(prefabName, EffectRoot, pooling: true);
+        go.transform.position = position;
+        go.transform.rotation = rotation;
+        go.transform.parent = EffectRoot;
+        go.AddComponent<SortingGroup>().sortingOrder = SortingLayers.SKILL_EFFECT;
+        Effects.Add(go);
+        return go;
+    }
+
     public void DespawnEffect(GameObject effect)
     {
         Effects.Remove(effect);

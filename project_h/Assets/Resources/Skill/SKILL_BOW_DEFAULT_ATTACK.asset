@@ -36,8 +36,6 @@ MonoBehaviour:
   defaultLevel: 1
   skillDatas:
   - level: 1
-    isDefaultSkill: 0
-    defaultSkillDescription: 
     levelUpConditions: []
     levelUpCosts: []
     precedingAction:
@@ -49,8 +47,8 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     cooldown:
-      defaultValue: 1
-      scaleStat: {fileID: 0}
+      defaultValue: 5
+      scaleStat: {fileID: 11400000, guid: 4ec60cfcbf00604498c08f6ffee0569c, type: 2}
     targetSearcher:
       selectionAction:
         rid: 2868447306621911098

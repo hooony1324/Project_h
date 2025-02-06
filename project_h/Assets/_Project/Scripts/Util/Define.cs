@@ -53,4 +53,10 @@ public class Define
         DefaultAttack,
         Dodge,
     }
+
+    public enum EDungeonRoomType
+    {
+        None,
+        BossMonster,
+    }
 }

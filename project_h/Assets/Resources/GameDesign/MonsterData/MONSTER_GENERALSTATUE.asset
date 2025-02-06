@@ -24,21 +24,33 @@ MonoBehaviour:
     overrideMaxValue: 0
   - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
     isUseOverride: 1
-    overrideDefaultValue: 1
+    overrideDefaultValue: 5
     overrideMaxValue: 0
   - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-    overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
+    isUseOverride: 1
+    overrideDefaultValue: 7
     overrideMaxValue: 0
   - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+    isUseOverride: 1
+    overrideDefaultValue: 10
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
+    isUseOverride: 1
+    overrideDefaultValue: 5
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: f7c6ca64326491f459f8cb7ab20a72be, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: 4ec60cfcbf00604498c08f6ffee0569c, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
   defaultSkills:
-  - DEFAULT_TEST_ATTACK
+  - GENERAL_ATTACK
+  - BAT_SWEEPWORLD
+  - CHARIOT_CHARGING_RUSH
+  - GANGSI_ATTACK
+  - GENERAL_SUPERARMOR
   dodgeSkill: 
-  DropTableID: 2000
+  DropGroupID: 0

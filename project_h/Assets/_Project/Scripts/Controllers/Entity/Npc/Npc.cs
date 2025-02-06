@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -11,6 +12,7 @@ public abstract class NpcInteraction
 
 public class Npc : BaseObject
 {
+    private TextMeshPro _npcNameText;
     private UI_NpcInteraction _uiNpcInteraction;
 
     [HelpBox("isClickInteraction(true) : NPC클릭으로 Interaction\nisClickIn teraction(false) : NPC영역에 충돌하여 Interaction")]
@@ -38,6 +40,8 @@ public class Npc : BaseObject
 
         _uiNpcInteraction = Util.FindChild(gameObject, "UI_NpcInteraction").GetComponent<UI_NpcInteraction>();
         
+        _npcNameText = Util.FindChild(gameObject, "NpcNameText").GetComponent<TextMeshPro>();
+        _npcNameText.text = "TESTNAME";
         return true;
     }
 

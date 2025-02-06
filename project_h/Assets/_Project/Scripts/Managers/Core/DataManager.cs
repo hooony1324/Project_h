@@ -10,7 +10,7 @@ public class DataManager
     private readonly List<DungeonData> _dungeonDatas = new List<DungeonData>();
     private readonly List<Skill> _skillDatas = new List<Skill>();
     private readonly List<Stat> _statDatas = new List<Stat>();
-    private readonly Dictionary<int, List<DropData>> _dropTableDatas = new();
+    private readonly List<DropTableData> _dropTableDatas = new();
     private readonly List<Item> _itemDatas = new();
     private readonly Dictionary<int, SkillFusionData[]> _skillFusionDatas = new Dictionary<int, SkillFusionData[]>();
 
@@ -18,7 +18,7 @@ public class DataManager
     public IReadOnlyDictionary<int, HeroData> HeroDatas => _heroDatas;
     public IReadOnlyList<Skill> SkillDatas => _skillDatas;
     public IReadOnlyList<Stat> StatDatas => _statDatas;
-    public IReadOnlyDictionary<int, List<DropData>> DropTableDatas => _dropTableDatas;
+    public IReadOnlyList<DropTableData> DropTableDatas => _dropTableDatas;
     public IReadOnlyList<Item> ItemDatas => _itemDatas;
     public IReadOnlyDictionary<int, SkillFusionData[]> SkillFusionDatas => _skillFusionDatas;
     
@@ -48,10 +48,7 @@ public class DataManager
 
         foreach (DropTableData droptableData in Resources.LoadAll<DropTableData>("DropTableData"))
         {
-            if (!_dropTableDatas.ContainsKey(droptableData.ID))
-            {
-                _dropTableDatas.Add(droptableData.ID, droptableData.DropList);
-            }
+            _dropTableDatas.Add(droptableData);
         }
 
         foreach (Item item in Resources.LoadAll<Item>("Item"))

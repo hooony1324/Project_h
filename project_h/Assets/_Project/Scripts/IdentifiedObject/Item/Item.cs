@@ -9,9 +9,9 @@ public class Item : ScriptableObject
     [SerializeField, Tooltip("여러 개 획득할 수 있는지의 여부")] private bool isAllowMultiple = false;
     [SerializeField, Tooltip("장비 창에 보여줄지의 여부")] private bool isEquipment = true;
     [SerializeReference, SubclassSelector] public ItemAcquireAction itemAcquireAction;
-
-    // CombinationableIDs??
-
+    
+    [SerializeField] private string description;
+    
     public int ID => id;
     public Sprite ItemHolderSprite => itemHolderSprite;
     public bool IsAllowMultiple => isAllowMultiple;
@@ -25,11 +25,11 @@ public class Item : ScriptableObject
 
     public void Load()
     {
-        if(!itemAcquireAction.IsActionType<AddStatItem>())
+        if(!itemAcquireAction.IsActionType<IncreaseStatItemAction>())
             return;
 
-        AddStatItem addStatItem = itemAcquireAction as AddStatItem;
-        addStatItem.Load(); 
+        IncreaseStatItemAction increaseStatItem = itemAcquireAction as IncreaseStatItemAction;
+        increaseStatItem.Load(); 
     }
 }
 

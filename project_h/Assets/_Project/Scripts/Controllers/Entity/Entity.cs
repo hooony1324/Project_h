@@ -122,6 +122,8 @@ public abstract class Entity : BaseObject
             return;
 
         float prevValue = StatsComponent.HPStat.DefaultValue;
+
+        damage *= StatsComponent.FragilityStat.Value;
         StatsComponent.HPStat.DefaultValue -= damage;
 
         onTakeDamage?.Invoke(this, instigator, causer, damage);
@@ -153,6 +155,7 @@ public abstract class Entity : BaseObject
         onDead = null;
     }
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
+    public bool HasCategory(string categoryName) => categories.Any(x => x.CodeName == categoryName);
 
     public bool IsInState<T>() where T : State<Entity>
         => StateMachine.IsInState<T>();

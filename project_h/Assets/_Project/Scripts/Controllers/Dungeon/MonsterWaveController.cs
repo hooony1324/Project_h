@@ -37,12 +37,14 @@ public class MonsterWaveController : InitOnce
 
     public void InitWaveDatas(DungeonRoom owner)
     {
+        GameObject monsterWavesObj = Util.FindChild(gameObject, "MonsterWaves");
         _spawnDataList = new ();
-
         _totalMonsterCount = 0;
-        for (int i = 0; i < transform.childCount; i++)
+
+        int waveCount = monsterWavesObj.transform.childCount;
+        for (int i = 0; i < waveCount; i++)
         {
-            Tilemap tilemap = transform.GetChild(i).GetComponent<Tilemap>();
+            Tilemap tilemap = monsterWavesObj.transform.GetChild(i).GetComponent<Tilemap>();
 
             if (tilemap == null)
                 continue;
@@ -73,11 +75,6 @@ public class MonsterWaveController : InitOnce
             }
 
             tilemap.gameObject.SetActive(false);
-        }
-
-        if (_totalMonsterCount == 0)
-        {
-            owner.State = DungeonRoom.RoomState.Cleared;
         }
     }
 

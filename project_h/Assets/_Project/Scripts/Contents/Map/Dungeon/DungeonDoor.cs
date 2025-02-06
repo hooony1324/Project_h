@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using static Define;
 
 public class DungeonDoor : BaseObject
 {
@@ -16,6 +17,7 @@ public class DungeonDoor : BaseObject
     private DungeonDoor _targetDoor;
 
     private bool _isOpened = false;
+    private SpriteRenderer _spriteRenderer;
 
     public override bool Init()
     {
@@ -24,6 +26,7 @@ public class DungeonDoor : BaseObject
 
         _collider = GetComponent<TilemapCollider2D>();
         _collider.isTrigger = true;
+        _spriteRenderer = Util.FindChild<SpriteRenderer>(gameObject, "Sprite").GetComponent<SpriteRenderer>();
 
         return false;
     }
@@ -34,6 +37,8 @@ public class DungeonDoor : BaseObject
         TeleportPosition = teleportPosition;
         _targetDoor = targetDoor;
         Owner = owner;
+
+        SetupDoor();
     }
 
     public void Open()
@@ -55,15 +60,15 @@ public class DungeonDoor : BaseObject
         if (!other.CompareTag("Player"))
             return;
         
+        // 만약 열쇠개념 추가하면
+        // room.CheckOpenCondition
+        // room.InvokeOpenEvent
+
         if (!_isOpened)
             return;
 
-        // Teleport to TargetRoom
-        _targetDoor.Close();// 왔다갔다 방지
-        Managers.Hero.TeleportHero(TeleportPosition);
-        
-        TargetRoom.HandleHeroVisited();
-        //OnTriggered.Invoke();
+
+        MoveToTargetRoom();
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -73,6 +78,38 @@ public class DungeonDoor : BaseObject
 
         if (Owner.IsWaveCleared)
             Open();
+    }
+
+    void MoveToTargetRoom()
+    {
+        // Teleport to TargetRoom
+        _targetDoor.Close();    // 왔다갔다 방지
+        Managers.Hero.TeleportHero(TeleportPosition);
+        
+        TargetRoom.HandleHeroVisited();
+    }
+
+    void SetupDoor()
+    {
+        switch (TargetRoom.RoomType)
+        {
+            case EDungeonRoomType.BossMonster:
+                HandleBossRoom();
+                break;
+            default:
+                HandleNormal();
+                break;
+        }
+    }
+
+    void HandleNormal()
+    {
+        _spriteRenderer.color = Color.white;
+    }
+
+    void HandleBossRoom()
+    {
+        _spriteRenderer.color = Color.red;
     }
 
 }

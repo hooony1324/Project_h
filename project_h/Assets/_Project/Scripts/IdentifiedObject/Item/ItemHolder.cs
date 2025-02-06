@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -9,7 +7,6 @@ using static Define;
 public class ItemHolder : BaseObject
 {
     private Item item;
-    private DropData dropData;
     private SpriteRenderer spriteRenderer;
 
     private Action endCallback;
@@ -25,10 +22,9 @@ public class ItemHolder : BaseObject
         return true;
     }
 
-    public void Setup(DropData dropData, Action endCallback = null)
+    public void Setup(int itemID, Action endCallback = null)
     {
-        this.dropData = dropData;
-        this.item = Managers.Data.GetItemData(dropData.itemID);
+        this.item = Managers.Data.GetItemData(itemID);
         this.endCallback = endCallback;
 
         spriteRenderer.sprite = item.ItemHolderSprite;
@@ -37,7 +33,16 @@ public class ItemHolder : BaseObject
         _ = DoParabolaMotion();
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.gameObject.CompareTag("Player") == false)
+    //         return;
+
+    //     item.Acquire();
+    //     Managers.Object.Despawn<ItemHolder>(this);
+    // }
+
+    void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") == false)
             return;

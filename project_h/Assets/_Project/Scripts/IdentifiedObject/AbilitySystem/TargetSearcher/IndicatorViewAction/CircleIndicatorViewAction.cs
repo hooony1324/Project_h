@@ -50,8 +50,9 @@ public class CircleIndicatorViewAction : IndicatorViewAction
         angle = Mathf.Approximately(indicatorAngleOverride, 0f) ? angle : indicatorAngleOverride;
 
         // Indicator를 생성하고, Setup 함수로 위에서 정한 값들을 Setting해줌
+        Entity owner = requesterObject.GetComponent<Entity>();
         spawnedRangeIndicator = GameObject.Instantiate(indicatorPrefab).GetComponent<Indicator>();
-        spawnedRangeIndicator.Setup(new CircleIndicator.CircleArea() { angle = angle, radius = radius }, fillAmount, traceTarget: attachTarget, isTransparent);
+        spawnedRangeIndicator.Setup(owner, new CircleIndicator.CircleArea() { angle = angle, radius = radius }, fillAmount, traceTarget: attachTarget, isTransparent);
 
         // Rotate Indicator to target position
         var targetPos = targetSearcher.SelectionResult.selectedPosition;

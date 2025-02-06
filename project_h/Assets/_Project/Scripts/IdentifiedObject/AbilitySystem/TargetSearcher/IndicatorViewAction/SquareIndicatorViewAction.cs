@@ -8,6 +8,8 @@ public class SquareIndicatorViewAction : IndicatorViewAction
     [SerializeField]
     private GameObject indicatorPrefab;
 
+    [SerializeField]
+    private bool isArrowType;
 
     // Indicator의 속을 채우는 fillAmount Property를 사용할 것인가?
     [SerializeField]
@@ -34,8 +36,9 @@ public class SquareIndicatorViewAction : IndicatorViewAction
 
         Vector2 rangeScale = (Vector2)range;
         // Indicator를 생성하고, Setup 함수로 위에서 정한 값들을 Setting해줌
+        Entity owner = requesterObject.GetComponent<Entity>();
         spawnedRangeIndicator = GameObject.Instantiate(indicatorPrefab).GetComponent<Indicator>();
-        spawnedRangeIndicator.Setup(new SquareIndicator.SquareArea() { scale = new Vector2(rangeScale.x, rangeScale.y) }, fillAmount, traceTarget:attachTarget, isTransparent);
+        spawnedRangeIndicator.Setup(owner, new SquareIndicator.SquareArea() { scale = new Vector2(rangeScale.x, rangeScale.y), isArrowType = this.isArrowType}, fillAmount, traceTarget:attachTarget, isTransparent);
 
         // Rotate Indicator to target position
         var targetPos = targetSearcher.SelectionResult.selectedPosition;

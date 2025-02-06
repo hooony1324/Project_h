@@ -1,12 +1,25 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.Tilemaps;
+using static Define;
 
 public class DungeonRoom : InitOnce
 {
+    [SerializeField] private EPattern roomPattern;
+    [SerializeField] private ERoomDirection roomDirection = ERoomDirection.UP;
+    [SerializeField] private EDungeonRoomType roomType = EDungeonRoomType.None;
+    [SerializeReference, SubclassSelector] DungeonRoomAction roomVisitedAction;
+    [SerializeReference, SubclassSelector] DungeonRoomAction roomClearedAction;
+
+    private Transform _teleportPoint;
+    private Vector2Int[] _generatedGrid;
+    private MonsterWaveController _waveController;
+
+    public EDungeonRoomType RoomType => roomType;
+    public DungeonRoomAction RoomVisitedAction => roomVisitedAction;
+    public DungeonRoomAction RoomClearedAction => roomClearedAction;
+
     public override bool Init()
     {
         if (base.Init() == false)
@@ -14,7 +27,7 @@ public class DungeonRoom : InitOnce
 
         _teleportPoint = Util.FindChild(gameObject, "TeleportPoint").transform;
         _generatedGrid = GetPatternIndexes();
-        _waveController = Util.FindChild(gameObject, "MonsterWaveController").GetComponent<MonsterWaveController>();
+        _waveController = GetComponent<MonsterWaveController>();
 
         CreateCollisionBorder();
 
@@ -22,7 +35,7 @@ public class DungeonRoom : InitOnce
     }
 
     #region Dungeon Generation
-    enum RoomDirection
+    enum ERoomDirection
     {
         UP,
         RIGHT,
@@ -30,19 +43,18 @@ public class DungeonRoom : InitOnce
         LEFT,
     }
 
-    enum Pattern
+    enum EPattern
     {
         _1x1,
         _1x2,
+        _1x3,
         _2x2,
+        _3x3,
         _J,
         _L,
         _T,
         _Z,
     }
-
-    [SerializeField] private Pattern _roomPattern;
-    [SerializeField] private RoomDirection _roomDirection = RoomDirection.UP;
 
     ///<summary> Dungeon Grid에 소환된 Index </summary>
     private Vector2Int _spawnedIndex;
@@ -58,10 +70,8 @@ public class DungeonRoom : InitOnce
     
     /// <summary> Dungeon Grid에 소환된 Indexes </summary>
     public Vector2Int[] SpawnedGrid => _spawnedGrid;
-    private Vector2Int[] _generatedGrid;
     private Vector2Int[] _spawnedGrid;
     private readonly List<DungeonDoor> _doors = new List<DungeonDoor>();
-    private Transform _teleportPoint;
 
     public Vector3 TeleportPosition => _teleportPoint.position;
     public List<DungeonDoor> Doors => _doors;
@@ -73,12 +83,12 @@ public class DungeonRoom : InitOnce
         for (int i = 0; i < rotatedIndexes.Length; i++)
         {
             Vector2Int p = rotatedIndexes[i];
-            rotatedIndexes[i] = _roomDirection switch
+            rotatedIndexes[i] = roomDirection switch
             {
                 // UP이 기본 형태
-                RoomDirection.RIGHT => new Vector2Int(p.y, -p.x),
-                RoomDirection.DOWN => new Vector2Int(-p.x, -p.y),
-                RoomDirection.LEFT => new Vector2Int(-p.y, p.x),
+                ERoomDirection.RIGHT => new Vector2Int(p.y, -p.x),
+                ERoomDirection.DOWN => new Vector2Int(-p.x, -p.y),
+                ERoomDirection.LEFT => new Vector2Int(-p.y, p.x),
                 _ => p
             };
         }
@@ -88,15 +98,17 @@ public class DungeonRoom : InitOnce
 
     private Vector2Int[] GetPattern()
     {
-        switch (_roomPattern)
+        switch (roomPattern)
         {
-            case DungeonRoom.Pattern._1x1: return new Vector2Int[] { new Vector2Int(0, 0) };
-            case DungeonRoom.Pattern._1x2: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0) };
-            case DungeonRoom.Pattern._2x2: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(1, 1) };
-            case DungeonRoom.Pattern._L: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(0, 2), new Vector2Int(1, 0) };
-            case DungeonRoom.Pattern._J: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(2, 0) };
-            case DungeonRoom.Pattern._T: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(2, 0), new Vector2Int(1, 1) };
-            case DungeonRoom.Pattern._Z: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(2, 1) };
+            case DungeonRoom.EPattern._1x1: return new Vector2Int[] { new Vector2Int(0, 0) };
+            case DungeonRoom.EPattern._1x2: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0) };
+            case DungeonRoom.EPattern._1x3: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(2, 0) };
+            case DungeonRoom.EPattern._2x2: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(0, 1), new Vector2Int(1, 1) };
+            case DungeonRoom.EPattern._3x3: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(2, 0), new Vector2Int(0, 1), new Vector2Int(1, 1), new Vector2Int(2, 1), new Vector2Int(0, 2), new Vector2Int(1, 2), new Vector2Int(2, 2)};
+            case DungeonRoom.EPattern._L: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(0, 2), new Vector2Int(1, 0) };
+            case DungeonRoom.EPattern._J: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(0, 1), new Vector2Int(1, 0), new Vector2Int(2, 0) };
+            case DungeonRoom.EPattern._T: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(2, 0), new Vector2Int(1, 1) };
+            case DungeonRoom.EPattern._Z: return new Vector2Int[] { new Vector2Int(0, 0), new Vector2Int(1, 0), new Vector2Int(1, 1), new Vector2Int(2, 1) };
             default:
                 Debug.LogWarning("Unknown pattern!");
                 return new Vector2Int[0];
@@ -106,10 +118,7 @@ public class DungeonRoom : InitOnce
     /// <summary> ex) L모양 패턴의 특정 인덱스에서 선택한 방향에 Door를 소환한다 </summary>
     public DungeonDoor SpawnDoor(Vector3 spawnPosition)
     {
-        DungeonDoor door = Managers.Object.Spawn<DungeonDoor>(spawnPosition); // TODO : Manager.Object.Instantiate
-        // do something
-        // ex) targetRoom(BossRoom) > door.Sprite = "BossDoor"
-
+        DungeonDoor door = Managers.Object.Spawn<DungeonDoor>(spawnPosition);
         door.transform.position = spawnPosition;
         _doors.Add(door);
 
@@ -151,55 +160,9 @@ public class DungeonRoom : InitOnce
     #endregion
 
     #region Room State & Wave Control
-
-    public enum RoomState
-    {
-        Locked,
-
-        Unlocked,
-
-        WaveStarted, // (Locked)
-        Cleared,    // (Unlocked) Monster Wave 다 처리함
-    }
-
     public bool IsWaveCleared => _isWaveCleared;
-    private bool _isWaveCleared = false;
-
-    private RoomState _state = RoomState.Locked;
-
-    public RoomState State
-    {
-        get => _state;
-        set
-        {
-            if (_state == value)
-                return;
-
-            _state = value;
-            HandleRoomState(_state);
-        }
-    }
-
-    void HandleRoomState(RoomState state)
-    {
-        switch (state)
-        {
-            case RoomState.Locked:
-                LockRoom();
-                break;
-            case RoomState.Unlocked:
-                UnlockRoom();
-                break;
-            case RoomState.WaveStarted:
-                LockRoom();
-                StartWave();
-                break;
-            case RoomState.Cleared:
-                ClearWave();
-                UnlockRoom();
-                break;
-        }
-    }
+    private bool _isWaveCleared = true;
+    private bool _isVisited = false;
 
     void LockRoom()
     {
@@ -211,38 +174,44 @@ public class DungeonRoom : InitOnce
         _doors.ForEach(x => x.Open());
     }
 
-    private MonsterWaveController _waveController;
-    public void InitWaveController()
+    public void InitMonsterWaves()
     {
         _waveController.InitWaveDatas(this);
-    }
 
-    private async Awaitable StartWave()
+        // StartMonsterWaveAction설정한 방만 MonsterWave시작할 수 있음
+        if (roomVisitedAction != null && roomVisitedAction.CheckDungeonRoomAction<StartMonsterWaveAction>())
+        {
+            _isWaveCleared = false;
+
+            _waveController.onWavesCleared += () =>
+            {
+                roomClearedAction?.Apply(this);
+                _isWaveCleared = true;
+                UnlockRoom();
+            };
+        }
+    }   
+
+    public async Awaitable StartWave()
     {
         if (_isWaveCleared)
             return;
 
-        _waveController.onWavesCleared += () =>
-        {
-            State = RoomState.Cleared;
-        };
+        LockRoom();
 
         await Awaitable.WaitForSecondsAsync(1f);
 
         _waveController.StartWave();
     }
 
-    void ClearWave()
-    {
-        _isWaveCleared = true;
-    }
 
     public void HandleHeroVisited()
     {
-        if (_isWaveCleared == true)
-            return;
-
-        State = RoomState.WaveStarted;
+        if (_isVisited == false)
+        {
+            roomVisitedAction?.Apply(this);
+            _isVisited = true;
+        }
     }
 
     #endregion

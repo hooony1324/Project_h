@@ -17,8 +17,10 @@ public class CircleIndicator : Indicator
         return true;
     }
 
-    public override void Setup(IAreaData shape, float fillAmount = 0, Transform traceTarget = null, bool isTransparent = false)
+    public override void Setup(Entity owner, IAreaData shape, float fillAmount = 0, Transform traceTarget = null, bool isTransparent = false)
     {
+        _owner = owner;
+
         CircleArea circleShape = (CircleArea)shape;
 
         TraceTarget = traceTarget;
@@ -34,6 +36,8 @@ public class CircleIndicator : Indicator
 
         FillAmount = fillAmount;
 
+        SetIndicatorColor();
+        StartIndicatorSpreading();
     }
 
     public override float FillAmount

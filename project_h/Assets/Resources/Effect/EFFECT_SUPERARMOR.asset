@@ -34,7 +34,7 @@ MonoBehaviour:
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 3
+      defaultValue: 5
       scaleStat: {fileID: 0}
     applyCount: 0
     applyCycle: 0

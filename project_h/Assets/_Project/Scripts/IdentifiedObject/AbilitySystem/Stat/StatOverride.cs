@@ -16,6 +16,10 @@ public class StatOverride
     public StatOverride(Stat stat)
         => this.stat = stat;
 
+
+    public Stat Stat => stat;
+    public bool IsUseOverride => isUseOverride;
+
     public Stat CreateStat()
     {
         var newStat = stat.Clone() as Stat;

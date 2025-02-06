@@ -13,16 +13,12 @@ MonoBehaviour:
   m_Name: "0_ITEM_MAX(\uC9C0\uC6B0\uC9C0 \uB9C8\uC138\uC694)"
   m_EditorClassIdentifier: 
   id: -1
-  itemDatas:
-  - abilityID: 0
-    itemAcquireAction:
-      rid: -2
-  - abilityID: 0
-    itemAcquireAction:
-      rid: -2
-  - abilityID: 0
-    itemAcquireAction:
-      rid: -2
+  itemHolderSprite: {fileID: 0}
+  isAllowMultiple: 0
+  isEquipment: 1
+  itemAcquireAction:
+    rid: -2
+  Description: 
   references:
     version: 2
     RefIds:

@@ -21,52 +21,77 @@ public class EntityDataEditor : Editor
     {
         serializedObject.Update();
 
-        // Draw all serialized fields
-        EditorGUILayout.PropertyField(spriteProperty);
-        DrawPropertiesExcluding(serializedObject, "m_Script", "sprite", "id", "entityName");
+        // 스프라이트 프리뷰를 상단에 배치
+        EditorGUILayout.Space(10);
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.ObjectField(GUIContent.none, spriteProperty.objectReferenceValue,
+                 typeof(Sprite), false, GUILayout.Height(120));
+        GUILayout.EndHorizontal();
+        EditorGUILayout.Space(5);
 
-        // entityId 변경 시 에셋 이름 변경 로직
-        EditorGUI.BeginChangeCheck();
-        var prevCodeName = entityNameProperty.stringValue;
-        EditorGUILayout.DelayedTextField(entityNameProperty);
-
-        if (EditorGUI.EndChangeCheck())
+        // 기본 정보 섹션
+        EditorGUILayout.LabelField("기본 정보", EditorStyles.boldLabel);
+        using (new EditorGUI.IndentLevelScope())
         {
-            var assetPath = AssetDatabase.GetAssetPath(target);
-            EntityData entityData = (EntityData)target;
+            GUI.enabled = false;
+            EditorGUILayout.PropertyField(idProperty);
+            GUI.enabled = true;
 
-            // entityId를 대문자로 변환
-            var newName = $"{entityData.GetAssetPrefix().ToUpper()}_{entityNameProperty.stringValue.ToUpper()}";
-            entityNameProperty.stringValue = newName;
+            // entityName 변경 로직
+            EditorGUI.BeginChangeCheck();
+            var prevCodeName = entityNameProperty.stringValue;
+            EditorGUILayout.DelayedTextField(entityNameProperty);
 
-            serializedObject.ApplyModifiedProperties();
-            
-            target.name = newName;
-
-            var message = AssetDatabase.RenameAsset(assetPath, newName);
-            if (!string.IsNullOrEmpty(message))
+            if (EditorGUI.EndChangeCheck())
             {
-                // 실패시 원래 값으로 되돌림
-                entityNameProperty.stringValue = prevCodeName;
-                target.name = prevCodeName;
+                var assetPath = AssetDatabase.GetAssetPath(target);
+                EntityData entityData = (EntityData)target;
+                var newName = $"{entityData.GetAssetPrefix().ToUpper()}_{entityNameProperty.stringValue.ToUpper()}";
+                entityNameProperty.stringValue = newName;
                 serializedObject.ApplyModifiedProperties();
-                Debug.LogError($"Failed to rename asset: {message}");
+                
+                target.name = newName;
+
+                var message = AssetDatabase.RenameAsset(assetPath, newName);
+                if (!string.IsNullOrEmpty(message))
+                {
+                    entityNameProperty.stringValue = prevCodeName;
+                    target.name = prevCodeName;
+                    serializedObject.ApplyModifiedProperties();
+                    Debug.LogError($"Failed to rename asset: {message}");
+                }
             }
+
+            EditorGUILayout.PropertyField(spriteProperty);
         }
 
-        // Load Stats 버튼
-        if (GUILayout.Button("Load Stats"))
+        EditorGUILayout.Space(10);
+
+        // 캐릭터 설정 섹션
+        EditorGUILayout.LabelField("캐릭터 설정", EditorStyles.boldLabel);
+        using (new EditorGUI.IndentLevelScope())
+        {
+            DrawPropertiesExcluding(serializedObject, "m_Script", "sprite", "id", "entityName", "statOverrides");
+        }
+
+        EditorGUILayout.Space(10);
+
+        // Stats 섹션
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("스탯 설정", EditorStyles.boldLabel);
+        if (GUILayout.Button("Load Stats", GUILayout.Width(100)))
         {
             EntityData entityData = (EntityData)target;
             entityData.LoadStats();
             EditorUtility.SetDirty(target);
         }
+        EditorGUILayout.EndHorizontal();
 
-        // Sprite 프리뷰
-        GUILayout.BeginHorizontal();
-        EditorGUILayout.ObjectField(GUIContent.none, spriteProperty.objectReferenceValue,
-                 typeof(Sprite), false, GUILayout.Height(100));
-        GUILayout.EndHorizontal();
+        using (new EditorGUI.IndentLevelScope())
+        {
+            SerializedProperty statOverridesProperty = serializedObject.FindProperty("statOverrides");
+            EditorGUILayout.PropertyField(statOverridesProperty, true);
+        }
 
         serializedObject.ApplyModifiedProperties();
     }

@@ -8,6 +8,8 @@ public class StatEditor : IdentifiedObjectEditor
 {
     private SerializedProperty isConsumableProperty;
     private SerializedProperty isPercentTypeProperty;
+    private SerializedProperty isReduceTypeProperty;
+    private SerializedProperty reduceMinValueProperty;
     private SerializedProperty maxValueProperty;
     private SerializedProperty minValueProperty;
     private SerializedProperty defaultValueProperty;
@@ -18,6 +20,8 @@ public class StatEditor : IdentifiedObjectEditor
 
         isConsumableProperty = serializedObject.FindProperty("isConsumable");
         isPercentTypeProperty = serializedObject.FindProperty("isPercentType");
+        isReduceTypeProperty = serializedObject.FindProperty("isReduceType");
+        reduceMinValueProperty = serializedObject.FindProperty("reduceMinValue");
         maxValueProperty = serializedObject.FindProperty("maxValue");
         minValueProperty = serializedObject.FindProperty("minValue");
         defaultValueProperty = serializedObject.FindProperty("defaultValue");
@@ -33,6 +37,16 @@ public class StatEditor : IdentifiedObjectEditor
         {
             EditorGUILayout.PropertyField(isConsumableProperty);
             EditorGUILayout.PropertyField(isPercentTypeProperty);
+            EditorGUILayout.PropertyField(isReduceTypeProperty);
+            
+            if (isReduceTypeProperty.boolValue)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(reduceMinValueProperty,
+                    new GUIContent(reduceMinValueProperty.displayName, "감소된 결과의 최소값"));
+                EditorGUI.indentLevel--;
+            }
+            
             EditorGUILayout.PropertyField(maxValueProperty);
             EditorGUILayout.PropertyField(minValueProperty);
             EditorGUILayout.PropertyField(defaultValueProperty);

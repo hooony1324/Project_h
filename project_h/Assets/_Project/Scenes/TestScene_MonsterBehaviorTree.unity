@@ -395,7 +395,7 @@ MonoBehaviour:
   registerMosnterTestSkill: 0
   UnregisterMosnterTestSkill: 0
   executeMonsterTestSkill: 0
-  dropTableID: 100
+  dropTableID: 3
   dropItem: 0
 --- !u!1 &512847672
 GameObject:

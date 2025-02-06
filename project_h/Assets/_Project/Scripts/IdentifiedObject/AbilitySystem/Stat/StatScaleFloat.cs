@@ -14,6 +14,11 @@ public struct StatScaleFloat
         {
             if (stat.IsPercentType)
                 return defaultValue * (1 + stat.Value);
+            else if (stat.IsReduceType)
+            {
+                float reducedValue = defaultValue - (defaultValue - stat.ReduceMinValue) / stat.MaxValue * stat.Value;
+                return Mathf.Clamp(reducedValue, stat.ReduceMinValue, defaultValue);
+            }
             else
                 return defaultValue * stat.Value;
         }

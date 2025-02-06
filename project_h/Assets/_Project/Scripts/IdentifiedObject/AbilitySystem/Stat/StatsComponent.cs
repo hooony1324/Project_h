@@ -16,6 +16,7 @@ public class StatsComponent : MonoBehaviour
     public Stat AttackRangeStat => attackRangeStat;
     public Stat KeysStat => keysStat;
     public Stat GoldsStat => goldsStat;
+    public Stat FragilityStat => fragilityStat;
 
     public Stat[] Stats => stats;
 
@@ -25,6 +26,7 @@ public class StatsComponent : MonoBehaviour
     [SerializeField, ReadOnly] private Stat attackRangeStat;
     [SerializeField, ReadOnly] private Stat keysStat;
     [SerializeField, ReadOnly] private Stat goldsStat;
+    [SerializeField, ReadOnly] private Stat fragilityStat;
 
     public Entity Owner { get; private set; }
 
@@ -43,6 +45,8 @@ public class StatsComponent : MonoBehaviour
 
         keysStat = GetStat("KEYS");
         goldsStat = GetStat("GOLDS");
+
+        fragilityStat = GetStat("FRAGILITY");
     }
 
     private void OnDestroy()

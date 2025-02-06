@@ -16,5 +16,6 @@ MonoBehaviour:
   _prevDungeonId: 12
   _nextDungeonId: 0
   _isFinalDungeon: 1
+  _goldDropRange: {x: 1, y: 5}
   _prefabName: DungeonMap_03
-  _dungeonName: "\uC6A9\uC554\uAD74"
+  _dungeonName: Chapter3_3

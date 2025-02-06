@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 102
   itemHolderSprite: {fileID: 21300000, guid: 9430155fd8d464dd99118576941d050b, type: 3}
-  isAllowMultiple: 0
+  isAllowMultiple: 1
+  isEquipment: 1
   itemAcquireAction:
     rid: 2123022169425314663
+  description: 
   references:
     version: 2
     RefIds:

@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - PreGame
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fe8f8b3288e45a44af36ff8aa04486e
+    m_Address: CFXR3 Hit Misc F Smoke
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreGame
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 8f9898ef61d94f740aed59871e7ec1ba, type: 2}
   m_SchemaSet:

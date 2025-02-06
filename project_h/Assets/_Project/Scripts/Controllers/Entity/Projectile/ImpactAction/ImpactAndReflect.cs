@@ -47,8 +47,8 @@ public class ImpactAndReflect : ImpactAction
 
             target.SkillSystem.Apply(Skill);
 
-            // if (ImpactEffect != null)
-            //     Managers.Object.SpawnEffect(ImpactEffect, Owner.transform.position, Quaternion.identity);
+            if (ImpactEffect != null)
+                Managers.Object.SpawnEffect(ImpactEffect, Owner.transform.position, Quaternion.identity);
 
             Managers.Object.DespawnProjectile(Owner);
         }

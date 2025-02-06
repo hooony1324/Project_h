@@ -252,7 +252,7 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
     public void DropItem()
     {
-        monster.TestDropItem(dropTableID);
+        Managers.Dungeon.TestDropItem(dropTableID, Vector3.zero);
     }
 
     public override void Clear()

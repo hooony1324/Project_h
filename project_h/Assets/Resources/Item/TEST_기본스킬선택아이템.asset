@@ -18,6 +18,7 @@ MonoBehaviour:
   isEquipment: 0
   itemAcquireAction:
     rid: 2123022157656097791
+  Description: 
   references:
     version: 2
     RefIds:

@@ -17,15 +17,12 @@ MonoBehaviour:
   isAllowMultiple: 1
   isEquipment: 0
   itemAcquireAction:
-    rid: 2123022169425314662
+    rid: 1591114347787845784
+  description: 
   references:
     version: 2
     RefIds:
-    - rid: 2123022169425314662
+    - rid: 1591114347787845784
       type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
       data:
-        statDatas:
-        - id: 1
-          isDynamicValue: 1
-          valueType: 0
-          value: 1
+        statDatas: []

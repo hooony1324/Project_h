@@ -18,7 +18,8 @@ public class InventoryManager
     // 1개 이상 가지고 있는지 확인
     public bool IsMultiple(int itemID)
     {
-        return AllItems.Select(x => x.ID == itemID).Count() > 0;
+        int count = AllItems.Count(x => x.ID == itemID);
+        return count > 0;
     }
 
 

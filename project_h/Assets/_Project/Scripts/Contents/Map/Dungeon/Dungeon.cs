@@ -227,7 +227,7 @@ public class Dungeon : InitOnce
 
         foreach (var room in _rooms)
         {
-            room.InitWaveController();
+            room.InitMonsterWaves();
         }
     }
 

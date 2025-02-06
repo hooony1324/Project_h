@@ -23,6 +23,10 @@ public class Stat : IdentifiedObject
     [SerializeField]    
     private bool isPercentType;
 
+    [Tooltip("최저값 설정하여 값을 줄이는 용도\nex)CoolTime, Duration줄이는 용도로 사용 가능")]
+    [SerializeField]    
+    private bool isReduceType;
+
     [SerializeField]
     private float maxValue;
 
@@ -31,6 +35,9 @@ public class Stat : IdentifiedObject
 
     [SerializeField]
     private float defaultValue;
+
+    [SerializeField]
+    private float reduceMinValue;
 
     // 기본 stat 외의 bonus stat을 저장하는 dictionary,
     // key 값은 bonus stat을 준 대상 (ex. 장비가 bonus Stat을 주었다면 그 장비가 key값이 됨)
@@ -41,6 +48,9 @@ public class Stat : IdentifiedObject
 
     public bool IsPercentType => isPercentType;
     public bool IsConsumable => isConsumable;
+    public bool IsReduceType => isReduceType;
+    public float ReduceMinValue => reduceMinValue;
+    
     public float MaxValue
     {
         get => maxValue;

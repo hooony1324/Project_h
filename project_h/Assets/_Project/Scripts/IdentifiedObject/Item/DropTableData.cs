@@ -7,20 +7,15 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "DROPTABLEDATA", menuName = "Item/DropTableData")]
 public class DropTableData : ScriptableObject
 {
-    [SerializeField] private int id;
+    [SerializeField] private int itemId;
 
-    [SerializeField] private DropData[] dropDatas;
+    [SerializeField] private int groupId;
+    
+    [SerializeField] private float probability;
 
-    public int ID => id;
-    public List<DropData> DropList => dropDatas.ToList();
+    public int ItemID => itemId;
+    public int GroupID => groupId;
+    public float Probability => probability;
 }
 
 
-[System.Serializable]
-public class DropData
-{
-    public int itemID;
-    public int probability;    // 10 -> 10퍼의 확률로 드랍
-
-    // public int count
-}

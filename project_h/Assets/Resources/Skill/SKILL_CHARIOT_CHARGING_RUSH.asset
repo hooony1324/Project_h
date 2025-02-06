@@ -60,8 +60,8 @@ MonoBehaviour:
     isUseCharge: 1
     chargeFinishActionOption: 0
     chargeDuration: 4
-    chargeTime: 4
-    needChargeTimeToUse: 4
+    chargeTime: 3
+    needChargeTimeToUse: 3
     startChargePower: 0
     effectSelectors:
     - level: 1
@@ -117,5 +117,6 @@ MonoBehaviour:
       type: {class: SquareIndicatorViewAction, ns: , asm: Assembly-CSharp}
       data:
         indicatorPrefab: {fileID: 735806894715857630, guid: c5e2d12db8a656443be3f7fc0a9549d9, type: 3}
+        isArrowType: 1
         isUseIndicatorFillAmount: 1
         isAttachIndicatorToRequester: 1

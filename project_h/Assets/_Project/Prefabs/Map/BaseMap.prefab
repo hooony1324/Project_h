@@ -79557,6 +79557,26 @@ PrefabInstance:
       propertyPath: 'managedReferences[4885778232288477281]._dungeonDatas.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: b04797d726f22ef4db73d9aab08784e8, type: 2}
+    - target: {fileID: 4046238952736219705, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379894275010695618, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 9d2c7a8ece505b9448aaa5644d19c4b5, type: 3}
+    - target: {fileID: 4379894275010695618, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379894275010695618, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4379894275010695618, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8580904
+      objectReference: {fileID: 0}
     - target: {fileID: 8705213645089640575, guid: 531fe484d6efb5a489b0c06e7a934844, type: 3}
       propertyPath: m_Name
       value: Npc
