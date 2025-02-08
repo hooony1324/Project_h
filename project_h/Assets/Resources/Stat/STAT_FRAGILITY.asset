@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 8
+  id: 4
   codeName: FRAGILITY
   displayName: "\uCDE8\uC57D\uC131"
-  description: "\uCD1D \uD53C\uD574\uB7C9 = \uBC1B\uB294 \uD53C\uD574\uB7C9 * FRAGILITY"
+  description: "\uCD1D \uD53C\uD574\uB7C9 = \uBC1B\uB294 \uD53C\uD574\uB7C9 * FRAGILITY\n->
+    \uC870\uC791 \uCE90\uB9AD\uD130\uC5D0 \uC801\uC6A9 \uD544\uC694"
   isConsumable: 0
   isPercentType: 0
-  maxValue: 5
+  isReduceType: 0
+  maxValue: 3
   minValue: 1
   defaultValue: 1
+  reduceMinValue: 0

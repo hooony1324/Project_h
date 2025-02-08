@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 205f54bbf21c167468a0c1b65003e125, type: 3}
-  m_Name: DropTableData 8
+  m_Name: dragonarmor_blue
   m_EditorClassIdentifier: 
-  itemId: 108
-  groupId: 3
-  probability: 100
+  itemId: 10008
+  groupId: 1
+  probability: 10

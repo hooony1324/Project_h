@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 21300000, guid: 1a972cb6320f34bdaadedb0f0ea47c0d, type: 3}
-  id: 6
+  id: 51
   codeName: KEYS
   displayName: 
   description: "\uC5F4\uC1E0"
   isConsumable: 1
   isPercentType: 0
+  isReduceType: 0
   maxValue: 9999
   minValue: 0
   defaultValue: 0
+  reduceMinValue: 0

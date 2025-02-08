@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
+  m_Name: "\uBBF8\uC791\uC5C5_scale_blue"
+  m_EditorClassIdentifier: 
+  id: 10007
+  itemHolderSprite: {fileID: 21300000, guid: 1f65846583a4f8e49aaac47f81ba9db5, type: 3}
+  isAllowMultiple: 0
+  isEquipment: 1
+  itemAcquireAction:
+    rid: -2
+  description: "\uBC29 \uD074\uB9AC\uC5B4 \uC2DC \uCCB4\uB825 \uD68C\uBCF5 \uC18C"
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

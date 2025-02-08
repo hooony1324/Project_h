@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 21300000, guid: aa9906e804b974fa99babcae8c9a7bff, type: 3}
-  id: 2
+  id: 3
   codeName: MOVESPEED
   displayName: 
   description: 
   isConsumable: 0
   isPercentType: 0
-  maxValue: 30
+  isReduceType: 0
+  maxValue: 10
   minValue: 0
-  defaultValue: 10
+  defaultValue: 1
+  reduceMinValue: 0

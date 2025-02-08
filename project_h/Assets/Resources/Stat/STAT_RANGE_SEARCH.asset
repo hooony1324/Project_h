@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   categories: []
   icon: {fileID: 0}
-  id: 3
+  id: 100
   codeName: RANGE_SEARCH
   displayName: "\uC801 \uBC1C\uACAC \uC0AC\uAC70\uB9AC"
   description: 
-  isNotAbility: 0
+  isConsumable: 0
   isPercentType: 0
+  isReduceType: 0
   maxValue: 30
   minValue: 1
   defaultValue: 8
+  reduceMinValue: 0
