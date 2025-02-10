@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aef32cbd3362a4db7a43613ce04c74, type: 3}
   m_Name: STAT_SKILLCOOLTIME
   m_EditorClassIdentifier: 
+  id: 7
   categories: []
   icon: {fileID: 0}
-  id: 7
   codeName: SKILLCOOLTIME
   displayName: 
   description: "\uC2A4\uD0AC \uCFE8\uD0C0\uC784"

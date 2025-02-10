@@ -22,19 +22,7 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
-    isUseOverride: 1
-    overrideDefaultValue: 1
-    overrideMaxValue: 0
   - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-    overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-    overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
@@ -46,7 +34,27 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: 72402e4fc1564964aa197dd72e6890f8, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+    isUseOverride: 1
+    overrideDefaultValue: 1
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: e59accfd97d86444ba32506e6c3f0f2c, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: f0d7114d22120ab40beff9c8f16a821d, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
   defaultSkills:
   - DEFAULT_TEST_ATTACK
   dodgeSkill: 
-  DropGroupID: 2
+  DropGroupID: 1

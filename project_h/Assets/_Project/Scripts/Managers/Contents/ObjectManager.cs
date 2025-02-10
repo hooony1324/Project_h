@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 using static Define;
@@ -42,11 +40,11 @@ public class ObjectManager
         Doors.Clear();
     }
 
-    public void SpawnFloatingText(Vector2 pos, string message)
+    public void SpawnFloatingText(Vector2 pos, string message, EFloatingTextType type = EFloatingTextType.Damage)
     {
         GameObject go = Managers.Resource.Instantiate(nameof(UI_FloatingText), pooling: true);
         UI_FloatingText floatingText = go.GetComponent<UI_FloatingText>();
-        floatingText.SetInfo(message, pos);
+        floatingText.SetInfo(message, pos, type);
     }
 
     public T Spawn<T>(Vector3 spawnPos, string prefabName = "", string dataName = "") where T : BaseObject

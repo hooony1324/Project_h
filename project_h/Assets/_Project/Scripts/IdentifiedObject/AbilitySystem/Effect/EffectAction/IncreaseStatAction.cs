@@ -51,6 +51,8 @@ public class IncreaseStatAction : EffectAction
     {
         totalValue = GetTotalValue(effect, user, stack, scale);
 
+        Managers.Object.SpawnFloatingText(user.Position, $"{stat.CodeName} {totalValue}", Define.EFloatingTextType.Buff);
+
         if (isBonusType)
             target.StatsComponent.SetBonusValue(stat, this, totalValue);
         else

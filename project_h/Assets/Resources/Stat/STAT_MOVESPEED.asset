@@ -23,5 +23,4 @@ MonoBehaviour:
   isReduceType: 0
   maxValue: 10
   minValue: 0
-  defaultValue: 1
-  reduceMinValue: 0
+  defaultValue: 4

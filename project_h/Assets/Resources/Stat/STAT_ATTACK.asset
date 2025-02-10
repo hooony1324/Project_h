@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99aef32cbd3362a4db7a43613ce04c74, type: 3}
   m_Name: STAT_ATTACK
   m_EditorClassIdentifier: 
+  id: 2
   categories: []
   icon: {fileID: 21300000, guid: 9776cebead7314424984de5facab5ea3, type: 3}
-  id: 2
   codeName: ATTACK
   displayName: 
   description: 

@@ -59,4 +59,13 @@ public class Define
         None,
         BossMonster,
     }
+
+    public enum EFloatingTextType
+    {
+        Damage,
+        Heal,
+        Buff,
+        Debuff,
+        CC,
+    }
 }

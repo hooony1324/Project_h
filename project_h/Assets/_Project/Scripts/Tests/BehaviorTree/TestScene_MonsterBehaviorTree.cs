@@ -115,17 +115,6 @@ public class TestScene_MonsterBehaviorScene : BaseScene
         {
         });
 
-
-        if (DefaultAttackSkill)
-            hero.SkillSystem.RegisterWithoutCost(DefaultAttackSkill);
-
-        if (DodgeSkill)
-            hero.SkillSystem.RegisterWithoutCost(DodgeSkill);
-
-        if (PassiveSkill)
-            hero.SkillSystem.RegisterWithoutCost(PassiveSkill);
-
-    
         // joystick
         GameObject playerController = new GameObject { name = "@PlayerController"};
         playerController.AddComponent<PlayerController>();
@@ -135,6 +124,9 @@ public class TestScene_MonsterBehaviorScene : BaseScene
         Managers.Game.Cam.transform.position = hero.Position;
         Managers.Game.Cam.Target = hero;
         Managers.Game.PlayerController.SetControlTarget(hero);
+
+        RegisterHeroTestSkill();
+        RegisterMonsterTestSkill();
     }
 
     public void RegisterHeroTestSkill()

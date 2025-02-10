@@ -7,21 +7,25 @@ using UnityEngine;
 public class IdentifiedObject : ScriptableObject, ICloneable
 {
     [SerializeField]
+    private int id = -1;
+    
+    [SerializeField]
     private Category[] categories;
 
     [SerializeField]
     private Sprite icon;
-    [SerializeField]
-    private int id = -1;
+
     [SerializeField]
     private string codeName;
+
     [SerializeField]
     private string displayName;
+    
     [SerializeField]
     private string description;
 
-    public Sprite Icon => icon;
     public int ID => id;
+    public Sprite Icon => icon;
     public string CodeName => codeName;
     public string DisplayName => displayName;
     public virtual string Description => description;

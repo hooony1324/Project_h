@@ -16,6 +16,8 @@ public class SleepAction : EffectAction
     {
         this.effect = effect;
         target.onTakeDamage += OnTakeDamage;
+
+        Managers.Object.SpawnFloatingText(user.Position, "Sleep", Define.EFloatingTextType.CC);
     }
 
     public override bool Apply(Effect effect, Entity user, Entity target, int level, int stack, float scale)

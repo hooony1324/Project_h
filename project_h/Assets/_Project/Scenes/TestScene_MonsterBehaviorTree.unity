@@ -388,14 +388,14 @@ MonoBehaviour:
   unregisterHeroTestSkill: 0
   executeHeroTestSkill: 0
   EnablePatrol: 0
-  monsterDataID: 1
+  monsterDataID: 5
   monsterSpawnPos: {fileID: 202487936}
   registeredMonsterSkills: []
   monsterTestSkill: {fileID: 11400000, guid: dfbfa9c5e3471c241aa5ff55d5e37e7f, type: 2}
   registerMosnterTestSkill: 0
   UnregisterMosnterTestSkill: 0
   executeMonsterTestSkill: 0
-  dropTableID: 3
+  dropTableID: 0
   dropItem: 0
 --- !u!1 &512847672
 GameObject:

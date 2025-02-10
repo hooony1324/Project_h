@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1eac66e6f3b740b59fc034f726393, type: 3}
   m_Name: EFFECT_STUN
   m_EditorClassIdentifier: 
-  categories:
-  - {fileID: 11400000, guid: db4ae58d44ea3a54eaf5bb56ad389581, type: 2}
-  icon: {fileID: 0}
   id: 2
+  categories:
+  - {fileID: 11400000, guid: 43104a1eee4e2474488b59b541f662c4, type: 2}
+  icon: {fileID: 0}
   codeName: STUN
   displayName: 
   description: 
   type: 0
-  isAllowDuplicate: 1
+  isAllowDuplicate: 0
   removeDuplicateTargetOption: 0
   isShowInUI: 0
   isAllowLevelExceedDatas: 0
@@ -29,18 +29,22 @@ MonoBehaviour:
   - level: 1
     maxStack: 1
     stackActions: []
+    antiEffect: {fileID: 11400000}
     action:
-      rid: -2
-    runningFinishOption: 0
+      rid: 1591114507806834843
+    runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 0
+      defaultValue: 5
       scaleStat: {fileID: 0}
-    applyCount: 0
+      reduceMinValue: 0
+    applyCount: 1
     applyCycle: 0
     customActions: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 1591114507806834843
+      type: {class: StunAction, ns: , asm: Assembly-CSharp}
+      data:
+        removeTargetCategory: {fileID: 11400000, guid: 43104a1eee4e2474488b59b541f662c4, type: 2}

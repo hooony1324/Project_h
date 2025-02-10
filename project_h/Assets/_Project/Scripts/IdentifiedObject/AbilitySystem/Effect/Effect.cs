@@ -18,8 +18,13 @@ public class Effect : IdentifiedObject
     [SerializeField]
     private EffectType type;
     // Effect의 중복 적용 가능 여부
+    // - true: 이미 적용 중 effect라면 무시
+    // - false: 이미 적용 중 effect대체 
     [SerializeField]
     private bool isAllowDuplicate = true;
+
+    // old : 이전 것을 무시 새로운 것을 적용
+    // new : 이전 것 유지, 새로운 것을 무시
     [SerializeField]
     private EffectRemoveDuplicateTargetOption removeDuplicateTargetOption;
 

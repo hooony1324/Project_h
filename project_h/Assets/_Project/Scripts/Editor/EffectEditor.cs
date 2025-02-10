@@ -54,6 +54,7 @@ public class EffectEditor : IdentifiedObjectEditor
         serializedObject.ApplyModifiedProperties();
     }
 
+    //Tooltip("Effect중복 가능 여부\n- true: 같은 종류의 effect 중복 적용 가능\n- false: 중복 된 effect적용 안함 중복된 effect중 old와 new 중 하나를 없앰")
     private void DrawSettings()
     {
         if (!DrawFoldoutTitle("Setting"))
@@ -66,11 +67,11 @@ public class EffectEditor : IdentifiedObjectEditor
         CustomEditorUtility.DrawUnderline();
         EditorGUILayout.Space();
 
-        EditorGUILayout.PropertyField(isAllowDuplicateProperty);
+        EditorGUILayout.PropertyField(isAllowDuplicateProperty, new GUIContent("Allow Duplicate", "Effect중복 가능 여부\n- true: 같은 종류의 effect 중복 적용 가능\n- false: 중복 된 effect적용 안함"));
         // 중복 적용 허용 Option이 true라면 중복 Effect를 지울 필요가 없으므로
         // removeDuplicateTargetOption 변수를 그리지 않음
         if (!isAllowDuplicateProperty.boolValue)
-            CustomEditorUtility.DrawEnumToolbar(removeDuplicateTargetOptionProperty);
+            CustomEditorUtility.DrawEnumToolbar(removeDuplicateTargetOptionProperty, new GUIContent("Remove Duplicated Effect", "중복되어 Old를 제거할지 New를 제거할지 선택"));
     }
 
     private void DrawOptions()

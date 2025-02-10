@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1eac66e6f3b740b59fc034f726393, type: 3}
   m_Name: EFFECT_SLEEP
   m_EditorClassIdentifier: 
-  categories:
-  - {fileID: 11400000, guid: db4ae58d44ea3a54eaf5bb56ad389581, type: 2}
-  icon: {fileID: 0}
   id: 4
+  categories:
+  - {fileID: 11400000, guid: 43104a1eee4e2474488b59b541f662c4, type: 2}
+  icon: {fileID: 0}
   codeName: SLEEP
   displayName: 
   description: 
@@ -32,12 +32,13 @@ MonoBehaviour:
     antiEffect: {fileID: 0}
     action:
       rid: -2
-    runningFinishOption: 0
+    runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 0
+      defaultValue: 3
       scaleStat: {fileID: 0}
-    applyCount: 0
+      reduceMinValue: 0
+    applyCount: 1
     applyCycle: 0
     customActions: []
   references:

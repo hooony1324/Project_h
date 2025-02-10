@@ -22,11 +22,23 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
+  - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: 8971d28d7ef9b78469825787bec95340, type: 2}
+  - stat: {fileID: 11400000, guid: f7c6ca64326491f459f8cb7ab20a72be, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: 4ec60cfcbf00604498c08f6ffee0569c, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: 72402e4fc1564964aa197dd72e6890f8, type: 2}
+    isUseOverride: 0
+    overrideDefaultValue: 0
+    overrideMaxValue: 0
+  - stat: {fileID: 11400000, guid: ebaea3d83a193fc419dcc513c347286e, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
@@ -38,11 +50,7 @@ MonoBehaviour:
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: f7c6ca64326491f459f8cb7ab20a72be, type: 2}
-    isUseOverride: 0
-    overrideDefaultValue: 0
-    overrideMaxValue: 0
-  - stat: {fileID: 11400000, guid: 4ec60cfcbf00604498c08f6ffee0569c, type: 2}
+  - stat: {fileID: 11400000, guid: f0d7114d22120ab40beff9c8f16a821d, type: 2}
     isUseOverride: 0
     overrideDefaultValue: 0
     overrideMaxValue: 0
