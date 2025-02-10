@@ -24,4 +24,3 @@ MonoBehaviour:
   maxValue: 10
   minValue: 0
   defaultValue: 0
-  reduceMinValue: 0

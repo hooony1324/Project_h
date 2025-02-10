@@ -15,7 +15,7 @@ MonoBehaviour:
   categories: []
   icon: {fileID: 21300000, guid: 9776cebead7314424984de5facab5ea3, type: 3}
   id: 2
-  codeName: DAMAGE
+  codeName: ATTACK
   displayName: 
   description: 
   isConsumable: 0
@@ -24,4 +24,3 @@ MonoBehaviour:
   maxValue: 10
   minValue: 0
   defaultValue: 1
-  reduceMinValue: 0
