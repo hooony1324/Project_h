@@ -12,6 +12,7 @@ public class StatScaleFloatDrawer : PropertyDrawer
 
         var defaultValueProperty = property.FindPropertyRelative("defaultValue");
         var scaleStatProperty = property.FindPropertyRelative("scaleStat");
+        var reduceMinValueProperty = property.FindPropertyRelative("reduceMinValue");
 
         // label을 기준으로 position을 만들어줌
         position = EditorGUI.PrefixLabel(position, label);
@@ -28,6 +29,21 @@ public class StatScaleFloatDrawer : PropertyDrawer
 
         var scaleStatRect = new Rect(defaultValueRect.x + defaultValueRect.width - adjust + 2.5f, position.y, halfWidth, position.height);
         scaleStatProperty.objectReferenceValue = EditorGUI.ObjectField(scaleStatRect, GUIContent.none, scaleStatProperty.objectReferenceValue, typeof(Stat), false);
+
+        Stat stat = scaleStatProperty.objectReferenceValue as Stat;
+        if (stat != null && stat.IsReduceType)
+        {
+            float fieldWidth = 300f;
+            float labelWidth = 115f;
+            float lineHeight = EditorGUIUtility.singleLineHeight;
+            float spacing = 5f;
+
+            Rect labelRect = new Rect(position.x + position.width - labelWidth - fieldWidth - spacing, position.y + lineHeight + spacing, labelWidth, position.height);
+            Rect fieldRect = new Rect(position.x + position.width - fieldWidth, position.y + lineHeight + spacing, fieldWidth, position.height);
+
+            EditorGUI.LabelField(labelRect, "ReduceValue Min");
+            reduceMinValueProperty.floatValue = EditorGUI.FloatField(fieldRect, reduceMinValueProperty.floatValue);
+        }
 
         EditorGUI.EndProperty();
     }

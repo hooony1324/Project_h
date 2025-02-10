@@ -98,21 +98,21 @@ MonoBehaviour:
   roomDirection: 0
   roomType: 1
   roomVisitedAction:
-    rid: 1591114306535293117
+    rid: 1591114420792853312
   roomClearedAction:
-    rid: 1591114306535293118
+    rid: 1591114420792853315
   references:
     version: 2
     RefIds:
-    - rid: 1591114306535293117
+    - rid: 1591114420792853312
       type: {class: StartMonsterWaveAction, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 1591114306535293118
+    - rid: 1591114420792853315
       type: {class: SpawnItemAction, ns: , asm: Assembly-CSharp}
       data:
         spawnEffect: CFXR3 Hit Misc F Smoke
         spawnPoint: {fileID: 8478020673478871040}
-        dropTableID: 0
+        dropGroupID: 0
 --- !u!114 &1599852706656400014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ Transform:
   m_GameObject: {fileID: 3096480514771647039}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.1, y: 1.3, z: 0}
+  m_LocalPosition: {x: 0, y: -2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

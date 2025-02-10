@@ -47,8 +47,9 @@ MonoBehaviour:
     applyCount: 1
     applyCycle: 0
     cooldown:
-      defaultValue: 5
+      defaultValue: 1
       scaleStat: {fileID: 11400000, guid: 4ec60cfcbf00604498c08f6ffee0569c, type: 2}
+      reduceMinValue: 0
     targetSearcher:
       selectionAction:
         rid: 2868447306621911098
@@ -59,6 +60,7 @@ MonoBehaviour:
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     isUseCharge: 0
     chargeFinishActionOption: 0
     chargeDuration: 0
@@ -121,6 +123,7 @@ MonoBehaviour:
         targettingRange:
           defaultValue: 20
           scaleStat: {fileID: 0}
+          reduceMinValue: 0
         layerMask:
           serializedVersion: 2
           m_Bits: 0

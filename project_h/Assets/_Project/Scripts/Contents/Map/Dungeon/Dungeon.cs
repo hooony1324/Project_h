@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Random = UnityEngine.Random;
-using UnityEngine.Tilemaps;
-using NavMeshPlus.Components;
+using static Define;
 
 
 
@@ -28,6 +27,7 @@ public class Dungeon : InitOnce
     [SerializeField] int _gridSizeX = 20;
     [SerializeField] int _gridSizeY = 20;
     private DungeonRoom _startRoom;
+    private DungeonRoom _bossRoom;
 
     private List<DungeonRoom> _rooms = new List<DungeonRoom>();
     private List<Vector2Int> _openedIndexes = new List<Vector2Int>();   // 방을 설치할 수 있는 Grid 위치
@@ -51,10 +51,15 @@ public class Dungeon : InitOnce
                 _rooms.Add(room);
         }
 
+        _startRoom = _rooms.First();
+        _bossRoom = _rooms.Find(x => x.GetComponent<DungeonRoom>().RoomType == EDungeonRoomType.BossMonster);
+        if (_bossRoom != null)
+        {
+            _bossRoom.transform.SetAsLastSibling();
+        }
+
         Vector2Int initialRoomIndex = new Vector2Int(_gridSizeX / 2, _gridSizeY / 2);
         _openedIndexes.Add(initialRoomIndex);
-
-        _startRoom = _rooms[0];
 
         return true;
     }
@@ -63,6 +68,7 @@ public class Dungeon : InitOnce
     {
         PlaceRoomsRandomly();
         GenerateDoors();
+        InitMonsterWaves();
         await Managers.Map.CurrentMap.NavMeshSurface2D.BuildNavMeshAsync();
     }
 
@@ -76,6 +82,12 @@ public class Dungeon : InitOnce
         // 바로 배치 가능한 방은 빠르게 생성
         foreach (DungeonRoom room in _rooms)
         {
+            if (room.RoomType == EDungeonRoomType.BossMonster)
+            {
+                failedRooms.Add(room);
+                continue;
+            }
+            
             if (!TryPlaceRoom(room))
                 failedRooms.Add(room);
         }
@@ -203,6 +215,14 @@ public class Dungeon : InitOnce
 
     #region Door Generation with MST
 
+    void InitMonsterWaves()
+    {
+        foreach (var room in _rooms)
+        {
+            room.InitMonsterWaves();
+        }
+    }
+
     // 인접한 방들 끼리만 edge생성 > Kruskal 알고리즘으로 선택
     private List<Edge> _edges = new List<Edge>();
     private Dictionary<DungeonRoom, DungeonRoom> _rootMap = new Dictionary<DungeonRoom, DungeonRoom>();
@@ -225,10 +245,7 @@ public class Dungeon : InitOnce
             }
         }
 
-        foreach (var room in _rooms)
-        {
-            room.InitMonsterWaves();
-        }
+        _rooms.First().GetComponent<DungeonRoom>().UnlockRoom();
     }
 
     private void CreateEdges()

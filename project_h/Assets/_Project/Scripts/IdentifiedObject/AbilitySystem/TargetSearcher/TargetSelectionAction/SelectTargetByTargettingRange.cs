@@ -34,9 +34,23 @@ public class SelectTargetByTargettingRange : TargetSelectionAction
     protected override TargetSelectionResult SelectImmediateByAI(TargetSearcher targetSearcher, Entity requesterEntity,
         GameObject requesterObject, Vector3 position)
     {
-        Collider2D collider = Physics2D.OverlapCircle(position, targettingRange.GetValue(requesterEntity.StatsComponent), requesterEntity.EnemyLayerMask);
-        Entity target = collider?.GetComponent<Entity>();
-    
+        Entity target = null; 
+        float closestDistance = float.MaxValue;
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(position, targettingRange.GetValue(requesterEntity.StatsComponent), requesterEntity.EnemyLayerMask);
+        foreach(Collider2D collider in colliders)
+        {
+            Entity entity = collider.GetComponent<Entity>();
+            if (entity == null)
+                continue;
+
+            float distance = Vector2.Distance(position, collider.bounds.center);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                target = entity;
+            }
+        }
+
         if (!target)
             return new TargetSelectionResult(position, SearchResultMessage.Fail);
         

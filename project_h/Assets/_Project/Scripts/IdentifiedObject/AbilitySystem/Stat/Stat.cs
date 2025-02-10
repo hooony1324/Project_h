@@ -36,9 +36,6 @@ public class Stat : IdentifiedObject
     [SerializeField]
     private float defaultValue;
 
-    [SerializeField]
-    private float reduceMinValue;
-
     // 기본 stat 외의 bonus stat을 저장하는 dictionary,
     // key 값은 bonus stat을 준 대상 (ex. 장비가 bonus Stat을 주었다면 그 장비가 key값이 됨)
     // value Dictionary의 key 값은 SubKey
@@ -49,15 +46,17 @@ public class Stat : IdentifiedObject
     public bool IsPercentType => isPercentType;
     public bool IsConsumable => isConsumable;
     public bool IsReduceType => isReduceType;
-    public float ReduceMinValue => reduceMinValue;
     
     public float MaxValue
     {
         get => maxValue;
         set
         {
-            onMaxValueChanged?.Invoke(this, value, maxValue);
+            if (Mathf.Approximately(maxValue, value))
+                return;
+                
             maxValue = value;
+            onMaxValueChanged?.Invoke(this, value, maxValue);
         }
     }
 

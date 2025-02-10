@@ -37,6 +37,10 @@ PrefabInstance:
       value: 0.07499999
       objectReference: {fileID: 0}
     - target: {fileID: 4179269744425076975, guid: 1ce0b9ce53208d741b114322f5db71ca, type: 3}
+      propertyPath: roomType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179269744425076975, guid: 1ce0b9ce53208d741b114322f5db71ca, type: 3}
       propertyPath: roomPattern
       value: 3
       objectReference: {fileID: 0}
@@ -67,6 +71,10 @@ PrefabInstance:
     - target: {fileID: 4179269744425076975, guid: 1ce0b9ce53208d741b114322f5db71ca, type: 3}
       propertyPath: managedReferences[2123022268693479885].spawnEffect
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179269744425076975, guid: 1ce0b9ce53208d741b114322f5db71ca, type: 3}
+      propertyPath: managedReferences[2123022294429991700].dropGroupID
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4179269744425076975, guid: 1ce0b9ce53208d741b114322f5db71ca, type: 3}
       propertyPath: managedReferences[2123022294429991700].dropTableID

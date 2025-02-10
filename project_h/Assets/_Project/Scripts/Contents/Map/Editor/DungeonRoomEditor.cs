@@ -49,6 +49,10 @@ public class DungeonRoomEditor : Editor
     {
         StyleSetup();
 
+        // 직렬화 객체를 업데이트하기 전에 null 체크 추가
+        if (serializedObject == null)
+            return;
+
         serializedObject.Update();
         
         // Room Tiles Generation
@@ -94,28 +98,41 @@ public class DungeonRoomEditor : Editor
         EditorGUILayout.LabelField("Room Setting", headerStyle);
         CustomEditorUtility.DrawUnderline();
         EditorGUILayout.PropertyField(roomTypeProperty, new GUIContent("Room Type"));
-
         EditorGUILayout.PropertyField(roomVisitedActionProperty);
-        EditorGUILayout.PropertyField(roomClearedActionProperty);
+
+        // roomVisitedAction이 null이 아닌지 확인
+        if (dungeonRoom.RoomVisitedAction != null && dungeonRoom.RoomVisitedAction is StartMonsterWaveAction)
+        {
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(roomClearedActionProperty);
+            EditorGUI.indentLevel--;
+        }
 
         Transform spawnPoint = Util.FindChild<Transform>(dungeonRoom.gameObject, "SpawnPoint");
 
         if (spawnPoint != null)
         {
-            DungeonSpawnAction roomVisitedAction = dungeonRoom.RoomVisitedAction as DungeonSpawnAction;
-            DungeonSpawnAction roomClearedAction = dungeonRoom.RoomClearedAction as DungeonSpawnAction;
-
-            // SpawnPoint 자동 할당
-            if (roomVisitedAction != null)
+            // null 체크 추가
+            if (dungeonRoom.RoomVisitedAction != null)
             {
-                SerializedProperty spawnPointProperty = roomVisitedActionProperty.FindPropertyRelative("spawnPoint");
-                spawnPointProperty.objectReferenceValue = spawnPoint;
+                DungeonSpawnAction roomVisitedAction = dungeonRoom.RoomVisitedAction as DungeonSpawnAction;
+                if (roomVisitedAction != null)
+                {
+                    SerializedProperty spawnPointProperty = roomVisitedActionProperty.FindPropertyRelative("spawnPoint");
+                    if (spawnPointProperty != null)
+                        spawnPointProperty.objectReferenceValue = spawnPoint;
+                }
             }
 
-            if (roomClearedAction != null)
+            if (dungeonRoom.RoomClearedAction != null)
             {
-                SerializedProperty spawnPointProperty = roomClearedActionProperty.FindPropertyRelative("spawnPoint");
-                spawnPointProperty.objectReferenceValue = spawnPoint;
+                DungeonSpawnAction roomClearedAction = dungeonRoom.RoomClearedAction as DungeonSpawnAction;
+                if (roomClearedAction != null)
+                {
+                    SerializedProperty spawnPointProperty = roomClearedActionProperty.FindPropertyRelative("spawnPoint");
+                    if (spawnPointProperty != null)
+                        spawnPointProperty.objectReferenceValue = spawnPoint;
+                }
             }
         }
 

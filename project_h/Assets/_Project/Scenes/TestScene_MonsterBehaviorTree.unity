@@ -381,17 +381,17 @@ MonoBehaviour:
   heroDataID: 0
   heroSpawnPos: {fileID: 258679855}
   registeredHeroSkills: []
-  DefaultAttackSkill: {fileID: 0}
+  DefaultAttackSkill: {fileID: 11400000, guid: 1170df94496ec5d4bbdb7750f0a631b1, type: 2}
   DodgeSkill: {fileID: 0}
   PassiveSkill: {fileID: 0}
   registerHeroTestSkill: 0
   unregisterHeroTestSkill: 0
   executeHeroTestSkill: 0
   EnablePatrol: 0
-  monsterDataID: 5
+  monsterDataID: 1
   monsterSpawnPos: {fileID: 202487936}
   registeredMonsterSkills: []
-  monsterTestSkill: {fileID: 0}
+  monsterTestSkill: {fileID: 11400000, guid: dfbfa9c5e3471c241aa5ff55d5e37e7f, type: 2}
   registerMosnterTestSkill: 0
   UnregisterMosnterTestSkill: 0
   executeMonsterTestSkill: 0

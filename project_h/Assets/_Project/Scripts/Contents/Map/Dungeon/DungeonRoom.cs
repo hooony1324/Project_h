@@ -9,8 +9,12 @@ public class DungeonRoom : InitOnce
     [SerializeField] private EPattern roomPattern;
     [SerializeField] private ERoomDirection roomDirection = ERoomDirection.UP;
     [SerializeField] private EDungeonRoomType roomType = EDungeonRoomType.None;
-    [SerializeReference, SubclassSelector] DungeonRoomAction roomVisitedAction;
-    [SerializeReference, SubclassSelector] DungeonRoomAction roomClearedAction;
+
+    // TODO : 자물쇠 방, 한다면 => roomVisitCondition;
+    [SerializeReference, SubclassSelector] 
+    private DungeonRoomAction roomVisitedAction = null;
+    [SerializeReference, SubclassSelector] 
+    private DungeonRoomAction roomClearedAction = null;
 
     private Transform _teleportPoint;
     private Vector2Int[] _generatedGrid;
@@ -164,12 +168,12 @@ public class DungeonRoom : InitOnce
     private bool _isWaveCleared = true;
     private bool _isVisited = false;
 
-    void LockRoom()
+    public void LockRoom()
     {
         _doors.ForEach(x => x.Close());
     }
 
-    void UnlockRoom()
+    public void UnlockRoom()
     {
         _doors.ForEach(x => x.Open());
     }

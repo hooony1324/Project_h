@@ -81,6 +81,7 @@ public class DungeonManager
 
         cts_dropItem.Cancel();
         cts_dropItem.Dispose();
+        cts_dropItem = null;
     }
 
     public async Awaitable GenerateDungeon()
@@ -94,6 +95,11 @@ public class DungeonManager
     private CancellationTokenSource cts_dropItem = new();
     public async UniTask DropItem(int dropGroupID, Vector3 position)
     {
+        cts_dropItem?.Cancel();
+        cts_dropItem?.Dispose();
+
+        cts_dropItem = new CancellationTokenSource();
+
         try
         {
             List<int> dropItems = GetDropItemsByProbability(dropGroupID);
@@ -103,18 +109,13 @@ public class DungeonManager
 
             foreach (int itemID in dropItems)
             {
-                // 취소 요청 확인
-                if (cts_dropItem.Token.IsCancellationRequested)
-                    return;
-
                 SpawnItemHolder(itemID, position);
                 await UniTask.Delay(TimeSpan.FromSeconds(0.2f), cancellationToken: cts_dropItem.Token);
             }
         }
-        catch (OperationCanceledException)
+        catch (OperationCanceledException exception)
         {
-            // 취소 처리
-            Debug.Log("아이템 드롭이 취소되었습니다.");
+            Debug.LogError(exception);
         }
     }
 

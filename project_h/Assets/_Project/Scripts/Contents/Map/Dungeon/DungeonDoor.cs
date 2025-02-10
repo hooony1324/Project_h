@@ -67,7 +67,6 @@ public class DungeonDoor : BaseObject
         if (!_isOpened)
             return;
 
-
         MoveToTargetRoom();
     }
 
@@ -77,7 +76,7 @@ public class DungeonDoor : BaseObject
             return;
 
         if (Owner.IsWaveCleared)
-            Open();
+            Owner.UnlockRoom();
     }
 
     void MoveToTargetRoom()
