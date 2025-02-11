@@ -32,6 +32,13 @@ public class Monster : Entity
         monsterData = data as MonsterData;
     }
 
+    public override void TakeDamage(Entity instigator, object causer, float damage)
+    {
+        base.TakeDamage(instigator, causer, damage);
+
+        Target = Managers.Hero.MainHero;
+    }
+
     private void HandleOnDead(Entity entity)
     {
         Target = null;

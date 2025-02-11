@@ -1,5 +1,7 @@
 using NavMeshPlus.Components;
+using UnityEditor.Analytics;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum ECellCollisionType
 {
@@ -31,5 +33,11 @@ public class MapManager
         Managers.Dungeon.Setup(dungeon);
     }
 
+    public Vector3 GetLerpedPosition(Vector3 startPos, Vector3 destPos)
+    {
+        if (NavMesh.Raycast(startPos, destPos, out NavMeshHit hit, NavMesh.GetAreaFromName("Not Walkable")))
+            return hit.position;
 
+        return destPos;
+    }
 }

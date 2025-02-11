@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
   m_Name: SKILL_CHARIOT_CHARGING_RUSH
   m_EditorClassIdentifier: 
+  id: 50001
   categories: []
   icon: {fileID: 0}
-  id: 50001
   codeName: CHARIOT_CHARGING_RUSH
   displayName: "\uB3CC\uC9C4"
   description: "\uBA87 \uCD08\uAC04 \uCC28\uC9C0\uD558\uACE0 \uB3CC\uC9C4\uD55C\uB2E4."
@@ -47,6 +47,7 @@ MonoBehaviour:
     cooldown:
       defaultValue: 3
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     targetSearcher:
       selectionAction:
         rid: 2868447305151808126
@@ -57,6 +58,7 @@ MonoBehaviour:
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     isUseCharge: 1
     chargeFinishActionOption: 0
     chargeDuration: 4
@@ -90,7 +92,8 @@ MonoBehaviour:
       type: {class: , ns: , asm: }
     - rid: 2123022065556520977
       type: {class: ChargingRushAction, ns: , asm: Assembly-CSharp}
-      data: 
+      data:
+        blockedEffect: {fileID: 11400000, guid: 76bd6974536d51b4a98ebd2dc87f801e, type: 2}
     - rid: 2868447305151808126
       type: {class: SelectPositionByAttackRange, ns: , asm: Assembly-CSharp}
       data:

@@ -116,7 +116,7 @@ public abstract class Entity : BaseObject
 
     // instigator : 이즈리얼
     // causer : 이즈리얼 Q
-    public void TakeDamage(Entity instigator, object causer, float damage)
+    public virtual void TakeDamage(Entity instigator, object causer, float damage)
     {
         if (IsDead)
             return;

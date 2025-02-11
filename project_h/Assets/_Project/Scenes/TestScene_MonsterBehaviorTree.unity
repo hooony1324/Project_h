@@ -37816,6 +37816,10 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3384745687649902019, guid: 811271f2859eb9f4494a05550ac239c1, type: 3}
+      propertyPath: m_DefaultArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3384745687649902019, guid: 811271f2859eb9f4494a05550ac239c1, type: 3}
       propertyPath: m_NavMeshData
       value: 
       objectReference: {fileID: 23800000, guid: 99bce915afe599240a53743a2bb6e920, type: 2}

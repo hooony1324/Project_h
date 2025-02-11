@@ -26,7 +26,7 @@ public class InSkillActionState : EntitySkillState
         IsStateEnded = false;
         RunningSkill.onApplied -= OnSkillApplied;
 
-        Entity.Target = null;
+        //Entity.Target = null;
         Entity.Movement.TraceTarget = null;
 
         base.Exit();

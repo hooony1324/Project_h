@@ -23,7 +23,9 @@ public partial class SelectAndUseSkillAction : Action
         if (selectedSkill == null && entity.SkillSystem.OwnSkills.Count > 0)
         {
             var activeSkills = entity.SkillSystem.OwnSkills.Where(x => !x.IsPassive).ToArray();
-            int randomIdx = Random.Range(0, activeSkills.Length);
+            var usableSkills = activeSkills.Where(x => x.IsUseable).ToArray();
+            
+            int randomIdx = Random.Range(0, usableSkills.Length);
             selectedSkill = activeSkills[randomIdx];
         }
 

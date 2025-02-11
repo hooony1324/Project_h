@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
   m_Name: SKILL_GENERAL_ATTACK
   m_EditorClassIdentifier: 
+  id: 50004
   categories: []
   icon: {fileID: 0}
-  id: 50004
   codeName: GENERAL_ATTACK
   displayName: 
   description: "\uAC70\uB300\uC7A5\uAD70\uC0C1 \uC6D0 \uC778\uB514\uCF00\uC774\uD130
@@ -48,6 +48,7 @@ MonoBehaviour:
     cooldown:
       defaultValue: 3
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     targetSearcher:
       selectionAction:
         rid: 9152563583850119273
@@ -58,11 +59,12 @@ MonoBehaviour:
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     isUseCharge: 1
     chargeFinishActionOption: 0
-    chargeDuration: 4
-    chargeTime: 4
-    needChargeTimeToUse: 4
+    chargeDuration: 3
+    chargeTime: 3
+    needChargeTimeToUse: 3
     startChargePower: 0
     effectSelectors:
     - level: 1

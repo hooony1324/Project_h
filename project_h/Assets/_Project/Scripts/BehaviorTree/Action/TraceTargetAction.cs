@@ -12,6 +12,7 @@ public partial class TraceTargetAction : Action
     [SerializeReference] public BlackboardVariable<float> AttackRange;
 
     Entity entity;
+    Transform targetTransform;
 
     protected override Status OnStart()
     {
@@ -20,16 +21,26 @@ public partial class TraceTargetAction : Action
         if (Managers.Hero.MainHero == null)
             return Status.Failure;
 
-        entity.Movement.TraceTarget = Managers.Hero.MainHero.transform;
+        Trace();
+
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        float distance = Vector2.Distance(Agent.Value.transform.position, Managers.Hero.MainHero.transform.position);
+        if (!entity.IsInState<EntityDefaultState>())
+        {
+            entity.Movement.Stop();
+            return Status.Failure;
+        }
+
+
+        float distance = Vector2.Distance(Agent.Value.transform.position, targetTransform.position);
 
         if (distance > AttackRange.Value)
+        {
             return Status.Running;
+        }
         else
         {
             entity.Movement.Stop();
@@ -37,6 +48,15 @@ public partial class TraceTargetAction : Action
         }
     }
 
+    void Trace()
+    {
+        if (entity.Target != null)
+            targetTransform = entity.Target.transform;
+        else
+            targetTransform = Managers.Hero.MainHero.transform;
+
+        entity.Movement.TraceTarget = targetTransform;
+    }
 
 }
 
