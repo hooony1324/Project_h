@@ -47,7 +47,13 @@ public class Hero : Entity
     {
         base.SetData(data);
         
-        
+        onDead -= HandleOnDead;
+        onDead += HandleOnDead;
+    }
+
+    void HandleOnDead(Entity entity)
+    {
+        EventBus<HeroDeadEvent>.Raise(new HeroDeadEvent());
     }
 
     void Update()

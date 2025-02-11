@@ -42,7 +42,7 @@ public class HeroManager
     }
 
     // Dungeon1 -> Dungeon2 스탯 유지용도
-    public void SavePlayDatas()
+    public void SaveHeroDatas()
     {
         if (MainHero == null)
             return;
@@ -71,7 +71,7 @@ public class HeroManager
 
     // 저장된 데이터를 Entity에 적용
     // - Dungeon1 -> Dungeon2 스탯 유지용도
-    public void LoadPlayDatas()
+    public void LoadHeroDatas()
     {
         if (MainHero == null)
             return;

@@ -152,7 +152,7 @@ public abstract class Entity : BaseObject
         _collider.enabled = false;
 
         onDead?.Invoke(this);
-        onDead = null;
+        //onDead = null;
     }
     public bool HasCategory(Category category) => categories.Any(x => x.ID == category.ID);
     public bool HasCategory(string categoryName) => categories.Any(x => x.CodeName == categoryName);

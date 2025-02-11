@@ -19,6 +19,15 @@ public partial class SelectAndUseSkillAction : Action
     {
         entity = entity == null ? Agent.Value.GetComponent<Entity>() : entity;
 
+        // Target이 있어야 Skill Use가능
+        entity.Target = Managers.Hero.MainHero;
+
+        if (entity.Target.IsDead)
+        {
+            entity.Target = null;
+            return Status.Failure;
+        }
+
         // select skill
         if (selectedSkill == null && entity.SkillSystem.OwnSkills.Count > 0)
         {
@@ -29,8 +38,7 @@ public partial class SelectAndUseSkillAction : Action
             selectedSkill = activeSkills[randomIdx];
         }
 
-        // Target이 있어야 Skill Use가능
-        entity.Target = Managers.Hero.MainHero;
+        
 
         if (selectedSkill == null)
             return Status.Failure;

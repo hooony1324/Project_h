@@ -1,13 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class GameManager
 {
-
-
     private Vector2 _moveDir = Vector2.zero;
     public Vector2 MoveDir 
     {
@@ -68,6 +64,31 @@ public class GameManager
             
             return playerController;
         }
+    }
+
+    public void GoToLobby()
+    {
+        ResumeGame();
+        Managers.SaveLoad.RemovePlayData();
+        Managers.Scene.LoadScene(EScene.SelectHeroScene);
+    }
+
+    public void ReviveHero()
+    {
+        // 체력 올려서 부활
+        Stat hpStat = Managers.Hero.MainHero.StatsComponent.HPStat;
+        hpStat.DefaultValue = hpStat.MaxValue;
+
+        EventBus<HeroRevialEvent>.Raise(new HeroRevialEvent());
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
     }
 
 }

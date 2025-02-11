@@ -32,9 +32,9 @@ public partial class PatrolRandomPositionAction : Action
 
     protected override Status OnUpdate()
     {
-
-        if (DistanceToTarget.Value <= SearchRange.Value)
-            return Status.Failure;
+        if (!Managers.Hero.MainHero.IsDead)
+            if (DistanceToTarget.Value <= SearchRange.Value)
+                return Status.Failure;
         
         if (entity.Movement.AtDestination)
             waitingTime += Time.deltaTime;

@@ -27,6 +27,7 @@ public class Monster : Entity
 
         bga.Restart();
 
+        onDead -= HandleOnDead;
         onDead += HandleOnDead;
 
         monsterData = data as MonsterData;

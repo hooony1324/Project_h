@@ -56,8 +56,5 @@ public class DungeonScene : BaseScene
     public override void Clear()
     {
         Managers.UI.Joystick = null;
-
-        // Save Hero Stat
-        Managers.SaveLoad.SaveGame();
     }
 }

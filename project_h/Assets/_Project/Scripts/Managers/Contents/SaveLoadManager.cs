@@ -44,7 +44,7 @@ public class SaveLoadManager
     public void SaveGame()
     {
         // 히어로 정보
-        Managers.Hero.SavePlayDatas();
+        Managers.Hero.SaveHeroDatas();
 
         // 플레이 중인 던전
         SaveData.ProgressedDungeonId = Managers.Dungeon.CurrentDungeonId;
@@ -105,23 +105,31 @@ public class SaveLoadManager
     {
         // 로드한 데이터를 적용
         // - 스탯, 스킬, 아이템
-        Managers.Hero.LoadPlayDatas();
+        Managers.Hero.LoadHeroDatas();
         Managers.Inventory.LoadItems();
     }
 
 
     public void RemovePlayData()
     {
-        // TODO: 로그라이크?
-        if (File.Exists(Path))
-        {
-            File.Delete(Path);
-            Debug.Log("Savedata removed!");
-        }
-        else
-        {
-            Debug.Log("Savedata not found!");
-        }
+        SaveData.ProgressedDungeonId = 0;
+
+        // 플레이 중인 히어로
+        SaveData.HeroDataID = 0;
+
+        // 스탯
+        SaveData.StatSaveDatas.Clear();
+
+        // 아이템
+        SaveData.ItemSaveDatas.Clear();
+
+        // 스킬
+        SaveData.DefaultAttackID = 0;
+        SaveData.DodgeID = 0;
+        SaveData.PassiveSkills.Clear();
+
+        string jsonStr = JsonUtility.ToJson(_gameSaveData);
+        File.WriteAllText(Path, jsonStr);
     }
 
     #if UNITY_EDITOR

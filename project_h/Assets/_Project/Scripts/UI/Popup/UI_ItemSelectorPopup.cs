@@ -61,11 +61,11 @@ public class UI_ItemSelectorPopup : UI_Popup
 
     void OnEnable()
     {
-        Time.timeScale = 0;
+        Managers.Game.PauseGame();
     }
 
     void OnDisable()
     {
-        Time.timeScale = 1;
+        Managers.Game.ResumeGame();
     }
 }

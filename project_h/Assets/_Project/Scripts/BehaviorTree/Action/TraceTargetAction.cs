@@ -18,7 +18,7 @@ public partial class TraceTargetAction : Action
     {
         entity = entity == null ? Agent.Value.GetComponent<Entity>() : entity;
 
-        if (Managers.Hero.MainHero == null)
+        if (Managers.Hero.MainHero.IsDead)
             return Status.Failure;
 
         Trace();
@@ -28,12 +28,14 @@ public partial class TraceTargetAction : Action
 
     protected override Status OnUpdate()
     {
+        if (Managers.Hero.MainHero.IsDead)
+            return Status.Failure;
+
         if (!entity.IsInState<EntityDefaultState>())
         {
             entity.Movement.Stop();
             return Status.Failure;
         }
-
 
         float distance = Vector2.Distance(Agent.Value.transform.position, targetTransform.position);
 
