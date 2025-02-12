@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
   m_Name: SKILL_BOW_DEFAULT_ATTACK_A
   m_EditorClassIdentifier: 
+  id: 100001
   categories: []
   icon: {fileID: 21300000, guid: 39ef3ee733c904f08a85268391803a80, type: 3}
-  id: 100001
   codeName: BOW_DEFAULT_ATTACK_A
   displayName: 
   description: attack_a
@@ -37,9 +37,9 @@ MonoBehaviour:
     levelUpConditions: []
     levelUpCosts: []
     precedingAction:
-      rid: -2
+      rid: 1591114534001836328
     action:
-      rid: 2123022065556520976
+      rid: 1591114534001836329
     runningFinishOption: 0
     duration: 0
     applyCount: 1
@@ -47,18 +47,18 @@ MonoBehaviour:
     cooldown:
       defaultValue: 3
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     targetSearcher:
       selectionAction:
         rid: 2123022045973054337
       searchAction:
         rid: 2123022045973054340
-      scale: 1
-      <IsSearching>k__BackingField: 0
     costs: []
     isUseCast: 0
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     isUseCharge: 1
     chargeFinishActionOption: 0
     chargeDuration: 5
@@ -70,93 +70,42 @@ MonoBehaviour:
     castAnimatorParamter:
       type: 0
       name: 
-      hash: 0
     chargeAnimatorParameter:
       type: 0
       name: 
-      hash: 0
     precedingActionAnimatorParameter:
       type: 0
       name: 
-      hash: 0
     actionAnimatorParameter:
       type: 0
       name: 
-      hash: 0
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []
     customActionsOnAction: []
-  currentData:
-    level: 0
-    levelUpConditions: []
-    levelUpCosts: []
-    precedingAction:
-      rid: -2
-    action:
-      rid: 2123022045973054436
-    runningFinishOption: 0
-    duration: 0
-    applyCount: 0
-    applyCycle: 0
-    cooldown:
-      defaultValue: 0
-      scaleStat: {fileID: 0}
-    targetSearcher:
-      selectionAction:
-        rid: -2
-      searchAction:
-        rid: -2
-      scale: 1
-      <IsSearching>k__BackingField: 0
-    costs: []
-    isUseCast: 0
-    castTime:
-      defaultValue: 0
-      scaleStat: {fileID: 0}
-    isUseCharge: 0
-    chargeFinishActionOption: 0
-    chargeDuration: 0
-    chargeTime: 0
-    needChargeTimeToUse: 0
-    startChargePower: 0
-    effectSelectors: []
-    inSkillActionFinishOption: 0
-    castAnimatorParamter:
-      type: 0
-      name: 
-      hash: 0
-    chargeAnimatorParameter:
-      type: 0
-      name: 
-      hash: 0
-    precedingActionAnimatorParameter:
-      type: 0
-      name: 
-      hash: 0
-    actionAnimatorParameter:
-      type: 0
-      name: 
-      hash: 0
-    customActionsOnCast: []
-    customActionsOnCharge: []
-    customActionsOnPrecedingAction: []
-    customActionsOnAction: []
-  level: 0
-  currentApplyCount: 0
-  currentCastTime: 0
-  currentCooldown: 0
-  currentDuration: 0
-  currentChargePower: 0
-  currentChargeDuration: 0
-  <Owner>k__BackingField: {fileID: 0}
-  <CurrentApplyCycle>k__BackingField: 0
-  <IsActivated>k__BackingField: 0
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 1591114534001836328
+      type: {class: ApproachAction, ns: , asm: Assembly-CSharp}
+      data:
+        searchRange: 20
+        remainingDistance: 5
+    - rid: 1591114534001836329
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 5
+        lifetime: 0
+        useObjectPool: 1
+        impactAction:
+          rid: -2
+        projectileMotion:
+          rid: -2
+        shootInfos: []
     - rid: 2123022045973054337
       type: {class: SelectPositionByMovingDirection, ns: , asm: Assembly-CSharp}
       data:
@@ -164,7 +113,6 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-        scale: 0
     - rid: 2123022045973054340
       type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
       data:
@@ -173,16 +121,9 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 1
-        scale: 0
         range: {x: 1, y: 6}
         isIncludeSelf: 0
         isSearchSameCategory: 0
-    - rid: 2123022045973054436
-      type: {class: RushAction, ns: , asm: Assembly-CSharp}
-      data: {}
-    - rid: 2123022065556520976
-      type: {class: ChargingRushAction, ns: , asm: Assembly-CSharp}
-      data: {}
     - rid: 2123022065556521022
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
-      data: {}
+      data: 

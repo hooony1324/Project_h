@@ -163,23 +163,46 @@ public class SkillSystemWindow : EditorWindow
                     selectedObjectsByType[dataType] = newData;
                 }
 
-                // 지금부터 그릴 GUI는 빨간색
-                GUI.color = Color.red;
-                // 마지막 순번의 Data를 삭제하는 Button을 그려줌
-                if (GUILayout.Button($"Remove Last {dataType.Name}"))
+                // New 버튼 아래에 추가
+                GUI.color = Color.yellow;
+                if (GUILayout.Button($"Duplicate Selected {dataType.Name}") && selectedObjectsByType[dataType] != null)
                 {
-                    var lastData = database.Count > 0 ? database.Datas.Last() : null;
-                    if (lastData)
-                    {
-                        database.Remove(lastData);
+                    var guid = Guid.NewGuid();
+                    var duplicatedData = CreateInstance(dataType) as IdentifiedObject;
+                    
+                    // JsonUtility를 사용하여 모든 내용 복사
+                    JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(selectedObjectsByType[dataType]), duplicatedData);
+                    
+                    // 새로운 고유 ID 설정
+                    dataType.BaseType.GetField("codeName", BindingFlags.NonPublic | BindingFlags.Instance)
+                        .SetValue(duplicatedData, guid.ToString());
+                    
+                    AssetDatabase.CreateAsset(duplicatedData, $"Assets/Resources/{dataType.Name}/{dataType.Name.ToUpper()}_{guid}.asset");
 
-                        // Data의 Asset 폴더 내 위치를 찾아와서 삭제
-                        AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(lastData));
-                        // database에서 data를 제거했으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
-                        EditorUtility.SetDirty(database);
-                        AssetDatabase.SaveAssets();
-                    }
+                    database.Add(duplicatedData);
+                    selectedObjectsByType[dataType] = duplicatedData;
+                    EditorUtility.SetDirty(database);
+                    AssetDatabase.SaveAssets();
+
                 }
+
+                // // 지금부터 그릴 GUI는 빨간색
+                // GUI.color = Color.red;
+                // // 마지막 순번의 Data를 삭제하는 Button을 그려줌
+                // if (GUILayout.Button($"Remove Last {dataType.Name}"))
+                // {
+                //     var lastData = database.Count > 0 ? database.Datas.Last() : null;
+                //     if (lastData)
+                //     {
+                //         database.Remove(lastData);
+
+                //         // Data의 Asset 폴더 내 위치를 찾아와서 삭제
+                //         AssetDatabase.DeleteAsset(AssetDatabase.GetAssetPath(lastData));
+                //         // database에서 data를 제거했으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
+                //         EditorUtility.SetDirty(database);
+                //         AssetDatabase.SaveAssets();
+                //     }
+                // }
 
                 // 지금부터 그릴 GUI는 Cyan
                 GUI.color = Color.cyan;
@@ -193,15 +216,15 @@ public class SkillSystemWindow : EditorWindow
                     AssetDatabase.SaveAssets();
                 }
 
-                // Data를 이름 순으로 정렬하는 Button을 그림
-                if (GUILayout.Button($"Sort By Name"))
-                {
-                    // 정렬 실행
-                    database.SortByCodeName();
-                    // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
-                    EditorUtility.SetDirty(database);
-                    AssetDatabase.SaveAssets();
-                }
+                // // Data를 이름 순으로 정렬하는 Button을 그림
+                // if (GUILayout.Button($"Sort By Name"))
+                // {
+                //     // 정렬 실행
+                //     database.SortByCodeName();
+                //     // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
+                //     EditorUtility.SetDirty(database);
+                //     AssetDatabase.SaveAssets();
+                // }
 
                 // 지금부터 그릴 GUI는 하얀색(=원래색)
                 GUI.color = Color.white;

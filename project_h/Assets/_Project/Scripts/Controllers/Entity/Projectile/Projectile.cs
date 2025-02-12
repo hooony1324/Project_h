@@ -76,7 +76,7 @@ public class Projectile : BaseObject
         _projectileMotion.Move();
     }
 
-    public async UniTask SetLifeTime(float duration)
+    private async UniTask SetLifeTime(float duration)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: _destroyCTS.Token);
         if (this != null)
