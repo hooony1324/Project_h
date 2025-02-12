@@ -58,7 +58,6 @@ MonoBehaviour:
   - GENERAL_ATTACK
   - BAT_SWEEPWORLD
   - CHARIOT_CHARGING_RUSH
-  - GANGSI_ATTACK
   - GENERAL_SUPERARMOR
   dodgeSkill: 
   DropGroupID: 0

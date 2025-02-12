@@ -37,7 +37,7 @@ MonoBehaviour:
     levelUpConditions: []
     levelUpCosts: []
     precedingAction:
-      rid: 1591114534001836328
+      rid: -2
     action:
       rid: 1591114534001836329
     runningFinishOption: 0
@@ -50,9 +50,9 @@ MonoBehaviour:
       reduceMinValue: 0
     targetSearcher:
       selectionAction:
-        rid: 2123022045973054337
+        rid: 1591114534001836636
       searchAction:
-        rid: 2123022045973054340
+        rid: 1591114534001836638
     costs: []
     isUseCast: 0
     castTime:
@@ -66,19 +66,19 @@ MonoBehaviour:
     needChargeTimeToUse: 1
     startChargePower: 0
     effectSelectors: []
-    inSkillActionFinishOption: 0
+    inSkillActionFinishOption: 1
     castAnimatorParamter:
       type: 0
       name: 
     chargeAnimatorParameter:
       type: 0
-      name: 
+      name: isSleeping
     precedingActionAnimatorParameter:
       type: 0
       name: 
     actionAnimatorParameter:
       type: 0
-      name: 
+      name: isDefaultAttack
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []
@@ -88,11 +88,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1591114534001836328
-      type: {class: ApproachAction, ns: , asm: Assembly-CSharp}
-      data:
-        searchRange: 20
-        remainingDistance: 5
     - rid: 1591114534001836329
       type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
       data:
@@ -102,28 +97,39 @@ MonoBehaviour:
         lifetime: 0
         useObjectPool: 1
         impactAction:
-          rid: -2
+          rid: 1591114534001836634
         projectileMotion:
-          rid: -2
+          rid: 1591114534001836635
         shootInfos: []
-    - rid: 2123022045973054337
-      type: {class: SelectPositionByMovingDirection, ns: , asm: Assembly-CSharp}
+    - rid: 1591114534001836634
+      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 0}
+    - rid: 1591114534001836635
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1591114534001836636
+      type: {class: SelectTargetByTargettingRange, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 2123022045973054340
-      type: {class: SearchBoxArea, ns: , asm: Assembly-CSharp}
+        targettingRange:
+          defaultValue: 20
+          scaleStat: {fileID: 0}
+          reduceMinValue: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 0
+    - rid: 1591114534001836638
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         isTransparentIndicator: 0
         indicatorViewAction:
           rid: -2
-        isUseScale: 1
-        range: {x: 1, y: 6}
-        isIncludeSelf: 0
-        isSearchSameCategory: 0
+        isUseScale: 0
     - rid: 2123022065556521022
       type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
       data: 

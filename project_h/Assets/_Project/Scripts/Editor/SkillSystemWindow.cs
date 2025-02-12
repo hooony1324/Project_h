@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
+using Newtonsoft.Json.Linq;
 
 public class SkillSystemWindow : EditorWindow
 {
@@ -31,6 +32,8 @@ public class SkillSystemWindow : EditorWindow
     private Texture2D selectedBoxTexture;
     // Database List의 Selected Style
     private GUIStyle selectedBoxStyle;
+
+    private static Dictionary<Type, string> copiedDataJson = new Dictionary<Type, string>();
 
     // Editor Tools 탭에 Skill System 항목이 추가되고, Click시 Window가 열림
     [MenuItem("AbilitySystem/SkillSystemWindow")]
@@ -204,17 +207,14 @@ public class SkillSystemWindow : EditorWindow
                 //     }
                 // }
 
-                // 지금부터 그릴 GUI는 Cyan
-                GUI.color = Color.cyan;
-
-                if (GUILayout.Button($"Sort By ID"))
-                {
-                    // 정렬 실행
-                    database.SortByID();
-                    // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
-                    EditorUtility.SetDirty(database);
-                    AssetDatabase.SaveAssets();
-                }
+                // if (GUILayout.Button($"Sort By ID"))
+                // {
+                //     // 정렬 실행
+                //     database.SortByID();
+                //     // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
+                //     EditorUtility.SetDirty(database);
+                //     AssetDatabase.SaveAssets();
+                // }
 
                 // // Data를 이름 순으로 정렬하는 Button을 그림
                 // if (GUILayout.Button($"Sort By Name"))
@@ -225,6 +225,36 @@ public class SkillSystemWindow : EditorWindow
                 //     EditorUtility.SetDirty(database);
                 //     AssetDatabase.SaveAssets();
                 // }
+                // 클래스 상단에 추가
+                
+                // Copy & Paste
+                EditorGUILayout.BeginHorizontal();
+                GUI.color = Color.cyan;
+                if (GUILayout.Button($"Copy {dataType.Name}") && selectedObjectsByType[dataType] != null)
+                {
+                    copiedDataJson[dataType] = JsonUtility.ToJson(selectedObjectsByType[dataType]);
+                }
+
+                if (GUILayout.Button($"Paste {dataType.Name}", GUILayout.Width(145f)) && 
+                    copiedDataJson.ContainsKey(dataType) && 
+                    selectedObjectsByType[dataType] != null)
+                {
+                    // 현재 선택된 오브젝트의 codeName을 임시 저장
+                    var originalCodeName = selectedObjectsByType[dataType].CodeName;
+                    
+                    // 전체 데이터를 JSON으로 변환
+                    var jsonData = copiedDataJson[dataType];
+                    
+                    // codeName은 원본을 입력
+                    JObject jsonObj = JObject.Parse(jsonData);
+                    jsonObj["codeName"] = originalCodeName;
+                    
+                    JsonUtility.FromJsonOverwrite(jsonObj.ToString(), selectedObjectsByType[dataType]);
+
+                    EditorUtility.SetDirty(selectedObjectsByType[dataType]);
+                    AssetDatabase.SaveAssets();
+                }
+                EditorGUILayout.EndHorizontal();
 
                 // 지금부터 그릴 GUI는 하얀색(=원래색)
                 GUI.color = Color.white;
