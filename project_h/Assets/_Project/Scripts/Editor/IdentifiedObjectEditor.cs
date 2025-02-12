@@ -48,7 +48,8 @@ public class IdentifiedObjectEditor : Editor
         // List의 Prefix Label을 어떻게 그릴지 정함D
         categories.drawHeaderCallback = rect => EditorGUI.LabelField(rect, categoriesProperty.displayName);
         // List의 Element를 어떻게 그릴지 정함
-        categories.drawElementCallback = (rect, index, isActive, isFocused) => {
+        categories.drawElementCallback = (rect, index, isActive, isFocused) =>
+        {
             rect = new Rect(rect.x, rect.y + 2f, rect.width, EditorGUIUtility.singleLineHeight);
             // EditorGUILayout와 EditorGUI의 차이점
             // EditorGUILayout은 GUI를 그리는 순서에 따라 위치를 자동으로 조정해줌
@@ -99,16 +100,24 @@ public class IdentifiedObjectEditor : Editor
                     // id 변수의 prefix(= inspector에서 보이는 변수의 이름)을 따로 지정해주기 위해 변수 Line을 직접 만듬.
                     EditorGUILayout.BeginHorizontal();
                     {
-                        // 변수 편집 Disable, ID는 Database에서 직접 Set해줄 것이기 때문에 사용자가 직접 편집하지 못하도록 함.
-                        GUI.enabled = false;
-                        // 변수의 선행 명칭(Prefix) 지정
                         EditorGUILayout.PrefixLabel("ID");
-                        // id 변수를 그리되 Prefix는 그리지않음(=GUIContent.none); 
-                        EditorGUILayout.PropertyField(idProperty, GUIContent.none);
-                        // 변수 편집 Enable
-                        GUI.enabled = true;
+                        EditorGUI.BeginChangeCheck();
+                        var prevID = idProperty.intValue;
+                        EditorGUILayout.DelayedIntField(idProperty, GUIContent.none);
+                        if(EditorGUI.EndChangeCheck())
+                        {
+                            var target = serializedObject.targetObject as IdentifiedObject;
+                            var database = AssetDatabase.LoadAssetAtPath<IODatabase>($"Assets/Resources/AbilitySystemDatabase/{target.GetType().Name}Database.asset");
+                            
+                            if(database.HasDuplicateID(idProperty.intValue, target))
+                            {
+                                EditorUtility.DisplayDialog("Duplicate ID", 
+                                    $"ID {idProperty.intValue} already exists in database. Please use a different ID.", "OK");
+                                idProperty.intValue = prevID;
+                            }
+                            serializedObject.ApplyModifiedProperties();
+                        }
                     }
-                    // (3) 가로 정렬 종료
                     EditorGUILayout.EndHorizontal();
 
                     // 지금부터 변수가 수정되었는지 검사한다.
@@ -147,7 +156,7 @@ public class IdentifiedObjectEditor : Editor
             }
             // (1) 가로 정렬 종료
             EditorGUILayout.EndHorizontal();
-            
+
             // 세로 정렬 시작, 기본적으로 세로 정렬이 Default 정렬이기 때문에 가로 정렬 내부에 사용하는게 아니라면
             // 직접 세로 정렬을 해줄 필요가 없지만 이 경우에는 HelpBox로 내부를 회색으로 채우기위해 직접 세로 정렬을 함
             EditorGUILayout.BeginVertical("HelpBox");
@@ -165,6 +174,19 @@ public class IdentifiedObjectEditor : Editor
         // Serialize 변수들의 값 변화를 적용함(=디스크에 저장함)
         // 이 작업을 해주지 않으면 바뀐 값이 적용되지 않아서 이전 값으로 돌아감
         serializedObject.ApplyModifiedProperties();
+    }
+    private void ValidateID()
+    {
+        var target = serializedObject.targetObject as IdentifiedObject;
+        var database = AssetDatabase.LoadAssetAtPath<IODatabase>($"Assets/Resources/AbilitySystemDatabase/{target.GetType().Name}Database.asset");
+
+        if (database.HasDuplicateID(target.ID, target))
+        {
+            EditorUtility.DisplayDialog("Duplicate ID",
+                $"ID {target.ID} already exists in database. Please use a different ID.", "OK");
+            idProperty.intValue = target.ID;
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 
     // Data의 Level과 Data 삭제를 위한 X Button을 그려주는 Foldout Title을 그려줌

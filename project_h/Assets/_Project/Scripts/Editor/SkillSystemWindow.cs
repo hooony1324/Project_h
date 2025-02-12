@@ -167,7 +167,6 @@ public class SkillSystemWindow : EditorWindow
                 }
 
                 // New 버튼 아래에 추가
-                GUI.color = Color.yellow;
                 if (GUILayout.Button($"Duplicate Selected {dataType.Name}") && selectedObjectsByType[dataType] != null)
                 {
                     var guid = Guid.NewGuid();
@@ -206,15 +205,16 @@ public class SkillSystemWindow : EditorWindow
                 //         AssetDatabase.SaveAssets();
                 //     }
                 // }
-
-                // if (GUILayout.Button($"Sort By ID"))
-                // {
-                //     // 정렬 실행
-                //     database.SortByID();
-                //     // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
-                //     EditorUtility.SetDirty(database);
-                //     AssetDatabase.SaveAssets();
-                // }
+                
+                GUI.color = Color.yellow;
+                if (GUILayout.Button($"Sort By ID"))
+                {
+                    // 정렬 실행
+                    database.SortByID();
+                    // database의 data들의 순서가 바뀌었으니 SetDirty를 설정하여 Unity에 database에 변화가 생겼다고 알림
+                    EditorUtility.SetDirty(database);
+                    AssetDatabase.SaveAssets();
+                }
 
                 // // Data를 이름 순으로 정렬하는 Button을 그림
                 // if (GUILayout.Button($"Sort By Name"))
@@ -240,6 +240,7 @@ public class SkillSystemWindow : EditorWindow
                     selectedObjectsByType[dataType] != null)
                 {
                     // 현재 선택된 오브젝트의 codeName을 임시 저장
+                    var originalID = selectedObjectsByType[dataType].ID;
                     var originalCodeName = selectedObjectsByType[dataType].CodeName;
                     
                     // 전체 데이터를 JSON으로 변환
@@ -247,6 +248,7 @@ public class SkillSystemWindow : EditorWindow
                     
                     // codeName은 원본을 입력
                     JObject jsonObj = JObject.Parse(jsonData);
+                    jsonObj["id"] = originalID;
                     jsonObj["codeName"] = originalCodeName;
                     
                     JsonUtility.FromJsonOverwrite(jsonObj.ToString(), selectedObjectsByType[dataType]);

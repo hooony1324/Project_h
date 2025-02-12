@@ -77,6 +77,11 @@ public class IODatabase : ScriptableObject
         }
     }
 
+    public bool HasDuplicateID(int id, IdentifiedObject excludeObject = null)
+    {
+        return datas.Any(x => x != excludeObject && x.ID == id);
+    }
+
     public IdentifiedObject GetDataByID(int id) => datas[id];
     public T GetDataByID<T>(int id) where T : IdentifiedObject => GetDataByID(id) as T;
 
