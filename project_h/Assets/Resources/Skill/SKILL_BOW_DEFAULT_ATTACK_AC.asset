@@ -12,23 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
   m_Name: SKILL_BOW_DEFAULT_ATTACK_AC
   m_EditorClassIdentifier: 
+  id: 100013
   categories: []
   icon: {fileID: 21300000, guid: 39ef3ee733c904f08a85268391803a80, type: 3}
-  id: 100013
   codeName: BOW_DEFAULT_ATTACK_AC
   displayName: 
-  description: attack_ac
+  description: "\uAC08\uB798\uD654\uC0B4 + \uBCBD \uD295\uAE40 \uD654\uC0B4"
   type: 0
   useType: 0
   executionType: 0
-  applyType: 0
+  applyType: 1
   needSelectionResultType: 0
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   acquisitionConditions: []
   acquisitionCosts: []
   useConditions:
-  - rid: 2123022081933705600
+  - rid: 1591114579727876165
   isAllowLevelExceedDatas: 0
   maxLevel: 1
   defaultLevel: 1
@@ -39,31 +39,35 @@ MonoBehaviour:
     precedingAction:
       rid: -2
     action:
-      rid: 2123022081933705706
+      rid: 1591114579727876166
     runningFinishOption: 0
     duration: 0
     applyCount: 1
     applyCycle: 0
     cooldown:
-      defaultValue: 0
+      defaultValue: 3
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     targetSearcher:
       selectionAction:
-        rid: 2123022081933705595
+        rid: 1591114579727876167
       searchAction:
-        rid: 2123022081933705596
+        rid: 1591114579727876168
     costs: []
     isUseCast: 0
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
+      reduceMinValue: 0
     isUseCharge: 0
     chargeFinishActionOption: 0
-    chargeDuration: 0
-    chargeTime: 0
-    needChargeTimeToUse: 0
+    chargeDuration: 3
+    chargeTime: 3
+    needChargeTimeToUse: 0.5
     startChargePower: 0
-    effectSelectors: []
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
     inSkillActionFinishOption: 0
     castAnimatorParamter:
       type: 0
@@ -76,7 +80,7 @@ MonoBehaviour:
       name: 
     actionAnimatorParameter:
       type: 0
-      name: 
+      name: isDefaultAttack
     customActionsOnCast: []
     customActionsOnCharge: []
     customActionsOnPrecedingAction: []
@@ -86,14 +90,40 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2123022081933705595
-      type: {class: SelectSelf, ns: , asm: Assembly-CSharp}
+    - rid: 1591114579727876165
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 1591114579727876166
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 20
+        lifetime: 5
+        useObjectPool: 1
+        impactAction:
+          rid: 1591114579727876177
+        projectileMotion:
+          rid: 1591114579727876170
+        shootInfos:
+        - angle: 0
+        - angle: -30
+        - angle: 30
+    - rid: 1591114579727876167
+      type: {class: SelectTargetByTargettingRange, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 2123022081933705596
+        targettingRange:
+          defaultValue: 20
+          scaleStat: {fileID: 0}
+          reduceMinValue: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 0
+    - rid: 1591114579727876168
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0
@@ -101,9 +131,11 @@ MonoBehaviour:
         indicatorViewAction:
           rid: -2
         isUseScale: 0
-    - rid: 2123022081933705600
-      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+    - rid: 1591114579727876170
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 2123022081933705706
-      type: {class: InstantApplyAction, ns: , asm: Assembly-CSharp}
-      data: 
+    - rid: 1591114579727876177
+      type: {class: ImpactAndReflect, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 0}
+        _reflectCount: 1

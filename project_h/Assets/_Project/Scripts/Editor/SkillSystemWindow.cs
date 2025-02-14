@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 using Newtonsoft.Json.Linq;
+using UnityEngine.Localization.SmartFormat.Utilities;
 
 public class SkillSystemWindow : EditorWindow
 {
@@ -242,14 +243,20 @@ public class SkillSystemWindow : EditorWindow
                     // 현재 선택된 오브젝트의 codeName을 임시 저장
                     var originalID = selectedObjectsByType[dataType].ID;
                     var originalCodeName = selectedObjectsByType[dataType].CodeName;
-                    
+                    var originalDisplayName = selectedObjectsByType[dataType].DisplayName;
+                    // Description getter에 메소드 포함되어 있어서 리플렉션을 통해 정보 가져옴
+                    var descriptionField = dataType.BaseType.GetField("description", BindingFlags.NonPublic | BindingFlags.Instance);
+                    string originalDescription = (string)descriptionField.GetValue(selectedObjectsByType[dataType]);
+
                     // 전체 데이터를 JSON으로 변환
                     var jsonData = copiedDataJson[dataType];
                     
-                    // codeName은 원본을 입력
+                    // 복사 내용 중 원본유지할 데이터
                     JObject jsonObj = JObject.Parse(jsonData);
                     jsonObj["id"] = originalID;
                     jsonObj["codeName"] = originalCodeName;
+                    jsonObj["displayName"] = originalDisplayName;
+                    jsonObj["description"] = originalDescription;
                     
                     JsonUtility.FromJsonOverwrite(jsonObj.ToString(), selectedObjectsByType[dataType]);
 

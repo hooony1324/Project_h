@@ -15,6 +15,8 @@ public class ChargingState : SkillState
     {
         Entity.Activate();
 
+        Entity.Owner.Movement.enabled = false;
+
         if (Entity.Owner.IsPlayer)
         {
             Entity.SelectTarget(OnTargetSearchCompleted, false);
@@ -54,9 +56,12 @@ public class ChargingState : SkillState
             IsChargeEnded = true;
             if (Entity.ChargeFinishActionOption == SkillChargeFinishActionOption.Use)
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
-                    Entity.SelectTargetImmediate(hitInfo.point);
+                // var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity))
+                //     Entity.SelectTargetImmediate(hitInfo.point);
+
+                // 어떤 동작이 있을 때 (ex) PointerUp
+                //Entity.SelectTargetImmediate(Entity.Owner.Position);
 
                 TryUse();
             }
@@ -67,6 +72,7 @@ public class ChargingState : SkillState
 
     public override void Exit()
     {
+        Entity.Owner.Movement.enabled = true;
         IsChargeEnded = false;
         IsChargeSuccessed = false;
 

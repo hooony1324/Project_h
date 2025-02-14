@@ -32,6 +32,8 @@ public class GameStatusPanel : UI_Base
         timerText = GetTMPText((int)Texts.TimerText);
         fpsText = GetTMPText((int)Texts.FPSText);
 
+
+
         return true;   
     }
 

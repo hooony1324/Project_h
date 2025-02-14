@@ -26,11 +26,11 @@ MonoBehaviour:
       type: {class: MultiplyStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:
-        - id: 4
+        - id: 3
           isDynamicValue: 0
           valueType: 0
           value: 1
-        - id: 3
+        - id: 6
           isDynamicValue: 0
           valueType: 0
           value: 1

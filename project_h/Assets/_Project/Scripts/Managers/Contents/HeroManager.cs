@@ -111,14 +111,16 @@ public class HeroManager
         {
             case EDefaultSkillSlot.DefaultAttack:
                 hero.SkillSystem.Unregister(hero.SkillSystem.DefaultAttack);
-                hero.SkillSystem.RegisterWithoutCost(newDefaultSkill);
-                hero.SkillSystem.DefaultAttack = newDefaultSkill;
+                Skill newAttackSkill = hero.SkillSystem.RegisterWithoutCost(newDefaultSkill, 1);
+                hero.SkillSystem.DefaultAttack = newAttackSkill;
                 break;
             case EDefaultSkillSlot.Dodge:
                 hero.SkillSystem.Unregister(hero.SkillSystem.Dodge);
-                hero.SkillSystem.RegisterWithoutCost(newDefaultSkill);
-                hero.SkillSystem.Dodge = newDefaultSkill;
+                Skill newDodgeSkill = hero.SkillSystem.RegisterWithoutCost(newDefaultSkill, 1);
+                hero.SkillSystem.Dodge = newDodgeSkill;
                 break;
         }
+
+        Managers.UI.Joystick.SetupActionButtons(hero);
     }
 }

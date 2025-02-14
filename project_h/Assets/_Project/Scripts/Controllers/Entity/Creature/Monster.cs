@@ -25,12 +25,12 @@ public class Monster : Entity
     {
         base.SetData(data);
 
-        bga.Restart();
-
         onDead -= HandleOnDead;
         onDead += HandleOnDead;
 
         monsterData = data as MonsterData;
+        
+        bga.Restart();
     }
 
     public override void TakeDamage(Entity instigator, object causer, float damage)
@@ -44,6 +44,7 @@ public class Monster : Entity
     {
         Target = null;
         Movement.TraceTarget = null;
+        bga.End();
 
         _ = Managers.Dungeon.DropItem(monsterData.DropGroupID, CenterPosition);
         

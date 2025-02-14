@@ -48,12 +48,14 @@ public abstract class SelectTarget : TargetSelectionAction
     {
         if (requesterEntity.IsPlayer)
         {
-            this.targetSearcher = targetSearcher;
-            this.requesterEntity = requesterEntity;
-            this.requesterObject = requesterObject;
-            this.onSelectCompleted = onSelectCompleted;
+            // this.targetSearcher = targetSearcher;
+            // this.requesterEntity = requesterEntity;
+            // this.requesterObject = requesterObject;
+            // this.onSelectCompleted = onSelectCompleted;
 
-            // 사용자의 Select 액션 발생(ex.마우스 클릭) > Invoke onSelectCompleted 
+            onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity,
+                requesterObject, requesterEntity.Target.transform.position));
+
         }
         else
             onSelectCompleted.Invoke(SelectImmediateByAI(targetSearcher, requesterEntity,
@@ -85,4 +87,6 @@ public abstract class SelectTarget : TargetSelectionAction
         var dictionary = new Dictionary<string, string>() { { "range", range.ToString("0.##") } };
         return dictionary;
     }
+
+
 }

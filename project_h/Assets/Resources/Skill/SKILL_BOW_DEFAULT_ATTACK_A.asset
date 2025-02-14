@@ -17,12 +17,12 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 39ef3ee733c904f08a85268391803a80, type: 3}
   codeName: BOW_DEFAULT_ATTACK_A
   displayName: 
-  description: attack_a
+  description: "\uAC08\uB798 \uD654\uC0B4"
   type: 0
   useType: 0
   executionType: 0
-  applyType: 0
-  needSelectionResultType: 1
+  applyType: 1
+  needSelectionResultType: 0
   targetSelectionTimingOption: 0
   targetSearchTimingOption: 0
   acquisitionConditions: []
@@ -52,27 +52,29 @@ MonoBehaviour:
       selectionAction:
         rid: 1591114534001836636
       searchAction:
-        rid: 1591114534001836638
+        rid: 1591114579006194434
     costs: []
     isUseCast: 0
     castTime:
       defaultValue: 0
       scaleStat: {fileID: 0}
       reduceMinValue: 0
-    isUseCharge: 1
+    isUseCharge: 0
     chargeFinishActionOption: 0
-    chargeDuration: 5
+    chargeDuration: 3
     chargeTime: 3
-    needChargeTimeToUse: 1
+    needChargeTimeToUse: 0.5
     startChargePower: 0
-    effectSelectors: []
-    inSkillActionFinishOption: 1
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
+    inSkillActionFinishOption: 2
     castAnimatorParamter:
       type: 0
       name: 
     chargeAnimatorParameter:
       type: 0
-      name: isSleeping
+      name: 
     precedingActionAnimatorParameter:
       type: 0
       name: 
@@ -93,18 +95,21 @@ MonoBehaviour:
       data:
         projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
         spawnPointSocketName: FireSocket
-        speed: 5
-        lifetime: 0
+        speed: 20
+        lifetime: 5
         useObjectPool: 1
         impactAction:
           rid: 1591114534001836634
         projectileMotion:
           rid: 1591114534001836635
-        shootInfos: []
+        shootInfos:
+        - angle: 0
+        - angle: -30
+        - angle: 30
     - rid: 1591114534001836634
       type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
       data:
-        _impactEffect: {fileID: 0}
+        _impactEffect: {fileID: 2708598583397607911, guid: 6398d43fe79ea0140913dc5530c646af, type: 3}
     - rid: 1591114534001836635
       type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
       data: 
@@ -122,7 +127,7 @@ MonoBehaviour:
         layerMask:
           serializedVersion: 2
           m_Bits: 0
-    - rid: 1591114534001836638
+    - rid: 1591114579006194434
       type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
       data:
         isShowIndicatorPlayerOnly: 0

@@ -60,4 +60,4 @@ MonoBehaviour:
   - CHARIOT_CHARGING_RUSH
   - GENERAL_SUPERARMOR
   dodgeSkill: 
-  DropGroupID: 0
+  DropGroupID: 2

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +13,10 @@ public enum EJoystickState
 
 public class UI_Joystick : UI_Scene
 {
+    #region Event
+
+    #endregion
+
     // Joystick
     private HorizontalLayoutGroup layout;
     private GameObject _joystickCursor;
@@ -34,13 +37,16 @@ public class UI_Joystick : UI_Scene
 
     // Action Buttons
     private Joystick_ActionButtons _actionButtons;
-
+  
+    
     private enum GameObjects
     {
         Layout,
         JoystickBG,
         JoystickCursor,
         JoystickArea,
+        
+        ActionButtonsArea,
         Joystick_ActionButtons,
     }
 
@@ -75,6 +81,7 @@ public class UI_Joystick : UI_Scene
 
         // Action Buttons
         _actionButtons = GetGameObject((int)GameObjects.Joystick_ActionButtons).GetComponent<Joystick_ActionButtons>();
+        GetGameObject((int)GameObjects.ActionButtonsArea).BindEvent(null, OnClickActionButtonsArea, EUIEvent.Click);
 
         return true;
     }
@@ -153,6 +160,12 @@ public class UI_Joystick : UI_Scene
         else
             ShineBGDirection = ShineBGDirections.None;
     }
+
+    private void OnClickActionButtonsArea(PointerEventData eventData)
+    {
+        Debug.Log("버튼 이외 영역  터치됨");
+    }
+
     #endregion
 
     #region Misc

@@ -38,7 +38,6 @@ public partial class SelectAndUseSkillAction : Action
             selectedSkill = activeSkills[randomIdx];
         }
 
-        
 
         if (selectedSkill == null)
             return Status.Failure;

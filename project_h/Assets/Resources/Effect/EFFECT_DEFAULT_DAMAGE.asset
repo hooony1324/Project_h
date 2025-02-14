@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e1eac66e6f3b740b59fc034f726393, type: 3}
   m_Name: EFFECT_DEFAULT_DAMAGE
   m_EditorClassIdentifier: 
+  id: 0
   categories: []
   icon: {fileID: 0}
-  id: 0
   codeName: DEFAULT_DAMAGE
   displayName: "\uAE30\uBCF8\uACF5\uACA9 \uB370\uBBF8\uC9C0"
   description: 
   type: 0
-  isAllowDuplicate: 0
+  isAllowDuplicate: 1
   removeDuplicateTargetOption: 1
   isShowInUI: 0
   isAllowLevelExceedDatas: 0
@@ -31,11 +31,12 @@ MonoBehaviour:
     antiEffect: {fileID: 0}
     action:
       rid: 3506563725652131852
-    runningFinishOption: 1
+    runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
-      defaultValue: 1
+      defaultValue: 0
       scaleStat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
+      reduceMinValue: 0
     applyCount: 1
     applyCycle: 0
     customActions: []

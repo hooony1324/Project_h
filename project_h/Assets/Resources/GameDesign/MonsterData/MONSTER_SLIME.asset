@@ -57,4 +57,4 @@ MonoBehaviour:
   defaultSkills:
   - DEFAULT_TEST_ATTACK
   dodgeSkill: 
-  DropGroupID: 1
+  DropGroupID: 2

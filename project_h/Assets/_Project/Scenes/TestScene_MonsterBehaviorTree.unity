@@ -381,14 +381,14 @@ MonoBehaviour:
   heroDataID: 0
   heroSpawnPos: {fileID: 258679855}
   registeredHeroSkills: []
-  DefaultAttackSkill: {fileID: 11400000, guid: 1170df94496ec5d4bbdb7750f0a631b1, type: 2}
-  DodgeSkill: {fileID: 0}
+  DefaultAttackSkill: {fileID: 11400000, guid: 014ff5efe34b690469ae925772bcbb3b, type: 2}
+  DodgeSkill: {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
   PassiveSkill: {fileID: 0}
   registerHeroTestSkill: 0
   unregisterHeroTestSkill: 0
   executeHeroTestSkill: 0
   EnablePatrol: 0
-  monsterDataID: 5
+  monsterDataID: 1
   monsterSpawnPos: {fileID: 202487936}
   registeredMonsterSkills: []
   monsterTestSkill: {fileID: 11400000, guid: dfbfa9c5e3471c241aa5ff55d5e37e7f, type: 2}
@@ -38056,7 +38056,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668971143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d2a078f348699a41878c17a91c56318, type: 3}
+  m_Script: {fileID: 11500000, guid: 6491c3331e144c6429d41e9f24c3b459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1985050877

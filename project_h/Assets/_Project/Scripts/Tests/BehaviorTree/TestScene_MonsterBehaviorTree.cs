@@ -111,9 +111,6 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
         Managers.Hero.SetMainHero(hero);
         
-        EventBus<TEST_HeroSpawnEvent>.Raise(new TEST_HeroSpawnEvent
-        {
-        });
 
         // joystick
         GameObject playerController = new GameObject { name = "@PlayerController"};
@@ -127,6 +124,10 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
         RegisterHeroTestSkill();
         RegisterMonsterTestSkill();
+
+        EventBus<TEST_HeroSpawnEvent>.Raise(new TEST_HeroSpawnEvent
+        {
+        });
     }
 
     public void RegisterHeroTestSkill()

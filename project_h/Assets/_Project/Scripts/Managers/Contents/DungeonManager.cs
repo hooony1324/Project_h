@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEditor.Rendering;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -13,6 +14,10 @@ public class DungeonManager
     public DungeonData CurrentDungeonData => _currentDungeonData;
     private DungeonData _currentDungeonData;
     public int CurrentDungeonId => _currentDungeonData ? _currentDungeonData.Id : 0;
+
+    // 몬스터 처치1 > 몬스터 처치2 상황 드랍 아이템 겹치는 경우 안생기도록 스폰한 아이템 캐시
+    public HashSet<int> SpawnedItemsCache = new();
+
 
     public void Setup(Dungeon dungeon)
     {
@@ -82,6 +87,8 @@ public class DungeonManager
         cts_dropItem.Cancel();
         cts_dropItem.Dispose();
         cts_dropItem = null;
+
+        SpawnedItemsCache.Clear();
     }
 
     public async Awaitable GenerateDungeon()
@@ -163,6 +170,7 @@ public class DungeonManager
     {
         ItemHolder itemHolder = Managers.Object.Spawn<ItemHolder>(position);
         itemHolder.Setup(itemID);
+        SpawnedItemsCache.Add(itemID);
     }
 
     // 아이템이 DefaultSkill인지 확인하고 소환할 수 있는지 확인
@@ -170,6 +178,11 @@ public class DungeonManager
     {
         Item item = Managers.Data.GetItemData(itemID);
         bool isMultiple = Managers.Inventory.IsMultiple(item.ID);
+
+        bool isCurrentlySpawned = SpawnedItemsCache.Contains(itemID);
+
+        if (isCurrentlySpawned)
+            return false;
 
         if ((item.IsAllowMultiple == false) && isMultiple)
             return false;

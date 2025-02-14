@@ -121,6 +121,7 @@ public class MonsterWaveController : InitOnce
     {
         Monster monster = Managers.Object.Spawn<Monster>(position);
         monster.SetData(Managers.Data.GetMonsterData(monsterID));
+        monster.onDead -= OnMonsterDeath;
         monster.onDead += OnMonsterDeath;
     }
 
@@ -133,7 +134,8 @@ public class MonsterWaveController : InitOnce
         {
             if (_totalKillCount >= _totalMonsterCount)
             {
-                onWavesCleared.Invoke();
+                onWavesCleared?.Invoke();
+                onWavesCleared = null;
             }
             else
             {

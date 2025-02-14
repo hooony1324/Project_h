@@ -16,7 +16,16 @@ public class Item : ScriptableObject
     public Sprite ItemHolderSprite => itemHolderSprite;
     public bool IsAllowMultiple => isAllowMultiple;
     public bool IsEquipment => isEquipment;
-    public bool IsSpawnable => itemAcquireAction.IsSpawnable;
+    public bool IsSpawnable
+    {
+        get
+        {
+            if (itemAcquireAction == null)
+                return false;
+                
+           return itemAcquireAction.IsSpawnable;
+        }
+    }  
 
     public void Acquire()
     {

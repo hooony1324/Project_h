@@ -57,4 +57,4 @@ MonoBehaviour:
   defaultSkills:
   - CHARIOT_CHARGING_RUSH
   dodgeSkill: 
-  DropGroupID: 0
+  DropGroupID: 2

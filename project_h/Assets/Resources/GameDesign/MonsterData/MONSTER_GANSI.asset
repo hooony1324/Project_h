@@ -57,4 +57,4 @@ MonoBehaviour:
   defaultSkills:
   - GANGSI_ATTACK
   dodgeSkill: 
-  DropGroupID: 0
+  DropGroupID: 2

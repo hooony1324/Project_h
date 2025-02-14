@@ -57,4 +57,4 @@ MonoBehaviour:
   defaultSkills:
   - BALLISTA_ARROW
   dodgeSkill: 
-  DropGroupID: 0
+  DropGroupID: 2

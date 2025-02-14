@@ -161,7 +161,7 @@ MonoBehaviour:
   Movement: {fileID: 0}
   SkillSystem: {fileID: 0}
   Target: {fileID: 0}
-  enemyCategory: {fileID: 11400000, guid: 3f9e9f38fcf2f754a948140a973012a1, type: 2}
+  enemyCategory: {fileID: 0}
 --- !u!114 &1191303508249754646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,6 +179,9 @@ MonoBehaviour:
   moveSpeedStat: {fileID: 0}
   searchRangeStat: {fileID: 0}
   attackRangeStat: {fileID: 0}
+  keysStat: {fileID: 0}
+  goldsStat: {fileID: 0}
+  fragilityStat: {fileID: 0}
 --- !u!114 &-4095148635912737438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DefaultAttack: {fileID: 11400000, guid: 226b956c668983e4da21c96449068586, type: 2}
-  Roll: {fileID: 11400000, guid: ee6ea7d0c01635d48be5ca64b711d173, type: 2}
+  Dodge: {fileID: 0}
 --- !u!50 &757317807149808681
 Rigidbody2D:
   serializedVersion: 5
