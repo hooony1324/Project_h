@@ -18,8 +18,7 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 7117771178251124742
-  description: "\uBC1B\uB294 \uB300\uBBF8\uC9C0 2\uBC30 / \uC785\uD788\uB294 \uB300\uBBF8\uC9C0
-    2\uBC30"
+  description: "\uBC1B\uB294 \uB300\uBBF8\uC9C0 2\uBC30 / \uACF5\uACA9\uB825 2\uBC30"
   references:
     version: 2
     RefIds:
@@ -27,11 +26,11 @@ MonoBehaviour:
       type: {class: MultiplyStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:
-        - id: 2
+        - id: 4
           isDynamicValue: 0
           valueType: 0
           value: 2
-        - id: 4
+        - id: 2
           isDynamicValue: 0
           valueType: 0
           value: 2

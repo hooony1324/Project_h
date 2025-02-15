@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
-  m_Name: "\uBBF8\uC791\uC5C5_dragonarmor_red"
+  m_Name: emperor_staff
   m_EditorClassIdentifier: 
-  id: 10002
-  itemHolderSprite: {fileID: 21300000, guid: 350a8a00571b0fe4aad0791518a8dcc4, type: 3}
+  id: 10014
+  itemHolderSprite: {fileID: 21300000, guid: 57b9647a687e88d408576d3684d78a47, type: 3}
   isAllowMultiple: 0
   isEquipment: 1
   itemAcquireAction:
-    rid: -2
-  description: "\uC801 \uCC98\uC2DC \uC2DC \uC77C\uC815 \uD655\uB960\uB85C \uCCB4\uB825
-    \uD68C\uBCF5"
+    rid: 7117771269601755150
+  description: "\uC2A4\uD0AC \uD68D\uB4DD / \uC624\uBE0C\uC81D\uD2B8 \uD0C0\uC77C"
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 7117771269601755150
+      type: {class: AddPassiveSkillAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillID: 10014

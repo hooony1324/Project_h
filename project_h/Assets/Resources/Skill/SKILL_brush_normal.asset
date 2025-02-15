@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31f7a530d8c595e42b9cbaf9ae344b36, type: 3}
+  m_Name: SKILL_brush_normal
+  m_EditorClassIdentifier: 
+  id: 10016
+  categories: []
+  icon: {fileID: 0}
+  codeName: brush_normal
+  displayName: 
+  description: "brush_normal \uC544\uC774\uD15C \uD328\uC2DC\uBE0C \uC2A4\uD0AC"
+  type: 0
+  useType: 0
+  executionType: 0
+  applyType: 0
+  needSelectionResultType: 0
+  targetSelectionTimingOption: 0
+  targetSearchTimingOption: 0
+  acquisitionConditions: []
+  acquisitionCosts: []
+  useConditions:
+  - rid: 7117771337146826752
+  isAllowLevelExceedDatas: 0
+  maxLevel: 1
+  defaultLevel: 1
+  skillDatas:
+  - level: 1
+    levelUpConditions: []
+    levelUpCosts: []
+    precedingAction:
+      rid: -2
+    action:
+      rid: 7117771337146826753
+    runningFinishOption: 0
+    duration: 0
+    applyCount: 1
+    applyCycle: 0
+    cooldown:
+      defaultValue: 5
+      scaleStat: {fileID: 11400000, guid: 72402e4fc1564964aa197dd72e6890f8, type: 2}
+      reduceMinValue: 0
+    targetSearcher:
+      selectionAction:
+        rid: 7117771337146826754
+      searchAction:
+        rid: 7117771337146826755
+    costs: []
+    isUseCast: 0
+    castTime:
+      defaultValue: 0
+      scaleStat: {fileID: 0}
+      reduceMinValue: 0
+    isUseCharge: 0
+    chargeFinishActionOption: 0
+    chargeDuration: 0
+    chargeTime: 0
+    needChargeTimeToUse: 0
+    startChargePower: 0
+    effectSelectors:
+    - level: 1
+      effect: {fileID: 11400000, guid: 169c491de67b0c94a9d792bee52663f6, type: 2}
+    inSkillActionFinishOption: 0
+    castAnimatorParamter:
+      type: 0
+      name: 
+    chargeAnimatorParameter:
+      type: 0
+      name: 
+    precedingActionAnimatorParameter:
+      type: 0
+      name: 
+    actionAnimatorParameter:
+      type: 1
+      name: isMovingAttack
+    customActionsOnCast: []
+    customActionsOnCharge: []
+    customActionsOnPrecedingAction: []
+    customActionsOnAction: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7117771337146826752
+      type: {class: IsEntityReadyCondition, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7117771337146826753
+      type: {class: SpawnProjectileAction, ns: , asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 5549990469403761074, guid: 339a60ab2036e2e4a96b093b176906d2, type: 3}
+        spawnPointSocketName: FireSocket
+        speed: 30
+        lifetime: 3
+        useObjectPool: 1
+        impactAction:
+          rid: 7117771337146826756
+        projectileMotion:
+          rid: 7117771337146826757
+        shootInfos:
+        - angle: 0
+    - rid: 7117771337146826754
+      type: {class: SelectTargetByTargettingRange, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+        targettingRange:
+          defaultValue: 20
+          scaleStat: {fileID: 11400000, guid: 889513ad828781c4bac427af8454624e, type: 2}
+          reduceMinValue: 0
+        layerMask:
+          serializedVersion: 2
+          m_Bits: 0
+    - rid: 7117771337146826755
+      type: {class: SelectedTarget, ns: , asm: Assembly-CSharp}
+      data:
+        isShowIndicatorPlayerOnly: 0
+        isTransparentIndicator: 0
+        indicatorViewAction:
+          rid: -2
+        isUseScale: 0
+    - rid: 7117771337146826756
+      type: {class: ImpactAndDestroy, ns: , asm: Assembly-CSharp}
+      data:
+        _impactEffect: {fileID: 0}
+    - rid: 7117771337146826757
+      type: {class: StraightMotion, ns: , asm: Assembly-CSharp}
+      data: 

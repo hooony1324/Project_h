@@ -17,11 +17,12 @@ MonoBehaviour:
   isAllowMultiple: 0
   isEquipment: 1
   itemAcquireAction:
-    rid: -2
+    rid: 7117771269601755137
   description: "\uCCAB \uC6E8\uC774\uBE0C \uC2DC\uC791 \uD6C4 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
     \uB300\uBBF8\uC9C0"
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 7117771269601755137
+      type: {class: EliminateMonstersAction, ns: , asm: Assembly-CSharp}
+      data: 
