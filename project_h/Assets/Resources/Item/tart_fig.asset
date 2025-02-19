@@ -10,28 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
-  m_Name: flower_jade
+  m_Name: tart_fig
   m_EditorClassIdentifier: 
-  id: 10019
-  itemHolderSprite: {fileID: 4182642569779545269, guid: 8a56932c27bf5474bacca9380d3225a9, type: 3}
+  id: 10034
+  itemHolderSprite: {fileID: 1276953881173388541, guid: 4f32b87cad6eaec41b21cd38b5d21671, type: 3}
   isAllowMultiple: 0
   isEquipment: 1
   itemAcquireAction:
-    rid: 7117771360184303616
-  description: "\uC7AC\uC0AC\uC6A9\uAC10\uC18C \uC18C, \uACF5\uACA9 \uC18D\uB3C4
-    \uC18C"
+    rid: 7117771429082300425
+  description: "\uCCB4\uB825 \uD68C\uBCF5 \uC18C"
   references:
     version: 2
     RefIds:
-    - rid: 7117771360184303616
+    - rid: 7117771429082300425
       type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:
-        - id: 7
+        - id: 1
           isDynamicValue: 0
           valueType: 0
-          value: 0.5
-        - id: 3
-          isDynamicValue: 0
-          valueType: 0
-          value: 0.5
+          value: 1

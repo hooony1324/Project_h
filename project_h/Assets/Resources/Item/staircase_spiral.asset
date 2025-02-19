@@ -10,28 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
-  m_Name: flower_jade
+  m_Name: staircase_spiral
   m_EditorClassIdentifier: 
-  id: 10019
-  itemHolderSprite: {fileID: 4182642569779545269, guid: 8a56932c27bf5474bacca9380d3225a9, type: 3}
+  id: 10031
+  itemHolderSprite: {fileID: 5051855095779919205, guid: ab0585f6337bd1e4687c581bc543859d, type: 3}
   isAllowMultiple: 0
   isEquipment: 1
   itemAcquireAction:
-    rid: 7117771360184303616
-  description: "\uC7AC\uC0AC\uC6A9\uAC10\uC18C \uC18C, \uACF5\uACA9 \uC18D\uB3C4
-    \uC18C"
+    rid: 7117771429082300423
+  description: "\uCD5C\uB300 \uCCB4\uB825 \uC18C"
   references:
     version: 2
     RefIds:
-    - rid: 7117771360184303616
+    - rid: 7117771429082300423
       type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:
-        - id: 7
+        - id: 1
           isDynamicValue: 0
-          valueType: 0
-          value: 0.5
-        - id: 3
-          isDynamicValue: 0
-          valueType: 0
-          value: 0.5
+          valueType: 1
+          value: 1

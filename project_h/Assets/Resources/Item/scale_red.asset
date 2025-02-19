@@ -18,7 +18,7 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 7117771178251124736
-  description: "\uCD5C\uB300 \uCCB4\uB825 \uC99D\uAC00 \uB300"
+  description: "\uCD5C\uB300 \uCCB4\uB825 \uB300"
   references:
     version: 2
     RefIds:

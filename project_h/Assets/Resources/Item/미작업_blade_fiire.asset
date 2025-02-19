@@ -10,23 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
-  m_Name: dragonclaw_blue
+  m_Name: "\uBBF8\uC791\uC5C5_blade_fiire"
   m_EditorClassIdentifier: 
-  id: 10010
-  itemHolderSprite: {fileID: 21300000, guid: 77c02b04a871c8840bb58889a560f99e, type: 3}
+  id: 10025
+  itemHolderSprite: {fileID: 6014489093273178937, guid: c6ced0e0e715bf74bb64149cfb4579d3, type: 3}
   isAllowMultiple: 0
   isEquipment: 1
   itemAcquireAction:
-    rid: 7117771178251124753
-  description: "\uACF5\uACA9\uB825 \uB300"
+    rid: -2
+  description: "\uC2A4\uD0AC \uD68D\uB4DD / ?"
   references:
     version: 2
     RefIds:
-    - rid: 7117771178251124753
-      type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
-      data:
-        statDatas:
-        - id: 2
-          isDynamicValue: 0
-          valueType: 0
-          value: 1.5
+    - rid: -2
+      type: {class: , ns: , asm: }
