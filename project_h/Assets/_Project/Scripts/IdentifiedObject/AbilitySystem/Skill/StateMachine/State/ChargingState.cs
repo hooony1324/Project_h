@@ -15,8 +15,6 @@ public class ChargingState : SkillState
     {
         Entity.Activate();
 
-        Entity.Owner.Movement.enabled = false;
-
         if (Entity.Owner.IsPlayer)
         {
             Entity.SelectTarget(OnTargetSearchCompleted, false);
@@ -72,7 +70,6 @@ public class ChargingState : SkillState
 
     public override void Exit()
     {
-        Entity.Owner.Movement.enabled = true;
         IsChargeEnded = false;
         IsChargeSuccessed = false;
 

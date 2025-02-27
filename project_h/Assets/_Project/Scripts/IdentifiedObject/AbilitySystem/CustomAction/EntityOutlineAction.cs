@@ -37,7 +37,7 @@ public class EntityOutlineAction : CustomAction
         if (entity == null)
             return;
 
-        instancedMaterial.DisableKeyword("OUTBASE_ON");
+        instancedMaterial.DisableKeyword("OUTBASE_OFF");
         instancedMaterial.SetColor("_OutlineColor", Color.white);
     }
 

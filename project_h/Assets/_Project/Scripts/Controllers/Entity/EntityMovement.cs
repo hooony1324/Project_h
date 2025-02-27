@@ -79,6 +79,9 @@ public class EntityMovement : MonoBehaviour
 
     public bool AtDestination => agent.destination.InRangeOf(transform.position, 0.2f);
 
+    // LookAt 활성화 여부
+    public bool CanRotate { get; set; } = true;
+
     public void Move(Vector3 moveDir)
     {
         if (IsRolling)
@@ -150,6 +153,9 @@ public class EntityMovement : MonoBehaviour
 
     public void LookAt(Vector3 position)
     {
+        if (!CanRotate)
+            return;
+            
         Owner.LookAt(position);
     }
  

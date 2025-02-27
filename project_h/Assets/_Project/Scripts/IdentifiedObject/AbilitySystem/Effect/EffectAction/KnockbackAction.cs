@@ -19,7 +19,7 @@ public class KnockbackAction : EffectAction
         if (target == null || target.IsDead)
             return;
 
-        target.Movement.enabled = false;
+        
 
         // 넉백 방향 계산 (사용자로부터 대상을 향하는 방향)
         Vector2 direction = (target.transform.position - user.transform.position).normalized;
@@ -34,7 +34,7 @@ public class KnockbackAction : EffectAction
             .SetEase(knockbackEase)
             .OnComplete(() => {
                 // 넉백 완료 후 추가 처리가 필요한 경우
-                target.Movement.enabled = true;
+                
             });
     }
 

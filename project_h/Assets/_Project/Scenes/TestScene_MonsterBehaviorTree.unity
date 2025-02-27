@@ -391,7 +391,7 @@ MonoBehaviour:
   monsterDataID: 1
   monsterSpawnPos: {fileID: 202487936}
   registeredMonsterSkills: []
-  monsterTestSkill: {fileID: 11400000, guid: dfbfa9c5e3471c241aa5ff55d5e37e7f, type: 2}
+  monsterTestSkill: {fileID: 11400000, guid: 1c0651e40a1c6114e9a73cd42a5d3b26, type: 2}
   registerMosnterTestSkill: 0
   UnregisterMosnterTestSkill: 0
   executeMonsterTestSkill: 0

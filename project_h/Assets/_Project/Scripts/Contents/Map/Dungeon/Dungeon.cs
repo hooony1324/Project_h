@@ -240,7 +240,6 @@ public class Dungeon : InitOnce
             if (FindRoot(roomA) != FindRoot(roomB))
             {
                 Union(roomA, roomB);
-
                 PlaceDoorsBetweenRooms(roomA, roomB);
             }
         }

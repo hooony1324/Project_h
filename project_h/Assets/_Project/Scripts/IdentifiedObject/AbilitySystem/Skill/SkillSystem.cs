@@ -245,6 +245,7 @@ public class SkillSystem : MonoBehaviour
         // }
     }
 
+    public bool IsSkillReserved => reservedSkill != null;
     public void ReserveSkill(Skill skill) => reservedSkill = skill;
     public void CancelReservedSkill() => reservedSkill = null;
 
@@ -274,10 +275,10 @@ public class SkillSystem : MonoBehaviour
     {
         var runningEffect = Find(effect);
 
-        if (effect.AntiEffect != null)
+        if (effect.CounterEffect != null)
         {
-            var antiEffect = Find(effect.AntiEffect);
-            if (antiEffect != null)
+            var counterEffect = Find(effect.CounterEffect);
+            if (counterEffect != null)
                 return;
         }
 

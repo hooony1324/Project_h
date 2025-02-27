@@ -15,6 +15,8 @@ public class InSkillActionState : EntitySkillState
         if (!base.OnReceiveMessage(message, data))
             return false;
 
+        Entity.Movement.CanRotate = false;  // 회전 비활성화
+
         if (RunningSkill.InSkillActionFinishOption != InSkillActionFinishOption.FinishWhenAnimationEnded)
             RunningSkill.onApplied += OnSkillApplied;
 
@@ -26,7 +28,7 @@ public class InSkillActionState : EntitySkillState
         IsStateEnded = false;
         RunningSkill.onApplied -= OnSkillApplied;
 
-        //Entity.Target = null;
+        Entity.Movement.CanRotate = true;   // 회전 다시 활성화
         Entity.Movement.TraceTarget = null;
 
         base.Exit();

@@ -21,9 +21,6 @@ public partial class UpdateDistanceToTargetAction : Action
         if (Managers.Hero.MainHero != null)
             distanceToTarget = Vector2.Distance(entity.Position, Managers.Hero.MainHero.Position);
 
-        if (entity.Target != null)
-            distanceToTarget = 0;
-
         DistanceToTarget.Value = distanceToTarget;
         return Status.Success;
     }

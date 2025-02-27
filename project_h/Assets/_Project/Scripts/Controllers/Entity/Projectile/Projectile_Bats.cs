@@ -22,6 +22,9 @@ public class Projectile_Bats : Projectile
         _skill = skill;
         _direction = direction;
 
+        transform.position = Managers.Dungeon.CurrentRoom.TeleportPoint.position;
+        transform.SetParent(Managers.Dungeon.CurrentRoom.TeleportPoint);
+
         batsController.Setup(this, skill);
     }
 

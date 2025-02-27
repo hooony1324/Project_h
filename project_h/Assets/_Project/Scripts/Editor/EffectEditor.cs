@@ -174,7 +174,7 @@ public class EffectEditor : IdentifiedObjectEditor
                         stackProperty.intValue = Mathf.Clamp(stackProperty.intValue, 1, maxStackProperty.intValue);
                     }
 
-                    EditorGUILayout.PropertyField(property.FindPropertyRelative("antiEffect"));
+                    EditorGUILayout.PropertyField(property.FindPropertyRelative("counterEffect"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("action"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("runningFinishOption"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("duration"));

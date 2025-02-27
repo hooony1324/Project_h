@@ -19,6 +19,10 @@ public partial class PatrolRandomPositionAction : Action
     protected override Status OnStart()
     {
         entity = entity == null ? Agent.Value.GetComponent<Entity>() : entity;
+
+        if (entity.Target != null)
+            return Status.Failure;
+
         Vector2 nextPos = entity.Position;
         nextPos = nextPos.RandomPointInAnnulus(2, 6);
 
@@ -33,9 +37,16 @@ public partial class PatrolRandomPositionAction : Action
     protected override Status OnUpdate()
     {
         if (!Managers.Hero.MainHero.IsDead)
-            if (DistanceToTarget.Value <= SearchRange.Value)
+        {
+            if (entity.Target != null)
                 return Status.Failure;
-        
+
+            if (DistanceToTarget.Value <= SearchRange.Value)
+            {
+                entity.Target = Managers.Hero.MainHero;
+                return Status.Failure;
+            }       
+        }
         if (entity.Movement.AtDestination)
             waitingTime += Time.deltaTime;
             

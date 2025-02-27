@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public abstract class ItemAcquireAction
 {
     public abstract void AqcuireAction(Item owner);
+    // public virtual void Release() {}
     public virtual bool IsSpawnable => true;
 
     public bool IsActionType<T>() where T : ItemAcquireAction
@@ -67,7 +68,7 @@ public class SelectDefaultSkill : ItemAcquireAction
 
 
 [System.Serializable]
-public class DropGoldAction : ItemAcquireAction
+public class DungeonGoldAcquireAction : ItemAcquireAction
 {
     public int goldStatID;
     public override void AqcuireAction(Item owner) 

@@ -9,12 +9,12 @@ public class EffectStackAction
     [SerializeField, Min(1)]
     private int stack;
     // Effect가 다음 StackAction을 적용할 때 이 Action을 Release 할 것인가?
-    [SerializeField]
+    [SerializeField, Tooltip("Effect가 다음 StackAction을 적용할 때 이 Action을 Release 할 것인가?")]
     private bool isReleaseOnNextApply;
     // Effect마다 1번씩만 적용될 것인가?
     // ex. 이 Option이 켜져있으면, Action의 Stack이 2일 때 Effect의 Stack이 2가되면 Action이 적용되고,
     // Effect의 Stack이 3으로 증가되었다가 다시 2로 떨어져도, Action이 이미 한번 적용되었기 때문에 다시 적용되지 않음
-    [SerializeField]
+    [SerializeField, Tooltip("Effect마다 최초 1번만 적용될 것인가?")]
     private bool isApplyOnceInLifeTime;
 
     // 적용할 효과

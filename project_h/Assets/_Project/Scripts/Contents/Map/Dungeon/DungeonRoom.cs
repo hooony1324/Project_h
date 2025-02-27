@@ -77,7 +77,7 @@ public class DungeonRoom : InitOnce
     private Vector2Int[] _spawnedGrid;
     private readonly List<DungeonDoor> _doors = new List<DungeonDoor>();
 
-    public Vector3 TeleportPosition => _teleportPoint.position;
+    public Transform TeleportPoint => _teleportPoint;
     public List<DungeonDoor> Doors => _doors;
 
     public Vector2Int[] GetPatternIndexes()
@@ -215,6 +215,8 @@ public class DungeonRoom : InitOnce
         {
             roomVisitedAction?.Apply(this);
             _isVisited = true;
+
+            Managers.Dungeon.CurrentRoom = this;
         }
     }
 

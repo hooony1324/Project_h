@@ -5,14 +5,13 @@ using Action = Unity.Behavior.Action;
 using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "TraceTarget", story: "[Agent] traces Target up to [AttackRange]", category: "Action", id: "a51d3a203437abdbf3dc980daad32835")]
+[NodeDescription(name: "TraceTarget", story: "[Agent] traces Target up to [AttackRange] by [DistanceToTarget]", category: "Action", id: "a51d3a203437abdbf3dc980daad32835")]
 public partial class TraceTargetAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
     [SerializeReference] public BlackboardVariable<float> AttackRange;
-
+    [SerializeReference] public BlackboardVariable<float> DistanceToTarget;
     Entity entity;
-    Transform targetTransform;
 
     protected override Status OnStart()
     {
@@ -21,7 +20,10 @@ public partial class TraceTargetAction : Action
         if (Managers.Hero.MainHero.IsDead)
             return Status.Failure;
 
-        Trace();
+        if (entity.Target == null)
+            return Status.Failure;
+        
+        entity.Movement.TraceTarget = entity.Target.transform;
 
         return Status.Running;
     }
@@ -37,8 +39,7 @@ public partial class TraceTargetAction : Action
             return Status.Failure;
         }
 
-        float distance = Vector2.Distance(Agent.Value.transform.position, targetTransform.position);
-
+        float distance = DistanceToTarget.Value;
         if (distance > AttackRange.Value)
         {
             return Status.Running;
@@ -50,15 +51,6 @@ public partial class TraceTargetAction : Action
         }
     }
 
-    void Trace()
-    {
-        if (entity.Target != null)
-            targetTransform = entity.Target.transform;
-        else
-            targetTransform = Managers.Hero.MainHero.transform;
-
-        entity.Movement.TraceTarget = targetTransform;
-    }
 
 }
 

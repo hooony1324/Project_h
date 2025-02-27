@@ -20,12 +20,18 @@ public partial class SelectAndUseSkillAction : Action
         entity = entity == null ? Agent.Value.GetComponent<Entity>() : entity;
 
         // Target이 있어야 Skill Use가능
-        entity.Target = Managers.Hero.MainHero;
+        if (entity.Target == null)
+            return Status.Failure;
 
         if (entity.Target.IsDead)
         {
             entity.Target = null;
             return Status.Failure;
+        }
+
+        if (entity.SkillSystem.IsSkillReserved)
+        {
+            return Status.Running;
         }
 
         // select skill
@@ -34,13 +40,12 @@ public partial class SelectAndUseSkillAction : Action
             var activeSkills = entity.SkillSystem.OwnSkills.Where(x => !x.IsPassive).ToArray();
             var usableSkills = activeSkills.Where(x => x.IsUseable).ToArray();
             
+            if (usableSkills.Length == 0)
+                return Status.Failure;
+
             int randomIdx = Random.Range(0, usableSkills.Length);
-            selectedSkill = activeSkills[randomIdx];
+            selectedSkill = usableSkills[randomIdx];
         }
-
-
-        if (selectedSkill == null)
-            return Status.Failure;
 
         if (selectedSkill.IsUseable)
         {
@@ -54,6 +59,14 @@ public partial class SelectAndUseSkillAction : Action
 
     protected override Status OnUpdate()
     {
+        // 다른 효과에 의해 스킬 중단??
+        if (!entity.IsInState<EntityDefaultState>())
+        {
+            selectedSkill.Cancel();
+            selectedSkill = null;
+            return Status.Failure;
+        }
+
         if (selectedSkill.IsActivated == false)
         {
             selectedSkill = null;
