@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "ITEM", menuName = "Item/AbilityItem")]
@@ -8,7 +9,9 @@ public class Item : ScriptableObject
     [SerializeField] private Sprite itemHolderSprite;
     [SerializeField, Tooltip("여러 개 획득할 수 있는지의 여부")] private bool isAllowMultiple = false;
     [SerializeField, Tooltip("장비 창에 보여줄지의 여부")] private bool isEquipment = true;
-    [SerializeReference, SubclassSelector] public ItemAcquireAction itemAcquireAction;
+
+
+    [SerializeReference, SubclassSelector] public ItemAcquireAction[] itemAcquireActions;
     
     [SerializeField] private string description;
     
@@ -20,26 +23,41 @@ public class Item : ScriptableObject
     {
         get
         {
-            if (itemAcquireAction == null)
+            if (itemAcquireActions.Length == 0)
                 return false;
                 
-           return itemAcquireAction.IsSpawnable;
+           return itemAcquireActions.All(x => x.IsSpawnable);
         }
     }  
 
     public void Acquire()
     {
-        itemAcquireAction.AqcuireAction(this);
+        foreach (var itemAcquireAction in itemAcquireActions)
+        {
+            itemAcquireAction.AqcuireAction(this);
+        }
+    }
+
+    public void Release()
+    {
+        foreach (var itemAcquireAction in itemAcquireActions)
+        {
+            itemAcquireAction.Release();
+        }
     }
 
     public void Load()
     {
-        if(!itemAcquireAction.IsActionType<IncreaseStatItemAction>())
-            return;
+        foreach (var itemAcquireAction in itemAcquireActions)
+        {
+            if (!itemAcquireAction.IsActionType<IncreaseStatItemAction>())
+                continue;
 
-        IncreaseStatItemAction increaseStatItem = itemAcquireAction as IncreaseStatItemAction;
-        increaseStatItem.Load(); 
+            IncreaseStatItemAction increaseStatItem = itemAcquireAction as IncreaseStatItemAction;
+            increaseStatItem.LoadStat();
+        }
     }
+
 }
 
 

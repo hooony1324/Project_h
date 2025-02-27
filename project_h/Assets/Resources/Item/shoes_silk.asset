@@ -18,10 +18,24 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 7117771429082300422
+  itemAcquireActions:
+  - rid: 1591114902347973014
   description: "\uC774\uB3D9 \uC18D\uB3C4 \uC18C / \uCD5C\uB300 \uCCB4\uB825 \uC18C"
   references:
     version: 2
     RefIds:
+    - rid: 1591114902347973014
+      type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
+      data:
+        statDatas:
+        - id: 1
+          isDynamicValue: 0
+          valueType: 1
+          value: 1
+        - id: 3
+          isDynamicValue: 0
+          valueType: 0
+          value: 0.5
     - rid: 7117771429082300422
       type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
       data:

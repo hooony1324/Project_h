@@ -18,11 +18,21 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 1591114598863864494
+  itemAcquireActions:
+  - rid: 1591114902347973031
   description: "\uBC1B\uB294 \uB300\uBBF8\uC9C0 1/2"
   references:
     version: 2
     RefIds:
     - rid: 1591114598863864494
+      type: {class: MultiplyStatItem, ns: , asm: Assembly-CSharp}
+      data:
+        statDatas:
+        - id: 4
+          isDynamicValue: 0
+          valueType: 0
+          value: -0.5
+    - rid: 1591114902347973031
       type: {class: MultiplyStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:

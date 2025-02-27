@@ -18,10 +18,16 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 7117771337146826771
+  itemAcquireActions:
+  - rid: 1591114902347973041
   description: "\uC2A4\uD0AC \uD68D\uB4DD / \uC624\uBE0C\uC81D\uD2B8 \uD0C0\uC77C"
   references:
     version: 2
     RefIds:
+    - rid: 1591114902347973041
+      type: {class: AddPassiveSkillAction, ns: , asm: Assembly-CSharp}
+      data:
+        skillID: 10017
     - rid: 7117771337146826771
       type: {class: AddPassiveSkillAction, ns: , asm: Assembly-CSharp}
       data:

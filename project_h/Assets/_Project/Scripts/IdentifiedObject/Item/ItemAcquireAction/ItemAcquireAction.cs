@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +10,7 @@ using Random = UnityEngine.Random;
 public abstract class ItemAcquireAction
 {
     public abstract void AqcuireAction(Item owner);
-    // public virtual void Release() {}
+    public virtual void Release() {}
     public virtual bool IsSpawnable => true;
 
     public bool IsActionType<T>() where T : ItemAcquireAction
@@ -76,7 +77,7 @@ public class DungeonGoldAcquireAction : ItemAcquireAction
         Vector2Int range = Managers.Dungeon.CurrentDungeonData != null ? Managers.Dungeon.CurrentDungeonData.GoldDropRange : new Vector2Int(1, 3);
         int goldValue = Random.Range(range.x, range.y);
 
-        Stat stat = Managers.Hero.MainHero.StatsComponent.GetStat(goldStatID);
+        Stat stat = Managers.Hero.MainHero.StatsComponent.GoldsStat;
         stat.DefaultValue += goldValue;
     }
 }
@@ -91,6 +92,14 @@ public class AddPassiveSkillAction : ItemAcquireAction
         Managers.Hero.MainHero.SkillSystem.RegisterWithoutCost(skill);
 
         Managers.Hero.PassiveSkills.Add(skillID);
+    }
+
+    public override void Release()
+    {
+        Skill skill = Managers.Data.GetSkillData(skillID);
+        Managers.Hero.MainHero.SkillSystem.Unregister(skill);
+
+        Managers.Hero.PassiveSkills.Remove(skillID);
     }
 }
 

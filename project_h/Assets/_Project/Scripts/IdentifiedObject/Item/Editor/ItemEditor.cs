@@ -8,7 +8,8 @@ public class ItemEditor : Editor
     private SerializedProperty spriteProperty;
     private SerializedProperty isAllowMultipleProperty;
     private SerializedProperty isEquipmentProperty;
-    private SerializedProperty itemAcquireActionProperty;
+    //private SerializedProperty itemAcquireActionProperty;
+    private SerializedProperty itemAcquireActionsProperty;
     private SerializedProperty descriptionProperty;
 
     private GUIStyle textAreaStyle;
@@ -21,7 +22,8 @@ public class ItemEditor : Editor
         spriteProperty = serializedObject.FindProperty("itemHolderSprite");
         isAllowMultipleProperty = serializedObject.FindProperty("isAllowMultiple");
         isEquipmentProperty = serializedObject.FindProperty("isEquipment");
-        itemAcquireActionProperty = serializedObject.FindProperty("itemAcquireAction");
+        //itemAcquireActionProperty = serializedObject.FindProperty("itemAcquireAction");
+        itemAcquireActionsProperty = serializedObject.FindProperty("itemAcquireActions");
         descriptionProperty = serializedObject.FindProperty("description");
     }
     private void StyleSetup()
@@ -63,7 +65,8 @@ public class ItemEditor : Editor
         EditorGUILayout.LabelField("아이템 효과", EditorStyles.boldLabel);
         EditorGUI.indentLevel++;
         
-        EditorGUILayout.PropertyField(itemAcquireActionProperty, new GUIContent("획득 시 효과"));
+        //EditorGUILayout.PropertyField(itemAcquireActionProperty, new GUIContent("획득 시 효과"));
+        EditorGUILayout.PropertyField(itemAcquireActionsProperty, new GUIContent("획득 시 효과"));
         
         EditorGUI.indentLevel--;
 

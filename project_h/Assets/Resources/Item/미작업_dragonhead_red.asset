@@ -18,11 +18,16 @@ MonoBehaviour:
   isEquipment: 1
   itemAcquireAction:
     rid: 7117771269601755137
+  itemAcquireActions:
+  - rid: 1591114902347973045
   description: "\uCCAB \uC6E8\uC774\uBE0C \uC2DC\uC791 \uD6C4 \uBAA8\uB4E0 \uC801\uC5D0\uAC8C
     \uB300\uBBF8\uC9C0"
   references:
     version: 2
     RefIds:
+    - rid: 1591114902347973045
+      type: {class: EliminateMonstersAction, ns: , asm: Assembly-CSharp}
+      data: 
     - rid: 7117771269601755137
       type: {class: EliminateMonstersAction, ns: , asm: Assembly-CSharp}
       data: 

@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 
 
 [System.Serializable]
 public abstract class IncreaseStatItemAction : ItemAcquireAction
 {
-    abstract public void Load();
+    abstract public void LoadStat();
 }
 
 [System.Serializable]
@@ -52,7 +53,7 @@ public class AddStatItem : IncreaseStatItemAction
         Managers.Inventory.AddItem(owner);
     }
 
-    public override void Load()
+    public override void LoadStat()
     {
         foreach (StatItemData data in statDatas)
         {
@@ -73,8 +74,6 @@ public class AddStatItem : IncreaseStatItemAction
             }
         }
     }
-
-
 }
 
 
@@ -105,7 +104,7 @@ public class MultiplyStatItem : IncreaseStatItemAction
         Managers.Inventory.AddItem(owner);
     }
 
-    public override void Load()
+    public override void LoadStat()
     {
         foreach (StatItemData data in statDatas)
         {

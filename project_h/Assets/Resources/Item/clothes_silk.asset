@@ -16,13 +16,13 @@ MonoBehaviour:
   itemHolderSprite: {fileID: -5204687982931890929, guid: 796050f8cd33ba04fa3be5d6e447d943, type: 3}
   isAllowMultiple: 0
   isEquipment: 1
-  itemAcquireAction:
-    rid: 7117771429082300421
+  itemAcquireActions:
+  - rid: 1591114902347973027
   description: "\uC774\uB3D9 \uC18D\uB3C4 \uC911 / \uCCB4\uB825 \uD68C\uBCF5 \uC18C"
   references:
     version: 2
     RefIds:
-    - rid: 7117771429082300421
+    - rid: 1591114902347973027
       type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
       data:
         statDatas:

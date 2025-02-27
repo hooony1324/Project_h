@@ -18,10 +18,16 @@ MonoBehaviour:
   isEquipment: 0
   itemAcquireAction:
     rid: 2123022157656097791
-  Description: 
+  itemAcquireActions:
+  - rid: 1591114902347973036
+  description: 
   references:
     version: 2
     RefIds:
+    - rid: 1591114902347973036
+      type: {class: SelectDefaultSkill, ns: , asm: Assembly-CSharp}
+      data:
+        slotType: 0
     - rid: 2123022157656097791
       type: {class: SelectDefaultSkill, ns: , asm: Assembly-CSharp}
       data:
