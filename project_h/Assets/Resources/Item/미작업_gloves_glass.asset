@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
+  m_Name: "\uBBF8\uC791\uC5C5_gloves_glass"
+  m_EditorClassIdentifier: 
+  id: 10045
+  itemHolderSprite: {fileID: 7579835765311850929, guid: 075a5529a59358340872d8b8c7c207dd, type: 3}
+  isAllowMultiple: 0
+  isEquipment: 1
+  itemAcquireActions: []
+  description: "\uACF5\uC18D \uC0C1 / \uD53C\uACA9\uC2DC \uC81C\uAC70"
+  references:
+    version: 2
+    RefIds: []

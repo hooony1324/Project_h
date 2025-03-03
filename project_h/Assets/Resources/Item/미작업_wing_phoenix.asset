@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
+  m_Name: "\uBBF8\uC791\uC5C5_wing_phoenix"
+  m_EditorClassIdentifier: 
+  id: 10049
+  itemHolderSprite: {fileID: -2439157366407479114, guid: 22d64d1a6eb27374b994ee6deba4ef56, type: 3}
+  isAllowMultiple: 0
+  isEquipment: 1
+  itemAcquireActions: []
+  description: "\uACF5\uC911 \uB0A0\uAE30"
+  references:
+    version: 2
+    RefIds: []

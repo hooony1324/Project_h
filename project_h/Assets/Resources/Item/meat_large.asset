@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354f0bce8ab571e4a83271d31fb90f70, type: 3}
+  m_Name: meat_large
+  m_EditorClassIdentifier: 
+  id: 10059
+  itemHolderSprite: {fileID: 1326947229010011580, guid: 88ed019dff5dfb7488dad723d0685b42, type: 3}
+  isAllowMultiple: 0
+  isEquipment: 1
+  itemAcquireActions:
+  - rid: 3175914128541483019
+  description: "\uCD5C\uB300 \uCCB4\uB825 \uC18C/\uCCB4\uB825 \uB300"
+  references:
+    version: 2
+    RefIds:
+    - rid: 3175914128541483019
+      type: {class: MultiplyStatItem, ns: , asm: Assembly-CSharp}
+      data:
+        statDatas:
+        - id: 1
+          isDynamicValue: 0
+          valueType: 0
+          value: 3
+        - id: 1
+          isDynamicValue: 0
+          valueType: 1
+          value: 1
