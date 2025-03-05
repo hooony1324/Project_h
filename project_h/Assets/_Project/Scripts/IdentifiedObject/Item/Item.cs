@@ -9,6 +9,7 @@ public class Item : ScriptableObject
     [SerializeField] private Sprite itemHolderSprite;
     [SerializeField, Tooltip("여러 개 획득할 수 있는지의 여부")] private bool isAllowMultiple = false;
     [SerializeField, Tooltip("장비 창에 보여줄지의 여부")] private bool isEquipment = true;
+    [SerializeField, Tooltip("아이템 조합 가능 여부")] private bool isCombinable = true;
 
 
     [SerializeReference, SubclassSelector] public ItemAcquireAction[] itemAcquireActions;

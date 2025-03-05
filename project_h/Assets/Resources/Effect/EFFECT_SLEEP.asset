@@ -29,20 +29,24 @@ MonoBehaviour:
   - level: 1
     maxStack: 1
     stackActions: []
-    antiEffect: {fileID: 0}
+    counterEffect: {fileID: 0}
     action:
-      rid: -2
+      rid: 2965203756938166906
     runningFinishOption: 1
     isApplyAllWhenDurationExpires: 0
     duration:
       defaultValue: 3
       scaleStat: {fileID: 0}
-      reduceMinValue: 0
+      resultMinValue: 0
+      resultMaxValue: 0
     applyCount: 1
     applyCycle: 0
     customActions: []
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 2965203756938166906
+      type: {class: SleepAction, ns: , asm: Assembly-CSharp}
+      data:
+        removeTargetCategory: {fileID: 11400000, guid: 43104a1eee4e2474488b59b541f662c4, type: 2}
+        dotCategory: {fileID: 0}

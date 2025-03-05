@@ -178,6 +178,9 @@ public class EffectEditor : IdentifiedObjectEditor
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("action"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("runningFinishOption"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("duration"));
+                    
+                    EditorGUILayout.Space(25f);
+
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCount"));
                     EditorGUILayout.PropertyField(property.FindPropertyRelative("applyCycle"));
 

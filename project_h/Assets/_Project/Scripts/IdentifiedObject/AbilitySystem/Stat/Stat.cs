@@ -43,9 +43,10 @@ public class Stat : IdentifiedObject
     // subKey가 필요없을 경우 string.Empty를 subKey로 bonus를 저장함
     private Dictionary<object, Dictionary<object, float>> bonusValuesByKey = new();
 
-    public bool IsPercentType => isPercentType;
     public bool IsConsumable => isConsumable;
+    public bool IsPercentType => isPercentType;
     public bool IsReduceType => isReduceType;
+    public bool IsClampable => IsPercentType || IsReduceType;
     
     public float MaxValue
     {

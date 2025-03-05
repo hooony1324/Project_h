@@ -12,7 +12,8 @@ public class StatScaleFloatDrawer : PropertyDrawer
 
         var defaultValueProperty = property.FindPropertyRelative("defaultValue");
         var scaleStatProperty = property.FindPropertyRelative("scaleStat");
-        var reduceMinValueProperty = property.FindPropertyRelative("reduceMinValue");
+        var resultMinValueProperty = property.FindPropertyRelative("resultMinValue");
+        var resultMaxValueProperty = property.FindPropertyRelative("resultMaxValue");
 
         // label을 기준으로 position을 만들어줌
         position = EditorGUI.PrefixLabel(position, label);
@@ -31,18 +32,28 @@ public class StatScaleFloatDrawer : PropertyDrawer
         scaleStatProperty.objectReferenceValue = EditorGUI.ObjectField(scaleStatRect, GUIContent.none, scaleStatProperty.objectReferenceValue, typeof(Stat), false);
 
         Stat stat = scaleStatProperty.objectReferenceValue as Stat;
-        if (stat != null && stat.IsReduceType)
+        bool isClampable = stat != null && stat.IsClampable;
+        if (isClampable)
         {
-            float fieldWidth = 300f;
-            float labelWidth = 115f;
+            float totalWidth = position.width;
             float lineHeight = EditorGUIUtility.singleLineHeight;
             float spacing = 5f;
-
-            Rect labelRect = new Rect(position.x + position.width - labelWidth - fieldWidth - spacing, position.y + lineHeight + spacing, labelWidth, position.height);
-            Rect fieldRect = new Rect(position.x + position.width - fieldWidth, position.y + lineHeight + spacing, fieldWidth, position.height);
-
-            EditorGUI.LabelField(labelRect, "ReduceValue Min");
-            reduceMinValueProperty.floatValue = EditorGUI.FloatField(fieldRect, reduceMinValueProperty.floatValue);
+            // 한 줄에 Min과 Max를 모두 표시하기 위한 영역 계산
+            float half = (totalWidth - spacing) / 2;
+            float labelWidth = 120f;
+            float fieldWidth = half - labelWidth;
+            // Min 값 영역 (왼쪽)
+            Rect labelMinRect = new Rect(position.x, position.y + lineHeight + spacing, labelWidth, lineHeight);
+            Rect fieldMinRect = new Rect(labelMinRect.x + labelWidth, position.y + lineHeight + spacing, fieldWidth, lineHeight);
+            // Max 값 영역 (오른쪽)
+            Rect labelMaxRect = new Rect(fieldMinRect.x + fieldWidth + spacing, position.y + lineHeight + spacing, labelWidth, lineHeight);
+            Rect fieldMaxRect = new Rect(labelMaxRect.x + labelWidth, position.y + lineHeight + spacing, fieldWidth, lineHeight);
+            // Min 값 표시
+            EditorGUI.LabelField(labelMinRect, "Result Min Value");
+            resultMinValueProperty.floatValue = EditorGUI.FloatField(fieldMinRect, resultMinValueProperty.floatValue);
+            // Max 값 표시
+            EditorGUI.LabelField(labelMaxRect, "Result Max Value");
+            resultMaxValueProperty.floatValue = EditorGUI.FloatField(fieldMaxRect, resultMaxValueProperty.floatValue);
         }
 
         EditorGUI.EndProperty();

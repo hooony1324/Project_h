@@ -28,22 +28,23 @@ MonoBehaviour:
   - level: 1
     maxStack: 1
     stackActions: []
-    antiEffect: {fileID: 0}
+    counterEffect: {fileID: 0}
     action:
-      rid: 3506563725652131852
+      rid: 2965203756938166858
     runningFinishOption: 0
     isApplyAllWhenDurationExpires: 0
     duration:
       defaultValue: 0
       scaleStat: {fileID: 11400000, guid: f1d5fa2073b8b564aaf4d0aafd57dc9a, type: 2}
-      reduceMinValue: 0
+      resultMinValue: 0
+      resultMaxValue: 0
     applyCount: 1
     applyCycle: 0
     customActions: []
   references:
     version: 2
     RefIds:
-    - rid: 3506563725652131852
+    - rid: 2965203756938166858
       type: {class: DealDamageAction, ns: , asm: Assembly-CSharp}
       data:
         defaultDamage: 1
@@ -51,3 +52,5 @@ MonoBehaviour:
         bonusDamageStatFactor: 0
         bonusDamagePerLevel: 0
         bonusDamagePerStack: 0
+        resultMinDamage: 0
+        resultMaxDamage: 100

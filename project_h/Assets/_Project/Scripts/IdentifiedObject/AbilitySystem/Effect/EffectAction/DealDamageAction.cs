@@ -18,6 +18,11 @@ public class DealDamageAction : EffectAction
     [SerializeField]
     private float bonusDamagePerStack;
 
+    [SerializeField]
+    private float resultMinDamage;
+    [SerializeField]
+    private float resultMaxDamage = 100;
+
     private float GetDefaultDamage(Effect effect)
         => defaultDamage + (effect.DataBonusLevel * bonusDamagePerLevel);
 
@@ -37,6 +42,9 @@ public class DealDamageAction : EffectAction
 
         // 마지막으로 Effect의 Scale로 Damage를 Scaling함
         totalDamage *= scale;
+
+        // 최종 Damage 계산
+        totalDamage = Mathf.Clamp(totalDamage, resultMinDamage, resultMaxDamage);
 
         return totalDamage;
 }

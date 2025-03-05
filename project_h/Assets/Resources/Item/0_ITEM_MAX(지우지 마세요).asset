@@ -16,11 +16,17 @@ MonoBehaviour:
   itemHolderSprite: {fileID: 0}
   isAllowMultiple: 0
   isEquipment: 1
-  itemAcquireAction:
-    rid: -2
-  Description: 
+  isCombinable: 1
+  itemAcquireActions:
+  - rid: 2965203756938166458
+  - rid: -2
+  description: 
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
+    - rid: 2965203756938166458
+      type: {class: AddStatItem, ns: , asm: Assembly-CSharp}
+      data:
+        statDatas: []
