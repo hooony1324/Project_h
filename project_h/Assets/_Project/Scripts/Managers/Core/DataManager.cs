@@ -13,6 +13,7 @@ public class DataManager
     private readonly List<DropTableData> _dropTableDatas = new();
     private readonly List<Item> _itemDatas = new();
     private readonly Dictionary<int, SkillFusionData[]> _skillFusionDatas = new Dictionary<int, SkillFusionData[]>();
+    private readonly Dictionary<int, int[]> _itemCombinationDatas = new Dictionary<int, int[]>();
 
     public IReadOnlyDictionary<int, MonsterData> MonsterDatas => _monsterDatas;
     public IReadOnlyDictionary<int, HeroData> HeroDatas => _heroDatas;
@@ -21,6 +22,7 @@ public class DataManager
     public IReadOnlyList<DropTableData> DropTableDatas => _dropTableDatas;
     public IReadOnlyList<Item> ItemDatas => _itemDatas;
     public IReadOnlyDictionary<int, SkillFusionData[]> SkillFusionDatas => _skillFusionDatas;
+    public IReadOnlyDictionary<int, int[]> ItemCombinationDatas => _itemCombinationDatas;
     
     public void Init()
     {
@@ -59,6 +61,11 @@ public class DataManager
         foreach (var skillFusionData in Resources.LoadAll<DefaultSkillFusionData>("DefaultSkillFusionData"))
         {
             _skillFusionDatas.Add(skillFusionData.sourceSkillID, skillFusionData.fusionDatas);
+        }
+
+        foreach (var itemCombinationData in Resources.LoadAll<ItemCombinationData>("ItemCombinationData"))
+        {
+            _itemCombinationDatas.Add(itemCombinationData.ResultItemID , itemCombinationData.SourceItemIDs);
         }
     }
 

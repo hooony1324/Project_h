@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using Unity.Behavior;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using ReadOnlyAttribute = Unity.Collections.ReadOnlyAttribute;
 
@@ -87,12 +88,25 @@ public class TestScene_MonsterBehaviorScene : BaseScene
 
         await LoadAddressableAssets();
 
+        // Monster & Hero Data Init
         monster = Managers.Object.Spawn<Monster>(monsterSpawnPos.position.With(z: 0));
         monster.SetData(Managers.Data.GetMonsterData(monsterDataID));
+
+        BehaviorGraphAgent monsterBehavior = monster.GetComponent<BehaviorGraphAgent>();
+        monsterBehavior.SetVariableValue("EnablePatrol", EnablePatrol);
 
         hero = Managers.Object.Spawn<Hero>(heroSpawnPos.position.With(z: 0));
         hero.SetData(Managers.Data.GetHeroData(heroDataID));
 
+        GameObject gameStatusDebug = GameObject.Find("UI_GameStatusDebug");
+        if (gameStatusDebug)
+        {
+            GameObject characterStatus = Util.FindChild(gameStatusDebug, "CharacterStatus", true);
+            characterStatus.GetComponent<CharacterStatus>().Setup(hero);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(characterStatus.GetComponent<RectTransform>());
+        }
+        
+        // Skill Init
         var monsterSkillsToUnregister = monster.SkillSystem.OwnSkills.ToList(); 
         foreach (Skill monsterSkill in monsterSkillsToUnregister)
         {

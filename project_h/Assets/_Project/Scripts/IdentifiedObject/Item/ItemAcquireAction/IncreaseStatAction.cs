@@ -33,6 +33,8 @@ public class AddStatItem : IncreaseStatItemAction
 
     public override void AqcuireAction(Item owner) 
     {
+        this.owner = owner;
+
         foreach (StatItemData data in statDatas)
         {
             // data를 적용 : temporary -> DefaultValue, 
@@ -84,6 +86,8 @@ public class MultiplyStatItem : IncreaseStatItemAction
 
     public override void AqcuireAction(Item owner) 
     {
+        this.owner = owner;
+
         foreach (StatItemData data in statDatas)
         {
             // data를 적용 : temporary -> DefaultValue, 

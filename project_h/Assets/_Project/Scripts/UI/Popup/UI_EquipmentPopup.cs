@@ -37,7 +37,7 @@ public class UI_EquipmentPopup : UI_Popup
             Destroy(child.gameObject);
         }
 
-        foreach (Item item in Managers.Inventory.AllItems)
+        foreach (Item item in Managers.Inventory.EquippedItems)
         {
             var slot = Managers.Resource.Instantiate(nameof(UI_EquipmentPopupSlot), content.transform);
             slot.GetComponent<UI_EquipmentPopupSlot>().Setup(item);

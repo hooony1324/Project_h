@@ -7,11 +7,17 @@ public class InventoryManager
     public event ItemAddedHandler onItemAdded;
 
     public List<Item> allItems { get; } = new();
+    public List<Item> equippedItems { get; } = new();
     public IReadOnlyList<Item> AllItems => allItems;
+    public IReadOnlyList<Item> EquippedItems => equippedItems;
 
     public void AddItem(Item item)
     {
         allItems.Add(item);
+
+        if (item.IsEquipment)
+            equippedItems.Add(item);
+
         onItemAdded?.Invoke(item);
     }
 
@@ -39,5 +45,16 @@ public class InventoryManager
         {
             item.Load();
         }
+    }
+
+    public void RemoveEquippedItems(int[] itemIDs)
+    {
+        foreach (int itemID in itemIDs)
+        {
+            Item item = allItems.FirstOrDefault(x => x.ID == itemID);
+            if (item != null)
+                equippedItems.Remove(item);
+        }
+
     }
 }

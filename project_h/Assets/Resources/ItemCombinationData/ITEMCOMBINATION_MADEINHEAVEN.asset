@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3a44db407a03a5a4b84a8094f8009a86, type: 3}
-  m_Name: ITEMCOMBINATION
+  m_Name: ITEMCOMBINATION_MADEINHEAVEN
   m_EditorClassIdentifier: 
-  resultItemID: 0
-  sourceItemIDs: 
+  resultItemID: 10042
+  sourceItemIDs: 132700001427000015270000
