@@ -33,6 +33,7 @@ public class DungeonScene : BaseScene
         
         Managers.SaveLoad.LoadPlayData();
         Managers.SaveLoad.SaveGame();
+        
 
         return true;
     }
@@ -55,6 +56,7 @@ public class DungeonScene : BaseScene
 
     public override void Clear()
     {
+        Managers.SaveLoad.SaveGame();
         Managers.UI.Joystick = null;
     }
 }

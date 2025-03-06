@@ -331,7 +331,7 @@ public class SkillSystem : MonoBehaviour
             skill.Cancel();
     }
 
-    public Skill FindOwnedSkill(int skillId)
+    public Skill IsOwned(int skillId)
         => ownSkills.Find(x => x.ID == skillId);
 
     public Skill Find(Skill skill)

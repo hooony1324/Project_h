@@ -9,9 +9,11 @@ public abstract class ItemAcquireAction
     protected Item owner;
     public bool IsActionType<T>() where T : ItemAcquireAction
     {
-        if (this.GetType() == typeof(T))
-            return true;
+        return this.GetType() == typeof(T);
+    }
 
-        return false;
+    public bool IsSubclassOf<T>() where T : ItemAcquireAction
+    {
+        return this.GetType().IsSubclassOf(typeof(T));
     }
 }

@@ -6,14 +6,15 @@ public class InventoryManager
     public delegate void ItemAddedHandler(Item item);
     public event ItemAddedHandler onItemAdded;
 
-    public List<Item> allItems { get; } = new();
-    public List<Item> equippedItems { get; } = new();
+    private List<Item> allItems { get; } = new();
+    private List<Item> equippedItems { get; } = new();
     public IReadOnlyList<Item> AllItems => allItems;
     public IReadOnlyList<Item> EquippedItems => equippedItems;
 
     public void AddItem(Item item)
     {
-        allItems.Add(item);
+        if (!item.IsCombinedItem)
+            allItems.Add(item);
 
         if (item.IsEquipment)
             equippedItems.Add(item);
@@ -32,6 +33,7 @@ public class InventoryManager
     public void LoadItemSaveData(IReadOnlyList<int> itemSaveDatas)
     {
         allItems.Clear();
+        equippedItems.Clear();
         foreach (int itemID in itemSaveDatas)
         {
             Item item = Managers.Data.GetItemData(itemID);
@@ -41,10 +43,17 @@ public class InventoryManager
 
     public void LoadItems()
     {
+        equippedItems.Clear();
         foreach (var item in allItems)
         {
-            item.Load();
+            item.Acquire(bLoadSaveData:true);
         }
+    }
+
+    // 데이터 복구할 때만 사용
+    public void AddEquippedItem(Item item)
+    {
+        equippedItems.Add(item);
     }
 
     public void RemoveEquippedItems(int[] itemIDs)
@@ -55,6 +64,13 @@ public class InventoryManager
             if (item != null)
                 equippedItems.Remove(item);
         }
+    }
 
+    public void RemoveItem(Item item)
+    {
+        item.Release();
+
+        allItems.Remove(item);
+        equippedItems.Remove(item);
     }
 }

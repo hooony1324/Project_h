@@ -8,6 +8,7 @@ public class ItemEditor : Editor
     private SerializedProperty spriteProperty;
     private SerializedProperty isAllowMultipleProperty;
     private SerializedProperty isEquipmentProperty;
+    private SerializedProperty isCombinedItemProperty;
     private SerializedProperty itemAcquireActionsProperty;
     private SerializedProperty descriptionProperty;
 
@@ -21,6 +22,7 @@ public class ItemEditor : Editor
         spriteProperty = serializedObject.FindProperty("itemHolderSprite");
         isAllowMultipleProperty = serializedObject.FindProperty("isAllowMultiple");
         isEquipmentProperty = serializedObject.FindProperty("isEquipment");
+        isCombinedItemProperty = serializedObject.FindProperty("isCombinedItem");
         itemAcquireActionsProperty = serializedObject.FindProperty("itemAcquireActions");
         descriptionProperty = serializedObject.FindProperty("description");
     }
@@ -56,6 +58,7 @@ public class ItemEditor : Editor
         
         EditorGUILayout.PropertyField(isAllowMultipleProperty, new GUIContent("중복 획득 가능"));
         EditorGUILayout.PropertyField(isEquipmentProperty, new GUIContent("장비 창에 표시"));
+        EditorGUILayout.PropertyField(isCombinedItemProperty, new GUIContent("조합된 아이템"));
         EditorGUI.indentLevel--;
 
         EditorGUILayout.Space(10);

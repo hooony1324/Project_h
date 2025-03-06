@@ -13,11 +13,13 @@ public class AddPassiveSkillAction : ItemAcquireAction
         this.owner = owner;
 
         Skill skill = Managers.Data.GetSkillData(skillID);
-        Managers.Hero.MainHero.SkillSystem.RegisterWithoutCost(skill);
 
+        if (Managers.Hero.MainHero.SkillSystem.IsOwned(skillID))
+            return;
+
+        Managers.Hero.MainHero.SkillSystem.RegisterWithoutCost(skill);
         Managers.Hero.PassiveSkills.Add(skillID);
 
-        Managers.Inventory.AddItem(owner);
     }
 
     public override void Release()

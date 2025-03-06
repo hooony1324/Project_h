@@ -53,6 +53,7 @@ public class GameScene : BaseScene
 
     public override void Clear()
     {
+        Managers.SaveLoad.SaveGame();
         Managers.UI.Joystick = null;
 
     }

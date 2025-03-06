@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public abstract class IncreaseStatItemAction : ItemAcquireAction
 {
-    abstract public void LoadStat();
+    abstract public void LoadPresistantStat();
 }
 
 [System.Serializable]
@@ -51,11 +51,9 @@ public class AddStatItem : IncreaseStatItemAction
             }
 
         }
-  
-        Managers.Inventory.AddItem(owner);
     }
 
-    public override void LoadStat()
+    public override void LoadPresistantStat()
     {
         foreach (StatItemData data in statDatas)
         {
@@ -104,11 +102,9 @@ public class MultiplyStatItem : IncreaseStatItemAction
             }
 
         }
-  
-        Managers.Inventory.AddItem(owner);
     }
 
-    public override void LoadStat()
+    public override void LoadPresistantStat()
     {
         foreach (StatItemData data in statDatas)
         {

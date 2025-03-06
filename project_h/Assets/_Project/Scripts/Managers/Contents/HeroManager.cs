@@ -81,7 +81,6 @@ public class HeroManager
         {
             Stat stat = stats.GetStat(savedStat.ID);
             stat.DefaultValue = savedStat.DefaultValue;
-            //stat.MaxValue = savedStat.MaxValue; => MaxValue는 Item을 통해 복구
         }
 
         // Default Skills

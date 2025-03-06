@@ -39,7 +39,7 @@ public class StatsComponent : MonoBehaviour
 
         // TODO: HP -> 1001
         hpStat =  GetStat("HP");
-        moveSpeedStat = GetStat("MOVE_SPEED");
+        moveSpeedStat = GetStat("MOVESPEED");
         searchRangeStat = GetStat("RANGE_SEARCH");
         attackRangeStat = GetStat("RANGE_ATTACK");
 

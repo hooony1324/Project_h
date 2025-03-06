@@ -103,15 +103,16 @@ public class SaveLoadManager
 
     public void LoadPlayData()
     {
-        // 로드한 데이터를 적용
-        // - 스탯, 스킬, 아이템
+        // 로드한 데이터를 적용(LoadGame에서 하면 플레이어 소환 안됬는데 로드, 인벤토리 없는데 로드 확률 있음)
+        // - 스탯, 스킬, 아이템, ...
         Managers.Hero.LoadHeroDatas();
-        Managers.Inventory.LoadItems();
+        Managers.Inventory.LoadItems();        
     }
 
 
     public void RemovePlayData()
     {
+        // 플레이 중인 던전
         SaveData.ProgressedDungeonId = 0;
 
         // 플레이 중인 히어로
@@ -128,8 +129,8 @@ public class SaveLoadManager
         SaveData.DodgeID = 0;
         SaveData.PassiveSkills.Clear();
 
-        string jsonStr = JsonUtility.ToJson(_gameSaveData);
-        File.WriteAllText(Path, jsonStr);
+        SaveGame();
+        LoadGame();
     }
 
     #if UNITY_EDITOR

@@ -26,9 +26,7 @@ public class TryAcquireCombinationItem : ItemAcquireAction
                 // 완성 아이템 획득
                 Item combinationItem = Managers.Data.GetItemData(resultItemID);
                 combinationItem.Acquire();
-                Managers.Inventory.AddItem(combinationItem);
             }
-
             // 조합 실패 (모든 조합 아이템 가지고 있는 조건 충족안됨)
 
         }
